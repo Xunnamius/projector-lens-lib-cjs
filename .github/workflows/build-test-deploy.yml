@@ -134,7 +134,7 @@ jobs:
           path: ~/.npm
           restore-keys: npm-${{ runner.os }}-
 
-      - name: Install ci dependencies
+      - name: Install CI dependencies
         run: npm ci
 
       - name: Build distributables
@@ -167,7 +167,7 @@ jobs:
           path: ~/.npm
           restore-keys: npm-${{ runner.os }}-
 
-      - name: Install ci dependencies
+      - name: Install CI dependencies
         run: npm ci
 
       - name: Build externals
@@ -200,7 +200,7 @@ jobs:
       - name: Sort package.json
         run: npx sort-package-json
 
-      - name: Install ci dependencies
+      - name: Install CI dependencies
         run: npm ci
 
       - name: Cache dependencies
