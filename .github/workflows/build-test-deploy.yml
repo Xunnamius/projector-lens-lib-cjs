@@ -413,6 +413,7 @@ jobs:
     needs:
       - metadata
       - check-audit
+      - install-dependencies
       - lint
       - build-dist
       - test-unit
