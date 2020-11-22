@@ -43,11 +43,11 @@ jobs:
           commit-filter: ${{ env.CI_SKIP_COMMANDS }}
           commit-filter-separator: ';'
 
-      - name: Save result data
+      - name: Save skip result
         id: skip-ci
         run: echo "::set-output name=should-skip::$CI_SKIP"
 
-      - name: Save result data
+      - name: Save result matrix
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: set-matrix
         run: |
