@@ -237,7 +237,7 @@ jobs:
         uses: actions/cache@v2
         id: cache-dependencies
         with:
-          key: build-${{ github.sha }}
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: ./*
 
   build-dist:
@@ -252,7 +252,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: build-${{ github.sha }}
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: ./*
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -267,7 +267,7 @@ jobs:
         uses: actions/cache@v2
         id: cache-dist
         with:
-          key: build-${{ github.sha }}-dist
+          key: dist-${{ github.sha }}
           path: |
             ./dist
             ./build
@@ -284,14 +284,14 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: build-${{ github.sha }}
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: ./*
 
       - name: Restore distributables
         uses: actions/cache@v2
         id: restore-dist
         with:
-          key: build-${{ github.sha }}-dist
+          key: dist-${{ github.sha }}
           path: |
             ./dist
             ./build
@@ -316,7 +316,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: build-${{ github.sha }}
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: ./*
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -331,7 +331,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v2
         with:
-          name: build-${{ github.sha }}-docs
+          name: docs-${{ github.sha }}
           path: ./docs
 
       - name: Cache documentation
@@ -339,7 +339,7 @@ jobs:
         uses: actions/cache@v2
         id: cache-docs
         with:
-          key: build-${{ github.sha }}-docs
+          key: docs-${{ github.sha }}
           path: ./docs
 
   lint:
@@ -350,7 +350,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: build-${{ github.sha }}
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: ./*
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -369,7 +369,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: build-${{ github.sha }}
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: ./*
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -419,14 +419,14 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: build-${{ github.sha }}
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: ./*
 
       - name: Restore distributables
         uses: actions/cache@v2
         id: restore-dist
         with:
-          key: build-${{ github.sha }}-dist
+          key: dist-${{ github.sha }}
           path: |
             ./dist
             ./build
@@ -436,7 +436,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-docs
         with:
-          key: build-${{ github.sha }}-docs
+          key: docs-${{ github.sha }}
           path: ./docs
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
