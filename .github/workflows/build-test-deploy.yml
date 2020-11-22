@@ -32,35 +32,35 @@ jobs:
       has-integration-webpack: ${{ steps.data.outputs.has-integration-webpack == 'true' }}
       has-integration-externals: ${{ steps.data.outputs.has-integration-externals == 'true' }}
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 1000 # https://github.com/mstachniuk/ci-skip#use-cases
 
-      - name: gather CI metadata
+      - name: Gather CI metadata
         uses: mstachniuk/ci-skip@v1
         with:
           commit-filter: ${{ env.CI_SKIP_COMMANDS }}
           commit-filter-separator: ';'
 
-      - name: save result data
+      - name: Save result data
         id: skip-ci
         run: echo "::set-output name=should-skip::$CI_SKIP"
 
-      - name: save result data
+      - name: Save result data
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: set-matrix
         run: |
           echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_BASE_VERSION\"]}"
           echo "::set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}"
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         if: steps.skip-ci.outputs.should-skip != 'true'
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: gather and save run-script metadata
+      - name: Gather and save run-script metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: data
         run: |
@@ -99,15 +99,15 @@ jobs:
     needs: metadata
     if: needs.metadata.outputs.should-skip-ci != true
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: npm audit
+      - name: Npm audit
         run: npm audit
 
   test-integration-node:
@@ -118,15 +118,15 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: use node ${{ matrix.node }}
+      - name: Use node ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
 
-      - name: cache npm
+      - name: Cache npm
         uses: actions/cache@v2
         id: cache-npm
         with:
@@ -134,13 +134,13 @@ jobs:
           path: ~/.npm
           restore-keys: npm-${{ runner.os }}-
 
-      - name: install ci dependencies
+      - name: Install ci dependencies
         run: npm ci
 
-      - name: build distributables
+      - name: Build distributables
         run: npm run build-dist
 
-      - name: test integration
+      - name: Test integration
         run: npm run test-integration-node
 
   test-integration-externals:
@@ -151,18 +151,18 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
     steps:
-      - name: debug
+      - name: Debug
         run: echo ${{ toJson(needs.metadata.outputs) }}
 
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: use node ${{ matrix.node }}
+      - name: Use node ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
 
-      - name: cache npm
+      - name: Cache npm
         uses: actions/cache@v2
         id: cache-npm
         with:
@@ -170,13 +170,13 @@ jobs:
           path: ~/.npm
           restore-keys: npm-${{ runner.os }}-
 
-      - name: install ci dependencies
+      - name: Install ci dependencies
         run: npm ci
 
-      - name: build externals
+      - name: Build externals
         run: npm run build-externals
 
-      - name: test integration
+      - name: Test integration
         run: npm run test-integration-externals
 
   install-dependencies:
@@ -184,15 +184,15 @@ jobs:
     needs: metadata
     if: needs.metadata.outputs.should-skip-ci == false
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: cache npm
+      - name: Cache npm
         uses: actions/cache@v2
         id: cache-npm
         with:
@@ -200,13 +200,13 @@ jobs:
           path: ~/.npm
           restore-keys: npm-${{ runner.os }}-
 
-      - name: sort package.json
+      - name: Sort package.json
         run: npx sort-package-json
 
-      - name: install ci dependencies
+      - name: Install ci dependencies
         run: npm ci
 
-      - name: cache dependencies
+      - name: Cache dependencies
         uses: actions/cache@v2
         id: cache-dependencies
         with:
@@ -221,22 +221,22 @@ jobs:
       || needs.metadata.outputs.has-integration-chrome
       || needs.metadata.outputs.has-integration-webpack
     steps:
-      - name: restore dependencies
+      - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
         with:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: build distributables
+      - name: Build distributables
         run: npm run build-dist
 
-      - name: cache distributables
+      - name: Cache distributables
         uses: actions/cache@v2
         id: cache-dist
         with:
@@ -250,14 +250,14 @@ jobs:
     needs: [metadata, build-dist]
     if: needs.metadata.outputs.has-integration-chrome
     steps:
-      - name: restore dependencies
+      - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
         with:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: restore distributables
+      - name: Restore distributables
         uses: actions/cache@v2
         id: restore-dist
         with:
@@ -266,12 +266,12 @@ jobs:
             ./dist
             ./build
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: test integration
+      - name: Test integration
         run: npm run test-integration-chrome
 
   test-integration-webpack:
@@ -282,14 +282,14 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.webpack-matrix) }}
     steps:
-      - name: restore dependencies
+      - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
         with:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: restore distributables
+      - name: Restore distributables
         uses: actions/cache@v2
         id: restore-dist
         with:
@@ -298,15 +298,15 @@ jobs:
             ./dist
             ./build
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: install webpack@${{ matrix.webpack }}
+      - name: Install webpack@${{ matrix.webpack }}
         run: npm install webpack@${{ matrix.webpack }}
 
-      - name: test integration
+      - name: Test integration
         run: npm run test-integration-webpack
 
   build-docs:
@@ -314,29 +314,29 @@ jobs:
     needs: [metadata, install-dependencies]
     if: needs.metadata.outputs.has-docs
     steps:
-      - name: restore dependencies
+      - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
         with:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: build documentation
+      - name: Build documentation
         run: npm run build-docs
 
-      - name: upload documentation
+      - name: Upload documentation
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v2
         with:
           name: build-${{ github.sha }}-docs
           path: ./docs
 
-      - name: cache documentation
+      - name: Cache documentation
         if: github.event_name != 'pull_request'
         uses: actions/cache@v2
         id: cache-docs
@@ -348,38 +348,38 @@ jobs:
     runs-on: ubuntu-latest
     needs: install-dependencies
     steps:
-      - name: restore dependencies
+      - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
         with:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: lint
+      - name: Lint
         run: npm run lint
 
   test-unit:
     runs-on: ubuntu-latest
     needs: install-dependencies
     steps:
-      - name: restore dependencies
+      - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
         with:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: test unit
+      - name: Test unit
         run: npm run test-unit
 
   semantic-release:
@@ -411,14 +411,14 @@ jobs:
       && (!needs.metadata.outputs.has-integration-externals || needs.test-integration-externals.result == 'success')
       && (!needs.metadata.outputs.has-integration-webpack || needs.test-integration-webpack.result == 'success')
     steps:
-      - name: restore dependencies
+      - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
         with:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: restore distributables
+      - name: Restore distributables
         uses: actions/cache@v2
         id: restore-dist
         with:
@@ -427,7 +427,7 @@ jobs:
             ./dist
             ./build
 
-      - name: restore documentation
+      - name: Restore documentation
         if: needs.metadata.outputs.has-docs
         uses: actions/cache@v2
         id: restore-docs
@@ -435,12 +435,12 @@ jobs:
           key: build-${{ github.sha }}-docs
           path: ./docs
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: import gpg key
+      - name: Import gpg key
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v3
         with:
@@ -451,7 +451,7 @@ jobs:
           git-tag-gpgsign: true
           git-push-gpgsign: true
 
-      - name: perform semantic release
+      - name: Perform semantic release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
