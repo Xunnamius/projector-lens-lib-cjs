@@ -150,9 +150,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
+    env:
+      XDEBUG: ${{ toJson(needs.metadata.outputs) }}
     steps:
-      - name: Debug
-        run: echo ${{ toJson(needs.metadata.outputs) }}
+      - name: XDEBUG
+        run: echo "$XDEBUG"
 
       - name: Checkout
         uses: actions/checkout@v2
