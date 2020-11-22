@@ -11,19 +11,19 @@ on:
 
 env:
   CI: true
-  NODE_BASE_VERSION: '14.x'
-  NODE_VERSIONS_UNDER_TEST: ['10.x', '12.x', ${{ env.NODE_BASE_VERSION }}]
-  WEBPACK_BASE_VERSION: '5.x'
-  WEBPACK_VERSIONS_UNDER_TEST: ['4.x', ${{ env.WEBPACK_BASE_VERSION }}]
+  NODE_BASE: 14.x
+  NODE_MATRIX: '{ node: [ "10.x", "12.x", "${{ env.NODE_BASE }}" ]}'
+  WEBPACK_MATRIX: '{ webpack: [ "4.x", "5.x" ]}'
 
 jobs:
-  check-metadata:
+  metadata:
+    name: gather-metadata
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: '1000' # https://github.com/mstachniuk/ci-skip#use-cases
+          fetch-depth: 1000 # https://github.com/mstachniuk/ci-skip#use-cases
 
       - name: check for CI commands in commit messages
         uses: mstachniuk/ci-skip@v1
@@ -35,13 +35,13 @@ jobs:
         id: ci
         run: echo "::set-output name=skip::$CI_SKIP"
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         if: env.CI_SKIP != 'true'
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
-      - name: gather and sanity check run-script metadata
+      - name: gather and check run-script metadata
         id: metadata
         if: steps.ci.outputs.skip != 'true'
         run: |
@@ -78,27 +78,26 @@ jobs:
 
   check-audit:
     runs-on: ubuntu-latest
-    needs: check-metadata
+    needs: metadata
     steps:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: npm audit
         run: npm audit
 
   test-integration-node:
     runs-on: ubuntu-latest
-    needs: check-metadata
-    if: needs.check-metadata.outputs.has-integration-node == 'true'
+    needs: metadata
+    if: needs.metadata.outputs.has-integration-node == 'true'
     strategy:
       fail-fast: false
-      matrix:
-        node: ${{ env.NODE_VERSIONS_UNDER_TEST }}
+      matrix: ${{ fromJson(env.NODE_MATRIX) }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -127,12 +126,11 @@ jobs:
 
   test-integration-externals:
     runs-on: ubuntu-latest
-    needs: check-metadata
-    if: needs.check-metadata.outputs.has-integration-externals == 'true'
+    needs: metadata
+    if: needs.metadata.outputs.has-integration-externals == 'true'
     strategy:
       fail-fast: false
-      matrix:
-        node: ${{ env.NODE_VERSIONS_UNDER_TEST }}
+      matrix: ${{ fromJson(env.NODE_MATRIX) }}
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -161,15 +159,15 @@ jobs:
 
   install-dependencies:
     runs-on: ubuntu-latest
-    needs: check-metadata
+    needs: metadata
     steps:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: cache npm
         uses: actions/cache@v2
@@ -194,11 +192,11 @@ jobs:
 
   build-dist:
     runs-on: ubuntu-latest
-    needs: [check-metadata, install-dependencies]
+    needs: [metadata, install-dependencies]
     if: >
       github.event_name != 'pull_request'
-      || needs.check-metadata.outputs.has-integration-chrome == 'true'
-      || needs.check-metadata.outputs.has-integration-webpack == 'true'
+      || needs.metadata.outputs.has-integration-chrome == 'true'
+      || needs.metadata.outputs.has-integration-webpack == 'true'
     steps:
       - name: restore dependencies
         uses: actions/cache@v2
@@ -207,10 +205,10 @@ jobs:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: build distributables
         run: npm run build-dist
@@ -226,8 +224,8 @@ jobs:
 
   test-integration-chrome:
     runs-on: ubuntu-latest
-    needs: [check-metadata, build-dist]
-    if: needs.check-metadata.outputs.has-integration-chrome == 'true'
+    needs: [metadata, build-dist]
+    if: needs.metadata.outputs.has-integration-chrome == 'true'
     steps:
       - name: restore dependencies
         uses: actions/cache@v2
@@ -245,22 +243,21 @@ jobs:
             ./dist
             ./build
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: test integration
         run: npm run test-integration-chrome
 
   test-integration-webpack:
     runs-on: ubuntu-latest
-    needs: [check-metadata, build-dist]
-    if: needs.check-metadata.outputs.has-integration-webpack == 'true'
+    needs: [metadata, build-dist]
+    if: needs.metadata.outputs.has-integration-webpack == 'true'
     strategy:
       fail-fast: false
-      matrix:
-        webpack: ${{ env.WEBPACK_VERSIONS_UNDER_TEST }}
+      matrix: ${{ fromJson(env.WEBPACK_MATRIX) }}
     steps:
       - name: restore dependencies
         uses: actions/cache@v2
@@ -278,10 +275,10 @@ jobs:
             ./dist
             ./build
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: install webpack@${{ matrix.webpack }}
         run: npm install webpack@${{ matrix.webpack }}
@@ -291,8 +288,8 @@ jobs:
 
   build-docs:
     runs-on: ubuntu-latest
-    needs: [check-metadata, install-dependencies]
-    if: needs.check-metadata.outputs.has-docs == 'true'
+    needs: [metadata, install-dependencies]
+    if: needs.metadata.outputs.has-docs == 'true'
     steps:
       - name: restore dependencies
         uses: actions/cache@v2
@@ -301,10 +298,10 @@ jobs:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: build documentation
         run: npm run build-docs
@@ -335,10 +332,10 @@ jobs:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: lint
         run: npm run lint
@@ -354,10 +351,10 @@ jobs:
           key: build-${{ github.sha }}
           path: ./*
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: test unit
         run: npm run test-unit
@@ -365,7 +362,7 @@ jobs:
   semantic-release:
     runs-on: ubuntu-latest
     needs:
-      - check-metadata
+      - metadata
       - check-audit
       - lint
       - build-dist
@@ -378,17 +375,17 @@ jobs:
     if: >
       always()
       && github.event_name != 'pull_request'
-      && needs.check-metadata.result == 'success'
-      && needs.check-metadata.outputs.has-release-config == 'true'
+      && needs.metadata.result == 'success'
+      && needs.metadata.outputs.has-release-config == 'true'
       && needs.check-audit.result == 'success'
       && needs.lint.result == 'success'
       && needs.build-dist.result == 'success'
       && needs.test-unit.result == 'success'
-      && (needs.check-metadata.outputs.has-docs != 'true' || needs.build-docs.result == 'success')
-      && (needs.check-metadata.outputs.has-integration-node != 'true' || needs.test-integration-node.result == 'success')
-      && (needs.check-metadata.outputs.has-integration-chrome != 'true' || needs.test-integration-chrome.result == 'success')
-      && (needs.check-metadata.outputs.has-integration-externals != 'true' || needs.test-integration-externals.result == 'success')
-      && (needs.check-metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
+      && (needs.metadata.outputs.has-docs != 'true' || needs.build-docs.result == 'success')
+      && (needs.metadata.outputs.has-integration-node != 'true' || needs.test-integration-node.result == 'success')
+      && (needs.metadata.outputs.has-integration-chrome != 'true' || needs.test-integration-chrome.result == 'success')
+      && (needs.metadata.outputs.has-integration-externals != 'true' || needs.test-integration-externals.result == 'success')
+      && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
     steps:
       - name: restore dependencies
         uses: actions/cache@v2
@@ -407,17 +404,17 @@ jobs:
             ./build
 
       - name: restore documentation
-        if: needs.check-metadata.outputs.has-docs == 'true'
+        if: needs.metadata.outputs.has-docs == 'true'
         uses: actions/cache@v2
         id: restore-docs
         with:
           key: build-${{ github.sha }}-docs
           path: ./docs
 
-      - name: use node ${{ env.NODE_BASE_VERSION }}
+      - name: use node ${{ env.NODE_BASE }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_BASE }}
 
       - name: import gpg key
         id: gpg
