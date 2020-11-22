@@ -358,9 +358,7 @@ jobs:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
       - name: Lint
-        run: |
-          set +e
-          npm run lint
+        run: npm run lint
 
   test-unit:
     runs-on: ubuntu-latest
