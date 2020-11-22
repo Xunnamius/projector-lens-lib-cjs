@@ -40,7 +40,7 @@ jobs:
           fetch-depth: 1 # * We only skip if the top commit says so
 
       - name: Gather CI metadata
-        uses: mstachniuk/ci-skip@v1
+        uses: mstachniuk/ci-skip@v1.0.2
         with:
           commit-filter: ${{ env.CI_SKIP_COMMANDS }}
           commit-filter-separator: ';'
