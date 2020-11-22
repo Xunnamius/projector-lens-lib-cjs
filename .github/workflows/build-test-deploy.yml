@@ -35,7 +35,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1000 # https://github.com/mstachniuk/ci-skip#use-cases
+          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Gather CI metadata
         uses: mstachniuk/ci-skip@v1
@@ -417,6 +418,12 @@ jobs:
       && (needs.metadata.outputs.has-integration-externals != 'true' || needs.test-integration-externals.result == 'success')
       && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
+          token: ${{ secrets.GH_TOKEN }}
+
       - name: Restore dependencies
         uses: actions/cache@v2
         id: restore-dependencies
