@@ -87,7 +87,7 @@ jobs:
           echo "::set-output name=has-integration-externals::$HAS_IEXT"
           if [ $HAS_EXTS != $HAS_IEXT ]; then
             echo '::error::expected both 1) ./external-scripts directory to exist and 2) `test-integration-externals` run-script to be defined in package.json'
-            exit 1
+            exit 2
           fi
           if [ $HAS_DOCS = 'false' ]; then
             echo '::warning::no `build-documentation` run-script defined in package.json'
