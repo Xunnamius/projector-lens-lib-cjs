@@ -37,7 +37,6 @@
     "lint": "rm -f npm.pipe; touch npm.pipe; command -v unbuffer >/dev/null; X=$?; [ $X -eq 0 ] && unbuffer tsc --project tsconfig.lint.json >> npm.pipe; Y=$?; [ $Y -eq 0 ] && echo >> npm.pipe; unbuffer eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; Z=$?; [ $X -ne 0 ] && tsc --project tsconfig.lint.json >> npm.pipe && eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; W=$?; cat npm.pipe | less -R -FX; rm npm.pipe; ([ $W -eq 0 ] && [ $X -ne 0 ]) || ([ $X -eq 0 ] && [ $Y -eq 0 ] && [ $Z -eq 0 ])",
     "list-tasks": "npm run",
     "repl": "command -v rlwrap >/dev/null && rlwrap npx -p @babel/core -p @babel/node babel-node",
-    "semantic-release": "semantic-release",
     "test": "npm run test-unit --",
     "test-integration-chrome": "BABEL_ENV=test jest test/integration/chrome.test.ts",
     "test-integration-node": "BABEL_ENV=test jest test/integration/node.test.ts",
