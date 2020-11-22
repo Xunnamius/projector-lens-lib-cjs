@@ -487,5 +487,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          EDITOR: 'echo semantic-release-bot'
+          EDITOR: echo semantic-release-bot > $1
         run: npx semantic-release
