@@ -263,6 +263,15 @@ jobs:
             ./dist
             ./build
 
+      - name: Determine puppeteer version
+        id: puppeteer
+        run: |
+          STR=$(node -e 'console.log(`puppeteer@${require("./package.json").devDependencies.puppeteer}`)')
+          echo "::set-output name=install-target::"$STR
+
+      - name: Reinstall ${{ steps.puppeteer.outputs.install-target }}
+        run: npm install ${{ steps.puppeteer.outputs.install-target }}
+
       - name: Use node ${{ env.NODE_BASE_VERSION }}
         uses: actions/setup-node@v1
         with:
