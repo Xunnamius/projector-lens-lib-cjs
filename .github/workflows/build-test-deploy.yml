@@ -64,7 +64,7 @@ jobs:
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: data
         run: |
-          set -x
+          set +e
           NPMR=`npm run`
           if [ -r release.config.js ]; then HAS_RCNF=true; else HAS_RCNF=false; fi
           echo $NPMR | grep -q build-docs
