@@ -211,15 +211,25 @@ jobs:
     needs: metadata
     if: needs.metadata.outputs.should-skip-ci != 'true'
     steps:
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: cache-dependencies
+        with:
+          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          path: ./node_modules
+
       - name: Checkout
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         uses: actions/checkout@v2
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
       - name: Cache npm
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         uses: actions/cache@v2
         id: cache-npm
         with:
@@ -228,17 +238,12 @@ jobs:
           restore-keys: npm-${{ runner.os }}-
 
       - name: Sort package.json
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: npx sort-package-json
 
       - name: Install CI dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: npm ci
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        id: cache-dependencies
-        with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          path: ./node_modules
 
   build-dist:
     runs-on: ubuntu-latest
