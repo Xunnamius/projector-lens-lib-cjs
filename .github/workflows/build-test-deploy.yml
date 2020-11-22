@@ -151,6 +151,9 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
     steps:
+      - name: debug
+        run: echo ${{ toJson(needs.metadata.outputs) }}
+
       - name: checkout
         uses: actions/checkout@v2
 
