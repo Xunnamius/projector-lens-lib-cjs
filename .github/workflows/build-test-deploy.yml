@@ -210,17 +210,25 @@ jobs:
     runs-on: ubuntu-latest
     needs: metadata
     if: needs.metadata.outputs.should-skip-ci != 'true'
+    outputs:
+      cache-key: ${{ steps.cache.outputs.key }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Calculate cache-key
+        id: cache
+        env:
+          OS: ${{ runner.os }}
+          HASH: ${{ hashFiles('**/package-lock.json') }}
+        run: echo "::set-output name=key::deps-$OS-$HASH"
+
       - name: Cache dependencies
         uses: actions/cache@v2
         id: cache-dependencies
         with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ steps.cache.outputs.key }}
           path: ./node_modules
-
-      - name: Checkout
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        uses: actions/checkout@v2
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
@@ -260,7 +268,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
           path: ./node_modules
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -295,7 +303,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
           path: ./node_modules
 
       - name: Restore distributables
@@ -330,7 +338,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
           path: ./node_modules
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -367,7 +375,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
           path: ./node_modules
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -389,7 +397,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
           path: ./node_modules
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
@@ -439,7 +447,7 @@ jobs:
         uses: actions/cache@v2
         id: restore-dependencies
         with:
-          key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ needs.install-dependencies.outputs.cache-key }}
           path: ./node_modules
 
       - name: Restore distributables
