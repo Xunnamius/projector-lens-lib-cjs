@@ -13,7 +13,7 @@ env:
   CI: true
   CI_SKIP_COMMANDS: '[skip ci];[ci skip];[skip github];[github skip]' # ! follow the pre-existing syntax
   NODE_BASE_VERSION: 14.x
-  NODE_TEST_VERSIONS: '"10.x", "12.x", "${{ env.NODE_BASE_VERSION }}"'
+  NODE_TEST_VERSIONS: '"10.x", "12.x"' # * NODE_BASE_VERSION is automatically included
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
 
 jobs:
@@ -51,7 +51,7 @@ jobs:
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: set-matrix
         run: |
-          echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS]}"
+          echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_BASE_VERSION\"]}"
           echo "::set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}"
 
       - name: use node ${{ env.NODE_BASE_VERSION }}
