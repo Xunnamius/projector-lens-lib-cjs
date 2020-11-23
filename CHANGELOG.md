@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 
 
+## [2.0.1-canary.1](https://github.com/Xunnamius/workflow-playground/compare/v2.0.0...v2.0.1-canary.1) (2020-11-23)
+
+
+### Bug Fixes
+
+* **dependabot:** ensure dependabot formats GitHub Actions PRs correctly ([460738e](https://github.com/Xunnamius/workflow-playground/commit/460738ef4bceb86645c93085384f7ef7520f3781))
+* add build commits to release rule ([d3ebb2a](https://github.com/Xunnamius/workflow-playground/commit/d3ebb2a8205985d666a240364addd6014109700b))
+
 ## [2.0.1-canary.1](https://github.com/Xunnamius/workflow-playground/compare/v2.0.0...v2.0.1-canary.1) (2020-11-22)
 
 
