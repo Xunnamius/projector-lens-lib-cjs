@@ -3,11 +3,9 @@ name: build-test-deploy
 on:
   workflow_dispatch: # * treated like a `push` event with custom commit refs
   push:
-    branches:  # ! if you change these branches, update the rest of this script!
-      - main
-      - develop
   pull_request:
     types: [opened, synchronize]
+    branches: [main, canary]
 
 env:
   CI_SKIP_COMMANDS: '[skip ci];[ci skip];[skip github];[github skip]' # ! follow the pre-existing syntax
@@ -20,10 +18,11 @@ env:
 jobs:
   metadata:
     name: gather-metadata
-    # ? Only run this job (which all jobs depend on) on non-PRs or external PRs
+    # ? Skip CI entirely if this is an internal PR (avoid duplication)
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     outputs:
+      current-branch: ${{ steps.branch.outputs.current-branch }}
       should-skip-ci: ${{ steps.skip-ci.outputs.should-skip == 'true' }}
       node-matrix:  ${{ steps.set-matrix.outputs.node-matrix }}
       webpack-matrix:  ${{ steps.set-matrix.outputs.webpack-matrix }}
@@ -56,6 +55,13 @@ jobs:
         run: |
           echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_BASE_VERSION\"]}"
           echo "::set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}"
+
+      - name: Gather branch metadata
+        uses: nelonoel/branch-name@v1.0.1
+
+      - name: Determine current-branch
+        id: branch
+        run: echo "::set-output name=current-branch::$BRANCH_NAME"
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -352,15 +358,7 @@ jobs:
       - name: Build documentation
         run: npm run build-docs
 
-      - name: Upload documentation
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v2
-        with:
-          name: docs-${{ github.sha }}
-          path: ./docs
-
       - name: Cache documentation
-        if: github.event_name != 'pull_request'
         uses: actions/cache@v2
         id: cache-docs
         with:
@@ -464,7 +462,7 @@ jobs:
             ./build
 
       - name: Restore documentation
-        if: needs.metadata.outputs.has-docs
+        if: needs.metadata.outputs.has-docs == 'true'
         uses: actions/cache@v2
         id: restore-docs
         with:
@@ -493,4 +491,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           EDITOR: echo semantic-release-bot > $1
+          SHOULD_UPDATE_CHANGELOG: ${{ github.event_name != 'pull_request' && needs.metadata.outputs.current-branch == 'main' }}
         run: npx semantic-release
