@@ -12,6 +12,8 @@ on:
 env:
   CI: true
   CI_SKIP_COMMANDS: '[skip ci];[ci skip];[skip github];[github skip]' # ! follow the pre-existing syntax
+  CI_COMMITTER_NAME: Xunnamius (semantic-release)
+  CI_COMMITTER_EMAIL: Xunnamius@users.noreply.github.com
   NODE_BASE_VERSION: 14.x
   NODE_TEST_VERSIONS: '"10.x", "12.x"' # * NODE_BASE_VERSION is automatically included
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
@@ -482,6 +484,8 @@ jobs:
           git-user-signingkey: true
           git-commit-gpgsign: true
           git-tag-gpgsign: true
+          git-committer-name: ${{ env.CI_COMMITTER_NAME }}
+          git-committer-email: ${{ env.CI_COMMITTER_EMAIL }}
 
       - name: Perform semantic release
         env:
