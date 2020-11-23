@@ -10,7 +10,6 @@ on:
     types: [opened, synchronize]
 
 env:
-  CI: true
   CI_SKIP_COMMANDS: '[skip ci];[ci skip];[skip github];[github skip]' # ! follow the pre-existing syntax
   CI_COMMITTER_NAME: Xunnamius (semantic-release)
   CI_COMMITTER_EMAIL: Xunnamius@users.noreply.github.com
@@ -21,6 +20,8 @@ env:
 jobs:
   metadata:
     name: gather-metadata
+    # ? Only run this job (which all jobs depend on) on non-PRs or external PRs
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     outputs:
       should-skip-ci: ${{ steps.skip-ci.outputs.should-skip == 'true' }}
@@ -37,7 +38,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
+          fetch-depth: 1 # * We only skip if the top commit says so
 
       - name: Gather CI metadata
         uses: mstachniuk/ci-skip@v1
@@ -45,11 +46,11 @@ jobs:
           commit-filter: ${{ env.CI_SKIP_COMMANDS }}
           commit-filter-separator: ';'
 
-      - name: Save skip result
+      - name: Determine should-skip
         id: skip-ci
         run: echo "::set-output name=should-skip::$CI_SKIP"
 
-      - name: Save result matrix
+      - name: Determine matrixes
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: set-matrix
         run: |
@@ -62,7 +63,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
-      - name: Gather and save run-script metadata
+      - name: Gather run-script metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: data
         run: |
