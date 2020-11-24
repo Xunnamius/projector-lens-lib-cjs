@@ -215,6 +215,42 @@ jobs:
       - name: Test integration
         run: npm run test-integration-chrome
 
+  test-integration-webpack:
+    runs-on: ubuntu-latest
+    needs: metadata
+    if: needs.metadata.outputs.has-integration-webpack == 'true'
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.metadata.outputs.webpack-matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ env.NODE_BASE_VERSION }}
+
+      - name: Cache npm
+        uses: actions/cache@v2
+        id: cache-npm
+        with:
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: Install CI dependencies
+        run: npm ci
+
+      - name: Build distributables
+        run: npm run build-dist
+
+      - name: Install webpack@${{ matrix.webpack }}
+        run: npm install webpack@${{ matrix.webpack }}
+
+      - name: Test integration
+        run: npm run test-integration-webpack
+
   install-dependencies:
     runs-on: ubuntu-latest
     needs: metadata
@@ -296,44 +332,6 @@ jobs:
           path: |
             ./dist
             ./build
-
-  test-integration-webpack:
-    runs-on: ubuntu-latest
-    needs: [metadata, build-dist]
-    if: needs.metadata.outputs.has-integration-webpack == 'true'
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.metadata.outputs.webpack-matrix) }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Restore dependencies
-        uses: actions/cache@v2
-        id: restore-dependencies
-        with:
-          key: ${{ needs.install-dependencies.outputs.cache-key }}
-          path: ./node_modules
-
-      - name: Restore distributables
-        uses: actions/cache@v2
-        id: restore-dist
-        with:
-          key: dist-${{ github.sha }}
-          path: |
-            ./dist
-            ./build
-
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
-
-      - name: Install webpack@${{ matrix.webpack }}
-        run: npm install webpack@${{ matrix.webpack }}
-
-      - name: Test integration
-        run: npm run test-integration-webpack
 
   build-docs:
     runs-on: ubuntu-latest
