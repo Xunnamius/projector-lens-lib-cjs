@@ -450,7 +450,7 @@ jobs:
           set +e
           WL='${{ env.REPO_OWNER_WHITELIST }}'
           REPO='${{ github.repository }}'
-          node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(`${o.trim()}/`)) ? 0 : 1)"
+          node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(o.trim() + '/')) ? 0 : 1)"
           echo "::set-output name=is-allowed::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
 
       - name: Checkout
