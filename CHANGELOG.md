@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 
 
+## [2.0.1](https://github.com/Xunnamius/workflow-playground/compare/v2.0.0...v2.0.1) (2020-11-24)
+
+
+### Bug Fixes
+
+* **actions:** add git author and commiter env vars for semantic-release signed commits ([f01d16b](https://github.com/Xunnamius/workflow-playground/commit/f01d16b51e444eb801121e81718994b4add18799))
+* **dependabot:** ensure dependabot formats GitHub Actions PRs correctly ([bcdbd0e](https://github.com/Xunnamius/workflow-playground/commit/bcdbd0e1c23786185cd43b11d9ce18d3498e9ff5))
+* add build commits to release rule ([3124ab0](https://github.com/Xunnamius/workflow-playground/commit/3124ab0500924ce75f3387d59d5d60ea3e77c827))
+
 # [2.0.0](https://github.com/Xunnamius/workflow-playground/compare/v1.0.15...v2.0.0) (2020-11-22)
 
 
