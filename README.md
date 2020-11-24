@@ -20,7 +20,7 @@ automation scripts and the like.
 npm install @xunnamius/do-not-install
 ```
 
-<details><summary><strong>Package Details</strong></summary>
+<details><summary><strong>[additional details]</strong></summary>
 
 > Note: **typical users don't need to read through this!** This information is
 > primarily useful for those attempting to bundle this package or for those who
