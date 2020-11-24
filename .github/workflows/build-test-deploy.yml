@@ -475,7 +475,7 @@ jobs:
 
       - name: Import gpg key
         id: gpg
-        uses: Xunnamius/ghaction-import-gpg@v3.0.2-pr
+        uses: Xunnamius/ghaction-import-gpg@v3.0.2-pr.2
         with:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
