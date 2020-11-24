@@ -32,7 +32,7 @@ The ideal contributor flow is as follows:
 4. Create a new branch off main: `git checkout -b contrib`
 
 5. Make your changes and commit. Your work will be checked as you commit it; any
-   problems will be brought to your attention
+   problems will be brought to your attention via CLI
 
 6. Push your commits to your fork and, when you're ready, [*fearlessly* submit
    your PR](https://github.com/Xunnamius/workflow-playground/compare)!
@@ -52,6 +52,10 @@ PR passes review:
 - **Do not** circumvent automated linting, formatting, or unit testing
 - **Do** ensure `README.md` and other documentation is kept consistent with your
   changes
+- **Do not** create a PR to introduce [*purely* cosmetic
+  commits](https://github.com/rails/rails/pull/13771#issuecomment-32746700)
+    - Code de-duplication and other potential optimizations we **do not**
+      consider *purely* cosmetic 🙂
 - **Do** keep your PR as narrow and focused as possible
     - If there are multiple related changes to be made but they do not
       immediately depend on one another, submit them as separate PRs instead
