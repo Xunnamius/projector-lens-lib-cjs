@@ -11,6 +11,8 @@ env:
   CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
   CI_COMMITTER_NAME: Xunnamius (semantic-release)
   CI_COMMITTER_EMAIL: Xunnamius@users.noreply.github.com
+  # ? Add your (case-insensitive) GitHub user/org to enable semantic-release job
+  REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
   NODE_BASE_VERSION: 14.x
   NODE_TEST_VERSIONS: '"10.x", "12.x"' # * NODE_BASE_VERSION is automatically included
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
@@ -438,13 +440,24 @@ jobs:
       && (needs.metadata.outputs.has-integration-externals != 'true' || needs.test-integration-externals.result == 'success')
       && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
     steps:
+      - name: Verify repository owner against whitelist
+        id: whitelist
+        run: |
+          set +e
+          WL='${{ env.REPO_OWNER_WHITELIST }}'
+          REPO='${{ github.repository }}'
+          node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(`${o.trim()}/`)) ? 0 : 1)"
+          echo "::set-output name=is-allowed::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
+
       - name: Checkout
+        if: steps.whitelist.outputs.is-allowed == 'true'
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Restore dependencies
+        if: steps.whitelist.outputs.is-allowed == 'true'
         uses: actions/cache@v2
         id: restore-dependencies
         with:
@@ -452,6 +465,7 @@ jobs:
           path: ./node_modules
 
       - name: Restore distributables
+        if: steps.whitelist.outputs.is-allowed == 'true'
         uses: actions/cache@v2
         id: restore-dist
         with:
@@ -461,7 +475,7 @@ jobs:
             ./build
 
       - name: Restore documentation
-        if: needs.metadata.outputs.has-docs == 'true'
+        if: steps.whitelist.outputs.is-allowed == 'true' && needs.metadata.outputs.has-docs == 'true'
         uses: actions/cache@v2
         id: restore-docs
         with:
@@ -469,11 +483,13 @@ jobs:
           path: ./docs
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
+        if: steps.whitelist.outputs.is-allowed == 'true'
         uses: actions/setup-node@v2.1.2
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
       - name: Import gpg key
+        if: steps.whitelist.outputs.is-allowed == 'true'
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v3
         with:
@@ -486,6 +502,7 @@ jobs:
           git-committer-email: ${{ env.CI_COMMITTER_EMAIL }}
 
       - name: Perform semantic release
+        if: steps.whitelist.outputs.is-allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
