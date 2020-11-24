@@ -1,20 +1,36 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
-
+name: 🤩 Feature request
+about: Tell us about your awesome idea
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Is your feature request related to a problem? Please describe!
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+> Include a clear and concise description of what the problem is. If applicable,
+> add screenshots to help explain the problem.
+>
+> **If you've encountered a bug, [please report it as a bug instead of a feature
+> request](https://github.com/Xunnamius/workflow-playground/issues/new?template=bug_report.md).**
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+<start typing here>
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### Describe the solution you'd like to see
+
+> Include a clear and concise description of what you want to happen. If
+> applicable, add screenshots to help explain your solution.
+
+<start typing here>
+
+### Describe alternatives you've considered
+
+> Include a clear and concise description of any alternative solutions or
+features you've encountered and/or considered.
+
+<start typing here>
+
+<details><summary><strong>Additional context</strong></summary>
+
+> Include any other context or screenshots here.
+
+<start typing here>
+
+</details>

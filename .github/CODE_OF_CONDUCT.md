@@ -22,7 +22,7 @@ include:
 
 Examples of unacceptable behavior by participants include:
 
-* Racism or sexism in any context
+* Racism or sexism in any shape or form
 * The use of sexualized language or imagery and unwelcome sexual attention or
   advances
 * Trolling, insulting/derogatory comments, and personal or political attacks
