@@ -428,6 +428,7 @@ jobs:
       && github.event_name != 'pull_request'
       && needs.metadata.result == 'success'
       && needs.metadata.outputs.should-skip-ci != 'true'
+      && (needs.metadata.outputs.current-branch == 'main' || needs.metadata.outputs.current-branch == 'canary')
       && needs.metadata.outputs.has-release-config == 'true'
       && needs.check-audit.result == 'success'
       && needs.lint.result == 'success'
