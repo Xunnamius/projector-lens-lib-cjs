@@ -475,7 +475,7 @@ jobs:
 
       - name: Import gpg key
         id: gpg
-        uses: crazy-max/ghaction-import-gpg@v3.0.1
+        uses: Xunnamius/ghaction-import-gpg@v3.0.2-pr
         with:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
