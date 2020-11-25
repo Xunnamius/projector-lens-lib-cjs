@@ -343,20 +343,21 @@ jobs:
 
 # * === The end of CI (build and test) and the beginning of CD (deploy) === *
 
+  # ? Skip this job:
+  # ? 1. When CI is skipped globally
+  # ? 2. On PRs
+  # ? 3. In repo forks
+  # ? 4. If no semantic-release configuration
+  # ? 5. On pushes to branches (other than main/canary)
   build:
     name: '[CD] build'
     runs-on: ubuntu-latest
     needs: metadata
     if: |
-      # ? Skip this job when we're skipping CI
       needs.metadata.outputs.should-skip-ci != 'true'
-      # ? Skip this job on PRs
       && github.event_name != 'pull_request'
-      # ? Skip this job in repo forks
       && needs.metadata.outputs.has-proper-owner == 'true'
-      # ? Skip this job if no semantic-release configuration
       && needs.metadata.outputs.has-release-config == 'true'
-      # ? Skip this job on pushes to branches (other than main/canary)
       && (needs.metadata.outputs.current-branch == 'main' || needs.metadata.outputs.current-branch == 'canary')
     steps:
       - name: Checkout
@@ -401,6 +402,9 @@ jobs:
           key: build-${{ runner.os }}-${{ github.sha }}
           path: ./*
 
+  # ? This job always runs except:
+  # ? 1. if CD pipeline failed/was skipped
+  # ? 2. if CI pipeline didn't complete successfully
   release:
     name: '[CD] release'
     runs-on: ubuntu-latest
@@ -415,11 +419,8 @@ jobs:
       - test-integration-browser
       - test-integration-webpack
     if: |
-      # ? This job always runs, except it...
       always()
-      # ? Doesn't run if CD pipeline failed/was skipped
       && needs.build.result == 'success'
-      # ? Doesn't run if CI pipeline didn't complete successfully
       && needs.check-audit.result == 'success'
       && needs.lint.result == 'success'
       && needs.test-unit.result == 'success'
