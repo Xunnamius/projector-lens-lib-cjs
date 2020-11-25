@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 
 
+# [2.1.0](https://github.com/Xunnamius/workflow-playground/compare/v2.0.1...v2.1.0) (2020-11-25)
+
+
+### Bug Fixes
+
+* **actions:** gather-metadata steps gather and skip properly ([97682f4](https://github.com/Xunnamius/workflow-playground/commit/97682f434acc501e4964c31770472acae0320ad5))
+* **actions:** if statements now use | instead of > ([24e3739](https://github.com/Xunnamius/workflow-playground/commit/24e373907b23a68627fe535049f603c93bfa1361))
+* **actions:** move comments out of multiline statements ([874f8d6](https://github.com/Xunnamius/workflow-playground/commit/874f8d65aff5d8e27e14e8d9e4a0e37450713ce0))
+
+
+### Features
+
+* **actions:** introduce new streamlined workflow job configuration ([4bb9d94](https://github.com/Xunnamius/workflow-playground/commit/4bb9d94050d1b8fb164bdf04b1bffa10705aa0a2))
+
 ## [2.0.1](https://github.com/Xunnamius/workflow-playground/compare/v2.0.0...v2.0.1) (2020-11-24)
 
 
