@@ -201,7 +201,7 @@ jobs:
     name: '[CI] test-integration-node'
     runs-on: ubuntu-latest
     needs: metadata
-    if: >
+    if: |
       needs.metadata.outputs.should-skip-ci != 'true'
       && needs.metadata.outputs.has-integration-node == 'true'
     strategy:
@@ -237,7 +237,7 @@ jobs:
     name: '[CI] test-integration-externals'
     runs-on: ubuntu-latest
     needs: metadata
-    if: >
+    if: |
       needs.metadata.outputs.should-skip-ci != 'true'
       && needs.metadata.outputs.has-integration-externals == 'true'
     strategy:
@@ -273,7 +273,7 @@ jobs:
     name: '[CI] test-integration-browser'
     runs-on: ubuntu-latest
     needs: metadata
-    if: >
+    if: |
       needs.metadata.outputs.should-skip-ci != 'true'
       && needs.metadata.outputs.has-integration-browser == 'true'
     steps:
@@ -306,7 +306,7 @@ jobs:
     name: '[CI] test-integration-webpack'
     runs-on: ubuntu-latest
     needs: metadata
-    if: >
+    if: |
       needs.metadata.outputs.should-skip-ci != 'true'
       && needs.metadata.outputs.has-integration-webpack == 'true'
     strategy:
@@ -347,7 +347,7 @@ jobs:
     name: '[CD] build'
     runs-on: ubuntu-latest
     needs: metadata
-    if: >
+    if: |
       # ? Skip this job when we're skipping CI
       needs.metadata.outputs.should-skip-ci != 'true'
       # ? Skip this job on PRs
@@ -414,7 +414,7 @@ jobs:
       - test-integration-externals
       - test-integration-browser
       - test-integration-webpack
-    if: >
+    if: |
       # ? This job always runs, except it...
       always()
       # ? Doesn't run if CD pipeline failed/was skipped
