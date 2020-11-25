@@ -63,13 +63,16 @@ jobs:
           echo "::set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}"
 
       - name: Gather branch metadata
+        if: steps.skip-ci.outputs.should-skip != 'true'
         uses: nelonoel/branch-name@v1.0.1
 
       - name: Determine current-branch
+        if: steps.skip-ci.outputs.should-skip != 'true'
         id: branch
         run: echo "::set-output name=current-branch::$BRANCH_NAME"
 
       - name: Verify repository owner against whitelist
+        if: steps.skip-ci.outputs.should-skip != 'true'
         id: owner
         run: |
           set +e
@@ -96,11 +99,11 @@ jobs:
           echo $NPMR | grep -q build-externals
           if [ $? -eq 0 ]; then HAS_EXTS=true; else HAS_EXTS=false; fi
           echo $NPMR | grep -q test-integration-node
-          if [ $? -eq 0 ]; then HAS_CHRM=true; else HAS_CHRM=false; fi
-          echo $NPMR | grep -q test-integration-externals
           if [ $? -eq 0 ]; then HAS_NODE=true; else HAS_NODE=false; fi
-          echo $NPMR | grep -q test-integration-browser
+          echo $NPMR | grep -q test-integration-externals
           if [ $? -eq 0 ]; then HAS_IEXT=true; else HAS_IEXT=false; fi
+          echo $NPMR | grep -q test-integration-browser
+          if [ $? -eq 0 ]; then HAS_BWSR=true; else HAS_BWSR=false; fi
           echo $NPMR | grep -q test-integration-webpack
           if [ $? -eq 0 ]; then HAS_WEBP=true; else HAS_WEBP=false; fi
           echo "::set-output name=has-release-config::$HAS_RCNF"
@@ -108,13 +111,13 @@ jobs:
           echo "::set-output name=has-externals::$HAS_EXTS"
           echo "::set-output name=has-integration-node::$HAS_NODE"
           echo "::set-output name=has-integration-externals::$HAS_IEXT"
-          echo "::set-output name=has-integration-browser::$HAS_CHRM"
+          echo "::set-output name=has-integration-browser::$HAS_BWSR"
           echo "::set-output name=has-integration-webpack::$HAS_WEBP"
-          if [ $HAS_EXTS != $HAS_IEXT ]; then
+          if [ "$HAS_EXTS" != "$HAS_IEXT" ]; then
             echo '::error::expected both 1) `external-scripts` directory to exist and 2) `test-integration-externals` run-script to be defined in package.json'
             exit 1
           fi
-          if [ $HAS_DOCS = 'false' ]; then
+          if [ "$HAS_DOCS" = 'false' ]; then
             echo '::warning::no `build-documentation` run-script defined in package.json'
           fi
 
