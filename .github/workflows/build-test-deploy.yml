@@ -2,28 +2,29 @@ name: build-test-deploy
 
 # * Note: feel free to run this workflow in forks (e.g. for testing your PR)
 # * without worrying about this workflow attempting to deploy a package or any
-# * other craziness 🚀🚀🚀
+# * other craziness 🚀
 
 on:
-  workflow_dispatch: # * treated like a `push` event with custom commit refs
+  workflow_dispatch: # * Treated like a `push` event with custom refs
   push:
   pull_request:
     types: [opened, synchronize]
     branches: [main, canary]
 
 env:
-  CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
+  NODE_BASE_VERSION: 14.x
+  NODE_TEST_VERSIONS: '"10.x", "12.x"' # * NODE_BASE_VERSION included automatically
+  WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
   CI_COMMITTER_NAME: Xunnamius (semantic-release)
   CI_COMMITTER_EMAIL: Xunnamius@users.noreply.github.com
-  # ? Add your (case-insensitive) GitHub user/org to enable semantic-release job
+  CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
+  # ? Add your GitHub user/org to enable CD pipeline
+  # ? (you'll need to provide your own secrets)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
-  NODE_BASE_VERSION: 14.x
-  NODE_TEST_VERSIONS: '"10.x", "12.x"' # * NODE_BASE_VERSION is automatically included
-  WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
 
 jobs:
   metadata:
-    name: gather-metadata
+    name: '[CI] gather-metadata'
     runs-on: ubuntu-latest
     outputs:
       current-branch: ${{ steps.branch.outputs.current-branch }}
@@ -35,14 +36,14 @@ jobs:
       has-docs: ${{ steps.data.outputs.has-docs == 'true' }}
       has-externals: ${{ steps.data.outputs.has-externals == 'true' }}
       has-integration-node: ${{ steps.data.outputs.has-integration-node == 'true' }}
-      has-integration-chrome: ${{ steps.data.outputs.has-integration-chrome == 'true' }}
-      has-integration-webpack: ${{ steps.data.outputs.has-integration-webpack == 'true' }}
       has-integration-externals: ${{ steps.data.outputs.has-integration-externals == 'true' }}
+      has-integration-browser: ${{ steps.data.outputs.has-integration-browser == 'true' }}
+      has-integration-webpack: ${{ steps.data.outputs.has-integration-webpack == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1 # * We only skip if the tippy top commit says so
+          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
 
       - name: Gather CI metadata
         uses: mstachniuk/ci-skip@v1.0.2
@@ -95,10 +96,10 @@ jobs:
           echo $NPMR | grep -q build-externals
           if [ $? -eq 0 ]; then HAS_EXTS=true; else HAS_EXTS=false; fi
           echo $NPMR | grep -q test-integration-node
-          if [ $? -eq 0 ]; then HAS_NODE=true; else HAS_NODE=false; fi
-          echo $NPMR | grep -q test-integration-chrome
           if [ $? -eq 0 ]; then HAS_CHRM=true; else HAS_CHRM=false; fi
           echo $NPMR | grep -q test-integration-externals
+          if [ $? -eq 0 ]; then HAS_NODE=true; else HAS_NODE=false; fi
+          echo $NPMR | grep -q test-integration-browser
           if [ $? -eq 0 ]; then HAS_IEXT=true; else HAS_IEXT=false; fi
           echo $NPMR | grep -q test-integration-webpack
           if [ $? -eq 0 ]; then HAS_WEBP=true; else HAS_WEBP=false; fi
@@ -106,9 +107,9 @@ jobs:
           echo "::set-output name=has-docs::$HAS_DOCS"
           echo "::set-output name=has-externals::$HAS_EXTS"
           echo "::set-output name=has-integration-node::$HAS_NODE"
-          echo "::set-output name=has-integration-chrome::$HAS_CHRM"
-          echo "::set-output name=has-integration-webpack::$HAS_WEBP"
           echo "::set-output name=has-integration-externals::$HAS_IEXT"
+          echo "::set-output name=has-integration-browser::$HAS_CHRM"
+          echo "::set-output name=has-integration-webpack::$HAS_WEBP"
           if [ $HAS_EXTS != $HAS_IEXT ]; then
             echo '::error::expected both 1) `external-scripts` directory to exist and 2) `test-integration-externals` run-script to be defined in package.json'
             exit 1
@@ -118,6 +119,7 @@ jobs:
           fi
 
   check-audit:
+    name: '[CI] check-audit'
     runs-on: ubuntu-latest
     needs: metadata
     if: needs.metadata.outputs.should-skip-ci != 'true'
@@ -133,10 +135,75 @@ jobs:
       - name: Npm audit
         run: npm audit
 
-  test-integration-node:
+  lint:
+    name: '[CI] lint'
     runs-on: ubuntu-latest
     needs: metadata
-    if: needs.metadata.outputs.has-integration-node == 'true'
+    if: needs.metadata.outputs.should-skip-ci != 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ env.NODE_BASE_VERSION }}
+
+      - name: Cache npm
+        uses: actions/cache@v2
+        id: cache-npm
+        with:
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: Install CI dependencies
+        run: npm ci
+
+      - name: Build distributables
+        run: npm run build-dist
+
+      - name: Lint
+        run: npm run lint
+
+  test-unit:
+    name: '[CI] test-unit'
+    runs-on: ubuntu-latest
+    needs: metadata
+    if: needs.metadata.outputs.should-skip-ci != 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use node ${{ env.NODE_BASE_VERSION }}
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ env.NODE_BASE_VERSION }}
+
+      - name: Cache npm
+        uses: actions/cache@v2
+        id: cache-npm
+        with:
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          restore-keys: npm-${{ runner.os }}-
+
+      - name: Install CI dependencies
+        run: npm ci
+
+      - name: Build distributables
+        run: npm run build-dist
+
+      - name: Test unit
+        run: npm run test-unit
+
+  test-integration-node:
+    name: '[CI] test-integration-node'
+    runs-on: ubuntu-latest
+    needs: metadata
+    if: >
+      needs.metadata.outputs.should-skip-ci != 'true'
+      && needs.metadata.outputs.has-integration-node == 'true'
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
@@ -167,9 +234,12 @@ jobs:
         run: npm run test-integration-node
 
   test-integration-externals:
+    name: '[CI] test-integration-externals'
     runs-on: ubuntu-latest
     needs: metadata
-    if: needs.metadata.outputs.has-integration-externals == 'true'
+    if: >
+      needs.metadata.outputs.should-skip-ci != 'true'
+      && needs.metadata.outputs.has-integration-externals == 'true'
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
@@ -199,10 +269,13 @@ jobs:
       - name: Test integration
         run: npm run test-integration-externals
 
-  test-integration-chrome:
+  test-integration-browser:
+    name: '[CI] test-integration-browser'
     runs-on: ubuntu-latest
     needs: metadata
-    if: needs.metadata.outputs.has-integration-chrome == 'true'
+    if: >
+      needs.metadata.outputs.should-skip-ci != 'true'
+      && needs.metadata.outputs.has-integration-browser == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -227,12 +300,15 @@ jobs:
         run: npm run build-dist
 
       - name: Test integration
-        run: npm run test-integration-chrome
+        run: npm run test-integration-browser
 
   test-integration-webpack:
+    name: '[CI] test-integration-webpack'
     runs-on: ubuntu-latest
     needs: metadata
-    if: needs.metadata.outputs.has-integration-webpack == 'true'
+    if: >
+      needs.metadata.outputs.should-skip-ci != 'true'
+      && needs.metadata.outputs.has-integration-webpack == 'true'
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.webpack-matrix) }}
@@ -267,43 +343,34 @@ jobs:
 
 # * === The end of CI (build and test) and the beginning of CD (deploy) === *
 
-  install-dependencies:
+  build:
+    name: '[CD] build'
     runs-on: ubuntu-latest
     needs: metadata
     if: >
+      # ? Skip this job when we're skipping CI
       needs.metadata.outputs.should-skip-ci != 'true'
+      # ? Skip this job on PRs
       && github.event_name != 'pull_request'
+      # ? Skip this job in repo forks
       && needs.metadata.outputs.has-proper-owner == 'true'
+      # ? Skip this job if no semantic-release configuration
       && needs.metadata.outputs.has-release-config == 'true'
+      # ? Skip this job on pushes to branches (other than main/canary)
       && (needs.metadata.outputs.current-branch == 'main' || needs.metadata.outputs.current-branch == 'canary')
-    outputs:
-      cache-key: ${{ steps.cache.outputs.key }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Calculate cache-key
-        id: cache
-        env:
-          OS: ${{ runner.os }}
-          HASH: ${{ hashFiles('**/package-lock.json') }}
-        run: echo "::set-output name=key::deps-$OS-$HASH"
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        id: cache-dependencies
         with:
-          key: ${{ steps.cache.outputs.key }}
-          path: ./node_modules
+          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Use node ${{ env.NODE_BASE_VERSION }}
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         uses: actions/setup-node@v2.1.2
         with:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
       - name: Cache npm
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         uses: actions/cache@v2
         id: cache-npm
         with:
@@ -311,143 +378,54 @@ jobs:
           path: ~/.npm
           restore-keys: npm-${{ runner.os }}-
 
-      - name: Sort package.json
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
-        run: npx sort-package-json
-
       - name: Install CI dependencies
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: npm ci
 
-  build-dist:
-    runs-on: ubuntu-latest
-    needs: [metadata, install-dependencies]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Sort package.json
+        run: npx sort-package-json
 
-      - name: Restore dependencies
-        uses: actions/cache@v2
-        id: restore-dependencies
-        with:
-          key: ${{ needs.install-dependencies.outputs.cache-key }}
-          path: ./node_modules
-
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+      - name: Format source
+        run: npm run format
 
       - name: Build distributables
         run: npm run build-dist
 
-      - name: Cache distributables
-        uses: actions/cache@v2
-        id: cache-dist
-        with:
-          key: dist-${{ github.sha }}
-          path: |
-            ./dist
-            ./build
-
-  build-docs:
-    runs-on: ubuntu-latest
-    needs: [metadata, install-dependencies]
-    if: needs.metadata.outputs.has-docs == 'true'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Restore dependencies
-        uses: actions/cache@v2
-        id: restore-dependencies
-        with:
-          key: ${{ needs.install-dependencies.outputs.cache-key }}
-          path: ./node_modules
-
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
-
       - name: Build documentation
+        if: needs.metadata.outputs.has-docs == 'true'
         run: npm run build-docs
 
-      - name: Cache documentation
+      - name: Cache build
         uses: actions/cache@v2
-        id: cache-docs
+        id: cache-build
         with:
-          key: docs-${{ github.sha }}
-          path: ./docs
+          key: build-${{ runner.os }}-${{ github.sha }}
+          path: ./*
 
-  lint:
-    runs-on: ubuntu-latest
-    needs: install-dependencies
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Restore dependencies
-        uses: actions/cache@v2
-        id: restore-dependencies
-        with:
-          key: ${{ needs.install-dependencies.outputs.cache-key }}
-          path: ./node_modules
-
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
-
-      - name: Lint
-        run: npm run lint
-
-  test-unit:
-    runs-on: ubuntu-latest
-    needs: install-dependencies
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Restore dependencies
-        uses: actions/cache@v2
-        id: restore-dependencies
-        with:
-          key: ${{ needs.install-dependencies.outputs.cache-key }}
-          path: ./node_modules
-
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
-
-      - name: Test unit
-        run: npm run test-unit
-
-  semantic-release:
+  release:
+    name: '[CD] release'
     runs-on: ubuntu-latest
     needs:
-      - metadata
+      - build
       - check-audit
-      - install-dependencies
       - lint
-      - build-dist
       - test-unit
-      - build-docs
+      - metadata
       - test-integration-node
-      - test-integration-chrome
       - test-integration-externals
+      - test-integration-browser
       - test-integration-webpack
     if: >
+      # ? This job always runs, except it...
       always()
+      # ? Doesn't run if CD pipeline failed/was skipped
+      && needs.build.result == 'success'
+      # ? Doesn't run if CI pipeline didn't complete successfully
       && needs.check-audit.result == 'success'
       && needs.lint.result == 'success'
-      && needs.build-dist.result == 'success'
       && needs.test-unit.result == 'success'
-      && (needs.metadata.outputs.has-docs != 'true' || needs.build-docs.result == 'success')
       && (needs.metadata.outputs.has-integration-node != 'true' || needs.test-integration-node.result == 'success')
-      && (needs.metadata.outputs.has-integration-chrome != 'true' || needs.test-integration-chrome.result == 'success')
       && (needs.metadata.outputs.has-integration-externals != 'true' || needs.test-integration-externals.result == 'success')
+      && (needs.metadata.outputs.has-integration-browser != 'true' || needs.test-integration-browser.result == 'success')
       && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
     steps:
       - name: Checkout
@@ -456,33 +434,18 @@ jobs:
           fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Restore dependencies
+      - name: Restore build
         uses: actions/cache@v2
-        id: restore-dependencies
+        id: restore-build
         with:
-          key: ${{ needs.install-dependencies.outputs.cache-key }}
-          path: ./node_modules
+          key: build-${{ runner.os }}-${{ github.sha }}
+          path: ./*
 
-      - name: Restore distributables
-        uses: actions/cache@v2
-        id: restore-dist
-        with:
-          key: dist-${{ github.sha }}
-          path: |
-            ./dist
-            ./build
-
-      - name: Restore documentation
-        uses: actions/cache@v2
-        id: restore-docs
-        with:
-          key: docs-${{ github.sha }}
-          path: ./docs
-
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+      - name: Fail if build not restored
+        if: steps.restore-build.outputs.cache-hit != 'true'
+        run: |
+          echo '::error::release job failed to restore build ${{ github.sha }}'
+          exit 1
 
       - name: Import gpg key
         id: gpg
