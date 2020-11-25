@@ -24,7 +24,7 @@ env:
 
 jobs:
   metadata:
-    name: '[CI] gather-metadata'
+    name: 'gather-metadata'
     runs-on: ubuntu-latest
     outputs:
       current-branch: ${{ steps.branch.outputs.current-branch }}
