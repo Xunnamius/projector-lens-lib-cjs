@@ -13,7 +13,10 @@ or context and immediately upon push to this repository, are legally
 [released](https://help.github.com/articles/github-terms-of-service/#6-contributions-under-repository-license)
 (or not released) to the public pursuant to [this project's license](LICENSE).
 
-This repository uses a fully automated CI/CD
+> See also: [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)
+
+This repository uses a [fully automated](https://github.com/features/actions)
+CI/CD
 [semantic-release](https://github.com/semantic-release/semantic-release#readme)
 pipeline for vetting PRs and publishing releases. The nice thing about a fully
 automated pipeline is that anyone anywhere can make a contribution quickly and
@@ -61,39 +64,145 @@ PR passes review:
       immediately depend on one another, submit them as separate PRs instead
       👍🏿
 
-## Pipeline Details
+***
 
-TODO
+At this point, you're ready to create your PR and contribute. What follows is a
+description of this project's automated [CI/CD
+pipeline](.github/workflows/build-test-deploy.yml) and NPM run scripts; **this
+is optional reading for external collaborators.**
 
-### NPM Scripts
+***
+
+## The Build-Test-Deploy Pipeline
+
+Development in this repository adheres to [Trunk Based
+Development](https://trunkbaseddevelopment.com/) principles, specifically
+leveraging *short-lived feature branches* (SLFB). Broadly speaking, this
+pipeline consists of two "sub-pipelines" put together front to back:
+
+- First, the [Continuous
+  Integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI)
+  pipeline, which runs unit tests, project-wide integration tests, and
+  project-wide linting concurrently upon every triggering event (below).
+
+- If the CI pipeline terminates successfully (and other conditions are met), the
+  [Continuous Deployment](https://en.wikipedia.org/wiki/Continuous_deployment)
+  (CD) pipeline runs next. It builds, pretties up, versions, and ships to
+  production on every commit (production releases occur only when necessary).
+
+These pipelines are situated one after the other such that the CD pipeline
+always fails to publish when a CI pipeline check fails.
+
+### Pipeline Structure
+
+- `main` is the only permanent branch, all other branches are automatically
+  deleted after being merged into `main`
+    - Technically, there are also [maintenance
+      branches](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches),
+      which are semi-permanent
+- Changes are committed directly to `main`, to a SLFB that is eventually merged
+  into `main`, or through a PR that is eventually merged into `main` from an
+  external repository
+- `canary` is a special SLFB used to publish commits on the canary release
+  channel before eventually merging `canary` into `main` (useful to combine
+  multiple features as a single testable release)
+- Pushing a commit to any branch, opening a PR against `main`/`canary`, or
+  synchronizing a PR made against `main`/`canary` will trigger the CI pipeline
+- Pushing a commit directly to `main` or `canary` will trigger the CI pipeline
+  and, if all tests pass, also trigger the
+  [semantic-release](https://www.npmjs.com/package/semantic-release)-based CD
+  pipeline where:
+    - Commits pushed to `main` are released on the [default release
+      channel](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#release-branches)
+    - Commits pushed to `canary` are released on the [prerelease
+      channel](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#pre-release-branches)
+    - Commits pushed to `N.x`/`N.N.x` branches are released on their respective
+      [maintenance
+      channel](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches)
+    - Commits pushed to branches that aren't `main` or `canary` will not trigger
+      the CD pipeline even if all tests pass
+- Force pushing to `main` and `canary` will always fail
+- PRs only trigger the CI pipeline and *never* the CD pipeline
+- The CD pipeline never runs in forks of this repository, even when GitHub
+  Actions are explicitly enabled
+
+### Pipeline Events
+
+The CI/CD pipeline can be triggered by two
+[events](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows):
+
+- `push` events
+- `pull_request` events that:
+  - Are of type `synchronize` or `opened`
+  - Compare against branches `main` or `canary`
+
+```
+pushed `main` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z
+pushed `canary` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z-canary.N
+pushed any other SLFB ==> [run CI] ==> tested
+PR opened against `main`/`canary` ==> [run CI] ==> tested
+PR synchronized against `main`/`canary` ==> [run CI] ==> tested
+```
+
+When the CI/CD pipeline is triggered, jobs are executed according to the
+following chronology:
+
+```
+gather metadata ==> [CI] security audit
+                    [CI] linters
+                    [CI] unit tests
+                    [CI] integration tests
+                    [CD] install, build, format, sort ==> [CD] release
+```
+
+Jobs in the same column are executed concurrently. A job failing in one column
+prevents the pipeline from proceeding to the next column.
+
+This pipeline supports four suites of integration tests: *node*, *externals*,
+*browser*, and *webpack*. The presence of these test suites is picked up by
+`grep`-ing the output of `npm run` to search for the presence of the script keys
+`test-integration-node`, `test-integration-externals`,
+`test-integration-browser`, or `test-integration-webpack` respectively.
+
+This pipeline also supports an optional documentation build step via the
+`build-docs` key. A warning will be generated for projects that lack this key.
+On the other hand, the pipeline will fail if there is a `build-externals` key
+without a `test-integration-externals` key or vice-versa.
+
+Note that internal PRs to `main`/`canary` (like from dependabot) will sometimes
+trigger two CI runs: one on the `push` event when the branch is pushed and the
+other on the subsequent `pull_request` event (type: `synchronize`) when the
+internal PR is opened or its merge commit is updated. This is expected behavior.
+
+## NPM Scripts
 
 This project ships with several [NPM run
-scripts](https://docs.npmjs.com/cli/v6/commands/npm-run-script) to assist DX.
-Use `npm run list-tasks` to see which of the following scripts are available for
-this project.
+scripts](https://docs.npmjs.com/cli/v6/commands/npm-run-script). Use `npm run
+list-tasks` to see which of the following scripts are available for this
+project.
 
 > Using these scripts requires a linux-like development environment. None of the
 > scripts are likely to work on non-POSIX environments. If you're on Windows,
 > use [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
-#### Developing
+### Developing
 
 - `npm run dev` to start a development server or instance
 - `npm run lint` to run a project-wide type check
 - `npm run test` (or `npm test`, `npm run test-unit`) to run the unit tests
     - Also [gathers test coverage
       data](https://jestjs.io/docs/en/cli.html#--coverageboolean) as HTML files
-      under `coverage/`
+      (under `coverage/`)
 - `npm run test-integration-node` to run integration tests on the last three LTS
   Node versions
-- `npm run test-integration-chrome` to run integration tests (usually with
-  [puppeteer](https://github.com/puppeteer/puppeteer))
-- `npm run test-integration-webpack` to run integration tests verifying the
-  distributable can be bundled with Webpack 4 and 5 (as ESM, CJS, or both)
-- `npm run test-integration-externals` to run integration tests on compiled
-  external executables under `external-scripts/bin/`
+- `npm run test-integration-browser` to run browser integration tests with
+  [puppeteer](https://github.com/puppeteer/puppeteer)
+- `npm run test-integration-webpack` to run tests verifying the distributable
+  can be bundled with Webpack 4 and 5 (as ESM, CJS, or both)
+- `npm run test-integration-externals` to run tests on compiled external
+  executables (under `external-scripts/bin/`)
 
-##### Other Development Scripts
+#### Other Development Scripts
 - `npm run test-repeat` to run the entire test suite 100 times
     - Good for spotting bad async code and heisenbugs
     - Uses `__test-repeat` NPM script under the hood
@@ -101,25 +210,25 @@ this project.
 - `npm run generate` to transpile config files (under `config/`) from scratch
 - `npm run regenerate` to quickly re-transpile config files (under `config/`)
 
-#### Building
+### Building and Deploying
 
-- `npm run clean` to delete all build process artifacts (except `node_modules/`)
 - `npm run build` to compile `src/` into `dist/` (or `build/`), which is what
-  makes it into the published package
-- `npm run build-docs` to re-build the documentation (usually called
-  automatically)
+  ships to production
+- `npm run start` to deploy a *local* production instance
 
-##### Other Build Scripts
+#### Other Build Scripts
+- `npm run clean` to delete all build process artifacts (except `node_modules/`)
+- `npm run build-docs` to re-build the documentation (handled by pipeline)
 - `npm run build-externals` to compile `external-scripts/` into
   `external-scripts/bin/`
 - `npm run build-stats` to gather statistics about Webpack (look for
   `bundle-stats.json`)
 
-#### Deploying
+### NPX Scripts
 
-- `npm run start` to start a production instance
-
-#### NPX-only Scripts
+> These commands might be installed as a project dependency but are expected to
+> be run using [`npx X`](https://www.npmjs.com/package/npx) instead of `npm run
+> X` regardless.
 
 - `npx sort-package-json` to consistently sort `package.json`
 - `npx npm-force-resolutions` to forcefully patch security audit problems
