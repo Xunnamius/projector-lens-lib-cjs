@@ -21,6 +21,7 @@ env:
   # ? Add your GitHub user/org to enable CD pipeline
   # ? (you'll need to provide your own secrets)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
+  NPM_AUDIT_FAIL_LEVEL: high
 
 jobs:
   metadata:
@@ -92,20 +93,27 @@ jobs:
         id: data
         run: |
           set +e
-          NPMR=`npm run`
+          NPMR=`npm run list-tasks`
+
+          if [ $? -ne 0 ]; then
+            echo '::error::`npm run list-tasks` failed'
+            exit 1
+          fi
+
           if [ -r release.config.js ]; then HAS_RCNF=true; else HAS_RCNF=false; fi
-          echo $NPMR | grep -q build-docs
+          echo $NPMR | grep -e '^build-docs$'
           if [ $? -eq 0 ]; then HAS_DOCS=true; else HAS_DOCS=false; fi
-          echo $NPMR | grep -q build-externals
+          echo $NPMR | grep -e '^build-externals$'
           if [ $? -eq 0 ]; then HAS_EXTS=true; else HAS_EXTS=false; fi
-          echo $NPMR | grep -q test-integration-node
+          echo $NPMR | grep -e '^test-integration-node$'
           if [ $? -eq 0 ]; then HAS_NODE=true; else HAS_NODE=false; fi
-          echo $NPMR | grep -q test-integration-externals
+          echo $NPMR | grep -e '^test-integration-externals$'
           if [ $? -eq 0 ]; then HAS_IEXT=true; else HAS_IEXT=false; fi
-          echo $NPMR | grep -q test-integration-browser
+          echo $NPMR | grep -e '^test-integration-browser$'
           if [ $? -eq 0 ]; then HAS_BWSR=true; else HAS_BWSR=false; fi
-          echo $NPMR | grep -q test-integration-webpack
+          echo $NPMR | grep -e '^test-integration-webpack$'
           if [ $? -eq 0 ]; then HAS_WEBP=true; else HAS_WEBP=false; fi
+
           echo "::set-output name=has-release-config::$HAS_RCNF"
           echo "::set-output name=has-docs::$HAS_DOCS"
           echo "::set-output name=has-externals::$HAS_EXTS"
@@ -113,10 +121,12 @@ jobs:
           echo "::set-output name=has-integration-externals::$HAS_IEXT"
           echo "::set-output name=has-integration-browser::$HAS_BWSR"
           echo "::set-output name=has-integration-webpack::$HAS_WEBP"
+
           if [ "$HAS_EXTS" != "$HAS_IEXT" ]; then
             echo '::error::expected both 1) `external-scripts` directory to exist and 2) `test-integration-externals` run-script to be defined in package.json'
-            exit 1
+            exit 2
           fi
+
           if [ "$HAS_DOCS" = 'false' ]; then
             echo '::warning::no `build-documentation` run-script defined in package.json'
           fi
@@ -136,7 +146,7 @@ jobs:
           node-version: ${{ env.NODE_BASE_VERSION }}
 
       - name: Npm audit
-        run: npm audit
+        run: npm audit --audit-level=${{ env.NPM_AUDIT_FAIL_LEVEL }}
 
   lint:
     name: '[CI] lint'
