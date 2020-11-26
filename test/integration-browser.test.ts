@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { main } from '../../package.json'
-import { unitServerPuppeteer } from '../setup'
+import { main } from '../package.json'
+import { unitServerPuppeteer } from './setup'
 
 describe('workflow-playground [INTEGRATION-BROWSER]', () => {
     it('should export expected members', async () => {
@@ -8,7 +8,7 @@ describe('workflow-playground [INTEGRATION-BROWSER]', () => {
 
         await unitServerPuppeteer({
             client: async ({ page, run }) => {
-                await run(`${__dirname}/../../${main}.js`);
+                await run(`${__dirname}/../${main}.js`);
                 expect(await page.evaluate(() => Object.keys(window))).toIncludeAllMembers([
                     'sum',
                     'diff',
@@ -22,7 +22,7 @@ describe('workflow-playground [INTEGRATION-BROWSER]', () => {
 
         await unitServerPuppeteer({
             client: async ({ page, run }) => {
-                await run(`${__dirname}/../../${main}.js`);
+                await run(`${__dirname}/../${main}.js`);
 
                 expect(await page.evaluate(() => (window as any).sum(1, 2))).toBe(3);
                 expect(await page.evaluate(() => (window as any).diff(1, 2))).toBe(-1);
