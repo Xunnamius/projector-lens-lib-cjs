@@ -39,16 +39,17 @@
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))' && echo '\n(no gulp tasks defined for this project)'",
     "repl": "command -v rlwrap >/dev/null && rlwrap npx -p @babel/core -p @babel/node babel-node",
     "test": "npm run test-unit --",
-    "test-integration-browser": "BABEL_ENV=test jest test/integration/browser.test.ts",
-    "test-integration-node": "BABEL_ENV=test jest test/integration/node.test.ts",
-    "test-unit": "BABEL_ENV=test jest --coverage --testPathIgnorePatterns=/test/integration/"
+    "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts",
+    "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
+    "test-integration-node": "BABEL_ENV=test jest test/integration-node*.test.ts",
+    "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts"
   },
   "dependencies": {
     "chalk": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.7",
-    "@babel/core": "^7.12.7",
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-export-default-from": "^7.12.1",
     "@babel/plugin-proposal-function-bind": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
@@ -59,12 +60,12 @@
     "@types/confusing-browser-globals": "^1.0.0",
     "@types/expect-puppeteer": "^4.4.5",
     "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.9",
+    "@types/node": "^14.14.10",
     "@types/puppeteer": "^5.4.0",
     "@types/test-listen": "^1.1.0",
     "@types/webpack": "^4.41.25",
-    "@typescript-eslint/eslint-plugin": "^4.8.1",
-    "@typescript-eslint/parser": "^4.8.1",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.1",
@@ -80,10 +81,10 @@
     "jest-circus": "^26.6.3",
     "jest-extended": "^0.11.5",
     "puppeteer": "^5.5.0",
-    "semantic-release": "^17.2.4",
+    "semantic-release": "^17.3.0",
     "source-map-support": "^0.5.19",
     "test-listen": "^1.1.0",
-    "typedoc": "0.17.0-3",
+    "typedoc": "0.19.2",
     "typedoc-plugin-markdown": "^3.0.11",
     "typescript": "^4.1.2",
     "webpack": "^5.6.0",
@@ -91,6 +92,6 @@
     "webpack-node-module-types": "^1.0.4"
   },
   "engines": {
-    "node": ">= 10.x"
+    "node": ">=10.x"
   }
 }
