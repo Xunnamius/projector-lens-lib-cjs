@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 
 
+## [2.1.1](https://github.com/Xunnamius/workflow-playground/compare/v2.1.0...v2.1.1) (2020-11-26)
+
+
+### Bug Fixes
+
+* **actions:** update gather-metadata with more accurate grep ([961ecef](https://github.com/Xunnamius/workflow-playground/commit/961ecef3555403928cf319012ca6bd40093da66e))
+
 # [2.1.0](https://github.com/Xunnamius/workflow-playground/compare/v2.0.1...v2.1.0) (2020-11-25)
 
 

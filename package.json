@@ -1,6 +1,6 @@
 {
   "name": "@xunnamius/do-not-install",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A dummy package used for testing workflow pipelines. Not to be installed!",
   "repository": {
     "type": "git",
@@ -39,10 +39,10 @@
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))' && echo '\n(no gulp tasks defined for this project)'",
     "repl": "command -v rlwrap >/dev/null && rlwrap npx -p @babel/core -p @babel/node babel-node",
     "test": "npm run test-unit --",
-    "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts",
     "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
+    "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts",
     "test-integration-node": "BABEL_ENV=test jest test/integration-node*.test.ts",
-    "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts"
+    "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
   },
   "dependencies": {
     "chalk": "^4.1.0"
