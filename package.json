@@ -12,9 +12,9 @@
   "type": "commonjs",
   "exports": {
     ".": {
+      "default": "./dist/lib/index.js",
       "import": "./dist/lib/index.mjs",
-      "require": "./dist/lib/index.js",
-      "default": "./dist/lib/index.js"
+      "require": "./dist/lib/index.js"
     },
     "./package": "./package.json",
     "./package.json": "./package.json"
@@ -34,7 +34,7 @@
     "build-docs": "rm -rf tmp-docs tmp-docs-diff docs-diff && typedoc --plugin typedoc-plugin-markdown --out tmp-docs --readme none --mode library src/index.ts && find tmp-docs -name '*.md' -exec sed -i -e 's/`__namedParameters`: //g' {} + && find tmp-docs -name '*.md' -exec sed -i -e 's/__namedParameters/\\(destructured\\)/g' {} + && sed -i -e 1,4d tmp-docs/README.md && if [ ! -d docs ]; then mv tmp-docs docs; exit $?; fi && cp -rf tmp-docs tmp-docs-diff && cp -rf docs docs-diff && find docs-diff -name '*.md' -exec sed -i '/^\\*Defined in \\[.*\\]\\(.*\\)\\*$/d' {} + && find tmp-docs-diff -name '*.md' -exec sed -i '/^\\*Defined in \\[.*\\]\\(.*\\)\\*$/d' {} +; [ $? -ne 0 ] && echo 'build failed (try `npm run lint`)' && rm -rf tmp-docs tmp-docs-diff docs-diff && exit 1; if [ \"$(find ./docs-diff -type f -print0 | xargs -0 sha1sum | awk '{print $1}' | sha1sum)\" = \"$(find ./tmp-docs-diff -type f -print0 | xargs -0 sha1sum | awk '{print $1}' | sha1sum)\" ]; then echo 'no rebuild necessary'; else rm -r docs && mv tmp-docs docs && echo 'build successful'; fi; rm -rf tmp-docs tmp-docs-diff docs-diff",
     "build-stats": "NODE_ENV=production webpack --config-name main --json > bundle-stats.json",
     "clean": "rm -rf dist npm.pipe coverage external-scripts/bin",
-    "format": "echo '(no formatter setup for this project)'",
+    "format": "npx sort-package-json && prettier --write .",
     "lint": "rm -f npm.pipe; touch npm.pipe; command -v unbuffer >/dev/null; X=$?; [ $X -eq 0 ] && unbuffer tsc --project tsconfig.lint.json >> npm.pipe; Y=$?; [ $Y -eq 0 ] && echo >> npm.pipe; unbuffer eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; Z=$?; [ $X -ne 0 ] && tsc --project tsconfig.lint.json >> npm.pipe && eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; W=$?; cat npm.pipe | less -R -FX; rm npm.pipe; ([ $W -eq 0 ] && [ $X -ne 0 ]) || ([ $X -eq 0 ] && [ $Y -eq 0 ] && [ $Z -eq 0 ])",
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))' && echo '\n(no gulp tasks defined for this project)'",
     "repl": "command -v rlwrap >/dev/null && rlwrap npx -p @babel/core -p @babel/node babel-node",
@@ -43,6 +43,72 @@
     "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts",
     "test-integration-node": "BABEL_ENV=test jest test/integration-node*.test.ts",
     "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "body-leading-blank": [
+      2,
+      "always"
+    ],
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "footer-leading-blank": [
+      2,
+      "always"
+    ],
+    "type-enum": [
+      2,
+      "always",
+      [
+        "build",
+        "ci",
+        "chore",
+        "docs",
+        "feat",
+        "fix",
+        "perf",
+        "refactor",
+        "release",
+        "revert",
+        "style",
+        "test"
+      ]
+    ]
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "printWidth": 80,
+    "proseWrap": "always",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "overrides": [
+      {
+        "files": "*.(ts|js)?(x)",
+        "options": {
+          "parser": "babel-ts"
+        }
+      }
+    ]
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./test/setup.ts"
+    ],
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testRunner": "jest-circus/runner",
+    "testTimeout": 20000,
+    "verbose": false
   },
   "dependencies": {
     "chalk": "^4.1.0"
@@ -54,6 +120,8 @@
     "@babel/plugin-proposal-function-bind": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@ergodark/types": "^1.0.16",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
@@ -77,11 +145,14 @@
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.1.3",
+    "husky": "^4.3.0",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
     "jest-extended": "^0.11.5",
+    "prettier": "^2.2.0",
     "puppeteer": "^5.5.0",
     "semantic-release": "^17.3.0",
+    "sort-package-json": "^1.48.0",
     "source-map-support": "^0.5.19",
     "test-listen": "^1.1.0",
     "typedoc": "0.19.2",

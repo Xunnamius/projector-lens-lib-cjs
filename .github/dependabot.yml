@@ -5,15 +5,15 @@ updates:
     schedule:
       interval: daily
     commit-message:
-      prefix: "chore"
-      prefix-development: "chore"
-      include: "scope"
+      prefix: 'chore'
+      prefix-development: 'chore'
+      include: 'scope'
 
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: daily
     commit-message:
-      prefix: "build"
-      prefix-development: "chore"
-      include: "scope"
+      prefix: 'build'
+      prefix-development: 'chore'
+      include: 'scope'
