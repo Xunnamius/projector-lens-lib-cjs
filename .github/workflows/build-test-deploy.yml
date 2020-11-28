@@ -92,7 +92,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
-      - name: Gather run-script metadata
+      - name: Gather package.json script metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: data
         run: |
@@ -127,12 +127,12 @@ jobs:
           echo "::set-output name=has-integration-webpack::$HAS_WEBP"
 
           if [ "$HAS_EXTS" != "$HAS_IEXT" ]; then
-            echo '::error::expected both 1) `external-scripts` directory to exist and 2) `test-integration-externals` run-script to be defined in package.json'
+            echo '::error::expected both 1) `external-scripts` directory to exist and 2) `test-integration-externals` script to be defined in package.json'
             exit 2
           fi
 
           if [ "$HAS_DOCS" = 'false' ]; then
-            echo '::warning::no `build-documentation` run-script defined in package.json'
+            echo '::warning::no `build-docs` script defined in package.json'
           fi
 
   check-audit:
