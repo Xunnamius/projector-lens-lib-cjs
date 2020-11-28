@@ -12,8 +12,8 @@ on:
     branches: [main, canary]
 
 env:
-  NODE_BASE_VERSION: 14.x
-  NODE_TEST_VERSIONS: '"10.x", "12.x"' # * NODE_BASE_VERSION included automatically
+  NODE_CURRENT_VERSION: 15.x
+  NODE_TEST_VERSIONS: '"10.x", "12.x", "14.x"' # * NODE_CURRENT_VERSION included automatically
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
   CI_COMMITTER_NAME: Xunnamius (semantic-release)
   CI_COMMITTER_EMAIL: Xunnamius@users.noreply.github.com
@@ -64,7 +64,7 @@ jobs:
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: set-matrix
         run: |
-          echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_BASE_VERSION\"]}"
+          echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_CURRENT_VERSION\"]}"
           echo "::set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}"
 
       - name: Gather branch metadata
@@ -86,11 +86,11 @@ jobs:
           node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(o.trim() + '/')) ? 0 : 1)"
           echo "::set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
 
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         if: steps.skip-ci.outputs.should-skip != 'true'
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Gather run-script metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -144,10 +144,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Npm audit
         run: npm audit --audit-level=${{ env.NPM_AUDIT_FAIL_LEVEL }}
@@ -161,10 +161,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
         uses: actions/cache@v2
@@ -192,10 +192,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
         uses: actions/cache@v2
@@ -297,10 +297,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
         uses: actions/cache@v2
@@ -333,10 +333,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
         uses: actions/cache@v2
@@ -383,10 +383,10 @@ jobs:
           fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Use node ${{ env.NODE_BASE_VERSION }}
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ env.NODE_BASE_VERSION }}
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
         uses: actions/cache@v2

@@ -2,7 +2,7 @@
 // * https://tinyurl.com/yakv4ggx
 
 // ? https://nodejs.org/en/about/releases
-const NODE_OLDEST_LTS = '10.13.0';
+const NODE_OLDEST_LTS = 'maintained node versions';
 
 module.exports = {
   parserOpts: { strictMode: true },
