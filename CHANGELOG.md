@@ -7,14 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 
 
-## [2.1.2](https://github.com/Xunnamius/workflow-playground/compare/v2.1.1...v2.1.2) (2020-11-28)
+## [2.1.3](https://github.com/Xunnamius/workflow-playground/compare/v2.1.2...v2.1.3) (2020-11-28)
 
 
 ### Bug Fixes
 
-* **actions:** remove erroneous build-dist from lint job ([2cdd373](https://github.com/Xunnamius/workflow-playground/commit/2cdd373974fdc62480e5681813c09cba98aebddc))
-* **actions:** remove erroneous build-dist from test-unit job ([fcb2232](https://github.com/Xunnamius/workflow-playground/commit/fcb2232cf6e628f58033a78a0d6aa107f9794589))
-* **config:** fix babel.config.js with NODE_LTS ([cdf4610](https://github.com/Xunnamius/workflow-playground/commit/cdf46102e7d5b590bd153d2444cb13c24d4170b3))
+* **release:** update how changelogs are generated ([8ce1760](https://github.com/Xunnamius/workflow-playground/commit/8ce176044293af0ac3b5dd2495d7d0eb580bbede))
+
+## [2.1.2](https://github.com/Xunnamius/workflow-playground/compare/v2.1.1...v2.1.2) (2020-11-28)
+
+### Bug Fixes
+
+- **actions:** remove erroneous build-dist from lint job
+  ([2cdd373](https://github.com/Xunnamius/workflow-playground/commit/2cdd373974fdc62480e5681813c09cba98aebddc))
+- **actions:** remove erroneous build-dist from test-unit job
+  ([fcb2232](https://github.com/Xunnamius/workflow-playground/commit/fcb2232cf6e628f58033a78a0d6aa107f9794589))
+- **config:** fix babel.config.js with NODE_LTS
+  ([cdf4610](https://github.com/Xunnamius/workflow-playground/commit/cdf46102e7d5b590bd153d2444cb13c24d4170b3))
 
 ## [2.1.1](https://github.com/Xunnamius/workflow-playground/compare/v2.1.0...v2.1.1) (2020-11-26)
 
