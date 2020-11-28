@@ -1,8 +1,14 @@
 const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG;
+
 // eslint-disable-next-line no-console
 console.info(
   `SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG} (${typeof SHOULD_UPDATE_CHANGELOG})`
 );
+
+const parserOpts = require('./changelog.config.js');
+const { changelogTitle, ...remainingOpts } = parserOpts;
+const { transform: _, ...caParserOpts } = remainingOpts;
+const { warn: __, ...rngParserOpts } = remainingOpts;
 
 module.exports = {
   //extends: '@xunnamius/semantic-release-config',
@@ -19,23 +25,20 @@ module.exports = {
     [
       '@semantic-release/commit-analyzer',
       {
-        releaseRules: [{ type: 'build', release: 'patch' }]
+        preset: 'angular',
+        releaseRules: [{ type: 'build', release: 'patch' }],
+        parserOpts: caParserOpts
       }
     ],
-    '@semantic-release/release-notes-generator',
+    [
+      '@semantic-release/release-notes-generator',
+      {
+        preset: 'angular',
+        parserOpts: rngParserOpts
+      }
+    ],
     ...(SHOULD_UPDATE_CHANGELOG === 'true'
-      ? [
-          [
-            '@semantic-release/changelog',
-            {
-              changelogTitle:
-                `# Changelog\n\n` +
-                `All notable changes to this project will be documented in this file.\n\n` +
-                `The format is based on [Conventional Commits](https://conventionalcommits.org),\n` +
-                `and this project adheres to [Semantic Versioning](https://semver.org).`
-            }
-          ]
-        ]
+      ? [['@semantic-release/changelog', { ...changelogTitle }]]
       : []),
     '@semantic-release/npm',
     [
