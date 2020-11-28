@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "build": "npm run build-dist --",
+    "build-changelog": "conventional-changelog --outfile CHANGELOG.md --preset angular --config changelog.config.js --release-count 0 --skip-unstable && { node -e 'console.log(require(\"./changelog.config.js\").changelogTitle)'; cat CHANGELOG.md; } > CHANGELOG.md.tmp && mv CHANGELOG.md.tmp CHANGELOG.md && prettier --write CHANGELOG.md --loglevel warn",
     "build-dist": "npm run clean && NODE_ENV=production tsc --project tsconfig.types.json && NODE_ENV=production webpack --config-name main && NODE_ENV=esm babel src --extensions .ts --out-dir dist/lib --out-file-extension .mjs && { echo -n '\"undefined\"!=typeof window&&(window.global=window);'; cat dist/lib/index.js; } > dist/lib/index.js-tmp && mv -f dist/lib/index.js-tmp dist/lib/index.js",
     "build-docs": "rm -rf tmp-docs tmp-docs-diff docs-diff && typedoc --plugin typedoc-plugin-markdown --out tmp-docs --readme none --mode library src/index.ts && find tmp-docs -name '*.md' -exec sed -i -e 's/`__namedParameters`: //g' {} + && find tmp-docs -name '*.md' -exec sed -i -e 's/__namedParameters/\\(destructured\\)/g' {} + && sed -i -e 1,4d tmp-docs/README.md && if [ ! -d docs ]; then mv tmp-docs docs; exit $?; fi && cp -rf tmp-docs tmp-docs-diff && cp -rf docs docs-diff && find docs-diff -name '*.md' -exec sed -i '/^\\*Defined in \\[.*\\]\\(.*\\)\\*$/d' {} + && find tmp-docs-diff -name '*.md' -exec sed -i '/^\\*Defined in \\[.*\\]\\(.*\\)\\*$/d' {} +; [ $? -ne 0 ] && echo 'build failed (try `npm run lint`)' && rm -rf tmp-docs tmp-docs-diff docs-diff && exit 1; if [ \"$(find ./docs-diff -type f -print0 | xargs -0 sha1sum | awk '{print $1}' | sha1sum)\" = \"$(find ./tmp-docs-diff -type f -print0 | xargs -0 sha1sum | awk '{print $1}' | sha1sum)\" ]; then echo 'no rebuild necessary'; else rm -r docs && mv tmp-docs docs && echo 'build successful'; fi; rm -rf tmp-docs tmp-docs-diff docs-diff",
     "build-stats": "NODE_ENV=production webpack --config-name main --json > bundle-stats.json",
@@ -119,6 +120,7 @@
     "babel-plugin-source-map-support": "^2.1.3",
     "babel-plugin-transform-mjs-imports": "^1.0.1",
     "confusing-browser-globals": "^1.0.10",
+    "conventional-changelog-cli": "^2.1.1",
     "eslint": "^7.14.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^2.3.0",
