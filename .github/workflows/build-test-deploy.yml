@@ -17,6 +17,7 @@ env:
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
   CI_COMMITTER_NAME: Xunnamius (semantic-release)
   CI_COMMITTER_EMAIL: Xunnamius@users.noreply.github.com
+  # ! These also have to be updated in changelog.config.js
   CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
   # ? Add your GitHub user/org to enable CD pipeline
   # ? (you'll need to provide your own secrets)
