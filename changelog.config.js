@@ -41,10 +41,10 @@ module.exports = {
 
       // ? Make the scope/subject upper case in the changelog (per my tastes)
       if (commit) {
-        if (SKIP_COMMANDS.some((cmd) => commit.subject.contains(cmd)))
+        if (SKIP_COMMANDS.some((cmd) => commit.subject.includes(cmd)))
           return null;
 
-        commit.scope && !EXCLUDE_SCOPES.contains(commit.scope)
+        commit.scope && !EXCLUDE_SCOPES.includes(commit.scope)
           ? (commit.scope = sentenceCase(commit.scope))
           : (commit.subject = sentenceCase(commit.subject));
       }
