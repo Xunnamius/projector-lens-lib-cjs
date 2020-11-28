@@ -205,9 +205,6 @@ jobs:
       - name: Install CI dependencies
         run: npm ci
 
-      - name: Build distributables
-        run: npm run build-dist
-
       - name: Test unit
         run: npm run test-unit
 
