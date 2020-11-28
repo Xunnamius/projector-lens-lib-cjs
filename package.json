@@ -46,35 +46,19 @@
     "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
   },
   "commitlint": {
-    "body-leading-blank": [
-      2,
-      "always"
-    ],
     "extends": [
       "@commitlint/config-conventional"
     ],
-    "footer-leading-blank": [
-      2,
-      "always"
-    ],
-    "type-enum": [
-      2,
-      "always",
-      [
-        "build",
-        "ci",
-        "chore",
-        "docs",
-        "feat",
-        "fix",
-        "perf",
-        "refactor",
-        "release",
-        "revert",
-        "style",
-        "test"
+    "rules": {
+      "body-leading-blank": [
+        2,
+        "always"
+      ],
+      "footer-leading-blank": [
+        2,
+        "always"
       ]
-    ]
+    }
   },
   "prettier": {
     "endOfLine": "lf",
