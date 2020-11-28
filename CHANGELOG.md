@@ -5,14 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
-
-
 ## [2.1.3](https://github.com/Xunnamius/workflow-playground/compare/v2.1.2...v2.1.3) (2020-11-28)
-
 
 ### Bug Fixes
 
-* **release:** update how changelogs are generated ([8ce1760](https://github.com/Xunnamius/workflow-playground/commit/8ce176044293af0ac3b5dd2495d7d0eb580bbede))
+- **release:** update how changelogs are generated
+  ([8ce1760](https://github.com/Xunnamius/workflow-playground/commit/8ce176044293af0ac3b5dd2495d7d0eb580bbede))
 
 ## [2.1.2](https://github.com/Xunnamius/workflow-playground/compare/v2.1.1...v2.1.2) (2020-11-28)
 
