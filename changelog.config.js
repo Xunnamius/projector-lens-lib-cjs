@@ -8,12 +8,16 @@ const changelogTitle =
 
 module.exports = {
   changelogTitle,
-  mergePattern: /^Merge pull request #(\d+) from (.*)$/,
-  mergeCorrespondence: ['id', 'source'],
-  noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
-  // eslint-disable-next-line no-console
-  warn: console.warn.bind(console),
-  transform: {
-    subject: (s) => s.charAt(0).toUpperCase() + s.slice(1)
+  parserOpts: {
+    mergePattern: /^Merge pull request #(\d+) from (.*)$/,
+    mergeCorrespondence: ['id', 'source'],
+    noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
+    // eslint-disable-next-line no-console
+    warn: console.warn.bind(console)
+  },
+  writerOpts: {
+    transform: {
+      subject: (s) => s.charAt(0).toUpperCase() + s.slice(1)
+    }
   }
 };
