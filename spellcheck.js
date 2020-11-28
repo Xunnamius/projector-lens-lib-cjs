@@ -39,7 +39,7 @@ const splitOutWords = (phrase) => {
 const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
 
 (async () => {
-  const lastCommitMsg = await require('last-commit-message')();
+  const lastCommitMsg = (await read('./.git/COMMIT_EDITMSG')).toString('utf-8');
   const homeDir = require('os').homedir();
 
   const ignoreWords = Array.from(
@@ -56,7 +56,7 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
         ...keys(pkg.devDependencies).map(splitOutWords),
         ...keys(pkg.scripts).map(splitOutWords),
         ...sjx
-          .exec('git log --format="%B"')
+          .exec('git log --format="%B" HEAD~1')
           .stdout.split(/(?:[^\w\-_']|\s)\s*/g)
       ]
         .flat()
@@ -103,5 +103,6 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
     }
 
     typos.length > 5 && console.warn(`${typos.length - 5} more...`);
+    typos.length && console.warn('---');
   }
 })();
