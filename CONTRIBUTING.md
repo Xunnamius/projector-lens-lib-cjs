@@ -10,9 +10,9 @@ started,
 ## Submitting a Pull Request (PR)
 
 > Be aware: all contributions to this project, regardless of committer, origin,
-> or context and immediately upon push to this repository, are legally
+> or context and immediately upon push to this repository, are
 > [released](https://help.github.com/articles/github-terms-of-service/#6-contributions-under-repository-license)
-> (or not released) to the public pursuant to [this project's license](LICENSE).
+> pursuant to [this project's license](LICENSE).
 
 > See also: [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)
 
