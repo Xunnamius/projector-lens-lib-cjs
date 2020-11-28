@@ -32,7 +32,7 @@ module.exports = {
                 `# Changelog\n\n` +
                 `All notable changes to this project will be documented in this file.\n\n` +
                 `The format is based on [Conventional Commits](https://conventionalcommits.org),\n` +
-                `and this project adheres to [Semantic Versioning](https://semver.org).\n\n`
+                `and this project adheres to [Semantic Versioning](https://semver.org).`
             }
           ]
         ]
