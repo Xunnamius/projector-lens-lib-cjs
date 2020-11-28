@@ -2,7 +2,7 @@
 // * https://tinyurl.com/yakv4ggx
 
 // ? https://nodejs.org/en/about/releases
-const NODE_OLDEST_LTS = 'maintained node versions';
+const NODE_LTS = 'maintained node versions';
 
 module.exports = {
   parserOpts: { strictMode: true },
@@ -32,7 +32,7 @@ module.exports = {
           {
             // ? https://github.com/babel/babel-loader/issues/521#issuecomment-441466991
             //modules: false,
-            targets: { node: NODE_OLDEST_LTS }
+            targets: NODE_LTS
           }
         ],
         ['@babel/preset-typescript', { allowDeclareFields: true }]
@@ -55,7 +55,7 @@ module.exports = {
           {
             // ? https://babeljs.io/docs/en/babel-preset-env#modules
             modules: false,
-            targets: { node: NODE_OLDEST_LTS }
+            targets: NODE_LTS
           }
         ],
         ['@babel/preset-typescript', { allowDeclareFields: true }]
