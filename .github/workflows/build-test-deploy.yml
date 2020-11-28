@@ -105,17 +105,17 @@ jobs:
           fi
 
           if [ -r release.config.js ]; then HAS_RCNF=true; else HAS_RCNF=false; fi
-          echo $NPMR | grep -e '^build-docs$'
+          echo $NPMR | grep -qe '^build-docs$'
           if [ $? -eq 0 ]; then HAS_DOCS=true; else HAS_DOCS=false; fi
-          echo $NPMR | grep -e '^build-externals$'
+          echo $NPMR | grep -qe '^build-externals$'
           if [ $? -eq 0 ]; then HAS_EXTS=true; else HAS_EXTS=false; fi
-          echo $NPMR | grep -e '^test-integration-node$'
+          echo $NPMR | grep -qe '^test-integration-node$'
           if [ $? -eq 0 ]; then HAS_NODE=true; else HAS_NODE=false; fi
-          echo $NPMR | grep -e '^test-integration-externals$'
+          echo $NPMR | grep -qe '^test-integration-externals$'
           if [ $? -eq 0 ]; then HAS_IEXT=true; else HAS_IEXT=false; fi
-          echo $NPMR | grep -e '^test-integration-browser$'
+          echo $NPMR | grep -qe '^test-integration-browser$'
           if [ $? -eq 0 ]; then HAS_BWSR=true; else HAS_BWSR=false; fi
-          echo $NPMR | grep -e '^test-integration-webpack$'
+          echo $NPMR | grep -qe '^test-integration-webpack$'
           if [ $? -eq 0 ]; then HAS_WEBP=true; else HAS_WEBP=false; fi
 
           echo "::set-output name=has-release-config::$HAS_RCNF"
