@@ -12,5 +12,9 @@ describe('workflow-playground [UNIT]', () => {
       expect.hasAssertions();
       expect(diff(2, 2)).toBe(0);
     });
+    // eslint-disable-next-line jest/prefer-expect-assertions
+    it('fails if this test should fail', async () => {
+      expect(true).toBe(true);
+    });
   });
 });
