@@ -61,58 +61,60 @@ module.exports = {
     transform: (commit, context) => {
       const version = commit.version || null;
       const firstRelease =
-        version === context.gitSemverTags.slice(-1)[0].slice(1);
+        version === context.gitSemverTags?.slice(-1)[0].slice(1);
 
-      if (!firstRelease && version && !commit.type) {
+      if (!firstRelease || commit.type) {
         // ? This commit does not have a type, but has a version. It must be a
         // ? legacy release!
-        legacyReleases.push(commit);
-        commit = null;
-        shouldGenerate = false;
-      } else if (!firstRelease) {
-        commit = transform(commit, context);
+        if (version && !commit.type) {
+          legacyReleases.push(commit);
+          commit = null;
+          shouldGenerate = false;
+        } else {
+          commit = transform(commit, context);
 
-        if (commit) {
-          // ? Ignore any commits with commands like [skip ci] in them
-          if (SKIP_COMMANDS.some((cmd) => commit.subject.includes(cmd)))
-            return null;
+          if (commit) {
+            // ? Ignore any commits with commands like [skip ci] in them
+            if (SKIP_COMMANDS.some((cmd) => commit.subject.includes(cmd)))
+              return null;
 
-          if (!NO_CAPITALIZE_TYPES.some((type) => commit.type === type)) {
-            // ? Make the scope/subject upper case in the changelog (per my tastes)
-            commit.scope
-              ? (commit.scope = sentenceCase(commit.scope))
-              : (commit.subject = sentenceCase(commit.subject));
-          }
-
-          if (commit.type == 'Reverts') {
-            // ? Ignore reverts that didn't trigger releases
-            if (!SHOW_REVERSION_TYPES.includes(commit.subject)) return null;
-
-            commit.subject = `*${commit.subject}*`;
-          }
-
-          commit.notes.forEach((note) => {
-            note.text = sentenceCase(note.text.trim());
-
-            // ? If the text has a line break in it, make the first line bold and
-            // ? add a period before the line break unless there's a symbol
-            // ? already there
-            if (/\n/.test(note.text)) {
-              const [firstLine, ...remainder] = note.text.split('\n');
-              const addPeriod = !firstLine.endsWith('.');
-
-              note.text = `**${firstLine}${
-                addPeriod ? '.' : ''
-              }**\n${sentenceCase(remainder.join('\n'))}`;
+            if (!NO_CAPITALIZE_TYPES.some((type) => commit.type === type)) {
+              // ? Make the scope/subject upper case in the changelog (per my tastes)
+              commit.scope
+                ? (commit.scope = sentenceCase(commit.scope))
+                : (commit.subject = sentenceCase(commit.subject));
             }
-          });
+
+            if (commit.type == 'Reverts') {
+              // ? Ignore reverts that didn't trigger releases
+              if (!SHOW_REVERSION_TYPES.includes(commit.type)) return null;
+
+              commit.subject = `*${commit.subject}*`;
+            }
+
+            commit.notes.forEach((note) => {
+              note.text = sentenceCase(note.text.trim());
+
+              // ? If the text has a line break in it, make the first line bold and
+              // ? add a period before the line break unless there's a symbol
+              // ? already there
+              if (/\n/.test(note.text)) {
+                const [firstLine, ...remainder] = note.text.split('\n');
+                const addPeriod = !firstLine.endsWith('.');
+
+                note.text = `**${firstLine}${
+                  addPeriod ? '.' : ''
+                }**\n${sentenceCase(remainder.join('\n'))}`;
+              }
+            });
+          }
         }
       }
 
       // ? If this is the commit representing the earliest release (and there
       // ? are legacy releases), use this commit to report collected legacy
       // ? releases
-      if (firstRelease) {
+      else {
         shouldGenerate = 'always';
 
         const getShortHash = (h) => h.substring(0, 7);
