@@ -5,10 +5,8 @@ console.info(
   `SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG} (${typeof SHOULD_UPDATE_CHANGELOG})`
 );
 
-const parserOpts = require('./changelog.config.js');
-const { changelogTitle, ...remainingOpts } = parserOpts;
-const { transform: _, ...caParserOpts } = remainingOpts;
-const { warn: __, ...rngParserOpts } = remainingOpts;
+const options = require('./changelog.config.js');
+const { changelogTitle, parserOpts, writerOpts } = options;
 
 module.exports = {
   //extends: '@xunnamius/semantic-release-config',
@@ -26,15 +24,19 @@ module.exports = {
       '@semantic-release/commit-analyzer',
       {
         preset: 'angular',
-        releaseRules: [{ type: 'build', release: 'patch' }],
-        parserOpts: caParserOpts
+        parserOpts,
+        // ! If you change releaseRules, you should also take a look at:
+        // !   - dependabot.yml
+        // !   - changelog.config.js
+        releaseRules: [{ type: 'build', release: 'patch' }]
       }
     ],
     [
       '@semantic-release/release-notes-generator',
       {
         preset: 'angular',
-        parserOpts: rngParserOpts
+        parserOpts,
+        writerOpts
       }
     ],
     ...(SHOULD_UPDATE_CHANGELOG === 'true'
