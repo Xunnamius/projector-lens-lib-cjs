@@ -2,7 +2,6 @@
 . "$(dirname $0)/_/husky.sh"
 
 npx commitlint -e
-npm run format -- --loglevel warn
 npm run test
 echo
 node spellcheck.js
