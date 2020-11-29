@@ -195,6 +195,7 @@ this project.
   - Also
     [gathers test coverage data](https://jestjs.io/docs/en/cli.html#--coverageboolean)
     as HTML files (under `coverage/`)
+  - Can also run `npm run test-integration` to run all the integration tests
 - `npm run test-integration-node` to run integration tests on the last three LTS
   Node versions
 - `npm run test-integration-browser` to run browser integration tests with
@@ -215,13 +216,15 @@ this project.
 
 ### Building and Deploying
 
-- `npm run build` to compile `src/` into `dist/` (or `build/`), which is what
-  ships to production
+- `npm run build` (or `npm run build-dist`) to compile `src/` into `dist/` (or
+  `build/`), which is what ships to production
+- `npm run format` to run a formatter over the codebase
 - `npm run start` to deploy a _local_ production instance
 
 #### Other Build Scripts
 
 - `npm run clean` to delete all build process artifacts (except `node_modules/`)
+- `npm run build-changelog` to re-build the changelog (handled by pipeline)
 - `npm run build-docs` to re-build the documentation (handled by pipeline)
 - `npm run build-externals` to compile `external-scripts/` into
   `external-scripts/bin/`
