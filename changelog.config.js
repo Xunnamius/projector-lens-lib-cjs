@@ -24,7 +24,7 @@ const SKIP_COMMANDS = '[skip ci], [ci skip], [skip github], [github skip]'.split
   ', '
 );
 
-sjx.config.silent = true;
+sjx.config.silent = true;gfd
 
 // ! XXX: dark magic to synchronously deal with this async package
 const wait = sjx.exec(
