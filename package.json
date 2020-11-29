@@ -107,6 +107,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@ergodark/types": "^1.0.16",
+    "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "@types/confusing-browser-globals": "^1.0.0",
     "@types/expect-puppeteer": "^4.4.5",
