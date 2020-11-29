@@ -20,4 +20,9 @@ describe('workflow-playground [INTEGRATION-NODE]', () => {
     expect(sum(1, 2)).toBe(3);
     expect(diff(1, 2)).toBe(-1);
   });
+
+  // eslint-disable-next-line jest/prefer-expect-assertions
+  it('fails if this test should fail', async () => {
+    expect(true).toBe(true);
+  });
 });
