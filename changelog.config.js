@@ -86,8 +86,14 @@ module.exports = {
             }
 
             if (commit.type == 'Reverts') {
+              console.log(commit.subject);
               // ? Ignore reverts that didn't trigger releases
-              if (!SHOW_REVERSION_TYPES.includes(commit.type)) return null;
+              if (
+                !SHOW_REVERSION_TYPES.some((t) =>
+                  RegExp(`^[^\\w]${t}: `, 'i').test(commit.subject.trim())
+                )
+              )
+                return null;
 
               commit.subject = `*${commit.subject}*`;
             }
