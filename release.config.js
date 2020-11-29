@@ -6,7 +6,7 @@ console.info(
 );
 
 const options = require('./changelog.config.js');
-const { changelogTitle, parserOpts, writerOpts } = options;
+const { parserOpts, writerOpts } = options;
 
 module.exports = {
   //extends: '@xunnamius/semantic-release-config',
@@ -39,9 +39,12 @@ module.exports = {
         writerOpts
       }
     ],
-    ...(SHOULD_UPDATE_CHANGELOG === 'true'
-      ? [['@semantic-release/changelog', { ...changelogTitle }]]
-      : []),
+    [
+      '@semantic-release/exec',
+      {
+        prepareCmd: 'npm run build-changelog'
+      }
+    ],
     '@semantic-release/npm',
     [
       '@semantic-release/git',
