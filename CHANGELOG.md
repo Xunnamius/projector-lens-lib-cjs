@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [2.2.1](https://github.com/Xunnamius/workflow-playground/compare/v2.2.0...v2.2.1) (2020-11-29)
+
+### Build System
+
+- **Changelog:** changelog now includes relevant reverts
+  ([d4ccacb](https://github.com/Xunnamius/workflow-playground/commit/d4ccacb6533b04c4889b909ecd2bffd4c7b5fa79))
+
 # [2.2.0](https://github.com/Xunnamius/workflow-playground/compare/v2.1.4...v2.2.0) (2020-11-29)
 
 ### Bug Fixes
@@ -28,15 +35,23 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - **Spellcheck:** spellcheck now leverages assorted knowledge
   ([14b86ae](https://github.com/Xunnamius/workflow-playground/commit/14b86ae815f2c24aef82dcad41b0ead036a2f4c4))
 
+### Build System
+
+- Install @semantic-release/exec
+  ([cc94940](https://github.com/Xunnamius/workflow-playground/commit/cc94940e7b903a141f4e16a4169411c0a45bfb96))
+- **Config:** fix changelog.config.js operating on individual releases
+  ([66adf2f](https://github.com/Xunnamius/workflow-playground/commit/66adf2f3d8ea4bd1813fac4c704ff327ac175855))
+- **Config:** fix husky pre-commit hook
+  ([f0d0032](https://github.com/Xunnamius/workflow-playground/commit/f0d0032fb51ddb98b2f35b229c9d1873c00264f7))
+- **Config:** generate CHANGELOG.md beautifully
+  ([2fa4aa9](https://github.com/Xunnamius/workflow-playground/commit/2fa4aa962a17c6075d28af876f67fe98d0f519b6))
+- **Config:** retire @semantic-release/changelog
+  ([787a281](https://github.com/Xunnamius/workflow-playground/commit/787a28144826609ddffb5e0d1937f314b1039ab6))
+
 ### Features
 
 - Add build-changelog to npm scripts
   ([8393a87](https://github.com/Xunnamius/workflow-playground/commit/8393a87974cea60087a8d11fc9b0bac0f7ecc6e2))
-
-### Reverts
-
-- _"build: bad fix"_
-  ([48394bc](https://github.com/Xunnamius/workflow-playground/commit/48394bc497dc39046ae8ed815db335fe83fde335))
 
 ## [2.1.4](https://github.com/Xunnamius/workflow-playground/compare/v2.1.3...v2.1.4) (2020-11-28)
 

@@ -71,7 +71,15 @@ module.exports = {
           commit = null;
           shouldGenerate = false;
         } else {
+          let fakeFix = false;
+
+          if (commit.type === 'build') {
+            commit.type = 'fix';
+            fakeFix = true;
+          }
+
           commit = transform(commit, context);
+          if (fakeFix) commit.type = 'Build System';
 
           if (commit) {
             // ? Ignore any commits with commands like [skip ci] in them
@@ -86,7 +94,6 @@ module.exports = {
             }
 
             if (commit.type == 'Reverts') {
-              console.log(commit.subject);
               // ? Ignore reverts that didn't trigger releases
               if (
                 !SHOW_REVERSION_TYPES.some((t) =>
