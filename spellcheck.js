@@ -10,7 +10,6 @@ const tryToRead = async (path) => {
   try {
     return await read(path);
   } catch (ignored) {
-    console.log(ignored);
     return '';
   }
 };
