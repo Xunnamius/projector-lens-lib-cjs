@@ -97,6 +97,9 @@ always fails to publish when a CI pipeline check fails.
 
 - `main` is the only permanent branch, all other branches are automatically
   deleted after being merged into `main`
+  - Though the term "merged" is used here and throughout this document, usually
+    branches are merged via [rebase](https://git-scm.com/docs/git-rebase) rather
+    than an actual `git merge`.
   - Technically, there are also
     [maintenance branches](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches),
     which are semi-permanent
@@ -117,17 +120,17 @@ always fails to publish when a CI pipeline check fails.
   - Commits pushed to `canary` are released on the
     [prerelease channel](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#pre-release-branches)
   - Commits pushed to `N.x`/`N.N.x` branches are released on their respective
-    [maintenance channel](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches)
-  - Commits pushed to branches that aren't `main` or `canary` will not trigger
-    the CD pipeline even if all tests pass
+    [maintenance channels](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches)
+  - Commits pushed to branches that aren't the above will not trigger the CD
+    pipeline even if all tests pass
 - Force pushing to `main` and `canary` will always fail
 - PRs only trigger the CI pipeline and _never_ the CD pipeline
 - The CD pipeline never runs in forks of this repository, even when GitHub
-  Actions are explicitly enabled
+  Actions are explicitly enabled (this can be overridden)
 
 ### Pipeline Events
 
-The CI/CD pipeline can be triggered by two
+The CI/CD pipeline is triggered by two
 [events](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows):
 
 - `push` events
@@ -159,8 +162,8 @@ prevents the pipeline from proceeding to the next column.
 
 This pipeline supports four suites of integration tests: _node_, _externals_,
 _browser_, and _webpack_. The presence of these test suites is picked up by
-`grep`-ing the output of `npm run` to search for the presence of the script keys
-`test-integration-node`, `test-integration-externals`,
+`grep`-ing the output of `npm run list-tasks` to search for the presence of the
+script keys `test-integration-node`, `test-integration-externals`,
 `test-integration-browser`, or `test-integration-webpack` respectively.
 
 This pipeline also supports an optional documentation build step via the
