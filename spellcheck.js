@@ -28,6 +28,14 @@ const asJson = (str) => {
 
 const asText = (str) => str.toString('utf-8').split('\n');
 const sanitizeWord = (word) => word.replace(/[^a-zA-Z0-9'\w]/g, ' ');
+const isPascalCase = (word) =>
+  /^[A-Z]([A-Z0-9]*[a-z][a-z0-9]*[A-Z]|[a-z0-9]*[A-Z][A-Z0-9]*[a-z])[A-Za-z0-9]*.?$/.test(
+    word
+  );
+const isCamelCase = (word) =>
+  /^[a-z]+[A-Z0-9][a-z0-9]+[A-Za-z0-9]*.?$/.test(word);
+
+const isAllCaps = (word) => /^[\W0-9_A-Z]+$/.test(word);
 
 const splitOutWords = (phrase) => {
   return [...phrase.split(/(?:[^\w\-_']|\s)\s*/g), phrase]
@@ -68,11 +76,11 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
 
   const typos = spellcheck
     .checkSpelling(lastCommitMsg)
-    .map((typoLocation) => {
-      return lastCommitMsg
-        .slice(typoLocation.start, typoLocation.end)
-        .toLowerCase();
-    })
+    .map((typoLocation) =>
+      lastCommitMsg.slice(typoLocation.start, typoLocation.end)
+    )
+    .filter((w) => !isAllCaps(w) && !isCamelCase(w) && !isPascalCase(w))
+    .map((w) => w.toLowerCase())
     .filter(
       (typo) =>
         !ignoreWords.includes(typo) && !ignoreWords.includes(sanitizeWord(typo))
