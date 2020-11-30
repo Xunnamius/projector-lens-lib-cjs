@@ -24,22 +24,14 @@ const asJson = (str) => {
 };
 
 const asText = (str) => str.toString('utf-8').split('\n');
-const sanitizeWord = (word) => word.replace(/[^a-zA-Z0-9'\w]/g, ' ');
-const isPascalCase = (word) =>
-  /^[A-Z]([A-Z0-9]*[a-z][a-z0-9]*[A-Z]|[a-z0-9]*[A-Z][A-Z0-9]*[a-z])[A-Za-z0-9]*.?$/.test(
-    word
-  );
-const isCamelCase = (word) => /^[a-z]+[A-Z0-9][a-z0-9]+[A-Za-z0-9]*.?$/.test(word);
+const isPascalCase = (w) => /^([A-Z]{2,}.+|[A-Z][a-z]+[A-Z].*)$/.test(w);
+const isCamelCase = (w) => /^[a-z]+[A-Z]+.*$/.test(w);
+const isAllCaps = (w) => /^[^a-z]+$/.test(w);
 
-const isAllCaps = (word) => /^[\W0-9_A-Z]+$/.test(word);
+const splitOutWords = (phrase) =>
+  [...phrase.split(/[^a-zA-Z]+/g), phrase].filter(Boolean);
 
-const splitOutWords = (phrase) => {
-  return [...phrase.split(/(?:[^\w\-_']|\s)\s*/g), phrase]
-    .map((a) => sanitizeWord(a.trim()))
-    .filter((a) => !!a);
-};
-
-const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
+const keys = (obj) => Object.keys(obj).map(splitOutWords);
 
 (async () => {
   const lastCommitMsg = (await read('./.git/COMMIT_EDITMSG')).toString('utf-8');
@@ -55,45 +47,46 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
           tryToRead(`${homeDir}/.config/Code/User/settings.json`).then(asJson)
         ])),
         ...require('text-extensions'),
-        ...keys(pkg.dependencies).map(splitOutWords),
-        ...keys(pkg.devDependencies).map(splitOutWords),
-        ...keys(pkg.scripts).map(splitOutWords),
-        ...sjx.exec('git log --format="%B" HEAD~1').stdout.split(/(?:[^\w\-_']|\s)\s*/g)
+        // ? Popular contractions
+        ...['ve', 're', 's', 'll', 't', 'd', 'o', 'ol'],
+        ...keys(pkg.dependencies),
+        ...keys(pkg.devDependencies),
+        ...keys(pkg.scripts),
+        ...splitOutWords(sjx.exec('git log --format="%B" HEAD~1').stdout).slice(0, -1)
       ]
         .flat()
         .filter(Boolean)
-        .map((word) => word.trim().toLowerCase())
+        .map((word) => splitOutWords(word.trim().toLowerCase()))
+        .flat()
     )
   );
 
-  const seen = [];
-
-  const typos = spellcheck
-    .checkSpelling(lastCommitMsg)
-    .map((typoLocation) => lastCommitMsg.slice(typoLocation.start, typoLocation.end))
-    .filter((w) => !isAllCaps(w) && !isCamelCase(w) && !isPascalCase(w))
-    .map((w) => w.toLowerCase())
-    .filter(
-      (typo) => !ignoreWords.includes(typo) && !ignoreWords.includes(sanitizeWord(typo))
-    );
+  const typos = Array.from(
+    new Set(
+      spellcheck
+        .checkSpelling(lastCommitMsg)
+        .map((typoLocation) =>
+          lastCommitMsg.slice(typoLocation.start, typoLocation.end).trim().split("'")
+        )
+        .flat()
+        .filter((w) => !isAllCaps(w) && !isCamelCase(w) && !isPascalCase(w))
+        .map((w) => w.toLowerCase())
+        .filter((typo) => !ignoreWords.includes(typo))
+    )
+  );
 
   if (typos.length) {
     console.warn('WARNING: there may be misspelled words in your commit message!');
     console.warn('Commit messages can be fixed before push with `git commit -S --amend`');
     console.warn('---');
 
-    for (const typo of typos) {
-      if (!seen.includes(typo)) {
-        const corrections = spellcheck.getCorrectionsForMisspelling(typo);
-        const suggestion = corrections.length
-          ? ` (did you mean ${corrections.slice(0, 5).join(', ')}?)`
-          : '';
+    for (const typo of typos.slice(0, 5)) {
+      const corrections = spellcheck.getCorrectionsForMisspelling(typo);
+      const suggestion = corrections.length
+        ? ` (did you mean ${corrections.slice(0, 5).join(', ')}?)`
+        : '';
 
-        seen.push(typo);
-        console.warn(`${typo}${suggestion}`);
-      }
-
-      if (seen.length == 5) break;
+      console.warn(`${typo}${suggestion}`);
     }
 
     typos.length > 5 && console.warn(`${typos.length - 5} more...`);
