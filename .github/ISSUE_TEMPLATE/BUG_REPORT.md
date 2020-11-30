@@ -10,9 +10,10 @@ labels: 🤯 bug, needs triage
 A clear and concise description of what actually happened. If applicable, add
 screenshots to help explain the problem.
 
-If you really want this bug fixed in a timely manner, consider including below a
-link to a Minimal Reproducible Example (MRE) (https://bit.ly/3q2fyVo) that
-demonstrates your problem both simply and in as few lines of code as possible!
+If we cannot reproduce the bug, it's unlikely we can fix it! So, if you really
+want this bug fixed in a timely manner, consider linking to a Minimal
+Reproducible Example (MRE) (https://bit.ly/3q2fyVo) that demonstrates your
+problem both simply and in as few lines of code as possible!
 -->
 
 </details>
@@ -21,7 +22,7 @@ demonstrates your problem both simply and in as few lines of code as possible!
 
 <!--
 Include a clear and concise description of what you expected to happen. If
-applicable, add screenshots to help explain the problem.
+applicable, add screenshots to help explain.
 -->
 
 </details>
@@ -30,7 +31,8 @@ applicable, add screenshots to help explain the problem.
 
 <!--
 Please include the simplest most basic possible steps to reproduce the
-problematic behavior described above. For example:
+problematic behavior described above. If you included a MRE above, explain here
+how to use it to reproduce your bug. For example:
 
 1. Go to '...'
 2. Click on '....'
