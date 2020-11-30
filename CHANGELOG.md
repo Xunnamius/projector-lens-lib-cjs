@@ -1,3 +1,24 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Conventional Commits](https://conventionalcommits.org), and this
+project adheres to [Semantic Versioning](https://semver.org).
+
+## [2.3.2](https://github.com/Xunnamius/workflow-playground/compare/v2.3.1...v2.3.2) (2020-11-30)
+
+### Build System
+
+- **Release:** fix changelogTitle spread bug
+  ([598a396](https://github.com/Xunnamius/workflow-playground/commit/598a3966ce1d85c6dcc2945878ebd3ba2c969654))
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Conventional Commits](https://conventionalcommits.org), and this
+project adheres to [Semantic Versioning](https://semver.org).
+
 ## [2.3.1](https://github.com/Xunnamius/workflow-playground/compare/v2.3.0...v2.3.1) (2020-11-30)
 
 ### Build System
@@ -8,13 +29,6 @@
   ([0d181ea](https://github.com/Xunnamius/workflow-playground/commit/0d181ea032a9f5322137dacf5ee97e6a28acd035))
 - **Release:** fix SHOULD_UPDATE_CHANGELOG conditional
   ([ec632ad](https://github.com/Xunnamius/workflow-playground/commit/ec632ad52472184edbed16111b4a5b306ae6f7ed))
-
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Conventional Commits](https://conventionalcommits.org), and this
-project adheres to [Semantic Versioning](https://semver.org).
 
 # [2.3.0](https://github.com/Xunnamius/workflow-playground/compare/v2.2.2...v2.3.0) (2020-11-30)
 
