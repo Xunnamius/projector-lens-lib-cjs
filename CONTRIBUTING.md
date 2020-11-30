@@ -219,6 +219,7 @@ This project ships with several
 
 - `npm run clean` to delete all build process artifacts (except `node_modules/`)
 - `npm run build-changelog` to re-build the changelog (handled by pipeline)
+  - You can run this as `CHANGELOG_SKIP_TITLE=true npm run build-changelog` to skip prepending the header
 - `npm run build-docs` to re-build the documentation (handled by pipeline)
 - `npm run build-externals` to compile `external-scripts/` into `external-scripts/bin/`
 - `npm run build-stats` to gather statistics about Webpack (look for `bundle-stats.json`)
