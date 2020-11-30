@@ -45,7 +45,13 @@ module.exports = {
               prepareCmd: 'npm run build-changelog'
             }
           ],
-          ['@semantic-release/changelog', { ...changelogTitle }]
+          ['@semantic-release/changelog', { ...changelogTitle }],
+          [
+            '@semantic-release/exec',
+            {
+              prepareCmd: 'npx prettier --write CHANGELOG.md'
+            }
+          ]
         ]
       : []),
     '@semantic-release/npm',
