@@ -146,7 +146,7 @@
     "source-map-support": "^0.5.19",
     "spellchecker": "^3.7.1",
     "test-listen": "^1.1.0",
-    "text-extensions": "^1.9.0",
+    "text-extensions": "^2.3.0",
     "typedoc": "0.17.0-3",
     "typedoc-plugin-markdown": "3.0.11",
     "typescript": "^4.1.2",
