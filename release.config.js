@@ -1,9 +1,7 @@
-const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG;
+const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG === 'true';
 
 // eslint-disable-next-line no-console
-console.info(
-  `SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG} (${typeof SHOULD_UPDATE_CHANGELOG})`
-);
+console.info(`SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG}`);
 
 const options = require('./changelog.config.js');
 const { parserOpts, writerOpts } = options;
@@ -39,12 +37,17 @@ module.exports = {
         writerOpts
       }
     ],
-    [
-      '@semantic-release/exec',
-      {
-        prepareCmd: 'npm run build-changelog'
-      }
-    ],
+    ...(SHOULD_UPDATE_CHANGELOG === 'true'
+      ? [
+          [
+            '@semantic-release/exec',
+            {
+              prepareCmd: 'npm run build-changelog'
+            }
+          ],
+          ['@semantic-release/changelog', { ...changelogTitle }]
+        ]
+      : []),
     '@semantic-release/npm',
     [
       '@semantic-release/git',
