@@ -67,7 +67,7 @@
   },
   "prettier": {
     "endOfLine": "lf",
-    "printWidth": 90,
+    "printWidth": 80,
     "proseWrap": "always",
     "semi": true,
     "singleQuote": true,
@@ -75,15 +75,10 @@
     "trailingComma": "none",
     "overrides": [
       {
-        "files": "*.(ts|js)?(x)",
+        "files": "**/*.@(ts|js)?(x)",
         "options": {
-          "parser": "babel-ts"
-        }
-      },
-      {
-        "files": "*.(md|yml)",
-        "options": {
-          "printWidth": 80
+          "parser": "babel-ts",
+          "printWidth": 90
         }
       }
     ]
