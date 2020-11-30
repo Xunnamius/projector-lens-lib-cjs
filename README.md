@@ -75,9 +75,8 @@ Project documentation can be found under [`docs/`](docs/README.md).
 
 **[New issues](https://github.com/Xunnamius/workflow-playground/issues/new/choose)
 and [pull requests](https://github.com/Xunnamius/workflow-playground/compare)
-are always welcome and greatly appreciated! 🤩** But that's not the only way to
-contribute. Just as well, you can star 🌟 this project to let me know you found
-it useful! Thank you ✊🏿
+are always welcome and greatly appreciated! 🤩** Just as well, you can star 🌟
+this project to let me know you found it useful! ✊🏿 Thank you!
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [SUPPORT.md](.github/SUPPORT.md) for
 more information.
