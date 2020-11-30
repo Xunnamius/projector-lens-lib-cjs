@@ -12,13 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - **Release:** fix changelogTitle spread bug
   ([598a396](https://github.com/Xunnamius/workflow-playground/commit/598a3966ce1d85c6dcc2945878ebd3ba2c969654))
 
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Conventional Commits](https://conventionalcommits.org),
-and this project adheres to [Semantic Versioning](https://semver.org).
-
 ## [2.3.1](https://github.com/Xunnamius/workflow-playground/compare/v2.3.0...v2.3.1) (2020-11-30)
 
 ### Build System
