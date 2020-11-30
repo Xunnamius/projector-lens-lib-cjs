@@ -2,8 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Conventional Commits](https://conventionalcommits.org),
-and this project adheres to [Semantic Versioning](https://semver.org).
+The format is based on [Conventional Commits](https://conventionalcommits.org), and this
+project adheres to [Semantic Versioning](https://semver.org).
 
 ## [2.2.2](https://github.com/Xunnamius/workflow-playground/compare/v2.2.1...v2.2.2) (2020-11-29)
 
@@ -114,8 +114,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ### Bug Fixes
 
-- **Actions:** add git author and commiter env vars for semantic-release signed
-  commits
+- **Actions:** add git author and commiter env vars for semantic-release signed commits
   ([f01d16b](https://github.com/Xunnamius/workflow-playground/commit/f01d16b51e444eb801121e81718994b4add18799))
 - **Dependabot:** ensure dependabot formats GitHub Actions PRs correctly
   ([bcdbd0e](https://github.com/Xunnamius/workflow-playground/commit/bcdbd0e1c23786185cd43b11d9ce18d3498e9ff5))
@@ -159,9 +158,8 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 ### BREAKING CHANGES
 
-- **Switch to semantic-release CI/CD pipeline.** Moved away from publish-please
-  to a fully automated build-test-deploy release cycle based on
-  semantic-release.
+- **Switch to semantic-release CI/CD pipeline.** Moved away from publish-please to a fully
+  automated build-test-deploy release cycle based on semantic-release.
 
 # Archived Releases (pre-CI/CD)
 

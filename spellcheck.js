@@ -17,10 +17,7 @@ const tryToRead = async (path) => {
 const asJson = (str) => {
   try {
     const json = JSON.parse(str.toString('utf-8'));
-    return [
-      ...(json?.['cSpell.words'] || []),
-      ...(json?.['cSpell.ignoreWords'] || [])
-    ];
+    return [...(json?.['cSpell.words'] || []), ...(json?.['cSpell.ignoreWords'] || [])];
   } catch (ignored) {
     return [];
   }
@@ -32,8 +29,7 @@ const isPascalCase = (word) =>
   /^[A-Z]([A-Z0-9]*[a-z][a-z0-9]*[A-Z]|[a-z0-9]*[A-Z][A-Z0-9]*[a-z])[A-Za-z0-9]*.?$/.test(
     word
   );
-const isCamelCase = (word) =>
-  /^[a-z]+[A-Z0-9][a-z0-9]+[A-Za-z0-9]*.?$/.test(word);
+const isCamelCase = (word) => /^[a-z]+[A-Z0-9][a-z0-9]+[A-Za-z0-9]*.?$/.test(word);
 
 const isAllCaps = (word) => /^[\W0-9_A-Z]+$/.test(word);
 
@@ -62,9 +58,7 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
         ...keys(pkg.dependencies).map(splitOutWords),
         ...keys(pkg.devDependencies).map(splitOutWords),
         ...keys(pkg.scripts).map(splitOutWords),
-        ...sjx
-          .exec('git log --format="%B" HEAD~1')
-          .stdout.split(/(?:[^\w\-_']|\s)\s*/g)
+        ...sjx.exec('git log --format="%B" HEAD~1').stdout.split(/(?:[^\w\-_']|\s)\s*/g)
       ]
         .flat()
         .filter(Boolean)
@@ -76,23 +70,16 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords).flat();
 
   const typos = spellcheck
     .checkSpelling(lastCommitMsg)
-    .map((typoLocation) =>
-      lastCommitMsg.slice(typoLocation.start, typoLocation.end)
-    )
+    .map((typoLocation) => lastCommitMsg.slice(typoLocation.start, typoLocation.end))
     .filter((w) => !isAllCaps(w) && !isCamelCase(w) && !isPascalCase(w))
     .map((w) => w.toLowerCase())
     .filter(
-      (typo) =>
-        !ignoreWords.includes(typo) && !ignoreWords.includes(sanitizeWord(typo))
+      (typo) => !ignoreWords.includes(typo) && !ignoreWords.includes(sanitizeWord(typo))
     );
 
   if (typos.length) {
-    console.warn(
-      'WARNING: there may be misspelled words in your commit message!'
-    );
-    console.warn(
-      'Commit messages can be fixed before push with `git commit -S --amend`'
-    );
+    console.warn('WARNING: there may be misspelled words in your commit message!');
+    console.warn('Commit messages can be fixed before push with `git commit -S --amend`');
     console.warn('---');
 
     for (const typo of typos) {

@@ -24,9 +24,7 @@ module.exports = {
 
   resolve: { extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'] },
   module: {
-    rules: [
-      { test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }
-    ]
+    rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
   },
   optimization: { usedExports: true },
   ignoreWarnings: [/critical dependency:/i]

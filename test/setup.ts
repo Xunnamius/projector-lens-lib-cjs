@@ -46,8 +46,7 @@ export const unitServerPuppeteer = async ({
     const page = await browser.newPage();
     await page.goto(url);
 
-    const run = async (path: string) =>
-      page.evaluate(await readFile(path, 'utf-8'));
+    const run = async (path: string) => page.evaluate(await readFile(path, 'utf-8'));
 
     await clientFn({ browser, page, run, url });
   } finally {

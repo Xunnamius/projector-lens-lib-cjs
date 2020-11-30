@@ -20,9 +20,7 @@ const changelogTitle =
 
 // ? Strings in commit messages that, when found, are skipped
 // ! These also have to be updated in build-test-deploy.yml when changed
-const SKIP_COMMANDS = '[skip ci], [ci skip], [skip github], [github skip]'.split(
-  ', '
-);
+const SKIP_COMMANDS = '[skip ci], [ci skip], [skip github], [github skip]'.split(', ');
 
 sjx.config.silent = true;
 
@@ -53,15 +51,13 @@ module.exports = {
   writerOpts: {
     generateOn: (commit) => {
       const decision =
-        shouldGenerate === 'always' ||
-        (shouldGenerate && !!semverValid(commit.version));
+        shouldGenerate === 'always' || (shouldGenerate && !!semverValid(commit.version));
       shouldGenerate = true;
       return decision;
     },
     transform: (commit, context) => {
       const version = commit.version || null;
-      const firstRelease =
-        version === context.gitSemverTags?.slice(-1)[0].slice(1);
+      const firstRelease = version === context.gitSemverTags?.slice(-1)[0].slice(1);
 
       if (!firstRelease || commit.type) {
         // ? This commit does not have a type, but has a version. It must be a
@@ -83,8 +79,7 @@ module.exports = {
 
           if (commit) {
             // ? Ignore any commits with commands like [skip ci] in them
-            if (SKIP_COMMANDS.some((cmd) => commit.subject.includes(cmd)))
-              return null;
+            if (SKIP_COMMANDS.some((cmd) => commit.subject.includes(cmd))) return null;
 
             if (!NO_CAPITALIZE_TYPES.some((type) => commit.type === type)) {
               // ? Make the scope/subject upper case in the changelog (per my tastes)
@@ -115,9 +110,9 @@ module.exports = {
                 const [firstLine, ...remainder] = note.text.split('\n');
                 const addPeriod = !firstLine.endsWith('.');
 
-                note.text = `**${firstLine}${
-                  addPeriod ? '.' : ''
-                }**\n${sentenceCase(remainder.join('\n'))}`;
+                note.text = `**${firstLine}${addPeriod ? '.' : ''}**\n${sentenceCase(
+                  remainder.join('\n')
+                )}`;
               }
             });
           }
@@ -143,8 +138,7 @@ module.exports = {
             version
           }))
           .reduce(
-            (subject, { url, version }) =>
-              `Version ${version} (${url})\n\n- ${subject}`,
+            (subject, { url, version }) => `Version ${version} (${url})\n\n- ${subject}`,
             `Version ${commit.version}`
           );
 

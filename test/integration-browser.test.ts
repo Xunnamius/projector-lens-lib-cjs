@@ -9,9 +9,10 @@ describe('workflow-playground [INTEGRATION-BROWSER]', () => {
     await unitServerPuppeteer({
       client: async ({ page, run }) => {
         await run(`${__dirname}/../${main}.js`);
-        expect(
-          await page.evaluate(() => Object.keys(window))
-        ).toIncludeAllMembers(['sum', 'diff']);
+        expect(await page.evaluate(() => Object.keys(window))).toIncludeAllMembers([
+          'sum',
+          'diff'
+        ]);
       }
     });
   });

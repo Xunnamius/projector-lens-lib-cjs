@@ -9,8 +9,8 @@
 
 # do-not-install 🤔🤯☠️
 
-Proving grounds for my GitHub webhook, Action workflows, NPM publishing
-automation scripts and the like.
+Proving grounds for my GitHub webhook, Action workflows, NPM publishing automation scripts
+and the like.
 
 > Not meant for public consumption! Do not install this!
 
@@ -22,40 +22,37 @@ npm install @xunnamius/do-not-install
 
 <details><summary><strong>[additional details]</strong></summary>
 
-> Note: **typical users don't need to read through this!** This information is
-> primarily useful for those attempting to bundle this package or for those who
-> have an opinion on ESM versus CJS.
+> Note: **typical users don't need to read through this!** This information is primarily
+> useful for those attempting to bundle this package or for those who have an opinion on
+> ESM versus CJS.
 
-This is a [dual UMD (CJS2)/ES module][dual-module] package. That means this
-package exposes both UMD+CJS2 and ESM entry points and can be used in most
-JavaScript environments (browsers, any current or LTS Node version, etc).
+This is a [dual UMD (CJS2)/ES module][dual-module] package. That means this package
+exposes both UMD+CJS2 and ESM entry points and can be used in most JavaScript environments
+(browsers, any current or LTS Node version, etc).
 
-Loading this package via `require(...)` will cause Node and modern browsers to
-use the [CJS2 bundle][cjs2] entry point, disable [tree shaking][tree-shaking] in
-Webpack 4, and lead to larger bundles in Webpack 5. Alternatively, loading this
-package via `import { ... } from ...` or `import(...)` will cause Node and
-modern browsers to use the ESM entry point in [versions that support
-it][node-esm-support], in Webpack, and in the browser. Using the `import` syntax
-is the modern, preferred choice.
+Loading this package via `require(...)` will cause Node and modern browsers to use the
+[CJS2 bundle][cjs2] entry point, disable [tree shaking][tree-shaking] in Webpack 4, and
+lead to larger bundles in Webpack 5. Alternatively, loading this package via
+`import { ... } from ...` or `import(...)` will cause Node and modern browsers to use the
+ESM entry point in [versions that support it][node-esm-support], in Webpack, and in the
+browser. Using the `import` syntax is the modern, preferred choice.
 
 For backwards compatibility with Webpack 4 and Node versions < 14,
-[`package.json`](package.json) retains the [`module`][module-key] key, which
-points to the ESM entry point, and the [`main`][exports-main-key] key, which
-points to both the ESM and CJS2 entry points implicitly (no file extension). For
-Webpack 5 and Node versions >= 14, [`package.json`](package.json) includes the
-[`exports`][exports-main-key] key, which points to both entry points explicitly.
+[`package.json`](package.json) retains the [`module`][module-key] key, which points to the
+ESM entry point, and the [`main`][exports-main-key] key, which points to both the ESM and
+CJS2 entry points implicitly (no file extension). For Webpack 5 and Node versions >= 14,
+[`package.json`](package.json) includes the [`exports`][exports-main-key] key, which
+points to both entry points explicitly.
 
-Though [`package.json`](package.json) includes
-[`{ "type": "commonjs"}`][local-pkg], note that the ESM entry points are ES
-module (`.mjs`) files. [`package.json`](package.json) also includes the
-[`sideEffects`][side-effects-key] key, which is `false` for [optimal tree
-shaking][tree-shaking], and the `types` key, which points to a TypeScript
+Though [`package.json`](package.json) includes [`{ "type": "commonjs"}`][local-pkg], note
+that the ESM entry points are ES module (`.mjs`) files. [`package.json`](package.json)
+also includes the [`sideEffects`][side-effects-key] key, which is `false` for [optimal
+tree shaking][tree-shaking], and the `types` key, which points to a TypeScript
 declarations file.
 
-Additionally, this package does not maintain shared state and so does not
-exhibit the [dual package hazard][hazard]. However, setting global configuration
-may not actually be "globally" recognized by third-party code importing this
-package.
+Additionally, this package does not maintain shared state and so does not exhibit the
+[dual package hazard][hazard]. However, setting global configuration may not actually be
+"globally" recognized by third-party code importing this package.
 
 </details>
 
@@ -73,14 +70,13 @@ Project documentation can be found under [`docs/`](docs/README.md).
 
 ## Contributing and Support
 
-**[New issues](https://github.com/Xunnamius/workflow-playground/issues/new/choose)
-and [pull requests](https://github.com/Xunnamius/workflow-playground/compare)
-are always welcome and greatly appreciated! 🤩** But that's not the only way to
-contribute. Just as well, you can star 🌟 this project to let me know you found
-it useful! Thank you ✊🏿
+**[New issues](https://github.com/Xunnamius/workflow-playground/issues/new/choose) and
+[pull requests](https://github.com/Xunnamius/workflow-playground/compare) are always
+welcome and greatly appreciated! 🤩** But that's not the only way to contribute. Just as
+well, you can star 🌟 this project to let me know you found it useful! Thank you ✊🏿
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [SUPPORT.md](.github/SUPPORT.md) for
-more information.
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [SUPPORT.md](.github/SUPPORT.md) for more
+information.
 
 [module-key]: https://webpack.js.org/guides/author-libraries/#final-steps
 [side-effects-key]:

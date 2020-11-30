@@ -10,16 +10,16 @@ to see if your issue or feature request is already being talked about.
 
 If you find your issue already exists, make sure to
 [bump the issue by adding a reaction](https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments).
-**If you're serious about wanting an issue to get attention, use a reaction in
-place of a "+1" or other spam comment.**
+**If you're serious about wanting an issue to get attention, use a reaction in place of a
+"+1" or other spam comment.**
 
-If you cannot find an existing issue that describes your bug or feature, then
-you're clear to create your issue using the guidelines below.
+If you cannot find an existing issue that describes your bug or feature, then you're clear
+to create your issue using the guidelines below.
 
 ### Standard Reactions
 
-Analysis of issue popularity (by tooling or otherwise) relies on the following
-reactions being present on issues, PRs, and replies:
+Analysis of issue popularity (by tooling or otherwise) relies on the following reactions
+being present on issues, PRs, and replies:
 
 :+1: 👍🏿👍🏾👍🏽👍🏼👍🏻👍 — up vote (also: _approve_, _like_, _+1_)
 
@@ -34,9 +34,8 @@ Additionally:
 
 - Ensure you file one issue per problem or feature request
 - Do not enumerate multiple bugs or feature requests in the same issue
-- Do not add your issue as a comment to an existing issue unless you're
-  experiencing identical behavior or behavior that stems from the exact same
-  issue
+- Do not add your issue as a comment to an existing issue unless you're experiencing
+  identical behavior or behavior that stems from the exact same issue
 
 That's it! You are now ready to
 [fearlessly submit your new issue](https://github.com/Xunnamius/workflow-playground/issues/new/choose)!
@@ -44,7 +43,6 @@ Thank you for contribution 🎉, your efforts are greatly appreciated! 🙌🏿
 
 #### Closure Policy
 
-- Issues that do not follow the appropriate template or contain necessary
-  information will be closed immediately and the poster directed to these
-  guidelines
+- Issues that do not follow the appropriate template or contain necessary information will
+  be closed immediately and the poster directed to these guidelines
 - Issues that go for an extended period without activity are subject to closure
