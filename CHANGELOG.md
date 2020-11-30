@@ -1,9 +1,32 @@
+## [2.3.1](https://github.com/Xunnamius/workflow-playground/compare/v2.3.0...v2.3.1) (2020-11-30)
+
+### Build System
+
+- Install @semantic-release/changelog
+  ([022603b](https://github.com/Xunnamius/workflow-playground/commit/022603bbe50298a8e7500a77cb77ce5aae4b45f7))
+- **Release:** fix changelogTitle bug
+  ([0d181ea](https://github.com/Xunnamius/workflow-playground/commit/0d181ea032a9f5322137dacf5ee97e6a28acd035))
+- **Release:** fix SHOULD_UPDATE_CHANGELOG conditional
+  ([ec632ad](https://github.com/Xunnamius/workflow-playground/commit/ec632ad52472184edbed16111b4a5b306ae6f7ed))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Conventional Commits](https://conventionalcommits.org), and this
 project adheres to [Semantic Versioning](https://semver.org).
+
+# [2.3.0](https://github.com/Xunnamius/workflow-playground/compare/v2.2.2...v2.3.0) (2020-11-30)
+
+### Features
+
+- **Tooling:** spellcheck now ignores camelCase et al
+  ([d921382](https://github.com/Xunnamius/workflow-playground/commit/d9213827f9448a93affcab8ca652e37f24b247b9))
+
+### Performance Improvements
+
+- Better faster spellchecking
+  ([c44c310](https://github.com/Xunnamius/workflow-playground/commit/c44c310f01d78798c5a13213dafeef5e1f25b25f))
 
 ## [2.2.2](https://github.com/Xunnamius/workflow-playground/compare/v2.2.1...v2.2.2) (2020-11-29)
 
