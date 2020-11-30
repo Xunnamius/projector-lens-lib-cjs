@@ -17,7 +17,11 @@ const tryToRead = async (path) => {
 const asJson = (str) => {
   try {
     const json = JSON.parse(str.toString('utf-8'));
-    return [...(json?.['cSpell.words'] || []), ...(json?.['cSpell.ignoreWords'] || [])];
+    return [
+      ...(json?.['cSpell.words'] || []),
+      ...(json?.['cSpell.userWords'] || []),
+      ...(json?.['cSpell.ignoreWords'] || [])
+    ];
   } catch (ignored) {
     return [];
   }
