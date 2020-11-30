@@ -69,7 +69,7 @@ sum(2, 2); // = 4
 
 ## Documentation
 
-Project documentation can be found under [`docs/`](docs/README.md).
+Project documentation can be found under [`docs/`](docs).
 
 ## Contributing and Support
 
