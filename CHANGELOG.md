@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [2.3.3](https://github.com/Xunnamius/workflow-playground/compare/v2.3.2...v2.3.3) (2020-11-30)
+
+### Bug Fixes
+
+- **Spellcheck:** fix incorrect parsing of global cspell vscode settings
+  ([c2789bf](https://github.com/Xunnamius/workflow-playground/commit/c2789bfd8f43bb9fc60316131c4e6d17dd2c1de8))
+
+### Build System
+
+- **Release:** fix changelogTitle skip title
+  ([1dcdcc1](https://github.com/Xunnamius/workflow-playground/commit/1dcdcc1cac342f9bdca71e49f9cc332e9118932f))
+
 ## [2.3.2](https://github.com/Xunnamius/workflow-playground/compare/v2.3.1...v2.3.2) (2020-11-30)
 
 ### Build System
