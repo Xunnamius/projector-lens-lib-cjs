@@ -37,7 +37,7 @@ module.exports = {
         writerOpts
       }
     ],
-    ...(SHOULD_UPDATE_CHANGELOG === 'true'
+    ...(SHOULD_UPDATE_CHANGELOG
       ? [
           [
             '@semantic-release/exec',
