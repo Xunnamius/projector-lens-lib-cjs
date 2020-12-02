@@ -156,5 +156,9 @@
   },
   "engines": {
     "node": ">=10.x"
+  },
+  "env-expect": {
+    "errorMessage": "\nCopy the \".env.example\" file to \".env\" and/or define only the appropriate environment variables",
+    "rules": []
   }
 }
