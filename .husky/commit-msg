@@ -4,4 +4,4 @@
 npx commitlint -e
 npm run test
 echo
-node spellcheck.js
+node spellcheck-commit.js
