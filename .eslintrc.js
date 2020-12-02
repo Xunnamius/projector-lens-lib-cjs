@@ -33,6 +33,7 @@ module.exports = {
     'no-await-in-loop': 'warn',
     'import/no-unresolved': ['error', { commonjs: true }],
     'no-extra-boolean-cast': 'off',
+    'no-empty': 'off',
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
