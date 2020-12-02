@@ -20,7 +20,7 @@ env:
   # ! These also have to be updated in changelog.config.js
   CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
   # ? Add your GitHub user/org to enable CD pipeline
-  # ? (you'll need to provide your own secrets)
+  # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
   NPM_AUDIT_FAIL_LEVEL: high
 
