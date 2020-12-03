@@ -79,20 +79,22 @@ module.exports = {
 
           if (commit) {
             // ? Ignore any commits with commands like [skip ci] in them
-            if (SKIP_COMMANDS.some((cmd) => commit.subject.includes(cmd))) return null;
+            if (SKIP_COMMANDS.some((cmd) => commit.subject?.includes(cmd))) return null;
 
             if (!NO_CAPITALIZE_TYPES.some((type) => commit.type === type)) {
               // ? Make the scope/subject upper case in the changelog (per my tastes)
               commit.scope
                 ? (commit.scope = sentenceCase(commit.scope))
-                : (commit.subject = sentenceCase(commit.subject));
+                : (commit.subject = commit.subject
+                    ? sentenceCase(commit.subject)
+                    : commit.subject);
             }
 
             if (commit.type == 'Reverts') {
               // ? Ignore reverts that didn't trigger releases
               if (
                 !SHOW_REVERSION_TYPES.some((t) =>
-                  RegExp(`^[^\\w]${t}: `, 'i').test(commit.subject.trim())
+                  RegExp(`^[^\\w]${t}: `, 'i').test(commit.subject?.trim())
                 )
               )
                 return null;
@@ -101,7 +103,7 @@ module.exports = {
             }
 
             commit.notes.forEach((note) => {
-              note.text = sentenceCase(note.text.trim());
+              note.text = note.text ? sentenceCase(note.text.trim()) : note.text;
 
               // ? If the text has a line break in it, make the first line bold and
               // ? add a period before the line break unless there's a symbol
