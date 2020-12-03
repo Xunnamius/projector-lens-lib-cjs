@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [2.3.4](https://github.com/Xunnamius/workflow-playground/compare/v2.3.3...v2.3.4) (2020-12-03)
+
+### Build System
+
+- **Commitlint:** add debug type to type-enum
+  ([10c71bf](https://github.com/Xunnamius/workflow-playground/commit/10c71bf50522ae3902f84cf6171b9fce4d1470f4))
+- **Config:** fix changelog.config.js bug when subject is undefined
+  ([57e0c16](https://github.com/Xunnamius/workflow-playground/commit/57e0c162e73d5850807e9f496df0aa6203834f4c))
+- **Package.json:** downgrade puppeteer and upgrade other deps
+  ([e5d6d42](https://github.com/Xunnamius/workflow-playground/commit/e5d6d42ad230f45b0239bcec671a18a2789ae8f2))
+- Added .env.example and env-expect
+  ([efb29c5](https://github.com/Xunnamius/workflow-playground/commit/efb29c5c991d58ae8aa684159f4db0d3f8f6dbbe))
+
 ## [2.3.3](https://github.com/Xunnamius/workflow-playground/compare/v2.3.2...v2.3.3) (2020-11-30)
 
 ### Bug Fixes
