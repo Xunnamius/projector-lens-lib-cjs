@@ -3,7 +3,7 @@ const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG === 'true';
 // eslint-disable-next-line no-console
 console.info(`SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG}`);
 
-const options = require('./changelog.config.js');
+const options = require('./.changelogrc.js');
 const { changelogTitle, parserOpts, writerOpts } = options;
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
         parserOpts,
         // ! If you change releaseRules, you should also take a look at:
         // !   - dependabot.yml
-        // !   - changelog.config.js
+        // !   - .changelogrc.js
         releaseRules: [{ type: 'build', release: 'patch' }]
       }
     ],
