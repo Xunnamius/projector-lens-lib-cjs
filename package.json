@@ -70,7 +70,8 @@
           "test",
           "revert",
           "debug",
-          "build"
+          "build",
+          "chore"
         ]
       ]
     }
@@ -171,6 +172,9 @@
   },
   "engines": {
     "node": ">=10.x"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "env-expect": {
     "errorMessage": "\nCopy the \".env.example\" file to \".env\" and/or define only the appropriate environment variables",
