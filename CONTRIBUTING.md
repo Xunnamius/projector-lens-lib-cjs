@@ -213,6 +213,9 @@ this project.
 - `npm run repl` to run a buffered TypeScript-Babel REPL
 - `npm run generate` to transpile config files (under `config/`) from scratch
 - `npm run regenerate` to quickly re-transpile config files (under `config/`)
+- `npm run postinstall` to (re-)install
+  [Husky Git hooks](https://github.com/typicode/husky) if not in a CI
+  environment (handled by NPM)
 
 ### Building and Deploying
 
