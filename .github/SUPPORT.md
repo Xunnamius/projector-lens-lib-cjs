@@ -5,7 +5,7 @@ Need help? Want to help this project? Report your issue!
 ## Reporting an Issue
 
 Before you begin, please
-[search open issues](https://github.com/Xunnamius/workflow-playground/issues?utf8=%E2%9C%93&q=)
+[search open issues](https://github.com/Xunnamius/workflow-playground/issues?q=)
 to see if your issue or feature request is already being talked about.
 
 If you find your issue already exists, make sure to
@@ -27,19 +27,20 @@ reactions being present on issues, PRs, and replies:
 
 ### Bug Reports and Feature Requests
 
-For the timeliest resolution to bug reports, please make a good faith effort to
+For the timeliest resolution to bug reports specifically, please make a good
+faith effort to
 [follow the template](https://github.com/Xunnamius/workflow-playground/issues/new?template=bug_report.md).
 The more quality information you can provide, the quicker a fix will be found.
 Additionally:
 
 - Ensure you file one issue per problem or feature request
 - Do not enumerate multiple bugs or feature requests in the same issue
-- Do not add your issue as a comment to an existing issue unless you're
+- Do not add the issue as a comment to an existing issue unless you're
   experiencing identical behavior or behavior that stems from the exact same
   issue
 
 That's it! You are now ready to
-[fearlessly submit your new issue](https://github.com/Xunnamius/workflow-playground/issues/new/choose)!
+[submit a new issue](https://github.com/Xunnamius/workflow-playground/issues/new/choose)!
 Thank you for contribution 🎉, your efforts are greatly appreciated! 🙌🏿
 
 #### Closure Policy

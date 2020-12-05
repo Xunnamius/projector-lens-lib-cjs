@@ -48,7 +48,7 @@ Additionally, there are a few things you can do to increase the likelihood your
 PR passes review:
 
 - **Do**
-  [open an issue](https://github.com/Xunnamius/workflow-playground/issues/new?labels=%F0%9F%A4%A9+feature&template=FEATURE_REQUEST.md)
+  [open an issue](https://github.com/Xunnamius/workflow-playground/issues/new/choose)
   and discuss your proposed changes (to prevent wasting your time, e.g. _maybe
   we're already working on a fix_), and
   [search](https://github.com/Xunnamius/workflow-playground/issues?q=) to see if
