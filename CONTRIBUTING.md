@@ -12,7 +12,7 @@ started,
 > Be aware: all contributions to this project, regardless of committer, origin,
 > or context and immediately upon push to this repository, are
 > [released](https://help.github.com/articles/github-terms-of-service/#6-contributions-under-repository-license)
-> pursuant to [this project's license](LICENSE).
+> in accordance with [this project's license](LICENSE).
 
 > See also: [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)
 
@@ -42,14 +42,20 @@ The ideal contributor flow is as follows:
    [_fearlessly_ submit your PR](https://github.com/Xunnamius/workflow-playground/compare)!
 
 7. Pat your self on the back! Your hard work is well on its way to being
-   reviewed and merged 🚀
+   reviewed and, if everything looks good, merged 🚀
 
 Additionally, there are a few things you can do to increase the likelihood your
 PR passes review:
 
+- **Do**
+  [open an issue](https://github.com/Xunnamius/workflow-playground/issues/new?labels=%F0%9F%A4%A9+feature&template=FEATURE_REQUEST.md)
+  and discuss your proposed changes (to prevent wasting your time, e.g. _maybe
+  we're already working on a fix_), and
+  [search](https://github.com/Xunnamius/workflow-playground/issues?q=) to see if
+  there are any existing issues related to your concerns
 - **Do** practice
   [atomic committing](https://www.codewithjason.com/atomic-commits-testing/)
-- **Do not** reduce code coverage
+- **Do not** reduce code coverage ([see below](#developing))
 - **Do**
   [follow convention](https://www.conventionalcommits.org/en/v1.0.0/#summary)
   when coming up with your commit messages
