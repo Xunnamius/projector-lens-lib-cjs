@@ -29,7 +29,7 @@ reactions being present on issues, PRs, and replies:
 
 For the timeliest resolution to bug reports specifically, please make a good
 faith effort to
-[follow the template](https://github.com/Xunnamius/workflow-playground/issues/new?template=bug_report.md).
+[follow the template](https://github.com/Xunnamius/workflow-playground/issues/new/choose).
 The more quality information you can provide, the quicker a fix will be found.
 Additionally:
 
