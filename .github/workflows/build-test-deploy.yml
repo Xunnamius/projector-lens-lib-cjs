@@ -306,7 +306,7 @@ jobs:
           restore-keys: npm-${{ runner.os }}-
 
       - name: Install CI dependencies
-        run: npm ci!
+        run: npm ci
 
       - name: Build distributables
         run: npm run build-dist
