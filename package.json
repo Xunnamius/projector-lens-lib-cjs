@@ -157,6 +157,7 @@
     "prettier": "^2.2.1",
     "puppeteer": "5.4.0",
     "semantic-release": "Xunnamius/semantic-release#contrib-holistic",
+    "semver": "^7.3.4",
     "shelljs": "^0.8.4",
     "sort-package-json": "^1.48.0",
     "source-map-support": "^0.5.19",
