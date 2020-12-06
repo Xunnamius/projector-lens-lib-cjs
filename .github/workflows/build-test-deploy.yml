@@ -465,7 +465,9 @@ jobs:
         id: cache-build
         with:
           key: build-${{ runner.os }}-${{ github.sha }}
-          path: ./*
+          path: |
+            ./*
+            !./.git
 
   # ? This job always runs except:
   # ? 1. if CD pipeline failed/was skipped
@@ -494,6 +496,21 @@ jobs:
       && (needs.metadata.outputs.has-integration-browser != 'true' || needs.test-integration-browser.result == 'success')
       && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
     steps:
+      - name: Restore build
+        uses: actions/cache@v2
+        id: restore-build
+        with:
+          key: build-${{ runner.os }}-${{ github.sha }}
+          path: |
+            ./*
+            !./.git
+
+      - name: Fail if build not restored
+        if: steps.restore-build.outputs.cache-hit != 'true'
+        run: |
+          echo '::error::release job failed to restore build ${{ github.sha }}'
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -504,19 +521,6 @@ jobs:
         run:
           git config --global url."https://${{ secrets.GH_TOKEN
           }}@github.com/".insteadOf ssh://git@github.com/
-
-      - name: Restore build
-        uses: actions/cache@v2
-        id: restore-build
-        with:
-          key: build-${{ runner.os }}-${{ github.sha }}
-          path: ./*
-
-      - name: Fail if build not restored
-        if: steps.restore-build.outputs.cache-hit != 'true'
-        run: |
-          echo '::error::release job failed to restore build ${{ github.sha }}'
-          exit 1
 
       - name: Import gpg key
         id: gpg
