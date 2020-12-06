@@ -534,7 +534,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          EDITOR: echo semantic-release-bot > $1
           SHOULD_UPDATE_CHANGELOG:
             ${{ needs.metadata.outputs.current-branch == 'main' }}
           GIT_AUTHOR_NAME: ${{ env.CI_COMMITTER_NAME }}
