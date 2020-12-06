@@ -17,11 +17,13 @@ started,
 > See also: [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)
 
 This repository uses a [fully automated](https://github.com/features/actions)
-CI/CD
-[semantic-release](https://github.com/semantic-release/semantic-release#readme)
-pipeline for vetting PRs and publishing releases. The nice thing about a fully
-automated pipeline is that anyone anywhere can make a contribution quickly and
-with minimal tedium all around!
+[continuous linting](https://github.com/Xunnamius/workflow-playground/tree/main/.husky)
+(CL), [integration testing](.github/workflows/build-test-deploy.yml) (CI), and
+[deployment](.github/workflows/build-test-deploy.yml) (CD)
+[semantic-release](https://github.com/semantic-release/semantic-release#readme)-based
+pipeline for integrating PRs and publishing releases. The nice thing about a
+fully automated CL/CI/CD pipeline is that anyone anywhere can make a
+contribution quickly and with minimal tedium all around!
 
 The ideal contributor flow is as follows:
 
@@ -31,35 +33,41 @@ The ideal contributor flow is as follows:
 
 2. Configure and install dependencies: `npm install`
 
+   - If `.env.example` exists, consider copying it to `.env` and configure
+     sensible defaults
+
 3. Before making any changes, ensure all unit tests are passing: `npm run test`
 
-4. Create a new branch off main: `git checkout -b contrib`
+4. Create a new branch off main: e.g. `git checkout -b contrib`
 
-5. Make your changes and commit. Your work will be checked as you commit it; any
-   problems will be brought to your attention via CLI
+5. Make your changes and commit. Thanks to CL, your work will be checked as you
+   commit it; any problems will abort the commit attempt
 
 6. Push your commits to your fork and, when you're ready,
    [_fearlessly_ submit your PR](https://github.com/Xunnamius/workflow-playground/compare)!
+   Your changes will be tested in our CI pipeline
 
 7. Pat your self on the back! Your hard work is well on its way to being
-   reviewed and, if everything looks good, merged 🚀
+   reviewed and, if everything looks good, merged and released 🚀
 
 Additionally, there are a few things you can do to increase the likelihood your
 PR passes review:
 
 - **Do**
   [open an issue](https://github.com/Xunnamius/workflow-playground/issues/new/choose)
-  and discuss your proposed changes (to prevent wasting your time, e.g. _maybe
-  we're already working on a fix_), and
+  and discuss your proposed changes (to prevent wasting your valuable time, e.g.
+  _maybe we're already working on a fix!_), and
   [search](https://github.com/Xunnamius/workflow-playground/issues?q=) to see if
   there are any existing issues related to your concerns
 - **Do** practice
   [atomic committing](https://www.codewithjason.com/atomic-commits-testing/)
-- **Do not** reduce code coverage ([see below](#developing))
+- **Do not** reduce code coverage ([see below](#developing)) (also checked
+  during CI)
 - **Do**
   [follow convention](https://www.conventionalcommits.org/en/v1.0.0/#summary)
   when coming up with your commit messages
-- **Do not** circumvent automated linting, formatting, or unit testing
+- **Do not** circumvent CL, i.e. automated pre-commit linting, formatting, and
+  unit testing
 - **Do** ensure `README.md` and other documentation is kept consistent with your
   changes
 - **Do not** create a PR to introduce
@@ -67,15 +75,18 @@ PR passes review:
   - Code de-duplication and other potential optimizations we **do not** consider
     _purely_ cosmetic 🙂
 - **Do** keep your PR as narrow and focused as possible
-  - If there are multiple related changes to be made but they do not immediately
-    depend on one another, submit them as separate PRs instead 👍🏿
+  - If there are multiple related changes to be made but (1) they do not
+    immediately depend on one another or (2) one implements extended/alternative
+    functionality based on the other, consider submitting them as separate PRs
+    instead 👍🏿
 
 ---
 
-At this point, you're ready to create your PR and contribute. What follows is a
-description of this project's automated
-[CI/CD pipeline](.github/workflows/build-test-deploy.yml) and NPM run scripts;
-**this is optional reading for external collaborators.**
+At this point, you're ready to create your PR and ✨ contribute ✨. What follows
+is a description of this project's automated
+[CL](https://github.com/Xunnamius/workflow-playground/tree/main/.husky)/[CI/CD](.github/workflows/build-test-deploy.yml)
+pipeline and NPM run scripts; **this is optional reading for external
+collaborators.**
 
 ---
 
@@ -83,29 +94,44 @@ description of this project's automated
 
 Development in this repository adheres to
 [Trunk Based Development](https://trunkbaseddevelopment.com/) principles,
-specifically leveraging _short-lived feature branches_ (SLFB). Broadly speaking,
-this pipeline consists of two "sub-pipelines" put together front to back:
+specifically leveraging
+[_short-lived feature branches_](https://trunkbaseddevelopment.com/#scaled-trunk-based-development)
+(SLFB) and
+[CL](https://github.com/Xunnamius/workflow-playground/tree/main/.husky)/[CI/CD](.github/workflows/build-test-deploy.yml).
+Broadly speaking, this pipeline consists of three "sub-pipelines" put together
+front to back:
 
-- First, the
+- First, the so-called "Continuous Linting" pipeline, which automatically runs
+  formatting, linting, and unit testing locally on the developer's machine
+  _before every commit_. This
+  [tightens the developer feedback loop](https://blog.nelhage.com/post/testing-and-feedback-loops/#invest-in-regression-testing)
+  and [saves money](https://github.com/pricing).
+
+- Once one or more commits are pushed to remote, the
   [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration)
-  (CI) pipeline, which runs unit tests, project-wide integration tests, and
-  project-wide linting concurrently upon every triggering event (below).
+  (CI) pipeline runs next, which runs unit tests, project-wide integration
+  tests, and project-wide linting concurrently upon every triggering event
+  (below).
 
-- If the CI pipeline terminates successfully (and other conditions are met), the
+- Finally, if the CI pipeline terminates successfully (and other conditions are
+  met), the
   [Continuous Deployment](https://en.wikipedia.org/wiki/Continuous_deployment)
-  (CD) pipeline runs next. It builds, pretties up, versions, and ships to
-  production on every commit (production releases occur only when necessary).
+  (CD) pipeline runs. It builds, formats, versions, and ships to production on
+  every commit. Production releases only occur on the addition of features,
+  fixes, build system changes, or breaking changes.
 
 These pipelines are situated one after the other such that the CD pipeline
-always fails to publish when a CI pipeline check fails.
+always fails to publish when the CI pipeline check fails. Further, the CL
+pipeline will reject local commits that fail to pass unit testing before they
+even reach the remote CI pipeline.
 
 ### Pipeline Structure
 
 - `main` is the only permanent branch, all other branches are automatically
   deleted after being merged into `main`
-  - Though the term "merged" is used here and throughout this document, usually
-    branches are merged via [rebase](https://git-scm.com/docs/git-rebase) rather
-    than an actual `git merge`.
+  - The term "merged" is used here to connote the creation of a merge commit and
+    not a [rebase](https://git-scm.com/docs/git-rebase), the latter of which
+    [can damage the metadata used by `semantic-release`](https://semantic-release.gitbook.io/semantic-release/support/troubleshooting#release-not-found-release-branch-after-git-push-force).
   - Technically, there are also
     [maintenance branches](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches),
     which are semi-permanent
@@ -113,8 +139,8 @@ always fails to publish when a CI pipeline check fails.
   into `main`, or through a PR that is eventually merged into `main` from an
   external repository
 - `canary` is a special SLFB used to publish commits on the canary release
-  channel before eventually merging `canary` into `main` (useful to combine
-  multiple features as a single testable release)
+  channel before before they're merged into `main` (useful to combine multiple
+  features as a single testable release)
 - Pushing a commit to any branch, opening a PR against `main`/`canary`, or
   synchronizing a PR made against `main`/`canary` will trigger the CI pipeline
 - Pushing a commit directly to `main` or `canary` will trigger the CI pipeline
@@ -133,6 +159,7 @@ always fails to publish when a CI pipeline check fails.
 - PRs only trigger the CI pipeline and _never_ the CD pipeline
 - The CD pipeline never runs in forks of this repository, even when GitHub
   Actions are explicitly enabled (this can be overridden)
+- All tags created through this pipeline are annotated and automatically signed
 
 ### Pipeline Events
 
@@ -174,13 +201,14 @@ script keys `test-integration-node`, `test-integration-externals`,
 
 This pipeline also supports an optional documentation build step via the
 `build-docs` key. A warning will be generated for projects that lack this key.
-On the other hand, the pipeline will fail if there is a `build-externals` key
-without a `test-integration-externals` key or vice-versa.
+Similarly, the pipeline will fail if there is a `build-externals` key without a
+`test-integration-externals` key or vice-versa.
 
 Note that internal PRs to `main`/`canary` (like from dependabot) will sometimes
-trigger two CI runs: one on the `push` event when the branch is pushed and the
-other on the subsequent `pull_request` event (type: `synchronize`) when the
-internal PR is opened or its merge commit is updated. This is expected behavior.
+trigger two CI runs: one on the `push` event when the branch is pushed to and
+the other on the subsequent `pull_request` event when the PR is opened (type:
+`opened`) or its merge commit is updated (type: `synchronize`). This is expected
+behavior.
 
 ## NPM Scripts
 
@@ -250,3 +278,5 @@ this project.
 
 - `npx sort-package-json` to consistently sort `package.json`
 - `npx npm-force-resolutions` to forcefully patch security audit problems
+- `npx semantic-release -d` to run the CD pipeline locally (in
+  [dry-run mode](https://semantic-release.gitbook.io/semantic-release/usage/configuration#dryrun))
