@@ -166,7 +166,9 @@ even reach the remote CI pipeline.
 The CI/CD pipeline is triggered by two
 [events](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows):
 
-- `push` events
+- `push` events that:
+  - Are of non-tag refs (pushed tags are ignored by CI/CD)
+  - Are of refs that do not start with `dependabot/` or `snyk-`
 - `pull_request` events that:
   - Are of type `synchronize` or `opened`
   - Compare against branches `main` or `canary`
