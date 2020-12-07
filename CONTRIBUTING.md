@@ -14,7 +14,7 @@ started,
 > [released](https://help.github.com/articles/github-terms-of-service/#6-contributions-under-repository-license)
 > in accordance with [this project's license](LICENSE).
 
-> See also: [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)
+> See also: [CODE_OF_CONDUCT.md](/.github/CODE_OF_CONDUCT.md)
 
 This repository uses a [fully automated](https://github.com/features/actions)
 [continuous linting](https://github.com/Xunnamius/workflow-playground/tree/main/.husky)
