@@ -5,6 +5,137 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+# [3.0.0](https://github.com/Xunnamius/workflow-playground/compare/v2.3.4...v3.0.0) (2020-12-07)
+
+### Bug Fixes
+
+- **.github/workflows:** fix syntax: "no-ci/\*\*"
+  ([b060d3e](https://github.com/Xunnamius/workflow-playground/commit/b060d3ec78744b72bd53450ecd1664110cdebda8))
+- **Config:** rename changelog.config.js to .changelogrc.js
+  ([d5dfc50](https://github.com/Xunnamius/workflow-playground/commit/d5dfc506c9d68a0f299559b5e76c92630c9edf0a))
+- **Package.json:** use @xunnamius/semantic-release
+  ([0447d59](https://github.com/Xunnamius/workflow-playground/commit/0447d5959113f033e2ed5644efdb4c80c4fe5085))
+
+### Build System
+
+- **.github/workflows:** build system now ignores branches with names that begin
+  with "no-ci/"
+  ([3a4bdff](https://github.com/Xunnamius/workflow-playground/commit/3a4bdff03f0d8ea450f53aebceb33525801b3c34))
+- **.github/workflows:** workflow no longer triggered on tag push,
+  dependabot/snyk push
+  ([1096e6f](https://github.com/Xunnamius/workflow-playground/commit/1096e6fbfff5fd399c2f1af5fe2b6496c5ca3cfe))
+- **Package-lock.json:** fix syntax error
+  ([4fd2952](https://github.com/Xunnamius/workflow-playground/commit/4fd2952e78b5cfda17a84a538bcc382d06621926))
+
+### debug
+
+- Update semantic-release to Xunnamius/semantic-release#contrib-holistic
+  ([446e961](https://github.com/Xunnamius/workflow-playground/commit/446e961cee1326be7db4085f118447ac30f15078))
+
+### Features
+
+- Added mult function
+  ([e537358](https://github.com/Xunnamius/workflow-playground/commit/e537358218a8abcc97008f5460b37a1949dd0681))
+
+### BREAKING CHANGES
+
+- **Another simulated breaking change!.**
+
+It works a little like this and that and some of this
+
+- And a second breaking change too
+- **Config:** Breaking change 1
+- **Config:** Breaking change 2
+- **Config:** **Breaking change 3.**
+
+Ack: Tre Signed: Yup!
+
+- **Simulated breaking change.**
+
+This is a simulated breaking change.
+
+# [3.0.0-canary.7](https://github.com/Xunnamius/workflow-playground/compare/v2.3.4...v3.0.0-canary.7) (2020-12-07)
+
+# 3.0.0-canary.7 (2020-12-07)
+
+### Build System
+
+- **Package-lock.json:** fix syntax error
+  ([4fd2952](https://github.com/Xunnamius/workflow-playground/commit/4fd2952e78b5cfda17a84a538bcc382d06621926))
+
+# 3.0.0-canary.6 (2020-12-07)
+
+### Bug Fixes
+
+- **.github/workflows:** fix syntax: "no-ci/\*\*"
+  ([b060d3e](https://github.com/Xunnamius/workflow-playground/commit/b060d3ec78744b72bd53450ecd1664110cdebda8))
+
+### Build System
+
+- **.github/workflows:** build system now ignores branches with names that begin
+  with "no-ci/"
+  ([3a4bdff](https://github.com/Xunnamius/workflow-playground/commit/3a4bdff03f0d8ea450f53aebceb33525801b3c34))
+
+# 3.0.0-canary.5 (2020-12-07)
+
+### Build System
+
+- **.github/workflows:** workflow no longer triggered on tag push,
+  dependabot/snyk push
+  ([1096e6f](https://github.com/Xunnamius/workflow-playground/commit/1096e6fbfff5fd399c2f1af5fe2b6496c5ca3cfe))
+
+# 3.0.0-canary.4 (2020-12-06)
+
+### Build System
+
+- **Package.json:** add semver devdep
+  ([4a50ecd](https://github.com/Xunnamius/workflow-playground/commit/4a50ecd7eb03eafebc2412de7a556d319c39bc0e))
+
+# 3.0.0-canary.3 (2020-12-06)
+
+### debug
+
+- Update semantic-release to Xunnamius/semantic-release#contrib-holistic
+  ([446e961](https://github.com/Xunnamius/workflow-playground/commit/446e961cee1326be7db4085f118447ac30f15078))
+
+### BREAKING CHANGES
+
+- **Another simulated breaking change!.**
+
+It works a little like this and that and some of this
+
+- And a second breaking change too
+
+# 3.0.0-canary.2 (2020-12-05)
+
+### Bug Fixes
+
+- **Config:** rename changelog.config.js to .changelogrc.js
+  ([d5dfc50](https://github.com/Xunnamius/workflow-playground/commit/d5dfc506c9d68a0f299559b5e76c92630c9edf0a))
+- **Package.json:** use @xunnamius/semantic-release
+  ([0447d59](https://github.com/Xunnamius/workflow-playground/commit/0447d5959113f033e2ed5644efdb4c80c4fe5085))
+
+### BREAKING CHANGES
+
+- **Config:** Breaking change 1
+- **Config:** Breaking change 2
+- **Config:** **Breaking change 3.**
+
+Ack: Tre Signed: Yup!
+
+# 3.0.0-canary.1 (2020-12-03)
+
+### Features
+
+- Added mult function
+  ([e537358](https://github.com/Xunnamius/workflow-playground/commit/e537358218a8abcc97008f5460b37a1949dd0681))
+
+### BREAKING CHANGES
+
+- **Simulated breaking change.**
+
+This is a simulated breaking change.
+
 ## [2.3.4](https://github.com/Xunnamius/workflow-playground/compare/v2.3.3...v2.3.4) (2020-12-03)
 
 ### Build System
