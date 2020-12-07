@@ -11,7 +11,8 @@ describe('workflow-playground [INTEGRATION-BROWSER]', () => {
         await run(`${__dirname}/../${main}.js`);
         expect(await page.evaluate(() => Object.keys(window))).toIncludeAllMembers([
           'sum',
-          'diff'
+          'diff',
+          'mult'
         ]);
       }
     });
@@ -26,6 +27,7 @@ describe('workflow-playground [INTEGRATION-BROWSER]', () => {
 
         expect(await page.evaluate(() => (window as any).sum(1, 2))).toBe(3);
         expect(await page.evaluate(() => (window as any).diff(1, 2))).toBe(-1);
+        expect(await page.evaluate(() => (window as any).mult(1, 2))).toBe(2);
       }
     });
   });

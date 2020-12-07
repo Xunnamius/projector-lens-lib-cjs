@@ -1,6 +1,6 @@
 {
   "name": "@xunnamius/do-not-install",
-  "version": "2.3.4",
+  "version": "3.0.0-canary.7",
   "description": "A dummy package used for testing workflow pipelines. Not to be installed!",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "build": "npm run build-dist --",
-    "build-changelog": "conventional-changelog --outfile CHANGELOG.md --preset angular --config changelog.config.js --release-count 0 --skip-unstable && (if [ \"$CHANGELOG_SKIP_TITLE\" != 'true' ]; then { node -e 'console.log(require(\"./changelog.config.js\").changelogTitle)'; cat CHANGELOG.md; } > CHANGELOG.md.tmp && mv CHANGELOG.md.tmp CHANGELOG.md; fi) && prettier --write CHANGELOG.md --loglevel warn",
+    "build-changelog": "conventional-changelog --outfile CHANGELOG.md --preset angular --config .changelogrc.js --release-count 0 --skip-unstable && (if [ \"$CHANGELOG_SKIP_TITLE\" != 'true' ]; then { node -e 'console.log(require(\"./.changelogrc.js\").changelogTitle)'; cat CHANGELOG.md; } > CHANGELOG.md.tmp && mv CHANGELOG.md.tmp CHANGELOG.md; fi) && prettier --write CHANGELOG.md --loglevel warn",
     "build-dist": "npm run clean && NODE_ENV=production tsc --project tsconfig.types.json && NODE_ENV=production webpack --config-name main && NODE_ENV=esm babel src --extensions .ts --out-dir dist/lib --out-file-extension .mjs && { echo -n '\"undefined\"!=typeof window&&(window.global=window);'; cat dist/lib/index.js; } > dist/lib/index.js-tmp && mv -f dist/lib/index.js-tmp dist/lib/index.js",
     "build-docs": "rm -rf tmp-docs tmp-docs-diff docs-diff && typedoc --plugin typedoc-plugin-markdown --out tmp-docs --readme none --mode library src/index.ts && find tmp-docs -name '*.md' -exec sed -i -e 's/`__namedParameters`: //g' {} + && find tmp-docs -name '*.md' -exec sed -i -e 's/__namedParameters/\\(destructured\\)/g' {} + && sed -i -e 1,4d tmp-docs/README.md && if [ ! -d docs ]; then mv tmp-docs docs; exit $?; fi && cp -rf tmp-docs tmp-docs-diff && cp -rf docs docs-diff && find docs-diff -name '*.md' -exec sed -i '/^\\*Defined in \\[.*\\]\\(.*\\)\\*$/d' {} + && find tmp-docs-diff -name '*.md' -exec sed -i '/^\\*Defined in \\[.*\\]\\(.*\\)\\*$/d' {} +; [ $? -ne 0 ] && echo 'build failed (try `npm run lint`)' && rm -rf tmp-docs tmp-docs-diff docs-diff && exit 1; if [ \"$(find ./docs-diff -type f -print0 | xargs -0 sha1sum | awk '{print $1}' | sha1sum)\" = \"$(find ./tmp-docs-diff -type f -print0 | xargs -0 sha1sum | awk '{print $1}' | sha1sum)\" ]; then echo 'no rebuild necessary'; else rm -r docs && mv tmp-docs docs && echo 'build successful'; fi; rm -rf tmp-docs tmp-docs-diff docs-diff",
     "build-stats": "NODE_ENV=production webpack --config-name main --json > bundle-stats.json",
@@ -70,7 +70,8 @@
           "test",
           "revert",
           "debug",
-          "build"
+          "build",
+          "chore"
         ]
       ]
     }
@@ -130,7 +131,7 @@
     "@types/expect-puppeteer": "^4.4.5",
     "@types/jest": "^26.0.16",
     "@types/node": "^14.14.10",
-    "@types/puppeteer": "^5.4.0",
+    "@types/puppeteer": "^5.4.1",
     "@types/test-listen": "^1.1.0",
     "@types/webpack": "^4.41.25",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
@@ -143,7 +144,7 @@
     "confusing-browser-globals": "^1.0.10",
     "conventional-changelog-angular": "^5.0.12",
     "conventional-changelog-cli": "^2.1.1",
-    "eslint": "^7.14.0",
+    "eslint": "^7.15.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
@@ -152,10 +153,10 @@
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",
     "jest-extended": "^0.11.5",
-    "lint-staged": "^10.5.2",
+    "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "puppeteer": "5.4.0",
-    "semantic-release": "^17.3.0",
+    "semantic-release": "Xunnamius/semantic-release#contrib-holistic",
     "shelljs": "^0.8.4",
     "sort-package-json": "^1.48.0",
     "source-map-support": "^0.5.19",
@@ -165,12 +166,15 @@
     "typedoc": "0.17.0-3",
     "typedoc-plugin-markdown": "3.0.11",
     "typescript": "^4.1.2",
-    "webpack": "^5.9.0",
+    "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0",
     "webpack-node-module-types": "^1.0.4"
   },
   "engines": {
     "node": ">=10.x"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "env-expect": {
     "errorMessage": "\nCopy the \".env.example\" file to \".env\" and/or define only the appropriate environment variables",
