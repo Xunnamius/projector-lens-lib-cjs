@@ -9,7 +9,7 @@ on:
 
   push:
     tags-ignore: ['**']
-    branches-ignore: ['dependabot/**', 'snyk-*', 'no-ci/']
+    branches-ignore: ['dependabot/**', 'snyk-*', 'no-ci/**']
 
   pull_request:
     types: [opened, synchronize]
