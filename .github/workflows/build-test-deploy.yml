@@ -7,11 +7,8 @@ name: build-test-deploy
 on:
   workflow_dispatch: # * Treated like a `push` event with custom refs
   push:
-    tags-ignore:
-      - '**'
-    branches-ignore:
-      - 'dependabot/**'
-      - 'snyk-*'
+    tags-ignore: ['**']
+    branches-ignore: ['dependabot/**', 'snyk-*']
   pull_request:
     types: [opened, synchronize]
     branches: [main, canary]
