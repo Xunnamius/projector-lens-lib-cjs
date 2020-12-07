@@ -33,7 +33,7 @@ The ideal contributor flow is as follows:
 
 2. Configure and install dependencies: `npm install`
 
-   - If `.env.example` exists, consider copying it to `.env` and configure
+   - If `.env.example` exists, consider copying it to `.env` and configuring
      sensible defaults
 
 3. Before making any changes, ensure all unit tests are passing: `npm run test`
