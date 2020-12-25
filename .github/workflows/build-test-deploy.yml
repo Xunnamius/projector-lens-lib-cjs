@@ -19,8 +19,8 @@ env:
   NODE_CURRENT_VERSION: 15.x
   NODE_TEST_VERSIONS: '"10.x", "12.x", "14.x"' # * NODE_CURRENT_VERSION included automatically
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
-  CI_COMMITTER_NAME: Xunnamius (semantic-release)
-  CI_COMMITTER_EMAIL: Xunnamius@users.noreply.github.com
+  CI_COMMITTER_NAME: xunn-bot
+  CI_COMMITTER_EMAIL: bot@xunn.io
   # ! These also have to be updated in .changelogrc.js
   CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
   # ? Add your GitHub user/org to enable CD pipeline
