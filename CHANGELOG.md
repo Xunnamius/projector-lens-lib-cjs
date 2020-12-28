@@ -5,56 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
-# [3.0.0](https://github.com/Xunnamius/workflow-playground/compare/v2.3.4...v3.0.0) (2020-12-07)
+## [3.0.1](https://github.com/Xunnamius/workflow-playground/compare/v3.0.0...v3.0.1) (2020-12-28)
 
 ### Bug Fixes
 
-- **.github/workflows:** fix syntax: "no-ci/\*\*"
-  ([b060d3e](https://github.com/Xunnamius/workflow-playground/commit/b060d3ec78744b72bd53450ecd1664110cdebda8))
-- **Config:** rename changelog.config.js to .changelogrc.js
-  ([d5dfc50](https://github.com/Xunnamius/workflow-playground/commit/d5dfc506c9d68a0f299559b5e76c92630c9edf0a))
-- **Package.json:** use @xunnamius/semantic-release
-  ([0447d59](https://github.com/Xunnamius/workflow-playground/commit/0447d5959113f033e2ed5644efdb4c80c4fe5085))
+- **.github:** update ci committer name and email to xunn-bot
+  ([b151491](https://github.com/Xunnamius/workflow-playground/commit/b15149139462980707fc8ec6d7d67414ac207e6e))
+- **Package.json:** update typedoc to latest beta and fix npmbd
+  ([783ba76](https://github.com/Xunnamius/workflow-playground/commit/783ba76db816b0cc391450d442c708420203c46c))
 
 ### Build System
 
-- **.github/workflows:** build system now ignores branches with names that begin
-  with "no-ci/"
-  ([3a4bdff](https://github.com/Xunnamius/workflow-playground/commit/3a4bdff03f0d8ea450f53aebceb33525801b3c34))
-- **.github/workflows:** workflow no longer triggered on tag push,
-  dependabot/snyk push
-  ([1096e6f](https://github.com/Xunnamius/workflow-playground/commit/1096e6fbfff5fd399c2f1af5fe2b6496c5ca3cfe))
-- **Package-lock.json:** fix syntax error
-  ([4fd2952](https://github.com/Xunnamius/workflow-playground/commit/4fd2952e78b5cfda17a84a538bcc382d06621926))
+- **Package.json:** update deps
+  ([a876517](https://github.com/Xunnamius/workflow-playground/commit/a876517a6ea8b339e8c0eca9f7763bcc85919f87))
 
-### debug
-
-- Update semantic-release to Xunnamius/semantic-release#contrib-holistic
-  ([446e961](https://github.com/Xunnamius/workflow-playground/commit/446e961cee1326be7db4085f118447ac30f15078))
-
-### Features
-
-- Added mult function
-  ([e537358](https://github.com/Xunnamius/workflow-playground/commit/e537358218a8abcc97008f5460b37a1949dd0681))
-
-### BREAKING CHANGES
-
-- **Another simulated breaking change!.**
-
-It works a little like this and that and some of this
-
-- And a second breaking change too
-- **Config:** Breaking change 1
-- **Config:** Breaking change 2
-- **Config:** **Breaking change 3.**
-
-Ack: Tre Signed: Yup!
-
-- **Simulated breaking change.**
-
-This is a simulated breaking change.
-
-# [3.0.0-canary.7](https://github.com/Xunnamius/workflow-playground/compare/v2.3.4...v3.0.0-canary.7) (2020-12-07)
+# [3.0.0](https://github.com/Xunnamius/workflow-playground/compare/v2.3.4...v3.0.0) (2020-12-07)
 
 # 3.0.0-canary.7 (2020-12-07)
 
