@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [5.0.3](https://github.com/Xunnamius/workflow-playground/compare/v5.0.2...v5.0.3) (2020-12-29)
+
+### Build System
+
+- **.github:** loosen CD pipeline launch check: run CD on all branches
+  ([0a91fad](https://github.com/Xunnamius/workflow-playground/commit/0a91fad0d4f6c41c600294b8ecfc84b16e906980))
+
 ## [5.0.2](https://github.com/Xunnamius/workflow-playground/compare/v5.0.1...v5.0.2) (2020-12-29)
 
 ### Build System
