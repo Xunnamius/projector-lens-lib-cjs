@@ -26,6 +26,7 @@ env:
   # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
   NPM_AUDIT_FAIL_LEVEL: high
+  UPLOAD_CODE_COVERAGE: true
 
 jobs:
   metadata:
@@ -232,6 +233,18 @@ jobs:
 
       - name: Test unit
         run: npm run test-unit
+
+      - name: Attempt to upload coverage data to codecov
+        if: env.UPLOAD_CODE_COVERAGE == 'true'
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          fail_ci_if_error: true
+          verbose: true
+
+      - name: Issue any codecov-related warnings
+        if: env.UPLOAD_CODE_COVERAGE == 'false'
+        run: echo '::warning::no code coverage data uploaded for this run
 
   test-integration-node:
     name: '[CI] test-integration-node'
