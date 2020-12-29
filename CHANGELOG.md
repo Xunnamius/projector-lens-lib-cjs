@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+# [5.0.0](https://github.com/Xunnamius/workflow-playground/compare/v4.0.0...v5.0.0) (2020-12-29)
+
+### Chore
+
+- fix capitalization of non-release commit types
+  ([7391321](https://github.com/Xunnamius/workflow-playground/commit/7391321c8da14ed35a865a4e245db2ae3b72a606))
+
+### BREAKING CHANGES
+
+- dummy BC 7
+- dummy BC 9
+- dummy BCs 10, 8, and 6
+
 # [4.0.0](https://github.com/Xunnamius/workflow-playground/compare/v3.0.1...v4.0.0) (2020-12-29)
 
 ### Bug Fixes
@@ -12,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 - **.changelogrc.js:** remove BC capitalization and sentence-case code
   ([02662fc](https://github.com/Xunnamius/workflow-playground/commit/02662fcac7c02ac3f5a32dba750e00d23d6c88f2))
 
-### chore
+### Chore
 
 - update comment language
   ([5a2aef4](https://github.com/Xunnamius/workflow-playground/commit/5a2aef4cebc6ed136fa3fb5015f38f47de8ce781))
@@ -76,7 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org).
 
 # 3.0.0-canary.3 (2020-12-06)
 
-### debug
+### Debug
 
 - update semantic-release to Xunnamius/semantic-release#contrib-holistic
   ([446e961](https://github.com/Xunnamius/workflow-playground/commit/446e961cee1326be7db4085f118447ac30f15078))
