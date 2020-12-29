@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [5.0.2](https://github.com/Xunnamius/workflow-playground/compare/v5.0.1...v5.0.2) (2020-12-29)
+
+### Build System
+
+- **.github:** add codecov config and add fetch-depth to test-unit
+  ([e62c5b4](https://github.com/Xunnamius/workflow-playground/commit/e62c5b42ca2b43326cc9eec8db248020b2d90ec8))
+
 ## [5.0.1](https://github.com/Xunnamius/workflow-playground/compare/v5.0.0...v5.0.1) (2020-12-29)
 
 ### Build System
