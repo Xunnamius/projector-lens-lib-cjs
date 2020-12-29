@@ -28,6 +28,7 @@ const wait = sjx.exec(
 if (wait.code != 0) throw new Error('failed to acquire angular transformation');
 
 const transform = Function(`"use strict";return (${wait.stdout})`)();
+const sentenceCase = (s) => s.toString().charAt(0).toUpperCase() + s.toString().slice(1);
 
 // ? Releases made before this repo adopted semantic-release. They will be
 // ? collected together under a single header
@@ -70,9 +71,11 @@ module.exports = {
           }
 
           commit = transform(commit, context);
-          if (fakeFix) commit.type = 'Build System';
 
           if (commit) {
+            if (fakeFix) commit.type = 'Build System';
+            else commit.type = sentenceCase(commit.type);
+
             // ? Ignore any commits with commands like [skip ci] in them
             if (SKIP_COMMANDS.some((cmd) => commit.subject?.includes(cmd))) return null;
 
