@@ -208,6 +208,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
+          # ? codecov-action requires access to git history
+          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
           persist-credentials: false
 
       - name: Reconfigure git auth
@@ -240,10 +242,9 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           fail_ci_if_error: true
-          verbose: true
 
       - name: Issue any codecov-related warnings
-        if: env.UPLOAD_CODE_COVERAGE == 'false'
+        if: env.UPLOAD_CODE_COVERAGE != 'true'
         run: echo '::warning::no code coverage data uploaded for this run
 
   test-integration-node:
