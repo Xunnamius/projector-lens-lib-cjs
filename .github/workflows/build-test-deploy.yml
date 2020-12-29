@@ -1,8 +1,7 @@
 name: build-test-deploy
 
 # * Note: feel free to run this workflow in forks (e.g. for testing your PR)
-# * without worrying about this workflow attempting to deploy a package or any
-# * other craziness 🚀
+# * without worrying about this workflow attempting to deploy a package 🚀
 
 on:
   workflow_dispatch: # * Treated like a `push` event with custom refs
