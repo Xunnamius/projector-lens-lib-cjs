@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [5.0.1](https://github.com/Xunnamius/workflow-playground/compare/v5.0.0...v5.0.1) (2020-12-29)
+
+### Build System
+
+- **.github:** add codecov-action to test-unit job
+  ([2ef6297](https://github.com/Xunnamius/workflow-playground/commit/2ef6297d257bcd1661093eed5069714382f01f36))
+- **package.json:** add codecov package
+  ([d73cac9](https://github.com/Xunnamius/workflow-playground/commit/d73cac91012e0a32ee1f52a3b476b8639f325ca2))
+- **package.json:** remove codecov package
+  ([da477b7](https://github.com/Xunnamius/workflow-playground/commit/da477b770bc7b17db8eb474eb523e8468881e447))
+
 # [5.0.0](https://github.com/Xunnamius/workflow-playground/compare/v4.0.0...v5.0.0) (2020-12-29)
 
 ### Chore
