@@ -3,10 +3,6 @@
 const semverValid = require('semver').valid;
 const sjx = require('shelljs');
 
-// ? Commit types that will not be capitalized
-// ! Note: uses the post-angular-transform commit types
-const NO_CAPITALIZE_TYPES = ['Reverts'];
-
 // ? Commit types whose reversions are added to the changelog (releasers only!)
 // ! If you change this, you should also take a look at releaseRules in
 // ! release.config.js
@@ -32,7 +28,6 @@ const wait = sjx.exec(
 if (wait.code != 0) throw new Error('failed to acquire angular transformation');
 
 const transform = Function(`"use strict";return (${wait.stdout})`)();
-const sentenceCase = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
 // ? Releases made before this repo adopted semantic-release. They will be
 // ? collected together under a single header
@@ -81,15 +76,6 @@ module.exports = {
             // ? Ignore any commits with commands like [skip ci] in them
             if (SKIP_COMMANDS.some((cmd) => commit.subject?.includes(cmd))) return null;
 
-            if (!NO_CAPITALIZE_TYPES.some((type) => commit.type === type)) {
-              // ? Make the scope/subject upper case in the changelog (per my tastes)
-              commit.scope
-                ? (commit.scope = sentenceCase(commit.scope))
-                : (commit.subject = commit.subject
-                    ? sentenceCase(commit.subject)
-                    : commit.subject);
-            }
-
             if (commit.type == 'Reverts') {
               // ? Ignore reverts that didn't trigger releases
               if (
@@ -101,22 +87,6 @@ module.exports = {
 
               commit.subject = `*${commit.subject}*`;
             }
-
-            commit.notes.forEach((note) => {
-              note.text = note.text ? sentenceCase(note.text.trim()) : note.text;
-
-              // ? If the text has a line break in it, make the first line bold and
-              // ? add a period before the line break unless there's a symbol
-              // ? already there
-              if (/\n/.test(note.text)) {
-                const [firstLine, ...remainder] = note.text.split('\n');
-                const addPeriod = !firstLine.endsWith('.');
-
-                note.text = `**${firstLine}${addPeriod ? '.' : ''}**\n${sentenceCase(
-                  remainder.join('\n')
-                )}`;
-              }
-            });
           }
         }
       }
