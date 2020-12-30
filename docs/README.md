@@ -23,7 +23,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [index.ts:11](https://github.com/Xunnamius/workflow-playground/blob/bda2d5e/src/index.ts#L11)
+Defined in: [index.ts:11](https://github.com/Xunnamius/workflow-playground/blob/5921653/src/index.ts#L11)
 
 ___
 
@@ -42,7 +42,7 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [index.ts:18](https://github.com/Xunnamius/workflow-playground/blob/bda2d5e/src/index.ts#L18)
+Defined in: [index.ts:18](https://github.com/Xunnamius/workflow-playground/blob/5921653/src/index.ts#L18)
 
 ___
 
@@ -61,4 +61,4 @@ Name | Type |
 
 **Returns:** *number*
 
-Defined in: [index.ts:4](https://github.com/Xunnamius/workflow-playground/blob/bda2d5e/src/index.ts#L4)
+Defined in: [index.ts:4](https://github.com/Xunnamius/workflow-playground/blob/5921653/src/index.ts#L4)

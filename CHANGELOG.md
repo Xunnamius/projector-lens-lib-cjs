@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [6.1.2](https://github.com/Xunnamius/workflow-playground/compare/v6.1.1...v6.1.2) (2020-12-30)
+
+### Build System
+
+- **.github:** better snyk ignore
+  ([5921653](https://github.com/Xunnamius/workflow-playground/commit/5921653ac2c26273eace14aa3e4994960be521a0))
+- **package.json:** remove high audit CI failure
+  ([b2ea6f1](https://github.com/Xunnamius/workflow-playground/commit/b2ea6f13a5c7d7c8d89f76b6ced72c938448a235))
+- **package.json:** test high audit CI failure
+  ([03825f0](https://github.com/Xunnamius/workflow-playground/commit/03825f051d3ed50dad916f0e3f3993a0fb3c51ce))
+
 ## [6.1.1](https://github.com/Xunnamius/workflow-playground/compare/v6.1.0...v6.1.1) (2020-12-30)
 
 ### Bug Fixes
