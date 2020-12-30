@@ -4,17 +4,18 @@ name: build-test-deploy
 # * without worrying about this workflow attempting to deploy a package 🚀
 # *
 # * If you want to use the CD pipeline, the following secrets must be defined:
-# *   CODECOV_TOKEN (optional for public repos)
-# *   GPG_PRIVATE_KEY
-# *   GPG_PASSPHRASE
-# *   GH_TOKEN
-# *   NPM_TOKEN
+# !   CODECOV_TOKEN (optional for public repos)
+# !   GPG_PRIVATE_KEY
+# !   GPG_PASSPHRASE
+# !   GH_TOKEN
+# !   NPM_TOKEN
 
 on:
   workflow_dispatch: # * Treated like a `push` event with custom refs
 
   push:
     tags-ignore: ['**']
+    # ! If you update these, also consider updating cleanup.yml
     branches-ignore: ['dependabot/**', 'snyk-*', 'no-ci/**']
 
   pull_request:
