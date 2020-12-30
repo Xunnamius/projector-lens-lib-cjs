@@ -48,4 +48,4 @@ jobs:
           export DIST_TAGS
           MATCHED_TAGS=$(node -e 'const match = require("micromatch"); const tags = process.env.DIST_TAGS.split("\n").map(t => t.split(":")[0]); const branches = match(process.env.BRANCHES.split("\n"), require("./release.config.js").branches.reduce((a,b) => [...a, b.name || b.toString()], [])); const ignoreTags = process.env.IGNORE_TAGS.split(", "); console.log(tags.reduce((a,t) => branches.some(b => ignoreTags.includes(t) || t == b || t == `release-${b}`) ? a : [...a, t], []).join(" ").trim())')
           PKG_NAME=`node -e 'console.log(require("./package.json").name)'`
-          ! [ -z "$MATCHED_TAGS" ] && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc && echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"
+          if ! [ -z "$MATCHED_TAGS" ]; then echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc; echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"; else echo "dist tags OK!"; fi
