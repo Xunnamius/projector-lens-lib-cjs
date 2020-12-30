@@ -33,11 +33,10 @@ jobs:
 
       - name: Cache npm
         uses: actions/cache@v2
-        id: cache-npm
+        id: cache-npm-clean
         with:
-          key: npm-cleanup-${{ runner.os }}
+          key: npm-clean-${{ runner.os }}
           path: ~/.npm
-          restore-keys: npm-${{ runner.os }}-
 
       - name: Remove any erroneous dist tags
         run: |
