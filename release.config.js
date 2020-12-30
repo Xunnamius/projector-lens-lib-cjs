@@ -1,13 +1,9 @@
 const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG === 'true';
 
-// eslint-disable-next-line no-console
-console.info(`SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG}`);
-
 const options = require('./.changelogrc.js');
 const { changelogTitle, parserOpts, writerOpts } = options;
 
 module.exports = {
-  //extends: '@xunnamius/semantic-release-config',
   branches: [
     '+([0-9])?(.{+([0-9]),x}).x',
     'main',
