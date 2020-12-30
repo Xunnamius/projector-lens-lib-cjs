@@ -1,5 +1,3 @@
-# @xunnamius/do-not-install
-
 ## Index
 
 ### Functions
@@ -12,9 +10,7 @@
 
 ### diff
 
-▸ **diff**(`a`: number, `b`: number): number
-
-*Defined in [index.ts:11](https://github.com/Xunnamius/workflow-playground/blob/747a674/src/index.ts#L11)*
+▸ **diff**(`a`: *number*, `b`: *number*): *number*
 
 Returns the difference of `a` and `b`
 
@@ -22,18 +18,18 @@ Returns the difference of `a` and `b`
 
 Name | Type |
 ------ | ------ |
-`a` | number |
-`b` | number |
+`a` | *number* |
+`b` | *number* |
 
-**Returns:** number
+**Returns:** *number*
+
+Defined in: [index.ts:11](https://github.com/Xunnamius/workflow-playground/blob/02746df/src/index.ts#L11)
 
 ___
 
 ### mult
 
-▸ **mult**(`a`: number, `b`: number): number
-
-*Defined in [index.ts:18](https://github.com/Xunnamius/workflow-playground/blob/747a674/src/index.ts#L18)*
+▸ **mult**(`a`: *number*, `b`: *number*): *number*
 
 Returns the product of `a` and `b`
 
@@ -41,18 +37,18 @@ Returns the product of `a` and `b`
 
 Name | Type |
 ------ | ------ |
-`a` | number |
-`b` | number |
+`a` | *number* |
+`b` | *number* |
 
-**Returns:** number
+**Returns:** *number*
+
+Defined in: [index.ts:18](https://github.com/Xunnamius/workflow-playground/blob/02746df/src/index.ts#L18)
 
 ___
 
 ### sum
 
-▸ **sum**(`a`: number, `b`: number): number
-
-*Defined in [index.ts:4](https://github.com/Xunnamius/workflow-playground/blob/747a674/src/index.ts#L4)*
+▸ **sum**(`a`: *number*, `b`: *number*): *number*
 
 Returns the sum of `a` and `b`
 
@@ -60,7 +56,9 @@ Returns the sum of `a` and `b`
 
 Name | Type |
 ------ | ------ |
-`a` | number |
-`b` | number |
+`a` | *number* |
+`b` | *number* |
 
-**Returns:** number
+**Returns:** *number*
+
+Defined in: [index.ts:4](https://github.com/Xunnamius/workflow-playground/blob/02746df/src/index.ts#L4)
