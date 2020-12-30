@@ -49,8 +49,5 @@ jobs:
           export DIST_TAGS
           MATCHED_TAGS=$(node -e 'const match = require("micromatch"); const tags = process.env.DIST_TAGS.split("\n").map(t => t.split(":")[0]); const branches = match(process.env.BRANCHES.split("\n"), require("./release.config.js").branches.reduce((a,b) => [...a, b.name || b.toString()], [])); const ignoreTags = process.env.IGNORE_TAGS.split(", "); console.log(tags.reduce((a,t) => branches.some(b => ignoreTags.includes(t) || t == b || t == `release-${b}`) ? a : [...a, t], []).join(" "))')
           PKG_NAME=`node -e 'console.log(require("./package.json").name)'`
-          export MATCHED_TAGS
-          node -e 'process.env.MATCHED_TAGS.split(" ").forEach(t => console.log(`deleting dist-tag "${t}"`))'
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-          npm whoami
           echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"
