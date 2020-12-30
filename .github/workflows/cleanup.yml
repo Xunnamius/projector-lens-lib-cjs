@@ -52,4 +52,5 @@ jobs:
           export MATCHED_TAGS
           node -e 'process.env.MATCHED_TAGS.split(" ").forEach(t => console.log(`deleting dist-tag "${t}"`))'
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          npm whoami
           echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"
