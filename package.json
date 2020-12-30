@@ -44,7 +44,6 @@
     "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
     "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts",
     "test-integration-node": "BABEL_ENV=test jest test/integration-node*.test.ts",
-    "test-integration-externals": "BABEL_ENV=test jest test/integration-node*.test.ts",
     "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
   },
   "commitlint": {
