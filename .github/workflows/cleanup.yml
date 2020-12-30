@@ -35,6 +35,14 @@ jobs:
         with:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
+      - name: Cache npm
+        uses: actions/cache@v2
+        id: cache-npm
+        with:
+          key: npm-cleanup-${{ runner.os }}
+          path: ~/.npm
+          restore-keys: npm-${{ runner.os }}-
+
       - name: Remove any erroneous dist tags
         run: |
           npm install micromatch
@@ -47,5 +55,6 @@ jobs:
           PKG_NAME=`node -e 'console.log(require("./package.json").name)'`
           export MATCHED_TAGS
           node -e 'process.env.MATCHED_TAGS.split(" ").forEach(t => console.log(`deleting dist-tag "${t}"`))'
-          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > ~/.npmrc
+          npm login
           echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"
