@@ -51,5 +51,6 @@ jobs:
           PKG_NAME=`node -e 'console.log(require("./package.json").name)'`
           export MATCHED_TAGS
           node -e 'process.env.MATCHED_TAGS.split(" ").forEach(t => console.log(`deleting dist-tag "${t}"`))'
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          cat ~/.npmrc
           echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"
