@@ -32,7 +32,7 @@
     "build": "npm run build-dist --",
     "build-changelog": "conventional-changelog --outfile CHANGELOG.md --preset angular --config .changelogrc.js --release-count 0 --skip-unstable && (if [ \"$CHANGELOG_SKIP_TITLE\" != 'true' ]; then { node -e 'console.log(require(\"./.changelogrc.js\").changelogTitle)'; cat CHANGELOG.md; } > CHANGELOG.md.tmp && mv CHANGELOG.md.tmp CHANGELOG.md; fi) && prettier --write CHANGELOG.md --loglevel warn",
     "build-dist": "npm run clean && NODE_ENV=production tsc --project tsconfig.types.json && NODE_ENV=production webpack --config-name main && NODE_ENV=esm babel src --extensions .ts --out-dir dist/lib --out-file-extension .mjs && { echo -n '\"undefined\"!=typeof window&&(window.global=window);'; cat dist/lib/index.js; } > dist/lib/index.js-tmp && mv -f dist/lib/index.js-tmp dist/lib/index.js",
-    "build-externals": "true",
+    "build-externals": "touch .externals",
     "build-stats": "NODE_ENV=production webpack --config-name main --json > bundle-stats.json",
     "clean": "rm -rf dist npm.pipe coverage external-scripts/bin",
     "format": "sort-package-json && prettier --write .",
@@ -43,7 +43,7 @@
     "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
     "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts",
     "test-integration-node": "BABEL_ENV=test jest test/integration-node*.test.ts",
-    "test-integration-externals": "true",
+    "test-integration-externals": "test -r .externals",
     "test-integration-webpack": "true",
     "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
   },
