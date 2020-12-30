@@ -33,7 +33,7 @@ env:
   # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
   NPM_AUDIT_FAIL_LEVEL: high
-  UPLOAD_CODE_COVERAGE: true
+  UPLOAD_CODE_COVERAGE: false
 
 jobs:
   metadata:
