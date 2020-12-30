@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [6.1.6](https://github.com/Xunnamius/workflow-playground/compare/v6.1.5...v6.1.6) (2020-12-30)
+
+### Build System
+
+- **package.json:** conclude dynamic continuous integration tests
+  ([828751d](https://github.com/Xunnamius/workflow-playground/commit/828751d051d5cff15c5d1315fc9729d82cab985f))
+
+## [6.1.4](https://github.com/Xunnamius/workflow-playground/compare/v6.1.5...v6.1.4) (2020-12-30)
+
+### Build System
+
+- **package.json:** conclude dynamic continuous integration tests
+  ([828751d](https://github.com/Xunnamius/workflow-playground/commit/828751d051d5cff15c5d1315fc9729d82cab985f))
+
 ## [6.1.5](https://github.com/Xunnamius/workflow-playground/compare/v6.1.4...v6.1.5) (2020-12-30)
 
 ### Bug Fixes
