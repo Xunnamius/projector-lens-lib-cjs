@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [6.0.5](https://github.com/Xunnamius/workflow-playground/compare/v6.0.4...v6.0.5) (2020-12-30)
+
+### Bug Fixes
+
+- **readme.md:** add codecov badge
+  ([4b6c84c](https://github.com/Xunnamius/workflow-playground/commit/4b6c84c788c4105db8a1ddd10ecb044be31876f9))
+
 ## [6.0.4](https://github.com/Xunnamius/workflow-playground/compare/v6.0.3...v6.0.4) (2020-12-30)
 
 ### Build System
