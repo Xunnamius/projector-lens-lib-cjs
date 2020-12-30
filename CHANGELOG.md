@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [6.1.3](https://github.com/Xunnamius/workflow-playground/compare/v6.1.2...v6.1.3) (2020-12-30)
+
+### Build System
+
+- **build-test-deploy.yml:** debug should warn
+  ([55e1235](https://github.com/Xunnamius/workflow-playground/commit/55e1235d39714dd00c146549f630ec62f4952e2d))
+- **build-test-deploy.yml:** fix syntax error
+  ([5448960](https://github.com/Xunnamius/workflow-playground/commit/5448960531a3bd19cc38de44f13519a8888e342a))
+
 ## [6.1.2](https://github.com/Xunnamius/workflow-playground/compare/v6.1.1...v6.1.2) (2020-12-30)
 
 ### Build System
