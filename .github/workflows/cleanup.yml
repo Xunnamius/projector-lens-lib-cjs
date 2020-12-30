@@ -3,7 +3,7 @@ name: cleanup
 # ! If you want to use this workflow, the NPM_TOKEN secret must be defined!
 
 on:
-  workflow_dispatch: # * Treated like a `delete` event with custom refs
+  workflow_dispatch: # * Treated like a `delete` event
   delete:
 
 env:
@@ -52,5 +52,4 @@ jobs:
           export MATCHED_TAGS
           node -e 'process.env.MATCHED_TAGS.split(" ").forEach(t => console.log(`deleting dist-tag "${t}"`))'
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-          npm login
           echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"
