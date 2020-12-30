@@ -139,7 +139,7 @@ jobs:
           echo "::set-output name=has-integration-webpack::$HAS_WEBP"
 
           if [ "$HAS_EXTS" != "$HAS_IEXT" ]; then
-            echo '::error::expected both 1) `external-scripts` directory to exist and 2) `test-integration-externals` script to be defined in package.json'
+            echo '::error::expected both 1) `build-externals` and 2) `test-integration-externals` scripts to be defined in package.json'
             exit 2
           fi
 
