@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [6.1.5](https://github.com/Xunnamius/workflow-playground/compare/v6.1.4...v6.1.5) (2020-12-30)
+
+### Bug Fixes
+
+- **build-test-deploy.yml:** clearer error language with invalid externals
+  config
+  ([d8ed033](https://github.com/Xunnamius/workflow-playground/commit/d8ed033ead9608349f2d876c4cecebecd65dc47f))
+
 ## [6.1.4](https://github.com/Xunnamius/workflow-playground/compare/v6.1.3...v6.1.4) (2020-12-30)
 
 ## [6.1.3](https://github.com/Xunnamius/workflow-playground/compare/v6.1.2...v6.1.3) (2020-12-30)
