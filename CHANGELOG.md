@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [6.1.4](https://github.com/Xunnamius/workflow-playground/compare/v6.1.3...v6.1.4) (2020-12-30)
+
 ## [6.1.3](https://github.com/Xunnamius/workflow-playground/compare/v6.1.2...v6.1.3) (2020-12-30)
 
 ### Build System
