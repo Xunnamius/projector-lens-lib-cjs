@@ -40,9 +40,6 @@
     "lint": "rm -f npm.pipe; touch npm.pipe; command -v unbuffer >/dev/null; X=$?; [ $X -eq 0 ] && unbuffer tsc --project tsconfig.lint.json >> npm.pipe; Y=$?; [ $Y -eq 0 ] && echo >> npm.pipe; unbuffer eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; Z=$?; [ $X -ne 0 ] && tsc --project tsconfig.lint.json >> npm.pipe && eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; W=$?; cat npm.pipe | less -R -FX; rm npm.pipe; ([ $W -eq 0 ] && [ $X -ne 0 ]) || ([ $X -eq 0 ] && [ $Y -eq 0 ] && [ $Z -eq 0 ])",
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))' && echo '\n(no gulp tasks defined for this project)'",
     "test": "npm run test-unit --",
-    "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
-    "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts",
-    "test-integration-node": "BABEL_ENV=test jest test/integration-node*.test.ts",
     "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
   },
   "commitlint": {
