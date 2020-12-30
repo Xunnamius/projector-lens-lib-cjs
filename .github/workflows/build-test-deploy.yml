@@ -11,7 +11,7 @@ name: build-test-deploy
 # !   NPM_TOKEN
 
 on:
-  workflow_dispatch: # * Treated like a `push` event with custom refs
+  workflow_dispatch: # * Treated like a `push` event with a user-defined ref
 
   push:
     tags-ignore: ['**']
