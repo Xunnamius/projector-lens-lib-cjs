@@ -112,7 +112,8 @@
     "verbose": false
   },
   "dependencies": {
-    "chalk": "^4.1.0"
+    "chalk": "^4.1.0",
+    "object-path": "^0.11.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
