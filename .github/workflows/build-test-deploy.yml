@@ -15,7 +15,6 @@ on:
 
   push:
     tags-ignore: ['**']
-    # ! If you update these, also consider updating cleanup.yml
     branches-ignore: ['dependabot/**', 'snyk-*', 'no-ci/**']
 
   pull_request:
