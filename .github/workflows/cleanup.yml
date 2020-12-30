@@ -14,10 +14,6 @@ env:
 jobs:
   cleanup-npm-dist-tags:
     runs-on: ubuntu-latest
-    if: | # ! If you update these, also consider updating build-test-deploy.yml
-      startsWith(github.ref, 'refs/heads/dependabot/')
-      || startsWith(github.ref, 'refs/heads/snyk-')
-      || startsWith(github.ref, 'refs/heads/no-ci/')
     steps:
       - name: Checkout
         uses: actions/checkout@v2
