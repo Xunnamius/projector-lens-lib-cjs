@@ -3,6 +3,7 @@
 [![Last commit timestamp](https://img.shields.io/github/last-commit/xunnamius/workflow-playground 'When was the last commit to the official repo?')](https://www.npmjs.com/package/@xunnamius/do-not-install)
 [![Open issues](https://img.shields.io/github/issues/xunnamius/workflow-playground 'Number of known issues with this package')](https://www.npmjs.com/package/@xunnamius/do-not-install)
 [![Pull requests](https://img.shields.io/github/issues-pr/xunnamius/workflow-playground 'Number of open pull requests')](https://www.npmjs.com/package/@xunnamius/do-not-install)
+[![codecov](https://codecov.io/gh/Xunnamius/workflow-playground/branch/main/graph/badge.svg?token=HWRIOBAAPW)](https://codecov.io/gh/Xunnamius/workflow-playground)
 [![Source license](https://img.shields.io/npm/l/@xunnamius/do-not-install "This package's source license")](https://www.npmjs.com/package/@xunnamius/do-not-install)
 [![NPM version](https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/do-not-install 'Install this package using npm or yarn!')](https://www.npmjs.com/package/@xunnamius/do-not-install)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
