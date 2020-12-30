@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+# [6.1.0](https://github.com/Xunnamius/workflow-playground/compare/v6.0.5...v6.1.0) (2020-12-30)
+
+### Bug Fixes
+
+- **readme.md:** dummy fix
+  ([b9d92fd](https://github.com/Xunnamius/workflow-playground/commit/b9d92fdd4f2d594a62fce6d16299152c79a43566))
+
+### Features
+
+- **readme.md:** dummy feat
+  ([f90dde3](https://github.com/Xunnamius/workflow-playground/commit/f90dde35c32e676c765b131ddfa135246ad7f7eb))
+
+# [6.1.0-canary.1](https://github.com/Xunnamius/workflow-playground/compare/v6.0.5...v6.1.0-canary.1) (2020-12-30)
+
+# 6.1.0-canary.1 (2020-12-30)
+
+### Features
+
+- **readme.md:** dummy feat
+  ([f90dde3](https://github.com/Xunnamius/workflow-playground/commit/f90dde35c32e676c765b131ddfa135246ad7f7eb))
+
+## 6.0.6-canary.1 (2020-12-30)
+
+### Bug Fixes
+
+- **readme.md:** dummy fix
+  ([b9d92fd](https://github.com/Xunnamius/workflow-playground/commit/b9d92fdd4f2d594a62fce6d16299152c79a43566))
+
 ## [6.0.5](https://github.com/Xunnamius/workflow-playground/compare/v6.0.4...v6.0.5) (2020-12-30)
 
 ### Bug Fixes
