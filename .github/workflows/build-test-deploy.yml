@@ -541,6 +541,11 @@ jobs:
           echo '::error::release job failed to restore build ${{ github.sha }}'
           exit 1
 
+      - name: Use node ${{ env.NODE_CURRENT_VERSION }}
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: ${{ env.NODE_CURRENT_VERSION }}
+
       - name: Import gpg key
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v3
