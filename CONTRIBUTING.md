@@ -136,12 +136,17 @@ even reach the remote CI pipeline.
   - Technically, there are also
     [maintenance branches](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches),
     which are semi-permanent
+  - For NPM package projects, this also means `latest` is the only permanent
+    [dist-tag](https://docs.npmjs.com/cli/v6/commands/npm-dist-tag#purpose)
 - Changes are committed directly to `main`, to a SLFB that is eventually merged
   into `main`, or through a PR that is eventually merged into `main` from an
   external repository
 - `canary` is a special SLFB used to publish commits on the canary release
   channel before before they're merged into `main` (useful to combine multiple
   features as a single testable release)
+  - For projects that are deployed (e.g. Vercel, web push, etc), `canary` may be
+    used as a permanent preview branch in addition to the permanent `main`
+    branch
 - Pushing a commit to any branch, opening a PR against `main`/`canary`, or
   synchronizing a PR made against `main`/`canary` will trigger the CI pipeline
 - Pushing a commit directly to `main` or `canary` will trigger the CI pipeline
@@ -152,11 +157,15 @@ even reach the remote CI pipeline.
     [default release channel](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#release-branches)
   - Commits pushed to `canary` are released on the
     [prerelease channel](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#pre-release-branches)
-  - Commits pushed to `N.x`/`N.N.x` branches are released on their respective
+  - Commits pushed to `N.x`/`N.x.x` and `N.N.x` branches are released on their
+    respective
     [maintenance channels](https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches)
-  - Commits pushed to branches that aren't the above will not trigger the CD
-    pipeline even if all tests pass
-- Force pushing to `main` and `canary` will always fail
+  - Commits pushed to other release branches will also generate a release
+    depending on [custom configuration](release.config.js)
+  - Commits pushed to branches that aren't the above will never cause the CD
+    pipeline to generate a release even if all tests pass
+- Force pushing to `main` and `canary` will always fail (unless temporarily
+  allowed)
 - PRs only trigger the CI pipeline and _never_ the CD pipeline
 - The CD pipeline never runs in forks of this repository, even when GitHub
   Actions are explicitly enabled (this can be overridden)
@@ -173,6 +182,10 @@ The CI/CD pipeline is triggered by two
 - `pull_request` events that:
   - Are of type `synchronize` or `opened`
   - Compare against branches `main` or `canary`
+
+> For NPM packages, the `cleanup` workflow prunes
+> [dist-tags](https://docs.npmjs.com/cli/v6/commands/npm-dist-tag#purpose)
+> associated with deleted branches and is triggered by the `delete` event.
 
 This is further described by the following flow chart of events:
 
@@ -266,7 +279,8 @@ this project.
 - `npm run build` (or `npm run build-dist`) to compile `src/` into `dist/` (or
   `build/`), which is what ships to production
 - `npm run format` to run a formatter over the codebase
-- `npm run start` to deploy a _local_ production instance
+- `npm run start` to deploy a _local production mode_ instance
+- `npm run deploy` to deploy to production (bring your own auth tokens)
 
 #### Other Build Scripts
 
