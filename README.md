@@ -13,7 +13,7 @@ This is the 5.x version of the code! OooooOOoooOOOOooooh!
 
 ![Mentok the MIND TAKER](https://media1.tenor.com/images/e79a1bf4f8ae0e6838b959643caf961a/tenor.gif)
 
-> Not meant for public consumption! Do not install this!
+> Not meant for public consumption. Do not install this!
 
 ## Install
 
