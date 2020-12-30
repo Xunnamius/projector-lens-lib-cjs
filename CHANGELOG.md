@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+## [6.0.1](https://github.com/Xunnamius/workflow-playground/compare/v6.0.0...v6.0.1) (2020-12-30)
+
+### Build System
+
+- **.github:** ensure deploy stage is using latest node and npm
+  ([d40192b](https://github.com/Xunnamius/workflow-playground/commit/d40192bd13d9b301e09723cdca68be60b44b5d82))
+
 # [6.0.0](https://github.com/Xunnamius/workflow-playground/compare/v5.0.3...v6.0.0) (2020-12-30)
 
 ### Features
