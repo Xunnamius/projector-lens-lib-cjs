@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits](https://conventionalcommits.org),
 and this project adheres to [Semantic Versioning](https://semver.org).
 
+# [6.0.0](https://github.com/Xunnamius/workflow-playground/compare/v5.0.3...v6.0.0) (2020-12-30)
+
+### Features
+
+- **readme.md:** fake feature
+  ([95a13d2](https://github.com/Xunnamius/workflow-playground/commit/95a13d21dd902a490d445d3c8aee89c59b2131f1))
+
+### BREAKING CHANGES
+
+- **readme.md:** fake breaking change
+
 ## [5.0.3](https://github.com/Xunnamius/workflow-playground/compare/v5.0.2...v5.0.3) (2020-12-29)
 
 ### Build System
