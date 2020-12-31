@@ -1,10 +1,10 @@
 [![Black Lives Matter!](https://api.ergodark.com/badges/blm 'Join the movement!')](https://secure.actblue.com/donate/ms_blm_homepage_2019)
-[![Maintenance status](https://img.shields.io/maintenance/active/2020 'Is this package maintained?')](https://www.npmjs.com/package/@xunnamius/do-not-install)
-[![Last commit timestamp](https://img.shields.io/github/last-commit/xunnamius/workflow-playground 'When was the last commit to the official repo?')](https://www.npmjs.com/package/@xunnamius/do-not-install)
-[![Open issues](https://img.shields.io/github/issues/xunnamius/workflow-playground 'Number of known issues with this package')](https://www.npmjs.com/package/@xunnamius/do-not-install)
-[![Pull requests](https://img.shields.io/github/issues-pr/xunnamius/workflow-playground 'Number of open pull requests')](https://www.npmjs.com/package/@xunnamius/do-not-install)
+[![Maintenance status](https://img.shields.io/maintenance/active/2020 'Is this package maintained?')](https://github.com/xunnamius/workflow-playground)
+[![Last commit timestamp](https://img.shields.io/github/last-commit/xunnamius/workflow-playground 'When was the last commit to the official repo?')](https://github.com/xunnamius/workflow-playground)
+[![Open issues](https://img.shields.io/github/issues/xunnamius/workflow-playground 'Number of known issues with this package')](https://github.com/xunnamius/workflow-playground/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/xunnamius/workflow-playground 'Number of open pull requests')](https://github.com/xunnamius/workflow-playground/pulls)
 [![codecov](https://codecov.io/gh/Xunnamius/workflow-playground/branch/main/graph/badge.svg?token=HWRIOBAAPW 'Is this package well-tested?')](https://codecov.io/gh/Xunnamius/workflow-playground)
-[![Source license](https://img.shields.io/npm/l/@xunnamius/do-not-install "This package's source license")](https://www.npmjs.com/package/@xunnamius/do-not-install)
+[![Source license](https://img.shields.io/npm/l/@xunnamius/do-not-install "This package's source license")](https://github.com/Xunnamius/workflow-playground/blob/main/LICENSE)
 [![NPM version](https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/do-not-install 'Install this package using npm or yarn!')](https://www.npmjs.com/package/@xunnamius/do-not-install)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg 'This repo practices continuous integration and deployment!')](https://github.com/semantic-release/semantic-release)
 
@@ -17,7 +17,7 @@ automation scripts and the like.
 
 ## Install
 
-```bash
+```shell
 npm install @xunnamius/do-not-install
 ```
 
