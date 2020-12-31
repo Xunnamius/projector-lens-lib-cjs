@@ -83,8 +83,6 @@ found it useful! ✊🏿 Thank you!
 
 See [CONTRIBUTING.md][22] and [SUPPORT.md][23] for more information.
 
-s source license"
-
 [1]: https://api.ergodark.com/badges/blm 'Join the movement!'
 [2]: https://secure.actblue.com/donate/ms_blm_homepage_2019
 [3]:
@@ -106,30 +104,36 @@ s source license"
   https://codecov.io/gh/Xunnamius/workflow-playground/branch/main/graph/badge.svg?token=HWRIOBAAPW
   'Is this package well-tested?'
 [11]: https://codecov.io/gh/Xunnamius/workflow-playground
-
-[12]: https://img.shields.io/npm/l/@xunnamius/do-not-install "This package'
-[13]: https://github.com/Xunnamius/workflow-playground/blob/main/LICENSE [14]:
-https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/do-not-install
-'Install this package using npm or yarn!' [15]:
-https://www.npmjs.com/package/@xunnamius/do-not-install [16]:
-https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-'This repo practices continuous integration and deployment!' [17]:
-https://github.com/semantic-release/semantic-release [18]: package.json [19]:
-docs [20]: https://github.com/Xunnamius/workflow-playground/issues/new/choose
-[21]: https://github.com/Xunnamius/workflow-playground/compare [22]:
-CONTRIBUTING.md [23]: .github/SUPPORT.md [cjs2]:
-https://webpack.js.org/configuration/output/#module-definition-systems
+[12]:
+  https://img.shields.io/npm/l/@xunnamius/do-not-install
+  "This package's source license"
+[13]: https://github.com/Xunnamius/workflow-playground/blob/main/LICENSE
+[14]:
+  https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/do-not-install
+  'Install this package using npm or yarn!'
+[15]: https://www.npmjs.com/package/@xunnamius/do-not-install
+[16]:
+  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+  'This repo practices continuous integration and deployment!'
+[17]: https://github.com/semantic-release/semantic-release
+[18]: package.json
+[19]: docs
+[20]: https://github.com/Xunnamius/workflow-playground/issues/new/choose
+[21]: https://github.com/Xunnamius/workflow-playground/compare
+[22]: CONTRIBUTING.md
+[23]: .github/SUPPORT.md
+[cjs2]: https://webpack.js.org/configuration/output/#module-definition-systems
 [dual-module]:
-https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#dual-commonjses-module-packages
+  https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#dual-commonjses-module-packages
 [exports-main-key]:
-https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#package-entry-points
+  https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#package-entry-points
 [hazard]:
-https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#dual-package-hazard
+  https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#dual-package-hazard
 [local-pkg]:
-https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#type
+  https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#type
 [module-key]: https://webpack.js.org/guides/author-libraries/#final-steps
 [node-esm-support]:
-https://medium.com/%40nodejs/node-js-version-14-available-now-8170d384567e#2368
+  https://medium.com/%40nodejs/node-js-version-14-available-now-8170d384567e#2368
 [side-effects-key]:
-https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free
+  https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free
 [tree-shaking]: https://webpack.js.org/guides/tree-shaking
