@@ -15,7 +15,7 @@ const changelogTitle =
   `and this project adheres to [Semantic Versioning](https://semver.org).`;
 
 // ? Strings in commit messages that, when found, are skipped
-// ! These also have to be updated in build-test-deploy.yml when changed
+// ! These also have to be updated in build-test-deploy.yml and cleanup.yml
 const SKIP_COMMANDS = '[skip ci], [ci skip], [skip github], [github skip]'.split(', ');
 
 sjx.config.silent = true;
