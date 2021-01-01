@@ -45,7 +45,7 @@ module.exports = {
           [
             '@semantic-release/exec',
             {
-              prepareCmd: 'npm run remark -- CHANGELOG.md'
+              prepareCmd: 'remark -o --use reference-links --use gfm CHANGELOG.md'
             }
           ],
           [
