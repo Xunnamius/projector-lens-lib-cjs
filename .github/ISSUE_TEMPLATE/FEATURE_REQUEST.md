@@ -1,8 +1,6 @@
 ---
-name: 🤩 Feature request
-about: Tell us about your awesome idea
-labels: 🤩 feature
----
+
+## name: 🤩 Feature request&#xA;about: Talk about your awesome idea&#xA;labels: 🤩 feature
 
 ### Is your feature request related to a problem? Please describe!
 
