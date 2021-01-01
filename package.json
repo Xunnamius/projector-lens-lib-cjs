@@ -35,7 +35,7 @@
     "build-docs": "typedoc --plugin typedoc-plugin-markdown --out docs --readme none src/index.ts && find docs -name '*.md' -exec sed -i -e 's/`__namedParameters`: //g' {} + && find docs -name '*.md' -exec sed -i -e 's/__namedParameters/\\(destructured\\)/g' {} + && find docs -name '*.md' -exec sed -i -e 's/Project: //g' {} + && sed -i -e 1,4d docs/README.md",
     "build-stats": "NODE_ENV=production webpack --config-name main --json > bundle-stats.json",
     "clean": "rm -rf dist npm.pipe coverage external-scripts/bin",
-    "format": "sort-package-json && prettier --write .",
+    "format": "sort-package-json && npx remark . -o --use reference-links && prettier --write .",
     "postinstall": "if [ -z \"$CI\" ]; then husky install; else echo 'skipped installing husky git hooks'; fi",
     "lint": "rm -f npm.pipe; touch npm.pipe; command -v unbuffer >/dev/null; X=$?; [ $X -eq 0 ] && unbuffer tsc --project tsconfig.lint.json >> npm.pipe; Y=$?; [ $Y -eq 0 ] && echo >> npm.pipe; unbuffer eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; Z=$?; [ $X -ne 0 ] && tsc --project tsconfig.lint.json >> npm.pipe && eslint --parser-options=project:tsconfig.lint.json src >> npm.pipe; W=$?; cat npm.pipe | less -R -FX; rm npm.pipe; ([ $W -eq 0 ] && [ $X -ne 0 ]) || ([ $X -eq 0 ] && [ $Y -eq 0 ] && [ $Z -eq 0 ])",
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))' && echo '\n(no gulp tasks defined for this project)'",
@@ -77,8 +77,14 @@
     }
   },
   "lint-staged": {
-    "**": [
+    "*": [
       "prettier --loglevel warn --write --ignore-unknown"
+    ],
+    "*.md": [
+      "remark -o --use reference-links"
+    ],
+    "./package.json": [
+      "sort-package-json"
     ]
   },
   "prettier": {
@@ -156,6 +162,8 @@
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "puppeteer": "5.4.0",
+    "remark-cli": "^9.0.0",
+    "remark-reference-links": "^5.0.0",
     "semantic-release": "Xunnamius/semantic-release#contrib-holistic",
     "shelljs": "^0.8.4",
     "sort-package-json": "^1.48.0",

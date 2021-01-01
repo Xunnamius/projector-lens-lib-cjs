@@ -45,6 +45,12 @@ module.exports = {
           [
             '@semantic-release/exec',
             {
+              prepareCmd: 'npx remark -o --use reference-links CHANGELOG.md'
+            }
+          ],
+          [
+            '@semantic-release/exec',
+            {
               prepareCmd: 'npx prettier --write CHANGELOG.md'
             }
           ]

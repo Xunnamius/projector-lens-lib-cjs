@@ -470,9 +470,6 @@ jobs:
       - name: Install CI dependencies
         run: npm ci
 
-      - name: Sort package.json
-        run: npx sort-package-json
-
       - name: Format source
         run: npm run format
 
