@@ -168,6 +168,9 @@ The CI/CD pipeline is triggered by two [events][32]:
 > For NPM packages, the `cleanup` workflow prunes [dist-tags][27] associated
 > with deleted branches and is triggered by the `delete` event.
 
+> The units that make up the pipeline can usually be triggered manually. For
+> workflows, manual invocations are treated as `push`/`delete` events.
+
 This is further described by the following flow chart of events:
 
     pushed `main` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z
@@ -209,6 +212,19 @@ Note that internal PRs to `main`/`canary` made from pushing to internal branches
 is updated (type: `synchronize`). If this is a problem (i.e. wasting money),
 prepend `no-ci/` to the internal branch name or transition to a _clone-and-pull_
 workflow instead of _branch-and-pull_.
+
+### Pipeline Commands
+
+Commands can be passed to the pipeline via commit message that affect the
+pipeline's behavior. When a single push consists of multiple commits, only the
+very top commit's message is parsed for commands.
+
+> Currently, there is only a single supported pipeline command: the ability to
+> skip running the CI/CD pipeline for a given commit
+
+| Command     | Alias(es)                                     | Description                           | Example Commit Message                                  |
+| ----------- | --------------------------------------------- | ------------------------------------- | ------------------------------------------------------- |
+| `[skip ci]` | `[ci skip]`, `[skip github]`, `[github skip]` | Skip all GitHub-based CI/CD workflows | `release: 6.3.5 [skip ci]` (skip ci on release commits) |
 
 ## NPM Scripts
 
