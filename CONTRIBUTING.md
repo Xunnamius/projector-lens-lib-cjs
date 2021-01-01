@@ -222,7 +222,7 @@ to see which of the following scripts are available for this project.
 ### Developing
 
 - `npm run dev` to start a development server or instance
-- `npm run lint` to run a project-wide type check (handled by CI)
+- `npm run lint` to run a project-wide type check (handled by CL/CI)
 - `npm run test` (or `npm test`, `npm run test-unit`) to run the unit tests
   (handled by CL/CI)
   - Also [gathers test coverage data][35] as HTML files (under `coverage/`)

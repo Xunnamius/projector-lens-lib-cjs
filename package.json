@@ -35,10 +35,11 @@
     "build-docs": "typedoc --plugin typedoc-plugin-markdown --out docs --readme none src/index.ts && find docs -name '*.md' -exec sed -i -e 's/`__namedParameters`: //g' {} + && find docs -name '*.md' -exec sed -i -e 's/__namedParameters/\\(destructured\\)/g' {} + && find docs -name '*.md' -exec sed -i -e 's/Project: //g' {} + && sed -i -e 1,4d docs/README.md",
     "build-stats": "NODE_ENV=production webpack --config-name main --json > bundle-stats.json",
     "clean": "rm -rf dist coverage external-scripts/bin",
-    "format": "sort-package-json && npx remark . -o --use reference-links && prettier --write .",
+    "format": "sort-package-json && npm run remark -- . && prettier --write .",
     "postinstall": "if [ -z \"$CI\" ]; then husky install; else echo 'skipped installing husky git hooks'; fi",
     "lint": "stdbuf -i0 -o0 -e0 tsc --project tsconfig.lint.json; stdbuf -i0 -o0 -e0 eslint --parser-options=project:tsconfig.lint.json src",
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))'",
+    "remark": "remark -o --use reference-links --use gfm --use preset-lint-recommended",
     "test": "npm run test-unit --",
     "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
     "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts",
@@ -77,10 +78,12 @@
     }
   },
   "lint-staged": {
-    "*.md": [
-      "remark -o --use reference-links --use gfm"
-    ],
+    "*.md": "npm run remark --",
     "package.json": "sort-package-json",
+    "*.@(ts|?(@(c|m))js)?(x)": [
+      "tsc --project tsconfig.lint.json",
+      "eslint --parser-options=project:tsconfig.lint.json"
+    ],
     "*": "prettier --write --ignore-unknown"
   },
   "prettier": {
@@ -160,6 +163,7 @@
     "puppeteer": "5.4.0",
     "remark-cli": "^9.0.0",
     "remark-gfm": "^1.0.0",
+    "remark-preset-lint-recommended": "^5.0.0",
     "remark-reference-links": "^5.0.0",
     "semantic-release": "Xunnamius/semantic-release#contrib-holistic",
     "shelljs": "^0.8.4",
