@@ -252,8 +252,6 @@ to see which of the following scripts are available for this project.
   (or `build/`), which is what ships to production (handled by CI/CD)
 - `npm run format` to run source formatting over the codebase (handled by
   CL/CI/CD)
-- `npm run remark` to run markdown formatting over the codebase (handled by
-  CL/CI/CD)
 - `npm run start` to deploy a _local production mode_ instance
 - `npm run deploy` to deploy to production (bring your own auth tokens) (handled
   by CD)
