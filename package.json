@@ -77,15 +77,11 @@
     }
   },
   "lint-staged": {
-    "*": [
-      "prettier --loglevel warn --write --ignore-unknown"
-    ],
+    "*": "prettier --loglevel warn --write --ignore-unknown",
     "*.md": [
       "remark -o --use reference-links"
     ],
-    "./package.json": [
-      "sort-package-json"
-    ]
+    "./package.json": "sort-package-json"
   },
   "prettier": {
     "endOfLine": "lf",

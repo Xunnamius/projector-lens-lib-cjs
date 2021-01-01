@@ -22,26 +22,26 @@ around!
 
 The ideal contributor flow is as follows:
 
-1. [Fork][9] this repository and [clone it locally][10]
+1.  [Fork][9] this repository and [clone it locally][10]
 
-2. Configure and install dependencies: `npm install`
+2.  Configure and install dependencies: `npm install`
 
-   - If `.env.example` exists, consider copying it to `.env` and configuring
-     sensible defaults
+    - If `.env.example` exists, consider copying it to `.env` and configuring
+      sensible defaults
 
-3. Before making any changes, ensure all unit tests are passing: `npm run test`
+3.  Before making any changes, ensure all unit tests are passing: `npm run test`
 
-4. _(optional but recommended)_ Create a new branch off main: e.g.
-   `git checkout -b contrib`
+4.  _(optional but recommended)_ Create a new branch off main: e.g.
+    `git checkout -b contrib`
 
-5. Make your changes and commit. Thanks to CL, your work will be checked as you
-   commit it; any problems will abort the commit attempt
+5.  Make your changes and commit. Thanks to CL, your work will be checked as you
+    commit it; any problems will abort the commit attempt
 
-6. Push your commits to your fork and, when you're ready, [_fearlessly_ submit
-   your PR][11]! Your changes will be tested in our CI pipeline
+6.  Push your commits to your fork and, when you're ready, [_fearlessly_ submit
+    your PR][11]! Your changes will be tested in our CI pipeline
 
-7. Pat your self on the back! Your hard work is well on its way to being
-   reviewed and, if everything looks good, merged and released 🚀
+7.  Pat your self on the back! Your hard work is well on its way to being
+    reviewed and, if everything looks good, merged and released 🚀
 
 Additionally, there are a few things you can do to increase the likelihood your
 PR passes review:
@@ -158,13 +158,11 @@ The CI/CD pipeline is triggered by two [events][32]:
 
 This is further described by the following flow chart of events:
 
-```
-pushed `main` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z
-pushed `canary` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z-canary.N
-pushed any other SLFB* ==> [run CI] ==> tested
-PR opened against `main`/`canary` ==> [run CI] ==> tested
-PR synchronized against `main`/`canary` ==> [run CI] ==> tested
-```
+    pushed `main` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z
+    pushed `canary` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z-canary.N
+    pushed any other SLFB* ==> [run CI] ==> tested
+    PR opened against `main`/`canary` ==> [run CI] ==> tested
+    PR synchronized against `main`/`canary` ==> [run CI] ==> tested
 
 <small>\* Excluding branches with names starting with `dependabot/`, `snyk-`, or
 `no-ci/`</small>
@@ -172,13 +170,11 @@ PR synchronized against `main`/`canary` ==> [run CI] ==> tested
 When the CI/CD pipeline is triggered, jobs are executed according to the
 following chronology:
 
-```
-gather metadata ==> [CI] security audit
-                    [CI] linters
-                    [CI] unit tests
-                    [CI] integration tests
-                    [CD] install, build, format, sort ==> [CD] release
-```
+    gather metadata ==> [CI] security audit
+                        [CI] linters
+                        [CI] unit tests
+                        [CI] integration tests
+                        [CD] install, build, format, sort ==> [CD] release
 
 Jobs in the same column are executed concurrently. A job failing in one column
 prevents the pipeline from proceeding to the next column.
