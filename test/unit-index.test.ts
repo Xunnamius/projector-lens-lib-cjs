@@ -1,4 +1,4 @@
-import { sum, diff, mult } from '../src/index';
+import { sum, diff, mult, div } from '../src/index';
 
 describe('workflow-playground [UNIT]', () => {
   describe('::sum', () => {
@@ -23,6 +23,17 @@ describe('workflow-playground [UNIT]', () => {
     it('multiplies as expected', async () => {
       expect.hasAssertions();
       expect(mult(2, 3)).toBe(6);
+    });
+    // eslint-disable-next-line jest/prefer-expect-assertions
+    it('fails if this test should fail', async () => {
+      expect(true).toBe(true);
+    });
+  });
+
+  describe('::div', () => {
+    it('divides as expected', async () => {
+      expect.hasAssertions();
+      expect(div({ dividend: 4, divisor: 2 })).toBe(2);
     });
     // eslint-disable-next-line jest/prefer-expect-assertions
     it('fails if this test should fail', async () => {

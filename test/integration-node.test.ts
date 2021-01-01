@@ -2,16 +2,17 @@
 import { main } from '../package.json';
 
 describe('workflow-playground [INTEGRATION-NODE]', () => {
-  // it('should export expected members', async () => {
-  //   expect.hasAssertions();
+  it('should export expected members', async () => {
+    expect.hasAssertions();
 
-  //   const { sum, diff, mult, ...rest } = await import(`${__dirname}/../${main}.js`);
+    const { sum, diff, mult, div, ...rest } = await import(`${__dirname}/../${main}.js`);
 
-  //   expect(sum).toBeDefined();
-  //   expect(diff).toBeDefined();
-  //   expect(mult).toBeDefined();
-  //   expect(rest).toBeEmpty();
-  // });
+    expect(sum).toBeDefined();
+    expect(diff).toBeDefined();
+    expect(mult).toBeDefined();
+    expect(div).toBeDefined();
+    expect(rest).toBeEmpty();
+  });
 
   it('should sum properly', async () => {
     expect.hasAssertions();
@@ -35,6 +36,14 @@ describe('workflow-playground [INTEGRATION-NODE]', () => {
     const { mult } = await import(`${__dirname}/../${main}.js`);
 
     expect(mult(1, 2)).toBe(2);
+  });
+
+  it('should divide properly', async () => {
+    expect.hasAssertions();
+
+    const { div } = await import(`${__dirname}/../${main}.js`);
+
+    expect(div({ dividend: 4, divisor: 2 })).toBe(2);
   });
 
   // eslint-disable-next-line jest/prefer-expect-assertions

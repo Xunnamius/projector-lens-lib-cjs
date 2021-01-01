@@ -29,6 +29,9 @@ describe('workflow-playground [INTEGRATION-BROWSER]', () => {
         expect(await page.evaluate(() => (window as any).sum(1, 2))).toBe(3);
         expect(await page.evaluate(() => (window as any).diff(1, 2))).toBe(-1);
         expect(await page.evaluate(() => (window as any).mult(1, 2))).toBe(2);
+        expect(
+          await page.evaluate(() => (window as any).div({ dividend: 4, divisor: 2 }))
+        ).toBe(2);
       }
     });
   });
