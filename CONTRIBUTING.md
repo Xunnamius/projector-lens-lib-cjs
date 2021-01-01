@@ -113,9 +113,13 @@ even reach the remote CI pipeline.
 
 - `main` is the only permanent branch, all other branches are automatically
   deleted after being merged into `main`
-  - The term "merged" is used here to connote the creation of a merge commit and
-    not a [rebase][24], the latter of which [can damage the metadata used by
-    `semantic-release`][25].
+  - The term "merged" as used here and elsewhere in this document connotes a
+    [non-ff merge][41] operation. Note that [ff merge][41], [rebase][24], and
+    [squash][42] operations can be used as well **except when merging between
+    release branches (like `main` and `canary`); [only non-ff merge operations
+    should be used to merge between release branches][43]; any other operation
+    (_[including force pushing][25]_) risks damaging `semantic-release`'s
+    version tracking metadata**!
   - Technically, there are also [maintenance branches][26], which are
     semi-permanent
   - For NPM package projects, this also means `latest` is the only permanent
@@ -320,3 +324,7 @@ to see which of the following scripts are available for this project.
 [39]:
   https://semantic-release.gitbook.io/semantic-release/usage/configuration#dryrun
 [40]: https://docs.npmjs.com/cli/v6/commands/npm-ci
+[41]: https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---no-ff
+[42]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing
+[43]:
+  https://github.com/semantic-release/git#merging-between-semantic-release-branches
