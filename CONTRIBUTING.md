@@ -66,7 +66,8 @@ PR passes review:
 - **Do** keep your PR as narrow and focused as possible
   - If you ran `npm install` instead of `npm ci` and it updated `package.json`
     or `package-lock.json` and those updates have nothing to do with your PR
-    (e.g. random nested deps were updated), do not stage changes to those files
+    (e.g. random nested deps were updated), **do not** stage changes to those
+    files
   - If there are multiple related changes to be made but (1) they do not
     immediately depend on one another or (2) one implements extended/alternative
     functionality based on the other, consider submitting them as separate PRs
@@ -221,25 +222,25 @@ to see which of the following scripts are available for this project.
 ### Developing
 
 - `npm run dev` to start a development server or instance
-- `npm run lint` to run a project-wide type check
+- `npm run lint` to run a project-wide type check (errors ignored by CL/CI/CD)
 - `npm run test` (or `npm test`, `npm run test-unit`) to run the unit tests
+  (handled by CL/CI)
   - Also [gathers test coverage data][35] as HTML files (under `coverage/`)
   - Can also run `npm run test-integration` to run all the integration tests
 - `npm run test-integration-node` to run integration tests on the last three LTS
-  Node versions
+  Node versions (handled by CI)
 - `npm run test-integration-browser` to run browser integration tests with
-  [puppeteer][36]
+  [puppeteer][36] (handled by CI)
 - `npm run test-integration-webpack` to run tests verifying the distributable
-  can be bundled with Webpack 4 and 5 (as ESM, CJS, or both)
+  can be bundled with Webpack 4 and 5 (as ESM, CJS, or both) (handled by CI)
 - `npm run test-integration-externals` to run tests on compiled external
-  executables (under `external-scripts/bin/`)
+  executables (under `external-scripts/bin/`) (handled by CI)
 
 #### Other Development Scripts
 
 - `npm run test-repeat` to run the entire test suite 100 times
   - Good for spotting bad async code and heisenbugs
   - Uses `__test-repeat` NPM script under the hood
-- `npm run repl` to run a buffered TypeScript-Babel REPL
 - `npm run generate` to transpile config files (under `config/`) from scratch
 - `npm run regenerate` to quickly re-transpile config files (under `config/`)
 - `npm run postinstall` to (re-)install [Husky Git hooks][37] if not in a CI
@@ -247,19 +248,21 @@ to see which of the following scripts are available for this project.
 
 ### Building and Deploying
 
-- `npm run build` (or `npm run build-dist`) to compile `src/` into `dist/` (or
-  `build/`), which is what ships to production
-- `npm run format` to run a formatter over the codebase
+- `npm run build` (alias: `npm run build-dist`) to compile `src/` into `dist/`
+  (or `build/`), which is what ships to production (handled by CI/CD)
+- `npm run format` to run source formatting over the codebase (handled by
+  CL/CI/CD)
 - `npm run start` to deploy a _local production mode_ instance
-- `npm run deploy` to deploy to production (bring your own auth tokens)
+- `npm run deploy` to deploy to production (bring your own auth tokens) (handled
+  by CD)
 
 #### Other Build Scripts
 
 - `npm run clean` to delete all build process artifacts (except `node_modules/`)
-- `npm run build-changelog` to re-build the changelog (handled by pipeline)
+- `npm run build-changelog` to re-build the changelog (handled by CI/CD)
   - You can run this as `CHANGELOG_SKIP_TITLE=true npm run build-changelog` to
     skip prepending the header
-- `npm run build-docs` to re-build the documentation (handled by pipeline)
+- `npm run build-docs` to re-build the documentation (handled by CI/CD)
 - `npm run build-externals` to compile `external-scripts/` into
   `external-scripts/bin/`
 - `npm run build-stats` to gather statistics about Webpack (look for
@@ -270,7 +273,6 @@ to see which of the following scripts are available for this project.
 > These commands might be installed as a project dependency but are expected to
 > be run using [`npx X`][38] instead of `npm run X` regardless.
 
-- `npx sort-package-json` to consistently sort `package.json`
 - `npx npm-force-resolutions` to forcefully patch security audit problems
 - `npx semantic-release -d` to run the CD pipeline locally (in [dry-run
   mode][39])
