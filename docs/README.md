@@ -17,10 +17,10 @@ Returns the difference of `a` and `b`
 
 #### Parameters:
 
-Name | Type |
-\------ | ------ |
-`a` | *number* |
-`b` | *number* |
+| Name | Type     |
+| ---- | -------- |
+| `a`  | *number* |
+| `b`  | *number* |
 
 **Returns:** *number*
 
@@ -36,9 +36,9 @@ Returns the quotient of `dividend` and `divisor`
 
 #### Parameters:
 
-Name | Type |
-\------ | ------ |
-`(destructured)` | { `dividend`: *number* ; `divisor`: *number*  } |
+| Name             | Type                                            |
+| ---------------- | ----------------------------------------------- |
+| `(destructured)` | { `dividend`: *number* ; `divisor`: *number*  } |
 
 **Returns:** *number*
 
@@ -54,10 +54,10 @@ Returns the product of `a` and `b`
 
 #### Parameters:
 
-Name | Type |
-\------ | ------ |
-`a` | *number* |
-`b` | *number* |
+| Name | Type     |
+| ---- | -------- |
+| `a`  | *number* |
+| `b`  | *number* |
 
 **Returns:** *number*
 
@@ -73,10 +73,10 @@ Returns the sum of `a` and `b`
 
 #### Parameters:
 
-Name | Type |
-\------ | ------ |
-`a` | *number* |
-`b` | *number* |
+| Name | Type     |
+| ---- | -------- |
+| `a`  | *number* |
+| `b`  | *number* |
 
 **Returns:** *number*
 
@@ -90,10 +90,10 @@ Defined in: [index.ts:4][8]
 
 [4]: README.md#sum
 
-[5]: https://github.com/Xunnamius/workflow-playground/blob/f757db8/src/index.ts#L11
+[5]: https://github.com/Xunnamius/workflow-playground/blob/e38af90/src/index.ts#L11
 
-[6]: https://github.com/Xunnamius/workflow-playground/blob/f757db8/src/index.ts#L25
+[6]: https://github.com/Xunnamius/workflow-playground/blob/e38af90/src/index.ts#L25
 
-[7]: https://github.com/Xunnamius/workflow-playground/blob/f757db8/src/index.ts#L18
+[7]: https://github.com/Xunnamius/workflow-playground/blob/e38af90/src/index.ts#L18
 
-[8]: https://github.com/Xunnamius/workflow-playground/blob/f757db8/src/index.ts#L4
+[8]: https://github.com/Xunnamius/workflow-playground/blob/e38af90/src/index.ts#L4
