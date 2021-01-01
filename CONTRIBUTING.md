@@ -24,7 +24,11 @@ The ideal contributor flow is as follows:
 
 1.  [Fork][9] this repository and [clone it locally][10]
 
-2.  Configure and install dependencies: `npm install`
+2.  Configure and install dependencies: `npm ci`
+
+    - You use `npm ci` here instead of `npm install` to [prevent unnecessary
+      updates to `package.json` and `package-lock.json`][40], but if it makes
+      more sense to use `npm install` feel free to use that instead
 
     - If `.env.example` exists, consider copying it to `.env` and configuring
       sensible defaults
@@ -60,6 +64,9 @@ PR passes review:
   - Code de-duplication and other potential optimizations we **do not** consider
     _purely_ cosmetic 🙂
 - **Do** keep your PR as narrow and focused as possible
+  - If you ran `npm install` instead of `npm ci` and it updated `package.json`
+    or `package-lock.json` and those updates have nothing to do with your PR
+    (e.g. random nested deps were updated), do not stage changes to those files
   - If there are multiple related changes to be made but (1) they do not
     immediately depend on one another or (2) one implements extended/alternative
     functionality based on the other, consider submitting them as separate PRs
@@ -312,3 +319,4 @@ to see which of the following scripts are available for this project.
 [38]: https://www.npmjs.com/package/npx
 [39]:
   https://semantic-release.gitbook.io/semantic-release/usage/configuration#dryrun
+[40]: https://docs.npmjs.com/cli/v6/commands/npm-ci
