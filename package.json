@@ -28,6 +28,10 @@
     "/package.json",
     "/README.md"
   ],
+  "env-expect": {
+    "errorMessage": "\nCopy the \".env.example\" file to \".env\" and/or define only the appropriate environment variables",
+    "rules": []
+  },
   "scripts": {
     "build": "npm run build-dist --",
     "build-changelog": "conventional-changelog --outfile CHANGELOG.md --preset angular --config .changelogrc.js --release-count 0 --skip-unstable && (if [ \"$CHANGELOG_SKIP_TITLE\" != 'true' ]; then { node -e 'console.log(require(\"./.changelogrc.js\").changelogTitle)'; cat CHANGELOG.md; } > CHANGELOG.md.tmp && mv CHANGELOG.md.tmp CHANGELOG.md; fi) && prettier --write CHANGELOG.md --loglevel warn",
@@ -37,7 +41,7 @@
     "clean": "rm -rf dist coverage external-scripts/bin",
     "format": "sort-package-json && remark -o --use reference-links --use gfm . && prettier --write .",
     "postinstall": "if [ -z \"$CI\" ]; then husky install; else echo 'skipped installing husky git hooks'; fi",
-    "lint": "stdbuf -i0 -o0 -e0 tsc --project tsconfig.lint.json; X=$?; stdbuf -i0 -o0 -e0 eslint --parser-options=project:tsconfig.lint.json src && remark --use gfm --use preset-lint-recommended . && [ $X -eq 0 ]",
+    "lint": "stdbuf -i0 -o0 -e0 tsc --project tsconfig.lint.json; X=$?; stdbuf -i0 -o0 -e0 eslint --parser-options=project:tsconfig.lint.json src && remark --use gfm --use lint-final-newline --use lint-no-auto-link-without-protocol --use lint-no-blockquote-without-marker --use lint-ordered-list-marker-style --use lint-hard-break-spaces --use lint-no-duplicate-definitions --use lint-no-heading-content-indent --use lint-no-inline-padding --use lint-no-undefined-references --use lint-no-unused-definitions . && [ $X -eq 0 ]",
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))'",
     "test": "npm run test-unit --",
     "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
@@ -112,7 +116,17 @@
     "verbose": false
   },
   "dependencies": {
-    "chalk": "^4.1.0"
+    "chalk": "^4.1.0",
+    "remark-lint-final-newline": "^1.0.5",
+    "remark-lint-hard-break-spaces": "^2.0.1",
+    "remark-lint-no-auto-link-without-protocol": "^2.0.1",
+    "remark-lint-no-blockquote-without-marker": "^4.0.0",
+    "remark-lint-no-duplicate-definitions": "^2.0.1",
+    "remark-lint-no-heading-content-indent": "^3.0.0",
+    "remark-lint-no-inline-padding": "^3.0.0",
+    "remark-lint-no-undefined-references": "^3.0.0",
+    "remark-lint-no-unused-definitions": "^2.0.1",
+    "remark-lint-ordered-list-marker-style": "^2.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
@@ -158,11 +172,10 @@
     "puppeteer": "5.4.0",
     "remark-cli": "^9.0.0",
     "remark-gfm": "^1.0.0",
-    "remark-preset-lint-recommended": "^5.0.0",
     "remark-reference-links": "^5.0.0",
     "semantic-release": "Xunnamius/semantic-release#contrib-holistic",
     "shelljs": "^0.8.4",
-    "sort-package-json": "Xunnamius/sort-package-json#contrib",
+    "sort-package-json": "Xunnamius/sort-package-json#contrib-env-expect",
     "source-map-support": "^0.5.19",
     "spellchecker": "^3.7.1",
     "test-listen": "^1.1.0",
@@ -179,9 +192,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "env-expect": {
-    "errorMessage": "\nCopy the \".env.example\" file to \".env\" and/or define only the appropriate environment variables",
-    "rules": []
   }
 }
