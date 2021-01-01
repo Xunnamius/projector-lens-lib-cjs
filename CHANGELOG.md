@@ -1,8 +1,9 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. The format
-is based on [Conventional Commits][1], and this project adheres to [Semantic
-Versioning][2].
+All notable changes to this project will be documented in this file.
+
+The format is based on [Conventional Commits][1], and this project adheres to
+[Semantic Versioning][2].
 
 ## [6.1.7][135] (2020-12-31)
 
