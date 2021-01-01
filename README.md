@@ -1,15 +1,19 @@
 <!-- prettier-ignore-start -->
+
 <!-- badges-start -->
-[![Black Lives Matter!][1]][2]
-[![Maintenance status][3]][4]
-[![Last commit timestamp][5]][4]
-[![Open issues][6]][7]
-[![Pull requests][8]][9]
-[![codecov][10]][11]
-[![Source license][12]][13]
-[![NPM version][14]][15]
-[![semantic-release][16]][17]
+
+[![Black Lives Matter!][badge-blm]][link-blm]
+[![Maintenance status][badge-maintenance]][link-repo]
+[![Last commit timestamp][badge-last-commit]][link-repo]
+[![Open issues][badge-issues]][link-issues]
+[![Pull requests][badge-pulls]][link-pulls]
+[![codecov][badge-codecov]][link-codecov]
+[![Source license][badge-license]][link-license]
+[![NPM version][badge-npm]][link-npm]
+[![semantic-release][badge-semantic-release]][link-semantic-release]
+
 <!-- badges-end -->
+
 <!-- prettier-ignore-end -->
 
 # do-not-install 🤔🤯☠️
@@ -17,7 +21,7 @@
 Proving grounds for my GitHub webhook, Action workflows, NPM publishing
 automation scripts and the like.
 
-> Not meant for public consumption. Do not install this!
+> Not meant for public consumption! Do not install this!
 
 ## Install
 
@@ -44,17 +48,18 @@ it][node-esm-support], in Webpack, and in the browser. Using the `import` syntax
 is the modern, preferred choice.
 
 For backwards compatibility with Webpack 4 and Node versions < 14,
-[`package.json`][18] retains the [`module`][module-key] key, which points to the
-ESM entry point, and the [`main`][exports-main-key] key, which points to both
-the ESM and CJS2 entry points implicitly (no file extension). For Webpack 5 and
-Node versions >= 14, [`package.json`][18] includes the
+[`package.json`][package-json] retains the [`module`][module-key] key, which
+points to the ESM entry point, and the [`main`][exports-main-key] key, which
+points to both the ESM and CJS2 entry points implicitly (no file extension). For
+Webpack 5 and Node versions >= 14, [`package.json`][package-json] includes the
 [`exports`][exports-main-key] key, which points to both entry points explicitly.
 
-Though [`package.json`][18] includes [`{ "type": "commonjs"}`][local-pkg], note
-that the ESM entry points are ES module (`.mjs`) files. [`package.json`][18]
-also includes the [`sideEffects`][side-effects-key] key, which is `false` for
-[optimal tree shaking][tree-shaking], and the `types` key, which points to a
-TypeScript declarations file.
+Though [`package.json`][package-json] includes
+[`{ "type": "commonjs"}`][local-pkg], note that the ESM entry points are ES
+module (`.mjs`) files. [`package.json`][package-json] also includes the
+[`sideEffects`][side-effects-key] key, which is `false` for [optimal tree
+shaking][tree-shaking], and the `types` key, which points to a TypeScript
+declarations file.
 
 Additionally, this package does not maintain shared state and so does not
 exhibit the [dual package hazard][hazard]. However, setting global configuration
@@ -73,55 +78,58 @@ sum(2, 2); // = 4
 
 ## Documentation
 
-Project documentation can be found under [`docs/`][19].
+Project documentation can be found under [`docs/`][docs].
 
 ## Contributing and Support
 
-**[New issues][20] and [pull requests][21] are always welcome and greatly
-appreciated! 🤩** Just as well, you can star 🌟 this project to let me know you
-found it useful! ✊🏿 Thank you!
+**[New issues][choose-new-issue] and [pull requests][pr-compare] are always
+welcome and greatly appreciated! 🤩** Just as well, you can star 🌟 this project
+to let me know you found it useful! ✊🏿 Thank you!
 
-See [CONTRIBUTING.md][22] and [SUPPORT.md][23] for more information.
+See [CONTRIBUTING.md][contributing] and [SUPPORT.md][support] for more
+information.
 
-[1]: https://api.ergodark.com/badges/blm 'Join the movement!'
-[2]: https://secure.actblue.com/donate/ms_blm_homepage_2019
-[3]:
-  https://img.shields.io/maintenance/active/2020
+[badge-blm]: https://api.ergodark.com/badges/blm 'Join the movement!'
+[link-blm]: https://secure.actblue.com/donate/ms_blm_homepage_2019
+[badge-maintenance]:
+  https://img.shields.io/maintenance/active/2021
   'Is this package maintained?'
-[4]: https://github.com/xunnamius/workflow-playground
-[5]:
+[link-repo]: https://github.com/xunnamius/workflow-playground
+[badge-last-commit]:
   https://img.shields.io/github/last-commit/xunnamius/workflow-playground
   'When was the last commit to the official repo?'
-[6]:
-  https://img.shields.io/github/issues/xunnamius/workflow-playground
+[badge-issues]:
+  https://isitmaintained.com/badge/open/Xunnamius/workflow-playground.svg
   'Number of known issues with this package'
-[7]: https://github.com/xunnamius/workflow-playground/issues
-[8]:
+[link-issues]: https://github.com/Xunnamius/workflow-playground/issues?q=
+[badge-pulls]:
   https://img.shields.io/github/issues-pr/xunnamius/workflow-playground
   'Number of open pull requests'
-[9]: https://github.com/xunnamius/workflow-playground/pulls
-[10]:
+[link-pulls]: https://github.com/xunnamius/workflow-playground/pulls
+[badge-codecov]:
   https://codecov.io/gh/Xunnamius/workflow-playground/branch/main/graph/badge.svg?token=HWRIOBAAPW
   'Is this package well-tested?'
-[11]: https://codecov.io/gh/Xunnamius/workflow-playground
-[12]:
+[link-codecov]: https://codecov.io/gh/Xunnamius/workflow-playground
+[badge-license]:
   https://img.shields.io/npm/l/@xunnamius/do-not-install
   "This package's source license"
-[13]: https://github.com/Xunnamius/workflow-playground/blob/main/LICENSE
-[14]:
+[link-license]:
+  https://github.com/Xunnamius/workflow-playground/blob/main/LICENSE
+[badge-npm]:
   https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/do-not-install
   'Install this package using npm or yarn!'
-[15]: https://www.npmjs.com/package/@xunnamius/do-not-install
-[16]:
+[link-npm]: https://www.npmjs.com/package/@xunnamius/do-not-install
+[badge-semantic-release]:
   https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
   'This repo practices continuous integration and deployment!'
-[17]: https://github.com/semantic-release/semantic-release
-[18]: package.json
-[19]: docs
-[20]: https://github.com/Xunnamius/workflow-playground/issues/new/choose
-[21]: https://github.com/Xunnamius/workflow-playground/compare
-[22]: CONTRIBUTING.md
-[23]: .github/SUPPORT.md
+[link-semantic-release]: https://github.com/semantic-release/semantic-release
+[package-json]: package.json
+[docs]: docs
+[choose-new-issue]:
+  https://github.com/Xunnamius/workflow-playground/issues/new/choose
+[pr-compare]: https://github.com/Xunnamius/workflow-playground/compare
+[contributing]: CONTRIBUTING.md
+[support]: .github/SUPPORT.md
 [cjs2]: https://webpack.js.org/configuration/output/#module-definition-systems
 [dual-module]:
   https://github.com/nodejs/node/blob/8d8e06a345043bec787e904edc9a2f5c5e9c275f/doc/api/packages.md#dual-commonjses-module-packages

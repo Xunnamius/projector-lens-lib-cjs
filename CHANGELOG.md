@@ -1,20 +1,17 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. The format
+is based on [Conventional Commits][1], and this project adheres to [Semantic
+Versioning][2].
 
-The format is based on [Conventional Commits][1], and this project adheres to
-[Semantic Versioning][2].
-
-## [6.1.7](https://github.com/Xunnamius/workflow-playground/compare/v6.1.6...v6.1.7) (2020-12-31)
+## [6.1.7][135] (2020-12-31)
 
 ### Bug Fixes
 
-- **README.md:** simulated external-PR fix
-  ([1c35aa4](https://github.com/Xunnamius/workflow-playground/commit/1c35aa4aad597e8e25f937c7aba25ec83905f631))
-- **README.md:** simulated external-PR fix
-  ([8a7fc06](https://github.com/Xunnamius/workflow-playground/commit/8a7fc06df25ffa5381bb5d771eb6e5a619fcbf64))
+- **README.md:** simulated external-PR fix ([1c35aa4][136])
+- **README.md:** simulated external-PR fix ([8a7fc06][137])
 
-## [6.1.6](https://github.com/Xunnamius/workflow-playground/compare/v6.1.5...v6.1.6) (2020-12-30)
+## [6.1.6][3] (2020-12-30)
 
 ### Build System
 
@@ -651,3 +648,8 @@ This is a simulated breaking change.
   https://github.com/Xunnamius/workflow-playground/commit/5ced6267d44731337fe5e0a69776dd5642d8a54d
 [134]:
   https://github.com/Xunnamius/workflow-playground/commit/df91d8298edd2d756f732b2245ba086e91197505
+[135]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.6...v6.1.7
+[136]:
+  https://github.com/Xunnamius/workflow-playground/commit/1c35aa4aad597e8e25f937c7aba25ec83905f631
+[137]:
+  https://github.com/Xunnamius/workflow-playground/commit/8a7fc06df25ffa5381bb5d771eb6e5a619fcbf64
