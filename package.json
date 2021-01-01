@@ -37,7 +37,7 @@
     "clean": "rm -rf dist coverage external-scripts/bin",
     "format": "sort-package-json && npm run remark -- . && prettier --write .",
     "postinstall": "if [ -z \"$CI\" ]; then husky install; else echo 'skipped installing husky git hooks'; fi",
-    "lint": "stdbuf -i0 -o0 -e0 tsc --project tsconfig.lint.json; stdbuf -i0 -o0 -e0 eslint --parser-options=project:tsconfig.lint.json src",
+    "lint": "stdbuf -i0 -o0 -e0 tsc --project tsconfig.lint.json; X=$?; stdbuf -i0 -o0 -e0 eslint --parser-options=project:tsconfig.lint.json src && [ $X -eq 0 ]",
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))'",
     "remark": "remark -o --use reference-links --use gfm --use preset-lint-recommended",
     "test": "npm run test-unit --",
@@ -80,10 +80,6 @@
   "lint-staged": {
     "*.md": "npm run remark --",
     "package.json": "sort-package-json",
-    "*.@(ts|?(@(c|m))js)?(x)": [
-      "tsc --project tsconfig.lint.json",
-      "eslint --parser-options=project:tsconfig.lint.json"
-    ],
     "*": "prettier --write --ignore-unknown"
   },
   "prettier": {
