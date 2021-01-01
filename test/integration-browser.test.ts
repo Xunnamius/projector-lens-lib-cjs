@@ -12,7 +12,8 @@ describe('workflow-playground [INTEGRATION-BROWSER]', () => {
         expect(await page.evaluate(() => Object.keys(window))).toIncludeAllMembers([
           'sum',
           'diff',
-          'mult'
+          'mult',
+          'div'
         ]);
       }
     });
