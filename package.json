@@ -77,11 +77,11 @@
     }
   },
   "lint-staged": {
-    "*": "prettier --loglevel warn --write --ignore-unknown",
     "*.md": [
-      "remark -o --use reference-links"
+      "remark -o --use reference-links --use gfm"
     ],
-    "./package.json": "sort-package-json"
+    "./package.json": "sort-package-json",
+    "*": "prettier --write --ignore-unknown"
   },
   "prettier": {
     "endOfLine": "lf",
@@ -159,10 +159,11 @@
     "prettier": "^2.2.1",
     "puppeteer": "5.4.0",
     "remark-cli": "^9.0.0",
+    "remark-gfm": "^1.0.0",
     "remark-reference-links": "^5.0.0",
     "semantic-release": "Xunnamius/semantic-release#contrib-holistic",
     "shelljs": "^0.8.4",
-    "sort-package-json": "^1.48.0",
+    "sort-package-json": "Xunnamius/sort-package-json#contrib",
     "source-map-support": "^0.5.19",
     "spellchecker": "^3.7.1",
     "test-listen": "^1.1.0",
