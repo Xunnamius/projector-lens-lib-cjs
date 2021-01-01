@@ -80,7 +80,7 @@
     "*.md": [
       "remark -o --use reference-links --use gfm"
     ],
-    "package.json": "echo 'winning' && sort-package-json",
+    "package.json": "sort-package-json",
     "*": "prettier --write --ignore-unknown"
   },
   "prettier": {
