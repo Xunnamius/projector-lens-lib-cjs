@@ -35,8 +35,8 @@ The ideal contributor flow is as follows:
 
 3.  Before making any changes, ensure all unit tests are passing: `npm run test`
 
-4.  _(optional but recommended)_ Create a new branch off main: e.g.
-    `git checkout -b contrib`
+4.  _(optional but recommended)_ Create a new branch, usually off `main`: e.g.
+    `git checkout -b contrib-feature-1`
 
 5.  Make your changes and commit. Thanks to CL, your work will be checked as you
     commit it; any problems will abort the commit attempt
