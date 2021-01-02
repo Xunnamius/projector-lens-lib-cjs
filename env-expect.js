@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 
+const debug = require('debug')(`${require('./package.json').name}:env-expect`);
+
 const DEFAULT_VALUE_REGEX = [/^.*$/, /.*/];
 
 class IllegalEnvironmentError extends Error {}
@@ -65,14 +67,17 @@ module.exports = {
     let errorMessage = null;
 
     const normalize = (rule) => {
+      let normalizedRule;
       const makeErrorMessage = (reason) => `missing dep: ${reason}`;
+
+      debug('::normalize (not normalized) = %O', rule);
 
       if (typeof rule == 'string' || rule instanceof RegExp) {
         rule = rule.startsWith('^') ? rule.slice(1) : rule;
         rule = rule.startsWith('$') ? rule.slice(0, -1) : rule;
         rule = RegExp(`^${rule}$`);
 
-        return {
+        normalizedRule = {
           operation: 'or',
           variables: [{ name: rule, value: DEFAULT_VALUE_REGEX[0] }],
           required: true,
@@ -87,7 +92,7 @@ module.exports = {
         rule.value =
           typeof rule.value == 'string' ? RegExp(rule.value) : DEFAULT_VALUE_REGEX[0];
 
-        return {
+        normalizedRule = {
           operation: 'or',
           variables: [{ name: rule.name, value: rule.value }],
           required: typeof rule.required == 'undefined' || !!rule.required,
@@ -112,13 +117,12 @@ module.exports = {
         const opString = not ? '    ' : `${rule.operation} `;
 
         const makeSubstr = (name, value) =>
-          `name ${not ? 'NOT ' : ''}matching regex ${name}${
-            DEFAULT_VALUE_REGEX.map(String).includes(value?.toString())
-              ? ''
-              : ` and value ${not ? 'NOT ' : ''}matching regex ` + value
-          }`;
+          `name ${not ? 'NOT ' : ''}matching regex ${name}` +
+          (DEFAULT_VALUE_REGEX.map(String).includes(value?.toString())
+            ? ''
+            : ` and value ${not ? 'NOT ' : ''}matching regex ${value}`);
 
-        return {
+        normalizedRule = {
           operation: rule.operation,
           variables,
           required: typeof rule.required == 'undefined' || !!rule.required,
@@ -149,6 +153,9 @@ module.exports = {
           }: ${JSON.stringify(rule, undefined, 2)}`
         );
       }
+
+      debug('::normalize (normalized) = %O', normalizedRule);
+      return normalizedRule;
     };
 
     if (!rules) {
@@ -159,6 +166,9 @@ module.exports = {
         fromPkg = true;
       } catch (ignored) {}
     }
+
+    debug('rules = %O', rules);
+    debug('errorMessage = %O', errorMessage);
 
     if (typeof rules == 'undefined') return [];
 
@@ -231,6 +241,7 @@ module.exports = {
         !errorMessage ? 'environment verification failed' : errorMessage
       );
 
+    debug('violated rules = %O', violations);
     return violations;
   }
 };

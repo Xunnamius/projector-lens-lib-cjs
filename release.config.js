@@ -92,4 +92,4 @@ module.exports = {
   ]
 };
 
-debug('exports =', module.exports);
+debug('exports = %O', module.exports);

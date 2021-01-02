@@ -1,6 +1,8 @@
 // This webpack config is used for helping transpile src/ => dist/ as dual
 // UMD/CJS2+ES2015
 
+const debug = require('debug')(`${require('./package.json').name}:webpack-config`);
+
 module.exports = {
   name: 'main',
   mode: 'production',
@@ -29,3 +31,5 @@ module.exports = {
   optimization: { usedExports: true },
   ignoreWarnings: [/critical dependency:/i]
 };
+
+debug('exports = %O', module.exports);

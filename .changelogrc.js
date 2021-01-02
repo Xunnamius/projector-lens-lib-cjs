@@ -1,4 +1,8 @@
-// ? See: conventional-changelog GitHub repository
+// ? See https://github.com/conventional-changelog/conventional-changelog
+
+const debug = require('debug')(
+  `${require('./package.json').name}:conventional-changelog-config`
+);
 
 const semverValid = require('semver').valid;
 const sjx = require('shelljs');
@@ -17,6 +21,8 @@ const changelogTitle =
 // ? Strings in commit messages that, when found, are skipped
 // ! These also have to be updated in build-test-deploy.yml and cleanup.yml
 const SKIP_COMMANDS = '[skip ci], [ci skip], [skip github], [github skip]'.split(', ');
+
+debug('SKIP_COMMANDS=', SKIP_COMMANDS);
 
 sjx.config.silent = true;
 
@@ -143,3 +149,5 @@ module.exports = {
     }
   }
 };
+
+debug('exports = %O', module.exports);

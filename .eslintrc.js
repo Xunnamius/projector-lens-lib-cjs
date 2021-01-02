@@ -1,3 +1,5 @@
+const debug = require('debug')(`${require('./package.json').name}:eslint-config`);
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['jest', '@typescript-eslint', 'import'],
@@ -94,3 +96,5 @@ module.exports = {
   },
   ignorePatterns: ['coverage', 'dist', 'bin']
 };
+
+debug('exports = %O', module.exports);

@@ -4,6 +4,8 @@
 // ? https://nodejs.org/en/about/releases
 const NODE_LTS = 'maintained node versions';
 
+const debug = require('debug')(`${require('./package.json').name}:babel-config`);
+
 module.exports = {
   parserOpts: { strictMode: true },
   plugins: [
@@ -68,3 +70,5 @@ module.exports = {
     }
   }
 };
+
+debug('exports = %O', module.exports);

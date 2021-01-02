@@ -4,12 +4,18 @@ const pkg = require('./package.json');
 const read = require('fs').promises.readFile;
 const sjx = require('shelljs');
 
+const debug = require('debug')(`${require('./package.json').name}:spellcheck-commit`);
+
 sjx.config.silent = true;
 
 const tryToRead = async (path) => {
   try {
-    return await read(path);
+    debug(`attempting to read ${path}`);
+    const data = await read(path);
+    debug(`successfully read ${path}`);
+    return data;
   } catch (ignored) {
+    debug(`failed to read ${path}`);
     return '';
   }
 };
@@ -17,12 +23,14 @@ const tryToRead = async (path) => {
 const asJson = (str) => {
   try {
     const json = JSON.parse(str.toString('utf-8'));
+    debug('json parse successful!');
     return [
       ...(json?.['cSpell.words'] || []),
       ...(json?.['cSpell.userWords'] || []),
       ...(json?.['cSpell.ignoreWords'] || [])
     ];
   } catch (ignored) {
+    debug('json parse failed!');
     return [];
   }
 };
@@ -40,6 +48,9 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords);
 (async () => {
   const lastCommitMsg = (await read('./.git/COMMIT_EDITMSG')).toString('utf-8');
   const homeDir = require('os').homedir();
+
+  debug(`lastCommitMsg = ${lastCommitMsg}`);
+  debug(`homeDir = ${homeDir}`);
 
   const ignoreWords = Array.from(
     new Set(
@@ -78,6 +89,8 @@ const keys = (obj) => Object.keys(obj).map(splitOutWords);
         .filter((typo) => !ignoreWords.includes(typo))
     )
   );
+
+  debug('typos = %O', typos);
 
   if (typos.length) {
     console.warn('WARNING: there may be misspelled words in your commit message!');
