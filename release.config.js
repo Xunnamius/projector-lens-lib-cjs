@@ -1,4 +1,5 @@
 const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG === 'true';
+const SHOULD_DEPLOY = process.env.SHOULD_DEPLOY === 'true';
 
 const options = require('./.changelogrc.js');
 const { changelogTitle, parserOpts, writerOpts } = options;
@@ -70,6 +71,14 @@ module.exports = {
         message: 'release: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
       }
     ],
-    '@semantic-release/github'
+    '@semantic-release/github',
+    ...(SHOULD_DEPLOY
+      ? [
+          '@semantic-release/exec',
+          {
+            prepareCmd: 'npm run deploy'
+          }
+        ]
+      : [])
   ]
 };
