@@ -8,8 +8,12 @@ const SHOULD_DEPLOY = process.env.SHOULD_DEPLOY === 'true';
 debug(`SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG}`);
 debug(`SHOULD_DEPLOY=${SHOULD_DEPLOY}`);
 
-const options = require('./.changelogrc.js');
-const { changelogTitle, parserOpts, writerOpts } = options;
+const {
+  changelogTitle,
+  parserOpts,
+  writerOpts,
+  additionalReleaseRules
+} = require('./.changelogrc.js');
 
 module.exports = {
   branches: [
@@ -27,10 +31,7 @@ module.exports = {
       {
         preset: 'angular',
         parserOpts,
-        // ! If you change releaseRules, you should also take a look at:
-        // !   - dependabot.yml
-        // !   - .changelogrc.js
-        releaseRules: [{ type: 'build', release: 'patch', title: 'Build System' }]
+        releaseRules: additionalReleaseRules
       }
     ],
     [
