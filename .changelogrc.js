@@ -10,6 +10,7 @@ const sjx = require('shelljs');
 // ? Commit types whose reversions are added to the changelog (releasers only!)
 // ! If you change this, you should also take a look at releaseRules in
 // ! release.config.js
+// TODO: automate taking these directly from release.config.js
 const SHOW_REVERSION_TYPES = ['feat', 'fix', 'perf', 'build'];
 
 const changelogTitle =
@@ -54,6 +55,7 @@ module.exports = {
     generateOn: (commit) => {
       const decision =
         shouldGenerate === 'always' || (shouldGenerate && !!semverValid(commit.version));
+      debug(`::generateOn shouldGenerate=${shouldGenerate} decision=${decision}`);
       shouldGenerate = true;
       return decision;
     },
@@ -61,38 +63,58 @@ module.exports = {
       const version = commit.version || null;
       const firstRelease = version === context.gitSemverTags?.slice(-1)[0].slice(1);
 
+      debug('::transform encountered commit = %O', commit);
+      debug(`::transform commit version = ${version}`);
+      debug(`::transform commit firstRelease = ${firstRelease}`);
+
       if (!firstRelease || commit.type) {
         // ? This commit does not have a type, but has a version. It must be a
         // ? legacy release!
         if (version && !commit.type) {
+          debug('::transform determined commit is legacy release');
           legacyReleases.push(commit);
           commit = null;
           shouldGenerate = false;
         } else {
           let fakeFix = false;
 
+          // TODO: instead of hard coding "build" here, this needs to work with
+          // TODO: all custom defined commit types (see release.config.js)
           if (commit.type === 'build') {
+            debug(`::transform encountered custom commit type "${commit.type}"`);
             commit.type = 'fix';
             fakeFix = true;
           }
 
           commit = transform(commit, context);
 
-          if (commit) {
-            if (fakeFix) commit.type = 'Build System';
-            else commit.type = sentenceCase(commit.type);
+          debug('::transform angular transformed commit = %O', commit);
 
-            // ? Ignore any commits with commands like [skip ci] in them
-            if (SKIP_COMMANDS.some((cmd) => commit.subject?.includes(cmd))) return null;
+          if (commit) {
+            if (fakeFix) {
+              // TODO: replace this by reading release.config.js
+              commit.type = 'Build System';
+              debug(`::transform commit type set to custom value "${commit.type}"`);
+            } else commit.type = sentenceCase(commit.type);
+
+            // ? Ignore any commits with skip commands in them
+            if (SKIP_COMMANDS.some((cmd) => commit.subject?.includes(cmd))) {
+              debug(`::transform saw skip command in commit message; commit skipped`);
+              return null;
+            }
 
             if (commit.type == 'Reverts') {
+              debug('::transform saw special commit type "Reverts"');
+
               // ? Ignore reverts that didn't trigger releases
               if (
                 !SHOW_REVERSION_TYPES.some((t) =>
                   RegExp(`^[^\\w]${t}: `, 'i').test(commit.subject?.trim())
                 )
-              )
+              ) {
+                debug('::transform this revert was ignored');
                 return null;
+              }
 
               commit.subject = `*${commit.subject}*`;
             }
@@ -104,6 +126,7 @@ module.exports = {
       // ? are legacy releases), use this commit to report collected legacy
       // ? releases
       else {
+        debug('::transform generating summary legacy release commit');
         shouldGenerate = 'always';
 
         const getShortHash = (h) => h.substring(0, 7);
@@ -145,6 +168,7 @@ module.exports = {
         };
       }
 
+      debug('::transform final commit = %O', commit);
       return commit;
     }
   }
