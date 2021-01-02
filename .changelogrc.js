@@ -45,9 +45,9 @@ const sentenceCase = (s) => s.toString().charAt(0).toUpperCase() + s.toString().
 
 const extraReleaseTriggerCommitTypes = ADDITIONAL_RELEASE_RULES.map((r) => r.type);
 const allReleaseTriggerCommitTypes = [
-  ...DEFAULT_RELEASED_TYPES,
-  ...extraReleaseTriggerCommitTypes
-];
+  DEFAULT_RELEASED_TYPES,
+  extraReleaseTriggerCommitTypes
+].flat();
 
 debug('extra types that trigger releases = %O', extraReleaseTriggerCommitTypes);
 debug('all types that trigger releases = %O', allReleaseTriggerCommitTypes);
