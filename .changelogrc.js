@@ -109,7 +109,7 @@ module.exports = {
             if (fakeFix) {
               commit.type = ADDITIONAL_RELEASE_RULES.filter(
                 (r) => r.type == commit.type
-              ).title;
+              )?.title;
               debug(`::transform commit type set to custom title "${commit.type}"`);
             } else commit.type = sentenceCase(commit.type);
 
@@ -118,6 +118,11 @@ module.exports = {
               debug(`::transform saw skip command in commit message; commit skipped`);
               return null;
             }
+
+            // ? Make scope-less commit subjects sentence case in the
+            // ? changelog per my tastes
+            if (!commit.scope && commit.subject)
+              commit.subject = sentenceCase(commit.subject);
 
             if (commit.originalType == 'revert') {
               debug('::transform saw special commit type "revert"');
@@ -135,8 +140,21 @@ module.exports = {
                 return null;
               }
 
-              commit.subject = `*${commit.subject}*`;
+              if (commit.subject) commit.subject = `*${commit.subject}*`;
             }
+
+            // ? For breaking changes, make all scopes and subjects bold.
+            // ? Scope-less subjects are made sentence case. All per my
+            // ? tastes
+            commit.notes.forEach((note) => {
+              if (note.text) {
+                debug('::transform saw BC notes for this commit');
+                const [firstLine, ...remainder] = note.text.trim().split('\n');
+                note.text =
+                  `**${!commit.scope ? sentenceCase(firstLine) : firstLine}**` +
+                  remainder.reduce((result, line) => `${result}\n${line}`, '');
+              }
+            });
           }
         }
       }
