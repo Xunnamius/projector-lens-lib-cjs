@@ -8,7 +8,7 @@ on:
 
 env:
   # * Debugger verbose output
-  # DEBUG: '*'
+  DEBUG: '*'
   NODE_CURRENT_VERSION: 15.x
   IGNORE_TAGS: 'latest' # example: IGNORE_TAGS: 'tag1, tag2, tag-3'
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
@@ -27,6 +27,14 @@ jobs:
       has-release-config: ${{ steps.data.outputs.has-release-config == 'true' }}
       has-package-json: ${{ steps.data.outputs.has-package-json == 'true' }}
     steps:
+      - name: Report DEBUG mode status
+        run: |
+          if ! [ -z "$DEBUG" ]; then
+            echo 'PIPELINE IS RUNNING IN DEBUG MODE!'
+          else
+            echo '(pipeline is not running in debug mode)'
+          fi
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -40,7 +48,9 @@ jobs:
 
       - name: Determine should-skip
         id: skip-ci
-        run: echo "::set-output name=should-skip::$CI_SKIP"
+        run: |
+          echo "::set-output name=should-skip::$CI_SKIP"
+          ! [ -z "$DEBUG" ] && echo "set-output name=should-skip::$CI_SKIP"
 
       - name: Verify repository owner against whitelist
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -51,6 +61,7 @@ jobs:
           REPO='${{ github.repository }}'
           node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(o.trim() + '/')) ? 0 : 1)"
           echo "::set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
+          ! [ -z "$DEBUG" ] && echo "set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
 
       - name: Gather remaining metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -59,6 +70,8 @@ jobs:
           set +e
           [ -r release.config.js ] && echo "::set-output name=has-release-config::true"
           [ -r package.json ] && echo "::set-output name=has-package-json::true"
+          ! [ -z "$DEBUG" ] && [ -r release.config.js ] && echo "set-output name=has-release-config::true"
+          ! [ -z "$DEBUG" ] && [ -r package.json ] && echo "set-output name=has-package-json::true"
 
   cleanup-npm-dist-tags:
     runs-on: ubuntu-latest
@@ -99,9 +112,13 @@ jobs:
           npm install micromatch
           git remote prune origin
           BRANCHES=`git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin`
+          ! [ -z "$DEBUG" ] && echo 'BRANCHES=' "$BRANCHES"
           export BRANCHES
           PKG_NAME=`node -e 'console.log(require("./package.json").name)'`
+          ! [ -z "$DEBUG" ] && echo 'PKG_NAME=' "$PKG_NAME"
           DIST_TAGS=`npm dist-tag list "$PKG_NAME"`
+          ! [ -z "$DEBUG" ] && echo 'DIST_TAGS=' "$DIST_TAGS"
           export DIST_TAGS
           MATCHED_TAGS=$(node -e 'const match = require("micromatch"); const tags = process.env.DIST_TAGS.split("\n").map(t => t.split(":")[0]); const branches = match(process.env.BRANCHES.split("\n"), require("./release.config.js").branches.reduce((a,b) => [...a, b.name || b.toString()], [])); const ignoreTags = process.env.IGNORE_TAGS.split(", "); console.log(tags.reduce((a,t) => branches.some(b => ignoreTags.includes(t) || t == b || t == `release-${b}`) ? a : [...a, t], []).join(" ").trim())')
+          ! [ -z "$DEBUG" ] && echo 'MATCHED_TAGS=' "$MATCHED_TAGS"
           if ! [ -z "$MATCHED_TAGS" ]; then echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc; echo $MATCHED_TAGS | xargs -n1 npm dist-tag rm "$PKG_NAME"; else echo "dist tags OK!"; fi

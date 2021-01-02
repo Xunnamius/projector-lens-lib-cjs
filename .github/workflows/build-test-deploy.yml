@@ -60,6 +60,14 @@ jobs:
       has-integration-webpack:
         ${{ steps.data.outputs.has-integration-webpack == 'true' }}
     steps:
+      - name: Report DEBUG mode status
+        run: |
+          if ! [ -z "$DEBUG" ]; then
+            echo 'PIPELINE IS RUNNING IN DEBUG MODE!'
+          else
+            echo '(pipeline is not running in debug mode)'
+          fi
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -73,7 +81,9 @@ jobs:
 
       - name: Determine should-skip
         id: skip-ci
-        run: echo "::set-output name=should-skip::$CI_SKIP"
+        run: |
+          echo "::set-output name=should-skip::$CI_SKIP"
+          ! [ -z "$DEBUG" ] && echo "set-output name=should-skip::$CI_SKIP"
 
       - name: Determine matrixes
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -81,6 +91,8 @@ jobs:
         run: |
           echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_CURRENT_VERSION\"]}"
           echo "::set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}"
+          ! [ -z "$DEBUG" ] && echo "set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_CURRENT_VERSION\"]}"
+          ! [ -z "$DEBUG" ] && echo "set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}"
 
       - name: Gather branch metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -89,7 +101,9 @@ jobs:
       - name: Determine current-branch
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: branch
-        run: echo "::set-output name=current-branch::$BRANCH_NAME"
+        run: |
+          echo "::set-output name=current-branch::$BRANCH_NAME"
+          ! [ -z "$DEBUG" ] && echo "set-output name=current-branch::$BRANCH_NAME"
 
       - name: Verify repository owner against whitelist
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -100,6 +114,7 @@ jobs:
           REPO='${{ github.repository }}'
           node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(o.trim() + '/')) ? 0 : 1)"
           echo "::set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
+          ! [ -z "$DEBUG" ] && echo "set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         if: steps.skip-ci.outputs.should-skip != 'true'
@@ -113,6 +128,8 @@ jobs:
         run: |
           set +e
           NPMR=`npm run list-tasks`
+
+          ! [ -z "$DEBUG" ] && echo 'NPMR=' $NPMR
 
           if [ $? -ne 0 ]; then
             echo '::error::`npm run list-tasks` failed'
@@ -143,6 +160,15 @@ jobs:
           echo "::set-output name=has-integration-browser::$HAS_BWSR"
           echo "::set-output name=has-integration-webpack::$HAS_WEBP"
           echo "::set-output name=has-deploy::$HAS_DPLY"
+
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-release-config::$HAS_RCNF"
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-docs::$HAS_DOCS"
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-externals::$HAS_EXTS"
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-integration-node::$HAS_NODE"
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-integration-externals::$HAS_IEXT"
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-integration-browser::$HAS_BWSR"
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-integration-webpack::$HAS_WEBP"
+          ! [ -z "$DEBUG" ] && echo "set-output name=has-deploy::$HAS_DPLY"
 
           if [ "$HAS_EXTS" != "$HAS_IEXT" ]; then
             echo '::error::expected both 1) `build-externals` and 2) `test-integration-externals` scripts to be defined in package.json'
