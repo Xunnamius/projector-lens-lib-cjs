@@ -77,8 +77,7 @@ PR passes review:
 
 At this point, you're ready to create your PR and ✨ contribute ✨. What follows
 is a description of this project's automated [CL][6]/[CI/CD][7] pipeline and NPM
-run scripts; **this is optional reading for external collaborators.** You're
-done!
+scripts; **this is optional reading for external collaborators.** You're done!
 
 ---
 
@@ -229,8 +228,8 @@ message is parsed for commands.
 
 ## NPM Scripts
 
-This project ships with several [NPM run scripts][33]. Use `npm run list-tasks`
-to see which of the following scripts are available for this project.
+This project ships with several [NPM scripts][33]. Use `npm run list-tasks` to
+see which of the following scripts are available for this project.
 
 > Using these scripts requires a linux-like development environment. None of the
 > scripts are likely to work on non-POSIX environments. If you're on Windows,
