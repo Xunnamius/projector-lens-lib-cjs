@@ -39,7 +39,6 @@
     "build-docs": "typedoc --plugin typedoc-plugin-markdown --out docs --readme none src/index.ts && find docs -name '*.md' -exec sed -i -e 's/`__namedParameters`: //g' {} + && find docs -name '*.md' -exec sed -i -e 's/__namedParameters/\\(destructured\\)/g' {} + && find docs -name '*.md' -exec sed -i -e 's/Project: //g' {} + && sed -i -e 1,4d docs/README.md",
     "build-stats": "NODE_ENV=production webpack --config-name main --json > bundle-stats.json",
     "clean": "rm -rf dist coverage external-scripts/bin",
-    "deploy": "echo 'deploy test succeeded!'",
     "format": "sort-package-json && remark -o --use reference-links --use gfm . && prettier --write .",
     "postinstall": "if [ -z \"$CI\" ]; then husky install; else echo 'skipped installing husky git hooks'; fi",
     "lint": "stdbuf -i0 -o0 -e0 tsc --project tsconfig.lint.json; X=$?; stdbuf -i0 -o0 -e0 eslint --parser-options=project:tsconfig.lint.json src && remark --quiet --frail --use gfm --use lint-final-newline --use lint-no-auto-link-without-protocol --use lint-no-blockquote-without-marker --use lint-ordered-list-marker-style --use lint-hard-break-spaces --use lint-no-duplicate-definitions --use lint-no-heading-content-indent --use lint-no-inline-padding --use lint-no-undefined-references --use lint-no-unused-definitions . && [ $X -eq 0 ]",
