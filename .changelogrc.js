@@ -5,7 +5,7 @@ const debug = require('debug')(
 );
 
 const escapeRegExpStr = require('escape-string-regexp');
-const semverValid = require('semver').valid;
+const semver = require('semver');
 const sjx = require('shelljs');
 
 // ? Commit types that trigger releases by default (using angular configuration)
@@ -70,7 +70,10 @@ module.exports = {
   writerOpts: {
     generateOn: (commit) => {
       const decision =
-        shouldGenerate === 'always' || (shouldGenerate && !!semverValid(commit.version));
+        shouldGenerate === 'always' ||
+        (shouldGenerate &&
+          !!semver.valid(commit.version) &&
+          !semver.prerelease(commit.version));
       debug(`::generateOn shouldGenerate=${shouldGenerate} decision=${decision}`);
       shouldGenerate = true;
       return decision;
