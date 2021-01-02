@@ -123,7 +123,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
-      - name: Gather package.json script metadata
+      - name: Gather remaining metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: data
         run: |
