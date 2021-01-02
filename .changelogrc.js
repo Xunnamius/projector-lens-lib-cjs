@@ -8,11 +8,16 @@ const escapeRegExpStr = require('escape-string-regexp');
 const semverValid = require('semver').valid;
 const sjx = require('shelljs');
 
-// ? Commit types whose reversions are added to the changelog (releasers only!)
-// ! If you change this, you should also take a look at releaseRules in
-// ! release.config.js
-// TODO: automate taking these directly from release.config.js
-const SHOW_REVERSION_TYPES = ['feat', 'fix', 'perf', 'build'];
+// ? Commit types that trigger releases by default (using angular configuration)
+// ? See https://github.com/semantic-release/commit-analyzer/blob/master/lib/default-release-rules.js
+const DEFAULT_RELEASED_TYPES = ['feat', 'fix', 'perf'];
+
+// ? Same options as commit-analyzer's releaseRules (see
+// ? https://github.com/semantic-release/commit-analyzer#releaserules) with the
+// ? addition of the `title` property to set the resulting section title
+const ADDITIONAL_RELEASE_RULES = [
+  { type: 'build', release: 'patch', title: 'Build System' }
+];
 
 const changelogTitle =
   `# Changelog\n\n` +
@@ -38,6 +43,15 @@ if (wait.code != 0) throw new Error('failed to acquire angular transformation');
 const transform = Function(`"use strict";return (${wait.stdout})`)();
 const sentenceCase = (s) => s.toString().charAt(0).toUpperCase() + s.toString().slice(1);
 
+const extraReleaseTriggerCommitTypes = ADDITIONAL_RELEASE_RULES.map((r) => r.type);
+const allReleaseTriggerCommitTypes = [
+  ...DEFAULT_RELEASED_TYPES,
+  extraReleaseTriggerCommitTypes
+];
+
+debug('extra types that trigger releases = %O', extraReleaseTriggerCommitTypes);
+debug('all types that trigger releases = %O', allReleaseTriggerCommitTypes);
+
 // ? Releases made before this repo adopted semantic-release. They will be
 // ? collected together under a single header
 const legacyReleases = [];
@@ -45,6 +59,7 @@ let shouldGenerate = true;
 
 module.exports = {
   changelogTitle,
+  additionalReleaseRules: ADDITIONAL_RELEASE_RULES.map(({ title, ...r }) => r),
   parserOpts: {
     mergePattern: /^Merge pull request #(\d+) from (.*)$/,
     mergeCorrespondence: ['id', 'source'],
@@ -80,9 +95,7 @@ module.exports = {
         } else {
           let fakeFix = false;
 
-          // TODO: instead of hard coding "build" here, this needs to work with
-          // TODO: all custom defined commit types (see release.config.js)
-          if (commit.type === 'build') {
+          if (extraReleaseTriggerCommitTypes.includes(commit.type)) {
             debug(`::transform encountered custom commit type "${commit.type}"`);
             commit.type = 'fix';
             fakeFix = true;
@@ -94,9 +107,8 @@ module.exports = {
 
           if (commit) {
             if (fakeFix) {
-              // TODO: replace this by reading release.config.js
-              commit.type = 'Build System';
-              debug(`::transform commit type set to custom value "${commit.type}"`);
+              commit.type = ADDITIONAL_RELEASE_RULES[commit.type].title;
+              debug(`::transform commit type set to custom title "${commit.type}"`);
             } else commit.type = sentenceCase(commit.type);
 
             // ? Ignore any commits with skip commands in them
@@ -110,7 +122,7 @@ module.exports = {
 
               // ? Ignore reverts that didn't trigger releases
               if (
-                !SHOW_REVERSION_TYPES.some((t) =>
+                !allReleaseTriggerCommitTypes.some((t) =>
                   // ? Example: '"build(package.json): add semver devdep"'
                   RegExp(`^[^\\w]*${escapeRegExpStr(t)}(:|\\()`, 'i').test(
                     commit.subject?.trim()
