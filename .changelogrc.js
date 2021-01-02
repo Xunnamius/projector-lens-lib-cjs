@@ -107,7 +107,9 @@ module.exports = {
 
           if (commit) {
             if (fakeFix) {
-              commit.type = ADDITIONAL_RELEASE_RULES[commit.type].title;
+              commit.type = ADDITIONAL_RELEASE_RULES.filter(
+                (r) => r.type == commit.type
+              ).title;
               debug(`::transform commit type set to custom title "${commit.type}"`);
             } else commit.type = sentenceCase(commit.type);
 
