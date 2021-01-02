@@ -22,6 +22,8 @@ on:
     branches: [main, canary]
 
 env:
+  # * Debugger verbose output
+  DEBUG: '*'
   NODE_CURRENT_VERSION: 15.x
   NODE_TEST_VERSIONS: '"10.x", "12.x", "14.x"' # * NODE_CURRENT_VERSION included automatically
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'

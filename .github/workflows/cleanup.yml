@@ -7,6 +7,8 @@ on:
   delete:
 
 env:
+  # * Debugger verbose output
+  # DEBUG: '*'
   NODE_CURRENT_VERSION: 15.x
   IGNORE_TAGS: 'latest' # example: IGNORE_TAGS: 'tag1, tag2, tag-3'
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
