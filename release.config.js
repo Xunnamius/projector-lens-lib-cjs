@@ -30,7 +30,7 @@ module.exports = {
         // ! If you change releaseRules, you should also take a look at:
         // !   - dependabot.yml
         // !   - .changelogrc.js
-        releaseRules: [{ type: 'build', release: 'patch' }]
+        releaseRules: [{ type: 'build', release: 'patch', title: 'Build System' }]
       }
     ],
     [
