@@ -513,7 +513,7 @@ jobs:
         if: needs.metadata.outputs.has-docs == 'true'
         run: npm run build-docs
 
-      - name: Post source formatting
+      - name: Run formatting
         run: npm run format
 
       - name: Cache build
