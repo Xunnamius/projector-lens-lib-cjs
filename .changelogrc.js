@@ -81,11 +81,20 @@ module.exports = {
     transform: (commit, context) => {
       const version = commit.version || null;
       const firstRelease = version === context.gitSemverTags?.slice(-1)[0].slice(1);
-      commit.originalType = commit.type;
 
       debug('::transform encountered commit = %O', commit);
       debug(`::transform commit version = ${version}`);
       debug(`::transform commit firstRelease = ${firstRelease}`);
+
+      if (commit.revert) {
+        debug('::transform coercing to type "revert"');
+        commit.type = 'revert';
+      } else if (commit.type == 'revert') {
+        debug('::transform ignoring malformed revert commit');
+        return null;
+      }
+
+      commit.originalType = commit.type;
 
       if (!firstRelease || commit.type) {
         // ? This commit does not have a type, but has a version. It must be a
@@ -135,9 +144,7 @@ module.exports = {
               if (
                 !allReleaseTriggerCommitTypes.some((t) =>
                   // ? Example: '"build(package.json): add semver devdep"'
-                  RegExp(`^[^\\w]*${escapeRegExpStr(t)}(:|\\()`, 'i').test(
-                    commit.subject?.trim()
-                  )
+                  RegExp(`^${escapeRegExpStr(t)}(:|\\()`, 'i').test(commit.revert.header)
                 )
               ) {
                 debug('::transform this revert was ignored');
