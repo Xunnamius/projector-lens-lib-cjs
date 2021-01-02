@@ -1,5 +1,5 @@
 const debug = require('debug')(
-  `${require('./package.json').name.replace('/', '-')}:semantic-release-config`
+  `${require('./package.json').name}:semantic-release-config`
 );
 
 const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG === 'true';

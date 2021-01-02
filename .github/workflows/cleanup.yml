@@ -7,8 +7,9 @@ on:
   delete:
 
 env:
-  # * Debugger verbose output
-  DEBUG: '*'
+  # * Selectively enable debugger verbose output in the pipeline
+  # ? See also: https://www.npmjs.com/package/debug#wildcards
+  # DEBUG: '@xunnamius/do-not-install:*'
   NODE_CURRENT_VERSION: 15.x
   IGNORE_TAGS: 'latest' # example: IGNORE_TAGS: 'tag1, tag2, tag-3'
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
@@ -105,7 +106,7 @@ jobs:
           key: npm-clean-${{ runner.os }}
           path: ~/.npm
 
-      - name: Remove any erroneous dist tags
+      - name: Prune dist tags
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
