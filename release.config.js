@@ -1,6 +1,11 @@
 const SHOULD_UPDATE_CHANGELOG = process.env.SHOULD_UPDATE_CHANGELOG === 'true';
 const SHOULD_DEPLOY = process.env.SHOULD_DEPLOY === 'true';
 
+// eslint-disable-next-line no-console
+console.error(`SHOULD_UPDATE_CHANGELOG=${SHOULD_UPDATE_CHANGELOG}`);
+// eslint-disable-next-line no-console
+console.error(`SHOULD_DEPLOY=${SHOULD_DEPLOY}`);
+
 const options = require('./.changelogrc.js');
 const { changelogTitle, parserOpts, writerOpts } = options;
 
@@ -76,7 +81,7 @@ module.exports = {
       ? [
           '@semantic-release/exec',
           {
-            prepareCmd: 'npm run deploy'
+            successCmd: 'npm run deploy'
           }
         ]
       : [])
