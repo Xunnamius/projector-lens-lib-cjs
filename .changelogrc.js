@@ -4,6 +4,7 @@ const debug = require('debug')(
   `${require('./package.json').name}:conventional-changelog-config`
 );
 
+const escapeRegExpStr = require('escape-string-regexp');
 const semverValid = require('semver').valid;
 const sjx = require('shelljs');
 
@@ -62,6 +63,7 @@ module.exports = {
     transform: (commit, context) => {
       const version = commit.version || null;
       const firstRelease = version === context.gitSemverTags?.slice(-1)[0].slice(1);
+      commit.originalType = commit.type;
 
       debug('::transform encountered commit = %O', commit);
       debug(`::transform commit version = ${version}`);
@@ -103,13 +105,16 @@ module.exports = {
               return null;
             }
 
-            if (commit.type == 'Reverts') {
-              debug('::transform saw special commit type "Reverts"');
+            if (commit.originalType == 'revert') {
+              debug('::transform saw special commit type "revert"');
 
               // ? Ignore reverts that didn't trigger releases
               if (
                 !SHOW_REVERSION_TYPES.some((t) =>
-                  RegExp(`^[^\\w]${t}: `, 'i').test(commit.subject?.trim())
+                  // ? Example: '"build(package.json): add semver devdep"'
+                  RegExp(`^[^\\w]*${escapeRegExpStr(t)}(:|\\()`, 'i').test(
+                    commit.subject?.trim()
+                  )
                 )
               ) {
                 debug('::transform this revert was ignored');
