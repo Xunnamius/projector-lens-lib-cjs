@@ -50,13 +50,13 @@ jobs:
           node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(o.trim() + '/')) ? 0 : 1)"
           echo "::set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
 
-      - name: Gather package.json script metadata
+      - name: Gather remaining metadata
         if: steps.skip-ci.outputs.should-skip != 'true'
         id: data
         run: |
           set +e
-          [ -r release.config.js ] && echo "::set-output name=has-release-config::$HAS_RCNF"
-          [ -r package.json ] && echo "::set-output name=has-package-json::$HAS_RCNF"
+          [ -r release.config.js ] && echo "::set-output name=has-release-config::true"
+          [ -r package.json ] && echo "::set-output name=has-package-json::true"
 
   cleanup-npm-dist-tags:
     runs-on: ubuntu-latest
