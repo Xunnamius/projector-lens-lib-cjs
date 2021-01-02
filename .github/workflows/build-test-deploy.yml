@@ -2,8 +2,8 @@ name: build-test-deploy
 
 # * Note: feel free to run this workflow in forks (e.g. for testing your PR)
 # * without worrying about this workflow attempting to deploy a package 🚀
-# *
-# * If you want to use the CD pipeline, the following secrets must be defined:
+
+# ! If you want to use the CD pipeline, the following secrets must be defined:
 # !   CODECOV_TOKEN (optional for public repos)
 # !   GPG_PRIVATE_KEY
 # !   GPG_PASSPHRASE
