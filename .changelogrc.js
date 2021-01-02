@@ -96,7 +96,7 @@ module.exports = {
           let fakeFix = false;
 
           if (extraReleaseTriggerCommitTypes.includes(commit.type)) {
-            debug(`::transform encountered custom commit type "${commit.type}"`);
+            debug(`::transform encountered custom commit type: ${commit.type}`);
             commit.type = 'fix';
             fakeFix = true;
           }
@@ -107,10 +107,11 @@ module.exports = {
 
           if (commit) {
             if (fakeFix) {
-              commit.type = ADDITIONAL_RELEASE_RULES.filter(
-                (r) => r.type == commit.type
+              commit.type = ADDITIONAL_RELEASE_RULES.find(
+                (r) => r.type == commit.originalType
               )?.title;
-              debug(`::transform commit type set to custom title "${commit.type}"`);
+              debug('::transform debug: %O', ADDITIONAL_RELEASE_RULES);
+              debug(`::transform commit type set to custom title: ${commit.type}`);
             } else commit.type = sentenceCase(commit.type);
 
             // ? Ignore any commits with skip commands in them
