@@ -215,16 +215,17 @@ workflow instead of _branch-and-pull_.
 
 ### Pipeline Commands
 
-Commands can be passed to the pipeline via commit message that affect the
-pipeline's behavior. When a single push consists of multiple commits, only the
-very top commit's message is parsed for commands.
+There are several commands that can affect the behavior of the pipeline. To use
+them, include them as part of the top commit's message when pushing to remote.
+When a single push consists of multiple commits, only the very top commit's
+message is parsed for commands.
 
 > Currently, there is only a single supported pipeline command: the ability to
 > skip running the CI/CD pipeline for a given commit
 
-| Command     | Alias(es)                                     | Description                           | Example Commit Message                                  |
-| ----------- | --------------------------------------------- | ------------------------------------- | ------------------------------------------------------- |
-| `[skip ci]` | `[ci skip]`, `[skip github]`, `[github skip]` | Skip all GitHub-based CI/CD workflows | `release: 6.3.5 [skip ci]` (skip ci on release commits) |
+| Command     | Alias(es)                                     | Description                           | Usage Example                              |
+| ----------- | --------------------------------------------- | ------------------------------------- | ------------------------------------------ |
+| `[skip ci]` | `[ci skip]`, `[skip github]`, `[github skip]` | Skip all GitHub-based CI/CD workflows | `git commit -m 'release: 6.3.5 [skip ci]'` |
 
 ## NPM Scripts
 
