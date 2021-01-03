@@ -38,7 +38,10 @@ The ideal contributor flow is as follows:
 
 4.  _(optional but recommended)_ Create a new branch, usually off `main`
 
-    - For example: `git checkout -b contrib-feature-1`
+    - Example:
+      ```shell
+      git checkout -b contrib-feature-1
+      ```
 
 5.  Make your changes and commit. Thanks to CL, your work will be checked as you
     commit it; any problems will abort the commit attempt
@@ -115,7 +118,7 @@ always fails to publish when the CI pipeline check fails. Further, the CL
 pipeline will reject local commits that fail to pass unit testing before they
 even reach the remote CI pipeline.
 
-### Pipeline Structure
+### Pipeline Usage and Structure
 
 - `main` is the only permanent branch, all other branches are automatically
   deleted after being merged into `main`
@@ -154,12 +157,36 @@ even reach the remote CI pipeline.
     pipeline to generate a release even if all tests pass
 - Force pushing to `main` and `canary` will always fail (unless temporarily
   allowed)
+- Commits that include `BREAKING:`, `BREAKING CHANGE:`, or `BREAKING CHANGES:`
+  in their message body will be treated as major release commits and will appear
+  in [CHANGELOG.md][47] regardless of their type
+
+  - Example:
+
+    ```shell
+    git commit -m "debug: this commit will cause a major version bump and
+    will appear in the changelog, even though it's only a debug commit!!!
+
+    BREAKING CHANGE: this feature replaces that feature
+    BREAKING CHANGE: this other feature now also works differently"
+    ```
+
 - PRs only trigger the CI pipeline and _never_ the CD pipeline
 - The CD pipeline never runs in forks of this repository, even when GitHub
   Actions are explicitly enabled (this can be overridden)
-- All tags created through this pipeline are annotated and automatically signed
+- All tags created through this pipeline are annotated and automatically signed.
+  To support this and other features that require annotated tags, we use a
+  [custom fork of semantic-release][48]. Hopefully [support for][49] [annotated
+  tags][50] will be included upstream one day.
+- Note that **[all reverts are treated as patches by semantic-release][51]** no
+  matter the type of the reverted commit, which means they'll appear in
+  [CHANGELOG.md][47] even if the reverted commits wouldn't normally trigger a
+  release. This also means reverting a commit that introduced a breaking change
+  will only trigger a patch release. **Do not push commits that revert
+  release-triggering commits (like `feat` or `fix`) and expect anything other
+  than a patch release!**
 
-### Pipeline Events
+### Pipeline Trigger Events
 
 The CI/CD pipeline is triggered by two [events][32]:
 
@@ -218,7 +245,7 @@ is updated (type: `synchronize`). If this is a problem (i.e. wasting money),
 prepend `no-ci/` to the internal branch name or transition to a _clone-and-pull_
 workflow instead of _branch-and-pull_.
 
-### Pipeline Commands
+### Pipeline Commit Commands
 
 There are several commands that can affect the behavior of the pipeline. To use
 them, include them as part of the top commit's message when pushing to remote.
@@ -355,3 +382,9 @@ see which of the following scripts are available for this project.
 [44]: https://www.npmjs.com/package/debug
 [45]: https://www.npmjs.com/package/rejoinder
 [46]: https://www.npmjs.com/package/debug#wildcards
+[47]: CHANGELOG.md
+[48]: https://github.com/Xunnamius/semantic-release/tree/contrib-holistic
+[49]: https://github.com/semantic-release/semantic-release/pull/1709
+[50]: https://github.com/semantic-release/semantic-release/pull/1710
+[51]:
+  https://github.com/semantic-release/commit-analyzer/blob/e8c560459d7ef8752180154ed0263ce262aa22a7/lib/default-release-rules.js#L8
