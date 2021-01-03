@@ -78,12 +78,25 @@ scripts; **this is optional reading for external collaborators.** You're done!
 
 ---
 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 ## The Build-Test-Deploy Pipeline
 
 Development in this repository adheres to [Trunk Based Development][18]
 principles, specifically leveraging [_short-lived feature branches_][19] (SLFB)
-and [CL][6]/[CI/CD][7]. Broadly speaking, this pipeline consists of three
-"sub-pipelines" put together front to back:
+and Continuous Linting (CL), Integration (CI), and Deployment (CD).
+
+Broadly speaking, this pipeline consists of three "sub-pipelines" put together
+front to back:
 
 - First, the so-called "Continuous Linting" pipeline, which automatically runs
   formatting, linting, and unit testing locally on the developer's machine
@@ -104,9 +117,11 @@ and [CL][6]/[CI/CD][7]. Broadly speaking, this pipeline consists of three
 These pipelines are situated one after the other such that the CD pipeline
 always fails to publish when the CI pipeline check fails. Further, the CL
 pipeline will reject local commits that fail to pass unit testing before they
-even reach the remote CI pipeline.
+ever reach the CI pipeline.
 
 ### Pipeline Usage and Structure
+
+- The existence of certain files is assumed, such as `package.json`
 
 - `main` is the only permanent branch, all other branches are automatically
   deleted after being merged into `main`
@@ -267,8 +282,8 @@ message is parsed for commands.
 
 ## NPM Scripts
 
-This project ships with several [NPM scripts][33]. Use `npm run list-tasks` to
-see which of the following scripts are available for this project.
+This repo ships with several [NPM scripts][33]. Use `npm run list-tasks` to see
+which of the following scripts are available for this project.
 
 > Using these scripts requires a linux-like development environment. None of the
 > scripts are likely to work on non-POSIX environments. If you're on Windows,
