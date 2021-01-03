@@ -13,7 +13,7 @@ env:
   NODE_CURRENT_VERSION: 15.x
   IGNORE_TAGS: 'latest' # example: IGNORE_TAGS: 'tag1, tag2, tag-3'
   # ! These also have to be updated in .changelogrc.js and build-test-deploy.yml
-  CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
+  CI_SKIP_COMMANDS: '[skip ci], [ci skip]'
   # ? Add your GitHub user/org to enable this pipeline workflow
   # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc

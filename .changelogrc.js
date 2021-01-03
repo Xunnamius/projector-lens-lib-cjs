@@ -27,7 +27,7 @@ const changelogTitle =
 
 // ? Strings in commit messages that, when found, are skipped
 // ! These also have to be updated in build-test-deploy.yml and cleanup.yml
-const SKIP_COMMANDS = '[skip ci], [ci skip], [skip github], [github skip]'.split(', ');
+const SKIP_COMMANDS = '[skip ci], [ci skip], [skip cd], [cd skip]'.split(', ');
 
 debug('SKIP_COMMANDS=', SKIP_COMMANDS);
 

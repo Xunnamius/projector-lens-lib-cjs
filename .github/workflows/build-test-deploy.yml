@@ -31,7 +31,7 @@ env:
   CI_COMMITTER_NAME: xunn-bot
   CI_COMMITTER_EMAIL: bot@xunn.io
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
-  CI_SKIP_COMMANDS: '[skip ci], [ci skip], [skip github], [github skip]'
+  CI_SKIP_COMMANDS: '[skip ci], [ci skip]'
   # ? Add your GitHub user/org to enable CD pipeline
   # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
