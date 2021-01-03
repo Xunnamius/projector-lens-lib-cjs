@@ -283,8 +283,7 @@ them, include them as part of the top commit's message when pushing to remote.
 When a single push consists of multiple commits, only the very top commit's
 message is parsed for commands.
 
-> Currently, there is only a single supported pipeline command: the ability to
-> skip running the CI/CD pipeline for a given commit
+The following commands are recognized:
 
 | Command     | Alias(es)   | Description                                      | Usage Example                                          |
 | ----------- | ----------- | ------------------------------------------------ | ------------------------------------------------------ |
