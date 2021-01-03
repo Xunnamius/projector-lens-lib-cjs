@@ -24,31 +24,19 @@ To get debugging output for just this application/pipeline, [export
 The ideal contributor flow is as follows:
 
 1.  [Fork][9] this repository and [clone it locally][10]
-
 2.  Configure and install dependencies: `npm ci`
-
     - You use `npm ci` here instead of `npm install` to [prevent unnecessary
       updates to `package.json` and `package-lock.json`][40], but if it makes
       more sense to use `npm install` feel free to use that instead
-
     - If `.env.example` exists, consider copying it to `.env` and configuring
       sensible defaults
-
 3.  Before making any changes, ensure all unit tests are passing: `npm run test`
-
 4.  _(optional but recommended)_ Create a new branch, usually off `main`
-
-    - Example:
-      ```shell
-      git checkout -b contrib-feature-1
-      ```
-
+    - Example: `git checkout -b contrib-feature-1`
 5.  Make your changes and commit. Thanks to CL, your work will be checked as you
     commit it; any problems will abort the commit attempt
-
 6.  Push your commits to your fork and, when you're ready, [_fearlessly_ submit
     your PR][11]! Your changes will be tested in our CI pipeline
-
 7.  Pat your self on the back! Your hard work is well on its way to being
     reviewed and, if everything looks good, merged and released 🚀
 
@@ -122,6 +110,7 @@ even reach the remote CI pipeline.
 
 - `main` is the only permanent branch, all other branches are automatically
   deleted after being merged into `main`
+
   - The term "merged" as used here and elsewhere in this document connotes a
     [non-ff merge][41] operation. Note that [ff merge][41], [rebase][24], and
     [squash][42] operations can be used as well **except when merging between
@@ -129,34 +118,48 @@ even reach the remote CI pipeline.
     should be used to merge between release branches][43]; any other operation
     (_[including force pushing][25]_) risks damaging `semantic-release`'s
     version tracking metadata**!
+
   - Technically, there are also [maintenance branches][26], which are
     semi-permanent
+
   - For NPM package projects, this also means `latest` is the only permanent
     [dist-tag][27]
+
 - Changes are committed directly to `main`, to a SLFB that is eventually merged
   into `main`, or through a PR that is eventually merged into `main` from an
   external repository
+
 - `canary` is a special SLFB used to publish commits on the canary release
   channel before before they're merged into `main` (useful to combine multiple
   features as a single testable release)
+
   - For projects that are deployed (e.g. Vercel, web push, etc), `canary` may be
     used as a permanent preview branch in addition to the permanent `main`
     branch
+
 - Pushing a commit to any branch, opening a PR against `main`/`canary`, or
   synchronizing a PR made against `main`/`canary` will trigger the CI pipeline
+
 - Pushing a commit directly to `main` or `canary` will trigger the CI pipeline
   and, if all tests pass, also trigger the [semantic-release][28]-based CD
   pipeline where:
+
   - Commits pushed to `main` are released on the [default release channel][29]
+
   - Commits pushed to `canary` are released on the [prerelease channel][30]
+
   - Commits pushed to `N.x`/`N.x.x` and `N.N.x` branches are released on their
     respective [maintenance channels][26]
+
   - Commits pushed to other release branches will also generate a release
     depending on [custom configuration][31]
+
   - Commits pushed to branches that aren't the above will never cause the CD
     pipeline to generate a release even if all tests pass
+
 - Force pushing to `main` and `canary` will always fail (unless temporarily
   allowed)
+
 - Commits that include `BREAKING:`, `BREAKING CHANGE:`, or `BREAKING CHANGES:`
   in their message body will be treated as major release commits and will appear
   in [CHANGELOG.md][47] regardless of their type
@@ -172,12 +175,15 @@ even reach the remote CI pipeline.
     ```
 
 - PRs only trigger the CI pipeline and _never_ the CD pipeline
+
 - The CD pipeline never runs in forks of this repository, even when GitHub
   Actions are explicitly enabled (this can be overridden)
+
 - All tags created through this pipeline are annotated and automatically signed.
   To support this and other features that require annotated tags, we use a
   [custom fork of semantic-release][48]. Hopefully [support for][49] [annotated
   tags][50] will be included upstream one day.
+
 - Note that **[all reverts are treated as patches by semantic-release][51]** no
   matter the type of the reverted commit, which means they'll appear in
   [CHANGELOG.md][47] even if the reverted commits wouldn't normally trigger a
