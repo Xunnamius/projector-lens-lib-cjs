@@ -73,7 +73,7 @@ package.
 ```typescript
 import { sum } from '@xunnamius/do-not-install';
 
-sum(2, 2); // == 4
+sum(2, 2); // === 4
 ```
 
 ## Documentation
