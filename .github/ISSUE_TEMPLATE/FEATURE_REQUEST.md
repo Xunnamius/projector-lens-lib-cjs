@@ -1,6 +1,8 @@
 ---
-
-## name: 🤩 Feature request&#xA;about: Tell us about your awesome idea&#xA;labels: 🤩 feature
+name: 🤩 Feature request
+about: Tell us about your awesome idea
+labels: 🤩 feature
+---
 
 <!--
 Include a clear and concise description of what the problem is. If applicable,

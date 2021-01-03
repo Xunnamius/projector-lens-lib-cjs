@@ -1,6 +1,8 @@
 ---
-
-## name: 🤯 Bug report&#xA;about: Create a report and help us improve&#xA;labels: 🤯 bug, needs triage
+name: 🤯 Bug report
+about: Create a report to help us improve
+labels: 🤯 bug, needs triage
+---
 
 <details open><summary><strong>Problematic behavior</strong></summary>
 
