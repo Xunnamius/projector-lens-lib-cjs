@@ -13,7 +13,7 @@ The format is based on [Conventional Commits][210], and this project adheres to
 - **readme.md:** complete skip test ([67264ed][214])
 - **workflows:** replace should-skip determination algo ([cd6236a][215])
 
-# [7.0.0][1] (2021-01-03)
+# [7.0.0][1] (2021-01-03))
 
 ### Features
 
