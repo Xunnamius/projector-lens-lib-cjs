@@ -89,7 +89,7 @@ scripts; **this is optional reading for external collaborators.** You're done!
 <br/>
 <br/>
 
-## The Build-Test-Deploy Pipeline
+## [The Build-Test-Deploy Pipeline][7]
 
 Development in this repository adheres to [Trunk Based Development][18]
 principles, specifically leveraging [_short-lived feature branches_][19] (SLFB)
@@ -199,6 +199,9 @@ ever reach the CI pipeline.
   [custom fork of semantic-release][48]. Hopefully [support for][49] [annotated
   tags][50] will be included upstream one day.
 
+- The CD pipeline will not publish to NPM [so long as package.json contains
+  `private: true`][52]
+
 - Note that **[all reverts are treated as patches by semantic-release][51]** no
   matter the type of the reverted commit, which means they'll appear in
   [CHANGELOG.md][47] even if the reverted commits wouldn't normally trigger a
@@ -218,8 +221,8 @@ The CI/CD pipeline is triggered by two [events][32]:
   - Are of type `synchronize` or `opened`
   - Compare against branches `main` or `canary`
 
-> For NPM packages, the `cleanup` workflow prunes [dist-tags][27] associated
-> with deleted branches and is triggered by the `delete` event.
+> For NPM packages, [the `cleanup` workflow][53] prunes [dist-tags][27]
+> associated with deleted branches and is triggered by the `delete` event.
 
 > The units that make up the pipeline can usually be triggered manually. For
 > workflows, manual invocations are treated as `push`/`delete` events.
@@ -409,3 +412,5 @@ which of the following scripts are available for this project.
 [50]: https://github.com/semantic-release/semantic-release/pull/1710
 [51]:
   https://github.com/semantic-release/commit-analyzer/blob/e8c560459d7ef8752180154ed0263ce262aa22a7/lib/default-release-rules.js#L8
+[52]: https://github.com/semantic-release/npm#options
+[53]: .github/workflows/cleanup.yml
