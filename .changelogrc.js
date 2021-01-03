@@ -132,26 +132,13 @@ module.exports = {
               return null;
             }
 
-            // ? Make scope-less commit subjects sentence case in the
-            // ? changelog per my tastes
-            if (!commit.scope && commit.subject)
-              commit.subject = sentenceCase(commit.subject);
+            if (commit.subject) {
+              // ? Make scope-less commit subjects sentence case in the
+              // ? changelog per my tastes
+              if (!commit.scope) commit.subject = sentenceCase(commit.subject);
 
-            if (commit.originalType == 'revert') {
-              debug('::transform saw special commit type "revert"');
-
-              // ? Ignore reverts that didn't trigger releases
-              if (
-                !allReleaseTriggerCommitTypes.some((t) =>
-                  // ? Example: '"build(package.json): add semver devdep"'
-                  RegExp(`^${escapeRegExpStr(t)}(:|\\()`, 'i').test(commit.revert.header)
-                )
-              ) {
-                debug('::transform this revert was ignored');
-                return null;
-              }
-
-              if (commit.subject) commit.subject = `*${commit.subject}*`;
+              // ? Italicize reverts per my tastes
+              if (commit.originalType == 'revert') commit.subject = `*${commit.subject}*`;
             }
 
             // ? For breaking changes, make all scopes and subjects bold.
