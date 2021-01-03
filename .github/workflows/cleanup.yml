@@ -43,6 +43,7 @@ jobs:
       - name: Determine should-skip
         id: skip-ci
         run: |
+          set +e
           # Get last commit message
           LAST_COMMIT_MSG=$(git log -1 --pretty=format:"%s")
           ! [ -z "$DEBUG" ] && echo "LAST_COMMIT_MSG=$LAST_COMMIT_MSG"
