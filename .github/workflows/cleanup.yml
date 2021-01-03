@@ -90,7 +90,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Reconfigure git auth

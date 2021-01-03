@@ -76,12 +76,6 @@ jobs:
         with:
           fetch-depth: 1 # ! We only skip if the tippy top commit says so!
 
-      - name: Gather CI metadata
-        uses: mstachniuk/ci-skip@v1.2.0
-        with:
-          commit-filter: ${{ env.CI_SKIP_COMMANDS }}
-          commit-filter-separator: ', '
-
       - name: Determine should-skip
         id: skip
         run: |
@@ -396,7 +390,9 @@ jobs:
     needs: metadata
     if: |
       needs.metadata.outputs.should-skip-ci != 'true'
-      && needs.metadata.outputs.has-ii
+      && needs.metadata.outputs.has-integration-browser == 'true'
+    steps:
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           persist-credentials: false
