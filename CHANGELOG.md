@@ -11,7 +11,7 @@ The format is based on [Conventional Commits][205], and this project adheres to
 
 - **.changelogrc.js:** show reverts in changelog ([ec26302][208])
 
-## [6.7.2][1] (2021-01-03)
+## [6.7.2][1] (2021-01-03))
 
 ### Reverts
 
