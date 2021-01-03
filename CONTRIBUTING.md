@@ -196,19 +196,26 @@ ever reach the CI pipeline.
 
 - All tags created through this pipeline are annotated and automatically signed.
   To support this and other features that require annotated tags, we use a
-  [custom fork of semantic-release][48]. Hopefully [support for][49] [annotated
-  tags][50] will be included upstream one day.
+  [custom fork of semantic-release][48]
+
+  - Hopefully [support for][49] [annotated tags][50] will be included upstream
+    one day.
 
 - The CD pipeline will not publish to NPM [so long as package.json contains
   `private: true`][52]
 
-- Note that **[all reverts are treated as patches by semantic-release][51]** no
-  matter the type of the reverted commit, which means they'll appear in
-  [CHANGELOG.md][47] even if the reverted commits wouldn't normally trigger a
-  release. This also means reverting a commit that introduced a breaking change
-  will only trigger a patch release. **Do not push commits that revert
-  release-triggering commits (like `feat` or `fix`) and expect anything other
-  than a patch release!**
+- Note that **[all reverts are treated as patches and immediately
+  released][51]** no matter the type of the reverted commit. This means
+  **commits that were reverted will appear in [CHANGELOG.md][47] even if they
+  didn't trigger an earlier release**
+
+  - This also means **reverting a commit that introduced a breaking change will
+    only trigger a patch release** unless the revert commit itself also includes
+    `BREAKING CHANGE:` in its message body
+
+  - If a push includes only revert commits (and `BREAKING CHANGE:` or an
+    alternative is not present in the top commit's message body), **the result
+    is always a patch release!**
 
 ### Pipeline Trigger Events
 
@@ -279,9 +286,11 @@ message is parsed for commands.
 > Currently, there is only a single supported pipeline command: the ability to
 > skip running the CI/CD pipeline for a given commit
 
-| Command     | Alias(es)                                     | Description                           | Usage Example                              |
-| ----------- | --------------------------------------------- | ------------------------------------- | ------------------------------------------ |
-| `[skip ci]` | `[ci skip]`, `[skip github]`, `[github skip]` | Skip all GitHub-based CI/CD workflows | `git commit -m 'release: 6.3.5 [skip ci]'` |
+| Command         | Alias(es)       | Description                                      | Usage Example                                          |
+| --------------- | --------------- | ------------------------------------------------ | ------------------------------------------------------ |
+| `[skip github]` | `[github skip]` | Skip _all_ workflows (like [cleanup][53])        | `git commit -m 'debug: test [skip github]'`            |
+| `[skip ci]`     | `[ci skip]`     | Skip the [CI workflow][7]                        | `git commit -m 'build: fix CI system [skip ci]'`       |
+| `[skip cd]`     | `[cd skip]`     | Skip only the semantic-release-based CD pipeline | `git commit -m 'style: do-not-release-this [skip cd]'` |
 
 ## NPM Scripts
 
