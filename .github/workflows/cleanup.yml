@@ -26,7 +26,6 @@ jobs:
       should-skip-ci: ${{ steps.skip-ci.outputs.should-skip == 'true' }}
       has-proper-owner: ${{ steps.owner.outputs.is-whitelisted }}
       has-release-config: ${{ steps.data.outputs.has-release-config == 'true' }}
-      has-package-json: ${{ steps.data.outputs.has-package-json == 'true' }}
     steps:
       - name: Report DEBUG mode status
         run: |
@@ -70,9 +69,7 @@ jobs:
         run: |
           set +e
           [ -r release.config.js ] && echo "::set-output name=has-release-config::true"
-          [ -r package.json ] && echo "::set-output name=has-package-json::true"
           ! [ -z "$DEBUG" ] && [ -r release.config.js ] && echo "set-output name=has-release-config::true" || true
-          ! [ -z "$DEBUG" ] && [ -r package.json ] && echo "set-output name=has-package-json::true" || true
 
   cleanup-npm-dist-tags:
     runs-on: ubuntu-latest
@@ -81,7 +78,6 @@ jobs:
       needs.metadata.outputs.should-skip-ci != 'true'
       && needs.metadata.outputs.has-proper-owner == 'true'
       && needs.metadata.outputs.has-release-config == 'true'
-      && needs.metadata.outputs.has-package-json == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -110,7 +106,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm install micromatch
+          npm install --no-save micromatch
           git remote prune origin
           BRANCHES=`git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin`
           ! [ -z "$DEBUG" ] && echo 'BRANCHES=' "$BRANCHES" || true
