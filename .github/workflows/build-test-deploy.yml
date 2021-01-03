@@ -32,6 +32,7 @@ env:
   CI_COMMITTER_EMAIL: bot@xunn.io
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
   CI_SKIP_REGEX: '\[skip ci\]|\[ci skip\]'
+  CD_SKIP_REGEX: '\[skip cd\]|\[cd skip\]'
   # ? Add your GitHub user/org to enable CD pipeline
   # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
@@ -45,7 +46,8 @@ jobs:
     outputs:
       current-branch: ${{ steps.branch.outputs.current-branch }}
       has-proper-owner: ${{ steps.owner.outputs.is-whitelisted }}
-      should-skip-ci: ${{ steps.skip-ci.outputs.should-skip == 'true' }}
+      should-skip-ci: ${{ steps.skip.outputs.should-skip-ci == 'true' }}
+      should-skip-cd: ${{ steps.skip.outputs.should-skip-cd == 'true' }}
       node-matrix: ${{ steps.set-matrix.outputs.node-matrix }}
       webpack-matrix: ${{ steps.set-matrix.outputs.webpack-matrix }}
       has-deploy: ${{ steps.data.outputs.has-deploy == 'true' }}
@@ -81,20 +83,28 @@ jobs:
           commit-filter-separator: ', '
 
       - name: Determine should-skip
-        id: skip-ci
+        id: skip
         run: |
           set +e
-          # Get last commit message
           LAST_COMMIT_MSG=$(git log -1 --pretty=format:"%s")
-          ! [ -z "$DEBUG" ] && echo "LAST_COMMIT_MSG=$LAST_COMMIT_MSG"
+          ! [ -z "$DEBUG" ] && echo "LAST_COMMIT_MSG=$LAST_COMMIT_MSG" || true
+
           echo "$LAST_COMMIT_MSG" | grep -qE "$CI_SKIP_REGEX"
           [ $? -ne 0 ] && CI_SKIP=false || CI_SKIP=true
-          ! [ -z "$DEBUG" ] && echo "CI_SKIP=$CI_SKIP"
-          echo "::set-output name=should-skip::$CI_SKIP"
-          ! [ -z "$DEBUG" ] && echo "set-output name=should-skip::$CI_SKIP" || true
+          ! [ -z "$DEBUG" ] && echo "CI_SKIP=$CI_SKIP" || true
+
+          [ "$CI_SKIP" = 'true' ] || echo "$LAST_COMMIT_MSG" | grep -qE "$CD_SKIP_REGEX"
+          [ $? -ne 0 ] && CD_SKIP=false || CD_SKIP=true
+          ! [ -z "$DEBUG" ] && echo "CD_SKIP=$CD_SKIP" || true
+
+          echo "::set-output name=should-skip-ci::$CI_SKIP"
+          ! [ -z "$DEBUG" ] && echo "set-output name=should-skip-ci::$CI_SKIP" || true
+
+          echo "::set-output name=should-skip-cd::$CD_SKIP"
+          ! [ -z "$DEBUG" ] && echo "set-output name=should-skip-cd::$CD_SKIP" || true
 
       - name: Determine matrixes
-        if: steps.skip-ci.outputs.should-skip != 'true'
+        if: steps.skip.outputs.should-skip-ci != 'true'
         id: set-matrix
         run: |
           echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_CURRENT_VERSION\"]}"
@@ -103,18 +113,18 @@ jobs:
           ! [ -z "$DEBUG" ] && echo "set-output name=webpack-matrix::{\"webpack\":[$WEBPACK_TEST_VERSIONS]}" || true
 
       - name: Gather branch metadata
-        if: steps.skip-ci.outputs.should-skip != 'true'
+        if: steps.skip.outputs.should-skip-ci != 'true'
         uses: nelonoel/branch-name@v1.0.1
 
       - name: Determine current-branch
-        if: steps.skip-ci.outputs.should-skip != 'true'
+        if: steps.skip.outputs.should-skip-ci != 'true'
         id: branch
         run: |
           echo "::set-output name=current-branch::$BRANCH_NAME"
           ! [ -z "$DEBUG" ] && echo "set-output name=current-branch::$BRANCH_NAME" || true
 
       - name: Verify repository owner against whitelist
-        if: steps.skip-ci.outputs.should-skip != 'true'
+        if: steps.skip.outputs.should-skip-ci != 'true'
         id: owner
         run: |
           set +e
@@ -125,13 +135,13 @@ jobs:
           ! [ -z "$DEBUG" ] && echo "set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')" || true
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
-        if: steps.skip-ci.outputs.should-skip != 'true'
+        if: steps.skip.outputs.should-skip-ci != 'true'
         uses: actions/setup-node@v2.1.4
         with:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Gather remaining metadata
-        if: steps.skip-ci.outputs.should-skip != 'true'
+        if: steps.skip.outputs.should-skip-ci != 'true'
         id: data
         run: |
           set +e
@@ -386,9 +396,7 @@ jobs:
     needs: metadata
     if: |
       needs.metadata.outputs.should-skip-ci != 'true'
-      && needs.metadata.outputs.has-integration-browser == 'true'
-    steps:
-      - name: Checkout
+      && needs.metadata.outputs.has-ii
         uses: actions/checkout@v2
         with:
           persist-credentials: false
@@ -479,7 +487,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: metadata
     if: |
-      needs.metadata.outputs.should-skip-ci != 'true'
+      needs.metadata.outputs.should-skip-cd != 'true'
       && github.event_name != 'pull_request'
       && needs.metadata.outputs.has-proper-owner == 'true'
       && needs.metadata.outputs.has-release-config == 'true'

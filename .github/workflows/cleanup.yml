@@ -41,17 +41,18 @@ jobs:
           fetch-depth: 1 # ! We only skip if the tippy top commit says so!
 
       - name: Determine should-skip
-        id: skip-ci
+        id: skip
         run: |
           set +e
-          # Get last commit message
           LAST_COMMIT_MSG=$(git log -1 --pretty=format:"%s")
-          ! [ -z "$DEBUG" ] && echo "LAST_COMMIT_MSG=$LAST_COMMIT_MSG"
+          ! [ -z "$DEBUG" ] && echo "LAST_COMMIT_MSG=$LAST_COMMIT_MSG" || true
+
           echo "$LAST_COMMIT_MSG" | grep -qE "$CI_SKIP_REGEX"
           [ $? -ne 0 ] && CI_SKIP=false || CI_SKIP=true
-          ! [ -z "$DEBUG" ] && echo "CI_SKIP=$CI_SKIP"
-          echo "::set-output name=should-skip::$CI_SKIP"
-          ! [ -z "$DEBUG" ] && echo "set-output name=should-skip::$CI_SKIP" || true
+          ! [ -z "$DEBUG" ] && echo "CI_SKIP=$CI_SKIP" || true
+
+          echo "::set-output name=should-skip-ci::$CI_SKIP"
+          ! [ -z "$DEBUG" ] && echo "set-output name=should-skip-ci::$CI_SKIP" || true
 
       - name: Determine should-skip
         id: skip-ci
