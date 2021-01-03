@@ -31,7 +31,7 @@ env:
   CI_COMMITTER_NAME: xunn-bot
   CI_COMMITTER_EMAIL: bot@xunn.io
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
-  CI_SKIP_COMMANDS: '[skip ci], [ci skip]'
+  CI_SKIP_REGEX: '\[skip ci\]|\[ci skip\]'
   # ? Add your GitHub user/org to enable CD pipeline
   # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
@@ -83,6 +83,12 @@ jobs:
       - name: Determine should-skip
         id: skip-ci
         run: |
+          # Get last commit message
+          LAST_COMMIT_MSG=$(git log -1 --pretty=format:"%s")
+          ! [ -z "$DEBUG" ] && echo "LAST_COMMIT_MSG=$LAST_COMMIT_MSG"
+          echo "$LAST_COMMIT_MSG" | grep -qE "$CI_SKIP_REGEX"
+          [ $? -ne 0 ] && CI_SKIP=false || CI_SKIP=true
+          ! [ -z "$DEBUG" ] && echo "CI_SKIP=$CI_SKIP"
           echo "::set-output name=should-skip::$CI_SKIP"
           ! [ -z "$DEBUG" ] && echo "set-output name=should-skip::$CI_SKIP" || true
 
@@ -249,7 +255,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           # ? codecov-action requires access to git history
-          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Reconfigure git auth
@@ -553,7 +559,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 #1000 https://github.com/mstachniuk/ci-skip#use-cases
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Reconfigure git auth
