@@ -286,11 +286,10 @@ message is parsed for commands.
 > Currently, there is only a single supported pipeline command: the ability to
 > skip running the CI/CD pipeline for a given commit
 
-| Command         | Alias(es)       | Description                                      | Usage Example                                          |
-| --------------- | --------------- | ------------------------------------------------ | ------------------------------------------------------ |
-| `[skip github]` | `[github skip]` | Skip _all_ workflows (like [cleanup][53])        | `git commit -m 'debug: test [skip github]'`            |
-| `[skip ci]`     | `[ci skip]`     | Skip the [CI workflow][7]                        | `git commit -m 'build: fix CI system [skip ci]'`       |
-| `[skip cd]`     | `[cd skip]`     | Skip only the semantic-release-based CD pipeline | `git commit -m 'style: do-not-release-this [skip cd]'` |
+| Command     | Alias(es)   | Description                                      | Usage Example                                          |
+| ----------- | ----------- | ------------------------------------------------ | ------------------------------------------------------ |
+| `[skip ci]` | `[ci skip]` | Skip the [CI workflow][7] (implies `[skip cd]`)  | `git commit -m 'build: fix CI system [skip ci]'`       |
+| `[skip cd]` | `[cd skip]` | Skip only the semantic-release-based CD pipeline | `git commit -m 'style: do-not-release-this [skip cd]'` |
 
 ## NPM Scripts
 
