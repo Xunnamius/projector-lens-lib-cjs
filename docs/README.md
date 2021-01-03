@@ -90,10 +90,10 @@ Defined in: [index.ts:4][8]
 
 [4]: README.md#sum
 
-[5]: https://github.com/Xunnamius/workflow-playground/blob/b93bda9/src/index.ts#L11
+[5]: https://github.com/Xunnamius/workflow-playground/blob/ec26302/src/index.ts#L11
 
-[6]: https://github.com/Xunnamius/workflow-playground/blob/b93bda9/src/index.ts#L25
+[6]: https://github.com/Xunnamius/workflow-playground/blob/ec26302/src/index.ts#L25
 
-[7]: https://github.com/Xunnamius/workflow-playground/blob/b93bda9/src/index.ts#L18
+[7]: https://github.com/Xunnamius/workflow-playground/blob/ec26302/src/index.ts#L18
 
-[8]: https://github.com/Xunnamius/workflow-playground/blob/b93bda9/src/index.ts#L4
+[8]: https://github.com/Xunnamius/workflow-playground/blob/ec26302/src/index.ts#L4
