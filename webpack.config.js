@@ -1,5 +1,4 @@
-// This webpack config is used for helping transpile src/ => dist/ as dual
-// UMD/CJS2+ES2015
+// This webpack config is used to transpile src to dist, compile externals, etc
 
 const debug = require('debug')(`${require('./package.json').name}:webpack-config`);
 
@@ -23,6 +22,9 @@ module.exports = {
     providedExports: true,
     usedExports: true
   },
+
+  //externals: [nodeExternals()],
+  //externalsPresets: { node: true },
 
   resolve: { extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'] },
   module: {

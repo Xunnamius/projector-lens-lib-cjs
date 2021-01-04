@@ -30,6 +30,10 @@ The ideal contributor flow is as follows:
       more sense to use `npm install` feel free to use that instead
     - If `.env.example` exists, consider copying it to `.env` and configuring
       sensible defaults
+    - If you're using `npm@<=6`, you'll need to install any [peer
+      dependencies][54] manually. If you're using `npm@>=7`, you may have to
+      [forcefully][55] allow peer deps to be satisfied by custom forks of
+      certain packages
 3.  Before making any changes, ensure all unit tests are passing: `npm run test`
 4.  _(optional but recommended)_ Create a new branch, usually off `main`
     - Example: `git checkout -b contrib-feature-1`
@@ -421,3 +425,7 @@ which of the following scripts are available for this project.
   https://github.com/semantic-release/commit-analyzer/blob/e8c560459d7ef8752180154ed0263ce262aa22a7/lib/default-release-rules.js#L8
 [52]: https://github.com/semantic-release/npm#options
 [53]: .github/workflows/cleanup.yml
+[54]:
+  https://docs.npmjs.com/cli/v6/configuring-npm/package-json#peerdependencies
+[55]:
+  https://docs.npmjs.com/cli/v7/commands/npm-install#configuration-options-affecting-dependency-resolution-and-tree-design
