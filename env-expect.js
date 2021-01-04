@@ -92,10 +92,14 @@ module.exports = {
             )
           )
         };
-      } else if (typeof rule.name == 'string') {
-        rule.name = RegExp(rule.name);
+      } else if (typeof rule.name == 'string' || rule.name instanceof RegExp) {
+        rule.name = rule.name instanceof RegExp ? rule.name : RegExp(rule.name);
         rule.value =
-          typeof rule.value == 'string' ? RegExp(rule.value) : DEFAULT_VALUE_REGEX[0];
+          typeof rule.value == 'string'
+            ? RegExp(rule.value)
+            : rule.value instanceof RegExp
+            ? rule.value
+            : DEFAULT_VALUE_REGEX[0];
 
         normalizedRule = {
           operation: 'or',
@@ -152,6 +156,7 @@ module.exports = {
           )
         };
       } else {
+        debug('::normalize BAD RULE ENCOUNTERED = %O', rule);
         throw new IllegalEnvironmentError(
           `bad rule encountered${
             fromPkg ? ' in ./package.json "env-expect"' : ''
