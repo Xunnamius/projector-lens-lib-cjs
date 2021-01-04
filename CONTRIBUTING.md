@@ -18,7 +18,7 @@ around!
 
 This repository makes extensive use of [debug][44] (through [rejoinder][45]).
 Should you wish to view all possible debugging output, [export `DEBUG='*'`][46].
-To get debugging output for just this application/pipeline, [export
+To get debugging output for just this project's components, [export
 `DEBUG='@xunnamius/do-not-install:*'`][46].
 
 The ideal contributor flow is as follows:
