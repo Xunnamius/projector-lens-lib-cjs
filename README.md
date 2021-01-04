@@ -25,6 +25,9 @@ automation scripts and the like.
 
 ## Install
 
+> Note: NPM versions >=7 may need `npm install --legacy-peer-deps` until
+> [upstream peer dependency problems are resolved][1].
+
 ```shell
 npm install @xunnamius/do-not-install
 ```
@@ -145,3 +148,5 @@ information.
 [side-effects-key]:
   https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free
 [tree-shaking]: https://webpack.js.org/guides/tree-shaking
+[1]:
+  https://github.blog/2020-10-13-presenting-v7-0-0-of-the-npm-cli/#user-content-breaking-changes
