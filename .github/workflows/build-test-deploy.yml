@@ -247,7 +247,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs npm install --no-save
+          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs -r -- npm install --no-save
 
       - name: Lint
         run: npm run lint
@@ -286,7 +286,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs npm install --no-save
+          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs -r -- npm install --no-save
 
       - name: Test unit
         run: npm run test-unit
@@ -340,7 +340,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs npm install --no-save
+          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs -r -- npm install --no-save
 
       - name: Build distributables
         run: npm run build-dist
@@ -389,7 +389,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs npm install --no-save
+          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs -r -- npm install --no-save
 
       - name: Build externals
         run: npm run build-externals
@@ -445,7 +445,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs npm install --no-save
+          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs -r -- npm install --no-save
 
       - name: Build distributables
         run: npm run build-dist
@@ -490,7 +490,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs npm install --no-save
+          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs -r -- npm install --no-save
 
       - name: Build distributables
         run: npm run build-dist
@@ -547,7 +547,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs npm install --no-save
+          node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))' | xargs -r -- npm install --no-save
 
       - name: Pre source formatting
         run: npm run format
