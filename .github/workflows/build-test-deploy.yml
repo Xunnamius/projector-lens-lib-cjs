@@ -24,7 +24,7 @@ on:
 env:
   # * Selectively enable debugger verbose output in the pipeline
   # ? See also: https://www.npmjs.com/package/debug#wildcards
-  # DEBUG: '@xunnamius/do-not-install:*'
+  # DEBUG: 'next-test-api-route-handler:*'
   NODE_CURRENT_VERSION: 15.x
   NODE_TEST_VERSIONS: '"10.x", "12.x", "14.x"' # * NODE_CURRENT_VERSION included automatically
   WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
@@ -339,6 +339,8 @@ jobs:
         run: npm run build-dist
 
       - name: Test integration
+        env:
+          MATRIX_NODE_VERSION: ${{ matrix.node }}
         run: npm run test-integration-node
 
   test-integration-externals:
@@ -382,6 +384,8 @@ jobs:
         run: npm run build-externals
 
       - name: Test integration
+        env:
+          MATRIX_NODE_VERSION: ${{ matrix.node }}
         run: npm run test-integration-externals
 
   test-integration-browser:
@@ -468,6 +472,8 @@ jobs:
         run: npm install webpack@${{ matrix.webpack }}
 
       - name: Test integration
+        env:
+          MATRIX_WEBPACK_VERSION: ${{ matrix.webpack }}
         run: npm run test-integration-webpack
 
   # * === The end of CI (build and test) and the beginning of CD (deploy) === *
