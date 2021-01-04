@@ -192,6 +192,9 @@
     "webpack-cli": "^4.3.0",
     "webpack-node-module-types": "^1.0.4"
   },
+  "peerDependencies": {
+    "next": ">=9.5.x"
+  },
   "engines": {
     "node": ">=10.x"
   },
