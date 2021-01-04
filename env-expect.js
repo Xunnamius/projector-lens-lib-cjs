@@ -13,9 +13,12 @@ module.exports = {
    * `rules` is not defined, the "rules" defined under the "env-expect" key in
    * ./package.json are used instead.
    *
+   * Below, "name" is the name of an environment variable and "value" is its
+   * expected value.
+   *
    * Each rule can be one of:
    *
-   * (1) A regex STRING interpreted as RegExp(`^${STRING}$`)
+   * (1) A simple STRING variable "name" interpreted as RegExp(`^${STRING}$`)
    *
    * (2) An OBJECT where "name" and "value" are both regex STRINGs; "required"
    * is optional and defaults to `true`; and "errorMessage" is optional:
@@ -73,9 +76,11 @@ module.exports = {
       debug('::normalize (not normalized) = %O', rule);
 
       if (typeof rule == 'string' || rule instanceof RegExp) {
-        rule = rule.startsWith('^') ? rule.slice(1) : rule;
-        rule = rule.startsWith('$') ? rule.slice(0, -1) : rule;
-        rule = RegExp(`^${rule}$`);
+        if (typeof rule == 'string') {
+          rule = rule.startsWith('^') ? rule.slice(1) : rule;
+          rule = rule.startsWith('$') ? rule.slice(0, -1) : rule;
+          rule = RegExp(`^${rule}$`);
+        }
 
         normalizedRule = {
           operation: 'or',
