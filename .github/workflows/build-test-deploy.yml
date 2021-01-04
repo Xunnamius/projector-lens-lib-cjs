@@ -507,9 +507,6 @@ jobs:
       - name: Build distributables
         run: npm run build-dist
 
-      - name: Install webpack@${{ matrix.webpack }}
-        run: npm install webpack@${{ matrix.webpack }}
-
       - name: Test integration
         env:
           MATRIX_WEBPACK_VERSION: ${{ matrix.webpack }}
