@@ -288,7 +288,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
+          PEER_DEPS=$(node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))')
           ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
           ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
@@ -344,7 +344,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
+          PEER_DEPS=$(node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))')
           ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
           ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
@@ -395,7 +395,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
+          PEER_DEPS=$(node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))')
           ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
           ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
@@ -453,7 +453,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
+          PEER_DEPS=$(node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))')
           ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
           ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
@@ -500,7 +500,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
+          PEER_DEPS=$(node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))')
           ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
           ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
@@ -559,7 +559,7 @@ jobs:
       - name: Install CI dependencies
         run: |
           npm ci
-          PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
+          PEER_DEPS=$(node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))')
           ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
           ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
