@@ -2,362 +2,368 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Conventional Commits][220], and this project adheres to
-[Semantic Versioning][221].
+The format is based on [Conventional Commits][222], and this project adheres to
+[Semantic Versioning][223].
 
-## [7.2.2][222] (2021-01-03)
+## [7.2.3][224] (2021-01-04)
 
-### Bug Fixes
+### Build System
 
-- Add remark frontmatter support ([a8cd378][223])
+- Updates back-ported from package migration ([7869420][225])
 
-## [7.2.1][1] (2021-01-03)
-
-### Bug Fixes
-
-- **templates:** fix strange issue template problems ([73edb9a][2])
-
-# [7.2.0][3] (2021-01-03)
+## [7.2.2][1] (2021-01-03)
 
 ### Bug Fixes
 
-- **changelog.md:** conclude tests _breaks champagne glass_ ([864253c][4])
-- **workflows:** actually fix should-skip determination algo ([bf8c76b][5])
-- **workflows:** fix should-skip determination algo ([f7d1256][6])
+- Add remark frontmatter support ([a8cd378][2])
 
-# [7.1.0][7] (2021-01-03)
+## [7.2.1][3] (2021-01-03)
 
 ### Bug Fixes
 
-- **.github:** add set +e to should-skip ([27c9750][8])
-- **readme.md:** complete skip test ([67264ed][9])
-- **workflows:** replace should-skip determination algo ([cd6236a][10])
+- **templates:** fix strange issue template problems ([73edb9a][4])
 
-# [7.0.0][11] (2021-01-03)
+# [7.2.0][5] (2021-01-03)
+
+### Bug Fixes
+
+- **changelog.md:** conclude tests _breaks champagne glass_ ([864253c][6])
+- **workflows:** actually fix should-skip determination algo ([bf8c76b][7])
+- **workflows:** fix should-skip determination algo ([f7d1256][8])
+
+# [7.1.0][9] (2021-01-03)
+
+### Bug Fixes
+
+- **.github:** add set +e to should-skip ([27c9750][10])
+- **readme.md:** complete skip test ([67264ed][11])
+- **workflows:** replace should-skip determination algo ([cd6236a][12])
+
+# [7.0.0][13] (2021-01-03)
 
 ### Features
 
-- **changelog.md:** add skip cd/cd skip pipeline commands ([5765c02][12])
+- **changelog.md:** add skip cd/cd skip pipeline commands ([5765c02][14])
 
 ### BREAKING CHANGES
 
 - **changelog.md:** **skip github/github skip options were removed**
 
-## [6.7.3][13] (2021-01-03)
+## [6.7.3][15] (2021-01-03)
 
 ### Bug Fixes
 
-- **.changelogrc.js:** show reverts in changelog ([ec26302][14])
+- **.changelogrc.js:** show reverts in changelog ([ec26302][16])
 
 ### Reverts
 
-- _"chore(changelog.md): update pipeline usage bullets"_ ([6e9fb73][15])
+- _"chore(changelog.md): update pipeline usage bullets"_ ([6e9fb73][17])
 
-## [6.7.2][16] (2021-01-03)
+## [6.7.2][18] (2021-01-03)
 
 ### Reverts
 
-- _"chore(readme.md): debug chore"_ ([38bfb77][17])
-- _"debug(readme.md): debug debug"_ ([aff005d][18])
+- _"chore(readme.md): debug chore"_ ([38bfb77][19])
+- _"debug(readme.md): debug debug"_ ([aff005d][20])
 
-## [6.7.1][19] (2021-01-02)
-
-### Bug Fixes
-
-- **.changelogrc.js:** exclude pre-releases ([c24773e][20])
-- **.changelogrc.js:** fix bad type bug ([ff94fe1][21])
-- **.changelogrc.js:** several writer glitches fixed ([717ffdb][22])
-
-### Build System
-
-- **package.json:** better build-changelog ([f2e971e][23])
-
-# [6.7.0][24] (2021-01-02)
-
-### Features
-
-- **.changelogrc.js:** reintroduced selective capitalization ([1fdcb9c][25])
-
-# [6.6.0][26] (2021-01-02)
+## [6.7.1][21] (2021-01-02)
 
 ### Bug Fixes
 
-- **.changelogrc.js:** correct improper array access ([0cb2645][27])
+- **.changelogrc.js:** exclude pre-releases ([c24773e][22])
+- **.changelogrc.js:** fix bad type bug ([ff94fe1][23])
+- **.changelogrc.js:** several writer glitches fixed ([717ffdb][24])
 
 ### Build System
 
-- **.changelogrc.js:** fix revision filtering during generation ([ac06b33][28])
-- **.changelogrc.js:** fix spread bug ([c6a3cd6][29])
+- **package.json:** better build-changelog ([f2e971e][25])
+
+# [6.7.0][26] (2021-01-02)
 
 ### Features
 
-- **.changelogrc.js:** centralize release rules ([69ec71f][30])
-- **release.config.js:** use imported releaseRules ([2fe163c][31])
+- **.changelogrc.js:** reintroduced selective capitalization ([1fdcb9c][27])
 
-## [6.5.1][32] (2021-01-02)
+# [6.6.0][28] (2021-01-02)
 
 ### Bug Fixes
 
-- **release.config.js:** add title to releaseRules objects ([99c2868][33])
+- **.changelogrc.js:** correct improper array access ([0cb2645][29])
 
 ### Build System
 
-- **.changelogrc.js:** add debug output to .changelogrc.js ([d47c48b][34])
-
-# [6.5.0][35] (2021-01-02)
+- **.changelogrc.js:** fix revision filtering during generation ([ac06b33][30])
+- **.changelogrc.js:** fix spread bug ([c6a3cd6][31])
 
 ### Features
 
-- **.changelogrc.js:** add debug to all javascript ([54488d9][36])
+- **.changelogrc.js:** centralize release rules ([69ec71f][32])
+- **release.config.js:** use imported releaseRules ([2fe163c][33])
 
-## [6.4.3][37] (2021-01-02)
+## [6.5.1][34] (2021-01-02)
+
+### Bug Fixes
+
+- **release.config.js:** add title to releaseRules objects ([99c2868][35])
+
+### Build System
+
+- **.changelogrc.js:** add debug output to .changelogrc.js ([d47c48b][36])
+
+# [6.5.0][37] (2021-01-02)
+
+### Features
+
+- **.changelogrc.js:** add debug to all javascript ([54488d9][38])
+
+## [6.4.3][39] (2021-01-02)
 
 ### Bug Fixes
 
 - **build-test-deploy.yml:** debug pipeline statements always return true
-  ([b759c31][38])
+  ([b759c31][40])
 
 ### Build System
 
-- **.github:** fix debug scope name (leave / alone) ([de2c7b1][39])
-- **package.json:** remove deploy test script ([4fb641c][40])
+- **.github:** fix debug scope name (leave / alone) ([de2c7b1][41])
+- **package.json:** remove deploy test script ([4fb641c][42])
 
-## [6.4.2][41] (2021-01-02)
-
-### Build System
-
-- **.github:** add DEBUG support to metadata gathering steps ([6b2e238][42])
-
-## [6.4.1][43] (2021-01-02)
+## [6.4.2][43] (2021-01-02)
 
 ### Build System
 
-- **.github/workflows/build-test-deploy.yml:** add DEBUG support ([de7ef33][44])
-- **release.config.js:** fix bracket scoping issue ([c8ef15e][45])
+- **.github:** add DEBUG support to metadata gathering steps ([6b2e238][44])
+
+## [6.4.1][45] (2021-01-02)
+
+### Build System
+
+- **.github/workflows/build-test-deploy.yml:** add DEBUG support ([de7ef33][46])
+- **release.config.js:** fix bracket scoping issue ([c8ef15e][47])
 - **release.config.js:** fix deploy to run at success step; add debug output
-  ([b9e8cc5][46])
+  ([b9e8cc5][48])
 
-# [6.4.0][47] (2021-01-02)
+# [6.4.0][49] (2021-01-02)
 
 ### Features
 
-- **package.json:** vercel deploy test ([ed73fc3][48])
+- **package.json:** vercel deploy test ([ed73fc3][50])
 
-## [6.3.8][49] (2021-01-02)
+## [6.3.8][51] (2021-01-02)
 
 ### Build System
 
 - **build-test-deploy.yml:** add awareness of deploy npm script to pipeline
-  ([d923b29][50])
+  ([d923b29][52])
 
-## [6.3.7][51] (2021-01-02)
-
-### Build System
-
-- **.github/workflows/cleanup.yml:** fix metadata gathering step ([44dd462][52])
-
-## [6.3.6][53] (2021-01-01)
+## [6.3.7][53] (2021-01-02)
 
 ### Build System
 
-- **.github/workflows/cleanup.yml:** add metadata filtering step ([6667075][54])
+- **.github/workflows/cleanup.yml:** fix metadata gathering step ([44dd462][54])
 
-## [6.3.5][55] (2021-01-01)
-
-### Build System
-
-- **.github:** fix hardcoded package name ([a10bac3][56])
-
-## [6.3.4][57] (2021-01-01)
+## [6.3.6][55] (2021-01-01)
 
 ### Build System
 
-- Move npm lint step before lint-staged in husky hook ([e8bac90][58])
-- Update remark linting to exit 1 on error, quiet on success ([077abce][59])
-- Update sort-package-json to contrib-env-expect ([6885a34][60])
+- **.github/workflows/cleanup.yml:** add metadata filtering step ([6667075][56])
+
+## [6.3.5][57] (2021-01-01)
+
+### Build System
+
+- **.github:** fix hardcoded package name ([a10bac3][58])
+
+## [6.3.4][59] (2021-01-01)
+
+### Build System
+
+- Move npm lint step before lint-staged in husky hook ([e8bac90][60])
+- Update remark linting to exit 1 on error, quiet on success ([077abce][61])
+- Update sort-package-json to contrib-env-expect ([6885a34][62])
 - **pre-commit:** decentralize remark; more resilient build system
-  ([ba0ef58][61])
+  ([ba0ef58][63])
 
-## [6.3.3][62] (2021-01-01)
+## [6.3.3][64] (2021-01-01)
 
 ### Build System
 
 - **pre-commit:** centralize remark; add markdown and eslint linting to CL
-  ([772dee1][63])
+  ([772dee1][65])
 - **pre-commit:** move eslint (and tsc) CL linting out of lint-staged and
-  directly into husky ([e38af90][64])
+  directly into husky ([e38af90][66])
 
-## [6.3.2][65] (2021-01-01)
+## [6.3.2][67] (2021-01-01)
 
 ### Build System
 
-- **.github:** fix pre/post formatting steps ([f757db8][66])
+- **.github:** fix pre/post formatting steps ([f757db8][68])
 
-## [6.3.1][67] (2021-01-01)
+## [6.3.1][69] (2021-01-01)
 
 ### Bug Fixes
 
-- **test:** improve test coverage ([7f4a70a][68])
+- **test:** improve test coverage ([7f4a70a][70])
 
-# [6.3.0][69] (2021-01-01)
+# [6.3.0][71] (2021-01-01)
 
 ### Build System
 
-- **package.json:** simplify lint ([dda943e][70])
+- **package.json:** simplify lint ([dda943e][72])
 
 ### Features
 
-- **src:** add div function ([636c353][71])
+- **src:** add div function ([636c353][73])
 
-# [6.2.0][72] (2021-01-01)
+# [6.2.0][74] (2021-01-01)
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** add remark and formatting steps
-  ([e16cd8b][73])
-- **.husky:** remove verbose flag ([538c374][74])
-- **package.json:** fix lint-staged remark and prettier ([6fbd1df][75])
-- **package.json:** remove debug echo ([33a510d][76])
-- **release.config.js:** fix to use gfm ([db4c284][77])
+  ([e16cd8b][75])
+- **.husky:** remove verbose flag ([538c374][76])
+- **package.json:** fix lint-staged remark and prettier ([6fbd1df][77])
+- **package.json:** remove debug echo ([33a510d][78])
+- **release.config.js:** fix to use gfm ([db4c284][79])
 
 ### Features
 
-- **package.json:** add remark-gfm; test lint-staged ([bcbf3f5][78])
+- **package.json:** add remark-gfm; test lint-staged ([bcbf3f5][80])
 
-## [6.1.7][79] (2020-12-31)
+## [6.1.7][81] (2020-12-31)
 
 ### Bug Fixes
 
-- **README.md:** simulated external-PR fix ([8a7fc06][80])
+- **README.md:** simulated external-PR fix ([8a7fc06][82])
 
 ### Reverts
 
-- _"chore(readme.md): format husky test"_ ([9675eeb][81])
+- _"chore(readme.md): format husky test"_ ([9675eeb][83])
 
-## [6.1.6][82] (2020-12-30)
+## [6.1.6][84] (2020-12-30)
 
 ### Build System
 
 - **package.json:** conclude dynamic continuous integration tests
-  ([828751d][83])
+  ([828751d][85])
 
-## [6.1.5][84] (2020-12-30)
+## [6.1.5][86] (2020-12-30)
 
 ### Bug Fixes
 
 - **build-test-deploy.yml:** clearer error language with invalid externals
-  config ([d8ed033][85])
+  config ([d8ed033][87])
 
-## [6.1.4][86] (2020-12-30)
+## [6.1.4][88] (2020-12-30)
 
 ### Reverts
 
-- _"build(build-test-deploy.yml): debug should warn"_ ([44f5cd4][87])
+- _"build(build-test-deploy.yml): debug should warn"_ ([44f5cd4][89])
 
-## [6.1.3][88] (2020-12-30)
-
-### Build System
-
-- **build-test-deploy.yml:** debug should warn ([55e1235][89])
-- **build-test-deploy.yml:** fix syntax error ([5448960][90])
-
-## [6.1.2][91] (2020-12-30)
+## [6.1.3][90] (2020-12-30)
 
 ### Build System
 
-- **.github:** better snyk ignore ([5921653][92])
-- **package.json:** remove high audit CI failure ([b2ea6f1][93])
-- **package.json:** test high audit CI failure ([03825f0][94])
+- **build-test-deploy.yml:** debug should warn ([55e1235][91])
+- **build-test-deploy.yml:** fix syntax error ([5448960][92])
 
-## [6.1.1][95] (2020-12-30)
+## [6.1.2][93] (2020-12-30)
+
+### Build System
+
+- **.github:** better snyk ignore ([5921653][94])
+- **package.json:** remove high audit CI failure ([b2ea6f1][95])
+- **package.json:** test high audit CI failure ([03825f0][96])
+
+## [6.1.1][97] (2020-12-30)
 
 ### Bug Fixes
 
-- **readme.md:** dummy fix ([bda2d5e][96])
+- **readme.md:** dummy fix ([bda2d5e][98])
 
-# [6.1.0][97] (2020-12-30)
+# [6.1.0][99] (2020-12-30)
 
 ### Bug Fixes
 
-- **readme.md:** dummy fix ([b9d92fd][98])
+- **readme.md:** dummy fix ([b9d92fd][100])
 
 ### Features
 
-- **readme.md:** dummy feat ([f90dde3][99])
+- **readme.md:** dummy feat ([f90dde3][101])
 
-## [6.0.5][100] (2020-12-30)
+## [6.0.5][102] (2020-12-30)
 
 ### Bug Fixes
 
-- **readme.md:** add codecov badge ([4b6c84c][101])
+- **readme.md:** add codecov badge ([4b6c84c][103])
 
-## [6.0.4][102] (2020-12-30)
-
-### Build System
-
-- **.github:** more resilient cleanup routine ([85b8e12][103])
-
-## [6.0.3][104] (2020-12-30)
+## [6.0.4][104] (2020-12-30)
 
 ### Build System
 
-- **.github:** better cleanup caching ([02746df][105])
-- **.github:** fix cleanup ([7520e0f][106])
+- **.github:** more resilient cleanup routine ([85b8e12][105])
 
-## [6.0.2][107] (2020-12-30)
-
-### Build System
-
-- **cleanup.yml:** add cleanup workflow ([747a674][108])
-- **release.config.js:** remove console.info ([b374296][109])
-
-## [6.0.1][110] (2020-12-30)
+## [6.0.3][106] (2020-12-30)
 
 ### Build System
 
-- **.github:** ensure deploy stage is using latest node and npm ([d40192b][111])
+- **.github:** better cleanup caching ([02746df][107])
+- **.github:** fix cleanup ([7520e0f][108])
 
-# [6.0.0][112] (2020-12-30)
+## [6.0.2][109] (2020-12-30)
+
+### Build System
+
+- **cleanup.yml:** add cleanup workflow ([747a674][110])
+- **release.config.js:** remove console.info ([b374296][111])
+
+## [6.0.1][112] (2020-12-30)
+
+### Build System
+
+- **.github:** ensure deploy stage is using latest node and npm ([d40192b][113])
+
+# [6.0.0][114] (2020-12-30)
 
 ### Features
 
-- **readme.md:** fake feature ([95a13d2][113])
+- **readme.md:** fake feature ([95a13d2][115])
 
 ### BREAKING CHANGES
 
 - **readme.md:** **fake breaking change**
 
-## [5.0.3][114] (2020-12-29)
+## [5.0.3][116] (2020-12-29)
 
 ### Build System
 
 - **.github:** loosen CD pipeline launch check: run CD on all branches
-  ([0a91fad][115])
+  ([0a91fad][117])
 
 ### Reverts
 
-- _"chore(.gitignore): ignore coverage"_ ([4aab0bd][116])
+- _"chore(.gitignore): ignore coverage"_ ([4aab0bd][118])
 
-## [5.0.2][117] (2020-12-29)
+## [5.0.2][119] (2020-12-29)
 
 ### Build System
 
 - **.github:** add codecov config and add fetch-depth to test-unit
-  ([e62c5b4][118])
+  ([e62c5b4][120])
 
-## [5.0.1][119] (2020-12-29)
+## [5.0.1][121] (2020-12-29)
 
 ### Build System
 
-- **.github:** add codecov-action to test-unit job ([2ef6297][120])
-- **package.json:** add codecov package ([d73cac9][121])
-- **package.json:** remove codecov package ([da477b7][122])
+- **.github:** add codecov-action to test-unit job ([2ef6297][122])
+- **package.json:** add codecov package ([d73cac9][123])
+- **package.json:** remove codecov package ([da477b7][124])
 
-# [5.0.0][123] (2020-12-29)
+# [5.0.0][125] (2020-12-29)
 
 ### Chore
 
-- Fix capitalization of non-release commit types ([7391321][124])
+- Fix capitalization of non-release commit types ([7391321][126])
 
 ### BREAKING CHANGES
 
@@ -365,16 +371,16 @@ The format is based on [Conventional Commits][220], and this project adheres to
 - **Dummy BC 9**
 - **Dummy BCs 10, 8, and 6**
 
-# [4.0.0][125] (2020-12-29)
+# [4.0.0][127] (2020-12-29)
 
 ### Bug Fixes
 
 - **.changelogrc.js:** remove BC capitalization and sentence-case code
-  ([02662fc][126])
+  ([02662fc][128])
 
 ### Chore
 
-- Update comment language ([5a2aef4][127])
+- Update comment language ([5a2aef4][129])
 
 ### BREAKING CHANGES
 
@@ -382,48 +388,48 @@ The format is based on [Conventional Commits][220], and this project adheres to
 - **Dummy BC 2**
 - **Dummy BCs 3, 4, and 5**
 
-## [3.0.1][128] (2020-12-28)
+## [3.0.1][130] (2020-12-28)
 
 ### Bug Fixes
 
-- **.github:** update ci committer name and email to xunn-bot ([b151491][129])
-- **package.json:** update typedoc to latest beta and fix npmbd ([783ba76][130])
+- **.github:** update ci committer name and email to xunn-bot ([b151491][131])
+- **package.json:** update typedoc to latest beta and fix npmbd ([783ba76][132])
 
 ### Build System
 
-- **package.json:** update deps ([a876517][131])
+- **package.json:** update deps ([a876517][133])
 
-# [3.0.0][132] (2020-12-07)
+# [3.0.0][134] (2020-12-07)
 
 ### Bug Fixes
 
-- **.github/workflows:** fix syntax: "no-ci/\*\*" ([b060d3e][133])
-- **config:** rename changelog.config.js to .changelogrc.js ([d5dfc50][134])
-- **package.json:** use @xunnamius/semantic-release ([0447d59][135])
+- **.github/workflows:** fix syntax: "no-ci/\*\*" ([b060d3e][135])
+- **config:** rename changelog.config.js to .changelogrc.js ([d5dfc50][136])
+- **package.json:** use @xunnamius/semantic-release ([0447d59][137])
 
 ### Build System
 
 - **.github/workflows:** build system now ignores branches with names that begin
-  with "no-ci/" ([3a4bdff][136])
+  with "no-ci/" ([3a4bdff][138])
 - **.github/workflows:** workflow no longer triggered on tag push,
-  dependabot/snyk push ([1096e6f][137])
-- **package-lock.json:** fix syntax error ([4fd2952][138])
+  dependabot/snyk push ([1096e6f][139])
+- **package-lock.json:** fix syntax error ([4fd2952][140])
 
 ### Debug
 
 - Update semantic-release to Xunnamius/semantic-release#contrib-holistic
-  ([446e961][139])
+  ([446e961][141])
 
 ### Features
 
-- Added mult function ([e537358][140])
+- Added mult function ([e537358][142])
 
 ### Reverts
 
 - _"chore(.github/workflows): exclude ./.git from build caching"_
-  ([b75d8ac][141])
-- _"debug(.github/workflows): fake change"_ ([d59bb1a][142])
-- _"debug(.github/workflows): test force push protection"_ ([4cc6ee6][143])
+  ([b75d8ac][143])
+- _"debug(.github/workflows): fake change"_ ([d59bb1a][144])
+- _"debug(.github/workflows): test force push protection"_ ([4cc6ee6][145])
 
 ### BREAKING CHANGES
 
@@ -442,179 +448,179 @@ Ack: Tre Signed: Yup!
 
 This is a simulated breaking change.
 
-## [2.3.4][144] (2020-12-03)
+## [2.3.4][146] (2020-12-03)
 
 ### Build System
 
-- **commitlint:** add debug type to type-enum ([10c71bf][145])
+- **commitlint:** add debug type to type-enum ([10c71bf][147])
 - **config:** fix changelog.config.js bug when subject is undefined
-  ([57e0c16][146])
-- **package.json:** downgrade puppeteer and upgrade other deps ([e5d6d42][147])
-- Added .env.example and env-expect ([efb29c5][148])
+  ([57e0c16][148])
+- **package.json:** downgrade puppeteer and upgrade other deps ([e5d6d42][149])
+- Added .env.example and env-expect ([efb29c5][150])
 
 ### Reverts
 
-- revert "debug: switch actions ci to install" ([f9a3e23][149])
+- revert "debug: switch actions ci to install" ([f9a3e23][151])
 
-## [2.3.3][150] (2020-11-30)
+## [2.3.3][152] (2020-11-30)
 
 ### Bug Fixes
 
 - **spellcheck:** fix incorrect parsing of global cspell vscode settings
-  ([c2789bf][151])
+  ([c2789bf][153])
 
 ### Build System
 
-- **release:** fix changelogTitle skip title ([1dcdcc1][152])
+- **release:** fix changelogTitle skip title ([1dcdcc1][154])
 
-## [2.3.2][153] (2020-11-30)
-
-### Build System
-
-- **release:** fix changelogTitle spread bug ([598a396][154])
-
-## [2.3.1][155] (2020-11-30)
+## [2.3.2][155] (2020-11-30)
 
 ### Build System
 
-- Install @semantic-release/changelog ([022603b][156])
-- **release:** fix changelogTitle bug ([0d181ea][157])
-- **release:** fix SHOULD_UPDATE_CHANGELOG conditional ([ec632ad][158])
+- **release:** fix changelogTitle spread bug ([598a396][156])
 
-# [2.3.0][159] (2020-11-30)
+## [2.3.1][157] (2020-11-30)
+
+### Build System
+
+- Install @semantic-release/changelog ([022603b][158])
+- **release:** fix changelogTitle bug ([0d181ea][159])
+- **release:** fix SHOULD_UPDATE_CHANGELOG conditional ([ec632ad][160])
+
+# [2.3.0][161] (2020-11-30)
 
 ### Features
 
-- **tooling:** spellcheck now ignores camelCase et al ([d921382][160])
+- **tooling:** spellcheck now ignores camelCase et al ([d921382][162])
 
 ### Performance Improvements
 
-- Better faster spellchecking ([c44c310][161])
+- Better faster spellchecking ([c44c310][163])
 
-## [2.2.2][162] (2020-11-29)
+## [2.2.2][164] (2020-11-29)
 
 ### Build System
 
 - **changelog:** changelog now includes relevant build-type commits
-  ([d630264][163])
+  ([d630264][165])
 
-## [2.2.1][164] (2020-11-29)
+## [2.2.1][166] (2020-11-29)
 
 ### Build System
 
-- **changelog:** changelog now includes relevant reverts ([d4ccacb][165])
+- **changelog:** changelog now includes relevant reverts ([d4ccacb][167])
 
-# [2.2.0][166] (2020-11-29)
+# [2.2.0][168] (2020-11-29)
 
 ### Bug Fixes
 
 - **actions:** bring metadata collection in-line with new format
-  ([a62380b][167])
+  ([a62380b][169])
 - **config:** changelog config honors skip commands, leaves reverts alone
-  ([823f8b5][168])
-- **config:** fix broken changelog.config.js structure ([bd10f44][169])
-- **package.json:** downgrade typedoc and assoc plugins ([46db2ee][170])
-- **package.json:** install lint-staged dep and script ([f3800e4][171])
-- **package.json:** install spellcheck dependencies ([9a7adb4][172])
-- **spellcheck:** change "contains" to "includes" ([af76dbe][173])
+  ([823f8b5][170])
+- **config:** fix broken changelog.config.js structure ([bd10f44][171])
+- **package.json:** downgrade typedoc and assoc plugins ([46db2ee][172])
+- **package.json:** install lint-staged dep and script ([f3800e4][173])
+- **package.json:** install spellcheck dependencies ([9a7adb4][174])
+- **spellcheck:** change "contains" to "includes" ([af76dbe][175])
 - **spellcheck:** fix bug where spellcheck reads from wrong message source
-  ([69a25ba][174])
-- **spellcheck:** spellcheck now leverages assorted knowledge ([14b86ae][175])
+  ([69a25ba][176])
+- **spellcheck:** spellcheck now leverages assorted knowledge ([14b86ae][177])
 
 ### Build System
 
-- Install @semantic-release/exec ([cc94940][176])
+- Install @semantic-release/exec ([cc94940][178])
 - **config:** fix changelog.config.js operating on individual releases
-  ([66adf2f][177])
-- **config:** fix husky pre-commit hook ([f0d0032][178])
-- **config:** generate CHANGELOG.md beautifully ([2fa4aa9][179])
-- **config:** retire @semantic-release/changelog ([787a281][180])
+  ([66adf2f][179])
+- **config:** fix husky pre-commit hook ([f0d0032][180])
+- **config:** generate CHANGELOG.md beautifully ([2fa4aa9][181])
+- **config:** retire @semantic-release/changelog ([787a281][182])
 
 ### Features
 
-- Add build-changelog to npm scripts ([8393a87][181])
+- Add build-changelog to npm scripts ([8393a87][183])
 
-## [2.1.4][182] (2020-11-28)
+## [2.1.4][184] (2020-11-28)
 
 ### Bug Fixes
 
-- **actions:** ensure metadata is gathered properly ([31ece1c][183])
+- **actions:** ensure metadata is gathered properly ([31ece1c][185])
 - **release:** remove extra newlines during changelogs generation
-  ([72acb24][184])
+  ([72acb24][186])
 
-## [2.1.3][185] (2020-11-28)
-
-### Bug Fixes
-
-- **release:** update how changelogs are generated ([8ce1760][186])
-
-## [2.1.2][187] (2020-11-28)
+## [2.1.3][187] (2020-11-28)
 
 ### Bug Fixes
 
-- **actions:** remove erroneous build-dist from lint job ([2cdd373][188])
-- **actions:** remove erroneous build-dist from test-unit job ([fcb2232][189])
-- **config:** fix babel.config.js with NODE_LTS ([cdf4610][190])
+- **release:** update how changelogs are generated ([8ce1760][188])
 
-## [2.1.1][191] (2020-11-26)
+## [2.1.2][189] (2020-11-28)
 
 ### Bug Fixes
 
-- **actions:** update gather-metadata with more accurate grep ([961ecef][192])
+- **actions:** remove erroneous build-dist from lint job ([2cdd373][190])
+- **actions:** remove erroneous build-dist from test-unit job ([fcb2232][191])
+- **config:** fix babel.config.js with NODE_LTS ([cdf4610][192])
 
-# [2.1.0][193] (2020-11-25)
+## [2.1.1][193] (2020-11-26)
 
 ### Bug Fixes
 
-- **actions:** gather-metadata steps gather and skip properly ([97682f4][194])
-- **actions:** if statements now use | instead of > ([24e3739][195])
-- **actions:** move comments out of multiline statements ([874f8d6][196])
+- **actions:** update gather-metadata with more accurate grep ([961ecef][194])
+
+# [2.1.0][195] (2020-11-25)
+
+### Bug Fixes
+
+- **actions:** gather-metadata steps gather and skip properly ([97682f4][196])
+- **actions:** if statements now use | instead of > ([24e3739][197])
+- **actions:** move comments out of multiline statements ([874f8d6][198])
 
 ### Features
 
 - **actions:** introduce new streamlined workflow job configuration
-  ([4bb9d94][197])
+  ([4bb9d94][199])
 
-## [2.0.1][198] (2020-11-24)
+## [2.0.1][200] (2020-11-24)
 
 ### Bug Fixes
 
 - **actions:** add git author and commiter env vars for semantic-release signed
-  commits ([f01d16b][199])
+  commits ([f01d16b][201])
 - **dependabot:** ensure dependabot formats GitHub Actions PRs correctly
-  ([bcdbd0e][200])
-- Add build commits to release rule ([3124ab0][201])
+  ([bcdbd0e][202])
+- Add build commits to release rule ([3124ab0][203])
 
-# [2.0.0][202] (2020-11-24)
+# [2.0.0][204] (2020-11-24)
 
 ### Bug Fixes
 
 - **actions:** add install-dependencies to semantic-release needs
-  ([d8cc836][203])
-- **actions:** deps caching done properly ([bbe0416][204])
-- **actions:** ensure repo is always checked out first ([65e5d46][205])
-- **actions:** removed signed pushes ([f621f76][206])
-- **package.json:** do not guess error codes ([f5428c8][207])
-- **package.json:** ensure machine-friendly run-script syntax ([7af5e45][208])
+  ([d8cc836][205])
+- **actions:** deps caching done properly ([bbe0416][206])
+- **actions:** ensure repo is always checked out first ([65e5d46][207])
+- **actions:** removed signed pushes ([f621f76][208])
+- **package.json:** do not guess error codes ([f5428c8][209])
+- **package.json:** ensure machine-friendly run-script syntax ([7af5e45][210])
 - **package.json:** ensure set +e used in run-scripts when necessary
-  ([6d86c0b][209])
+  ([6d86c0b][211])
 - **package.json:** precedence error caused bad return value in lint
-  ([e8bfbc5][210])
+  ([e8bfbc5][212])
 
 ### Features
 
-- Added diff to take the difference ([5e40deb][211])
+- Added diff to take the difference ([5e40deb][213])
 
 ### Performance Improvements
 
-- **actions:** better caching ([6da0a65][212])
-- **actions:** made test-integration-chrome independent ([d489cfa][213])
-- **actions:** only cache node_modules ([57775c9][214])
+- **actions:** better caching ([6da0a65][214])
+- **actions:** made test-integration-chrome independent ([d489cfa][215])
+- **actions:** only cache node_modules ([57775c9][216])
 
 ### Reverts
 
-- _"debug: added debug step"_ ([1741cde][215])
-- _"debug: debug cache miss"_ ([42af347][216])
+- _"debug: added debug step"_ ([1741cde][217])
+- _"debug: debug cache miss"_ ([42af347][218])
 
 ### BREAKING CHANGES
 
@@ -625,393 +631,396 @@ cycle based on semantic-release.
 
 # Archived Releases (pre-CI/CD)
 
-- Version 1.0.15 ([57faa2c][217])
+- Version 1.0.15 ([57faa2c][219])
 
 <!---->
 
-- Version 1.0.7 ([5ced626][218])
+- Version 1.0.7 ([5ced626][220])
 
-- Version 1.0.0 ([df91d82][219])
+- Version 1.0.0 ([df91d82][221])
 
-[1]: https://github.com/Xunnamius/workflow-playground/compare/v7.2.0...v7.2.1
+[1]: https://github.com/Xunnamius/workflow-playground/compare/v7.2.1...v7.2.2
 [2]:
-  https://github.com/Xunnamius/workflow-playground/commit/73edb9a864bbc4b7d5a7eb1d03ca4ce3b8e02e95
-[3]: https://github.com/Xunnamius/workflow-playground/compare/v7.1.0...v7.2.0
-[4]:
-  https://github.com/Xunnamius/workflow-playground/commit/864253c3a63de8cbb6577244c8a419ea8a97decd
-[5]:
-  https://github.com/Xunnamius/workflow-playground/commit/bf8c76bc12c51476719204c44b25c361b7258e90
-[6]:
-  https://github.com/Xunnamius/workflow-playground/commit/f7d12565f96e1626ffa393ba4ac39786197818e7
-[7]: https://github.com/Xunnamius/workflow-playground/compare/v7.0.0...v7.1.0
-[8]:
-  https://github.com/Xunnamius/workflow-playground/commit/27c97500ced2ef3085ce5bf984ccfa3e2bf5e04f
-[9]:
-  https://github.com/Xunnamius/workflow-playground/commit/67264ed159f3686a5f89fda5cec5f07d465af49e
-[10]:
-  https://github.com/Xunnamius/workflow-playground/commit/cd6236ad92608b126f7b8df52693f75db28b488d
-[11]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.3...v7.0.0
-[12]:
-  https://github.com/Xunnamius/workflow-playground/commit/5765c024e82c3e7e0c77808e3860c85fb8c8d759
-[13]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.2...v6.7.3
-[14]:
-  https://github.com/Xunnamius/workflow-playground/commit/ec263026c77f36f1b15c67e102f42300108a43ce
-[15]:
-  https://github.com/Xunnamius/workflow-playground/commit/6e9fb7333b29c973517b6c2813c162f0c00c0f4b
-[16]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.1...v6.7.2
-[17]:
-  https://github.com/Xunnamius/workflow-playground/commit/38bfb775cde6952a35a7daca6ad3e191cc0fa37b
-[18]:
-  https://github.com/Xunnamius/workflow-playground/commit/aff005d252799e06e7a84aab1b5f88af62cf8901
-[19]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.0...v6.7.1
-[20]:
-  https://github.com/Xunnamius/workflow-playground/commit/c24773e0265cc559ad8b6596dd3d97740f18e64f
-[21]:
-  https://github.com/Xunnamius/workflow-playground/commit/ff94fe15bb18f2cc1d545a0b7948d0e818b48ae9
-[22]:
-  https://github.com/Xunnamius/workflow-playground/commit/717ffdb672294ccca92a87d368777e09d35a2ab6
-[23]:
-  https://github.com/Xunnamius/workflow-playground/commit/f2e971ece7f3b60647ab3584db988dd8cbfd5d97
-[24]: https://github.com/Xunnamius/workflow-playground/compare/v6.6.0...v6.7.0
-[25]:
-  https://github.com/Xunnamius/workflow-playground/commit/1fdcb9c6c500f88fbc2b7b6ec7f427f0a4995080
-[26]: https://github.com/Xunnamius/workflow-playground/compare/v6.5.1...v6.6.0
-[27]:
-  https://github.com/Xunnamius/workflow-playground/commit/0cb26453351737c2ff0476b02f76ca82e3087f88
-[28]:
-  https://github.com/Xunnamius/workflow-playground/commit/ac06b3300ed526f58f26a18e4a5465f9e6ee8f13
-[29]:
-  https://github.com/Xunnamius/workflow-playground/commit/c6a3cd632cf814ca9d103bb4868ecafd032ed527
-[30]:
-  https://github.com/Xunnamius/workflow-playground/commit/69ec71f088e1e162cf7695940b92e3637941e452
-[31]:
-  https://github.com/Xunnamius/workflow-playground/commit/2fe163c01107f6a1a31fddb871a6eae27f07fd3f
-[32]: https://github.com/Xunnamius/workflow-playground/compare/v6.5.0...v6.5.1
-[33]:
-  https://github.com/Xunnamius/workflow-playground/commit/99c2868b2682621a350c02665199a6132c3a8ec8
-[34]:
-  https://github.com/Xunnamius/workflow-playground/commit/d47c48bccb6110aca895d2472d611cd95134e156
-[35]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.3...v6.5.0
-[36]:
-  https://github.com/Xunnamius/workflow-playground/commit/54488d92317360c2e358bca9238e60e2daca64dd
-[37]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.2...v6.4.3
-[38]:
-  https://github.com/Xunnamius/workflow-playground/commit/b759c31195eb816c8c7fec1d18f89d85ed437ff1
-[39]:
-  https://github.com/Xunnamius/workflow-playground/commit/de2c7b1582b0ea20213ab5f761e7dc9994183f50
-[40]:
-  https://github.com/Xunnamius/workflow-playground/commit/4fb641cc202f3a510389566ce55415686bbc6a4e
-[41]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.1...v6.4.2
-[42]:
-  https://github.com/Xunnamius/workflow-playground/commit/6b2e2383ef2b54a56a665e6b9ecef7d93e5fec2e
-[43]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.0...v6.4.1
-[44]:
-  https://github.com/Xunnamius/workflow-playground/commit/de7ef33e1d74831b441e909c4e628527ed2900c0
-[45]:
-  https://github.com/Xunnamius/workflow-playground/commit/c8ef15e813811f037acd12133f485bd8435ac9cc
-[46]:
-  https://github.com/Xunnamius/workflow-playground/commit/b9e8cc58ea93099742c91d7431687965e131a3df
-[47]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.8...v6.4.0
-[48]:
-  https://github.com/Xunnamius/workflow-playground/commit/ed73fc3e5c9c7f0f621802e9ea429dcfca36bf52
-[49]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.7...v6.3.8
-[50]:
-  https://github.com/Xunnamius/workflow-playground/commit/d923b299e05789a20a08dc2e4059e5e6e1099658
-[51]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.6...v6.3.7
-[52]:
-  https://github.com/Xunnamius/workflow-playground/commit/44dd46246911a9cb58baf0ec0b84aa5093f2628e
-[53]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.5...v6.3.6
-[54]:
-  https://github.com/Xunnamius/workflow-playground/commit/66670754987250b92806dfa7d94c1cb46349f07f
-[55]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.4...v6.3.5
-[56]:
-  https://github.com/Xunnamius/workflow-playground/commit/a10bac3efbce2b4bd511420fd4d7466c288d9706
-[57]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.3...v6.3.4
-[58]:
-  https://github.com/Xunnamius/workflow-playground/commit/e8bac90bb68b79d4c4ab1853bdd4c45dddef44fe
-[59]:
-  https://github.com/Xunnamius/workflow-playground/commit/077abcea8df04b8b6cf292f97d0e4b37cda28f7b
-[60]:
-  https://github.com/Xunnamius/workflow-playground/commit/6885a3467c42b61e1edb93fed363ceca6ff15b28
-[61]:
-  https://github.com/Xunnamius/workflow-playground/commit/ba0ef5863ce550a6988ce259d7500807bdaa5db8
-[62]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.2...v6.3.3
-[63]:
-  https://github.com/Xunnamius/workflow-playground/commit/772dee15ff4eaeba84f8327f30c69868c5e514c8
-[64]:
-  https://github.com/Xunnamius/workflow-playground/commit/e38af90e7720f08f46d6220168226336e6c040d4
-[65]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.1...v6.3.2
-[66]:
-  https://github.com/Xunnamius/workflow-playground/commit/f757db8f0e97286abda30b825de9f803cd63c097
-[67]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.0...v6.3.1
-[68]:
-  https://github.com/Xunnamius/workflow-playground/commit/7f4a70af17528c36e80440827663251f79c9c1be
-[69]: https://github.com/Xunnamius/workflow-playground/compare/v6.2.0...v6.3.0
-[70]:
-  https://github.com/Xunnamius/workflow-playground/commit/dda943e24fcd164ae850feb1f1bd16924b773773
-[71]:
-  https://github.com/Xunnamius/workflow-playground/commit/636c35303cb5d04d239b13e89a3040e483c81cf7
-[72]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.7...v6.2.0
-[73]:
-  https://github.com/Xunnamius/workflow-playground/commit/e16cd8b559096a076739d79a15ff79e5efa7f581
-[74]:
-  https://github.com/Xunnamius/workflow-playground/commit/538c374e597751bc198b6d52bc0a8fa41de6494d
-[75]:
-  https://github.com/Xunnamius/workflow-playground/commit/6fbd1df74d4bc1a7ad852e76e8fa805138d95657
-[76]:
-  https://github.com/Xunnamius/workflow-playground/commit/33a510dce4dcaf004732e739e3e9c3d12518646a
-[77]:
-  https://github.com/Xunnamius/workflow-playground/commit/db4c284e914688911f1b0d75c569b83a198113c2
-[78]:
-  https://github.com/Xunnamius/workflow-playground/commit/bcbf3f5cc2d0bba5f282de657977ab44c70b1bfe
-[79]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.6...v6.1.7
-[80]:
-  https://github.com/Xunnamius/workflow-playground/commit/8a7fc06df25ffa5381bb5d771eb6e5a619fcbf64
-[81]:
-  https://github.com/Xunnamius/workflow-playground/commit/9675eeb1a06b715fea6cd9024cf94aa31d44943c
-[82]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.5...v6.1.6
-[83]:
-  https://github.com/Xunnamius/workflow-playground/commit/828751d051d5cff15c5d1315fc9729d82cab985f
-[84]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.4...v6.1.5
-[85]:
-  https://github.com/Xunnamius/workflow-playground/commit/d8ed033ead9608349f2d876c4cecebecd65dc47f
-[86]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.3...v6.1.4
-[87]:
-  https://github.com/Xunnamius/workflow-playground/commit/44f5cd4c3c6adeb548ba89adba8e884336f41520
-[88]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.2...v6.1.3
-[89]:
-  https://github.com/Xunnamius/workflow-playground/commit/55e1235d39714dd00c146549f630ec62f4952e2d
-[90]:
-  https://github.com/Xunnamius/workflow-playground/commit/5448960531a3bd19cc38de44f13519a8888e342a
-[91]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.1...v6.1.2
-[92]:
-  https://github.com/Xunnamius/workflow-playground/commit/5921653ac2c26273eace14aa3e4994960be521a0
-[93]:
-  https://github.com/Xunnamius/workflow-playground/commit/b2ea6f13a5c7d7c8d89f76b6ced72c938448a235
-[94]:
-  https://github.com/Xunnamius/workflow-playground/commit/03825f051d3ed50dad916f0e3f3993a0fb3c51ce
-[95]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.0...v6.1.1
-[96]:
-  https://github.com/Xunnamius/workflow-playground/commit/bda2d5ea408563874429d8ed8e30455d5e717a54
-[97]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.5...v6.1.0
-[98]:
-  https://github.com/Xunnamius/workflow-playground/commit/b9d92fdd4f2d594a62fce6d16299152c79a43566
-[99]:
-  https://github.com/Xunnamius/workflow-playground/commit/f90dde35c32e676c765b131ddfa135246ad7f7eb
-[100]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.4...v6.0.5
-[101]:
-  https://github.com/Xunnamius/workflow-playground/commit/4b6c84c788c4105db8a1ddd10ecb044be31876f9
-[102]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.3...v6.0.4
-[103]:
-  https://github.com/Xunnamius/workflow-playground/commit/85b8e12e1bce4baa22bd301da9dda21ea289fd9d
-[104]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.2...v6.0.3
-[105]:
-  https://github.com/Xunnamius/workflow-playground/commit/02746df97d17f717de608d4b5cc3838e2992a150
-[106]:
-  https://github.com/Xunnamius/workflow-playground/commit/7520e0fc29f22ef537fc947a5f32d6b6bc762cc5
-[107]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.1...v6.0.2
-[108]:
-  https://github.com/Xunnamius/workflow-playground/commit/747a6742dabcc6cdc8fd835b2f673e355f212cdf
-[109]:
-  https://github.com/Xunnamius/workflow-playground/commit/b3742961a2824618bf68953c532055a04ef03920
-[110]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.0...v6.0.1
-[111]:
-  https://github.com/Xunnamius/workflow-playground/commit/d40192bd13d9b301e09723cdca68be60b44b5d82
-[112]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.3...v6.0.0
-[113]:
-  https://github.com/Xunnamius/workflow-playground/commit/95a13d21dd902a490d445d3c8aee89c59b2131f1
-[114]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.2...v5.0.3
-[115]:
-  https://github.com/Xunnamius/workflow-playground/commit/0a91fad0d4f6c41c600294b8ecfc84b16e906980
-[116]:
-  https://github.com/Xunnamius/workflow-playground/commit/4aab0bda87d426f81663773342f77bf661c79ce0
-[117]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.1...v5.0.2
-[118]:
-  https://github.com/Xunnamius/workflow-playground/commit/e62c5b42ca2b43326cc9eec8db248020b2d90ec8
-[119]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.0...v5.0.1
-[120]:
-  https://github.com/Xunnamius/workflow-playground/commit/2ef6297d257bcd1661093eed5069714382f01f36
-[121]:
-  https://github.com/Xunnamius/workflow-playground/commit/d73cac91012e0a32ee1f52a3b476b8639f325ca2
-[122]:
-  https://github.com/Xunnamius/workflow-playground/commit/da477b770bc7b17db8eb474eb523e8468881e447
-[123]: https://github.com/Xunnamius/workflow-playground/compare/v4.0.0...v5.0.0
-[124]:
-  https://github.com/Xunnamius/workflow-playground/commit/7391321c8da14ed35a865a4e245db2ae3b72a606
-[125]: https://github.com/Xunnamius/workflow-playground/compare/v3.0.1...v4.0.0
-[126]:
-  https://github.com/Xunnamius/workflow-playground/commit/02662fcac7c02ac3f5a32dba750e00d23d6c88f2
-[127]:
-  https://github.com/Xunnamius/workflow-playground/commit/5a2aef4cebc6ed136fa3fb5015f38f47de8ce781
-[128]: https://github.com/Xunnamius/workflow-playground/compare/v3.0.0...v3.0.1
-[129]:
-  https://github.com/Xunnamius/workflow-playground/commit/b15149139462980707fc8ec6d7d67414ac207e6e
-[130]:
-  https://github.com/Xunnamius/workflow-playground/commit/783ba76db816b0cc391450d442c708420203c46c
-[131]:
-  https://github.com/Xunnamius/workflow-playground/commit/a876517a6ea8b339e8c0eca9f7763bcc85919f87
-[132]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.4...v3.0.0
-[133]:
-  https://github.com/Xunnamius/workflow-playground/commit/b060d3ec78744b72bd53450ecd1664110cdebda8
-[134]:
-  https://github.com/Xunnamius/workflow-playground/commit/d5dfc506c9d68a0f299559b5e76c92630c9edf0a
-[135]:
-  https://github.com/Xunnamius/workflow-playground/commit/0447d5959113f033e2ed5644efdb4c80c4fe5085
-[136]:
-  https://github.com/Xunnamius/workflow-playground/commit/3a4bdff03f0d8ea450f53aebceb33525801b3c34
-[137]:
-  https://github.com/Xunnamius/workflow-playground/commit/1096e6fbfff5fd399c2f1af5fe2b6496c5ca3cfe
-[138]:
-  https://github.com/Xunnamius/workflow-playground/commit/4fd2952e78b5cfda17a84a538bcc382d06621926
-[139]:
-  https://github.com/Xunnamius/workflow-playground/commit/446e961cee1326be7db4085f118447ac30f15078
-[140]:
-  https://github.com/Xunnamius/workflow-playground/commit/e537358218a8abcc97008f5460b37a1949dd0681
-[141]:
-  https://github.com/Xunnamius/workflow-playground/commit/b75d8ac9bb35a28aa8ebbe8dc52589bc7783d0cd
-[142]:
-  https://github.com/Xunnamius/workflow-playground/commit/d59bb1a385279427ee93ac6babbc2a8f7544e599
-[143]:
-  https://github.com/Xunnamius/workflow-playground/commit/4cc6ee68cec6500f99e918443fee5deae32a9f0a
-[144]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.3...v2.3.4
-[145]:
-  https://github.com/Xunnamius/workflow-playground/commit/10c71bf50522ae3902f84cf6171b9fce4d1470f4
-[146]:
-  https://github.com/Xunnamius/workflow-playground/commit/57e0c162e73d5850807e9f496df0aa6203834f4c
-[147]:
-  https://github.com/Xunnamius/workflow-playground/commit/e5d6d42ad230f45b0239bcec671a18a2789ae8f2
-[148]:
-  https://github.com/Xunnamius/workflow-playground/commit/efb29c5c991d58ae8aa684159f4db0d3f8f6dbbe
-[149]:
-  https://github.com/Xunnamius/workflow-playground/commit/f9a3e231bf5b99619d5aabccdba6f6299642b6e9
-[150]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.2...v2.3.3
-[151]:
-  https://github.com/Xunnamius/workflow-playground/commit/c2789bfd8f43bb9fc60316131c4e6d17dd2c1de8
-[152]:
-  https://github.com/Xunnamius/workflow-playground/commit/1dcdcc1cac342f9bdca71e49f9cc332e9118932f
-[153]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.1...v2.3.2
-[154]:
-  https://github.com/Xunnamius/workflow-playground/commit/598a3966ce1d85c6dcc2945878ebd3ba2c969654
-[155]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.0...v2.3.1
-[156]:
-  https://github.com/Xunnamius/workflow-playground/commit/022603bbe50298a8e7500a77cb77ce5aae4b45f7
-[157]:
-  https://github.com/Xunnamius/workflow-playground/commit/0d181ea032a9f5322137dacf5ee97e6a28acd035
-[158]:
-  https://github.com/Xunnamius/workflow-playground/commit/ec632ad52472184edbed16111b4a5b306ae6f7ed
-[159]: https://github.com/Xunnamius/workflow-playground/compare/v2.2.2...v2.3.0
-[160]:
-  https://github.com/Xunnamius/workflow-playground/commit/d9213827f9448a93affcab8ca652e37f24b247b9
-[161]:
-  https://github.com/Xunnamius/workflow-playground/commit/c44c310f01d78798c5a13213dafeef5e1f25b25f
-[162]: https://github.com/Xunnamius/workflow-playground/compare/v2.2.1...v2.2.2
-[163]:
-  https://github.com/Xunnamius/workflow-playground/commit/d630264d1ee046ddf943ad287b15f5308ce4c224
-[164]: https://github.com/Xunnamius/workflow-playground/compare/v2.2.0...v2.2.1
-[165]:
-  https://github.com/Xunnamius/workflow-playground/commit/d4ccacb6533b04c4889b909ecd2bffd4c7b5fa79
-[166]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.4...v2.2.0
-[167]:
-  https://github.com/Xunnamius/workflow-playground/commit/a62380bc4f75c42d74640916fde44fb5811f150d
-[168]:
-  https://github.com/Xunnamius/workflow-playground/commit/823f8b5434e07250b8aefbd9f4a49e0ea05cc9e5
-[169]:
-  https://github.com/Xunnamius/workflow-playground/commit/bd10f4414522a0c6b406adb2fba9d58abee6830e
-[170]:
-  https://github.com/Xunnamius/workflow-playground/commit/46db2ee7335e9b37cfafce98776171304f0072b7
-[171]:
-  https://github.com/Xunnamius/workflow-playground/commit/f3800e471e93308b37eb2668dd5c4bfde9e7b88e
-[172]:
-  https://github.com/Xunnamius/workflow-playground/commit/9a7adb4fb9592328efd3b33bc156b87f89a59ffb
-[173]:
-  https://github.com/Xunnamius/workflow-playground/commit/af76dbe52921aed27c4cf275875de9c1194561d4
-[174]:
-  https://github.com/Xunnamius/workflow-playground/commit/69a25baa21133345e2a2baffd2f69d0abe950c02
-[175]:
-  https://github.com/Xunnamius/workflow-playground/commit/14b86ae815f2c24aef82dcad41b0ead036a2f4c4
-[176]:
-  https://github.com/Xunnamius/workflow-playground/commit/cc94940e7b903a141f4e16a4169411c0a45bfb96
-[177]:
-  https://github.com/Xunnamius/workflow-playground/commit/66adf2f3d8ea4bd1813fac4c704ff327ac175855
-[178]:
-  https://github.com/Xunnamius/workflow-playground/commit/f0d0032fb51ddb98b2f35b229c9d1873c00264f7
-[179]:
-  https://github.com/Xunnamius/workflow-playground/commit/2fa4aa962a17c6075d28af876f67fe98d0f519b6
-[180]:
-  https://github.com/Xunnamius/workflow-playground/commit/787a28144826609ddffb5e0d1937f314b1039ab6
-[181]:
-  https://github.com/Xunnamius/workflow-playground/commit/8393a87974cea60087a8d11fc9b0bac0f7ecc6e2
-[182]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.3...v2.1.4
-[183]:
-  https://github.com/Xunnamius/workflow-playground/commit/31ece1cb7d0b91bbc38b1c3eb6366c13d1da7fd2
-[184]:
-  https://github.com/Xunnamius/workflow-playground/commit/72acb24c0c521217fb8eebb5204ddf1591808326
-[185]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.2...v2.1.3
-[186]:
-  https://github.com/Xunnamius/workflow-playground/commit/8ce176044293af0ac3b5dd2495d7d0eb580bbede
-[187]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.1...v2.1.2
-[188]:
-  https://github.com/Xunnamius/workflow-playground/commit/2cdd373974fdc62480e5681813c09cba98aebddc
-[189]:
-  https://github.com/Xunnamius/workflow-playground/commit/fcb2232cf6e628f58033a78a0d6aa107f9794589
-[190]:
-  https://github.com/Xunnamius/workflow-playground/commit/cdf46102e7d5b590bd153d2444cb13c24d4170b3
-[191]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.0...v2.1.1
-[192]:
-  https://github.com/Xunnamius/workflow-playground/commit/961ecef3555403928cf319012ca6bd40093da66e
-[193]: https://github.com/Xunnamius/workflow-playground/compare/v2.0.1...v2.1.0
-[194]:
-  https://github.com/Xunnamius/workflow-playground/commit/97682f434acc501e4964c31770472acae0320ad5
-[195]:
-  https://github.com/Xunnamius/workflow-playground/commit/24e373907b23a68627fe535049f603c93bfa1361
-[196]:
-  https://github.com/Xunnamius/workflow-playground/commit/874f8d65aff5d8e27e14e8d9e4a0e37450713ce0
-[197]:
-  https://github.com/Xunnamius/workflow-playground/commit/4bb9d94050d1b8fb164bdf04b1bffa10705aa0a2
-[198]: https://github.com/Xunnamius/workflow-playground/compare/v2.0.0...v2.0.1
-[199]:
-  https://github.com/Xunnamius/workflow-playground/commit/f01d16b51e444eb801121e81718994b4add18799
-[200]:
-  https://github.com/Xunnamius/workflow-playground/commit/bcdbd0e1c23786185cd43b11d9ce18d3498e9ff5
-[201]:
-  https://github.com/Xunnamius/workflow-playground/commit/3124ab0500924ce75f3387d59d5d60ea3e77c827
-[202]: https://github.com/Xunnamius/workflow-playground/compare/v1.0.15...v2.0.0
-[203]:
-  https://github.com/Xunnamius/workflow-playground/commit/d8cc83611de2a595631f42bee0f10591b11bc59c
-[204]:
-  https://github.com/Xunnamius/workflow-playground/commit/bbe0416125a303076bc3f8a5a96c9669db926b46
-[205]:
-  https://github.com/Xunnamius/workflow-playground/commit/65e5d463925b888e08dd69a9da7f4e9f4c9be872
-[206]:
-  https://github.com/Xunnamius/workflow-playground/commit/f621f76895e6a0749f76a6a1abd90253b8694717
-[207]:
-  https://github.com/Xunnamius/workflow-playground/commit/f5428c87836552db96d40310c52abd47e593e729
-[208]:
-  https://github.com/Xunnamius/workflow-playground/commit/7af5e45eb0712da5d80022cedd535a673082d195
-[209]:
-  https://github.com/Xunnamius/workflow-playground/commit/6d86c0b4ce2218a93f9919a256a89a04af83a9d1
-[210]:
-  https://github.com/Xunnamius/workflow-playground/commit/e8bfbc590ec8ac73071ae61708c1ca29f2beee36
-[211]:
-  https://github.com/Xunnamius/workflow-playground/commit/5e40deb020c4bafb103a6bc78fbeecb266a5c983
-[212]:
-  https://github.com/Xunnamius/workflow-playground/commit/6da0a656aba20f022d26335ec33c9c4c4ea37c02
-[213]:
-  https://github.com/Xunnamius/workflow-playground/commit/d489cfacd8514a210ec0b570ab3c5a283cf5bc19
-[214]:
-  https://github.com/Xunnamius/workflow-playground/commit/57775c9cc3ffdad94f09b23923785a081e2a08ee
-[215]:
-  https://github.com/Xunnamius/workflow-playground/commit/1741cde56623bdb6e3e0c1dc95dcbe094b197ebe
-[216]:
-  https://github.com/Xunnamius/workflow-playground/commit/42af3470f3e91e5d359d995888c83534b8d32060
-[217]:
-  https://github.com/Xunnamius/workflow-playground/commit/57faa2cc448f39383b56db04ec06b1093f5f7bcd
-[218]:
-  https://github.com/Xunnamius/workflow-playground/commit/5ced6267d44731337fe5e0a69776dd5642d8a54d
-[219]:
-  https://github.com/Xunnamius/workflow-playground/commit/df91d8298edd2d756f732b2245ba086e91197505
-[220]: https://conventionalcommits.org
-[221]: https://semver.org
-[222]: https://github.com/Xunnamius/workflow-playground/compare/v7.2.1...v7.2.2
-[223]:
   https://github.com/Xunnamius/workflow-playground/commit/a8cd37812dc9e304bf813c742b2d4d54c1c9c183
+[3]: https://github.com/Xunnamius/workflow-playground/compare/v7.2.0...v7.2.1
+[4]:
+  https://github.com/Xunnamius/workflow-playground/commit/73edb9a864bbc4b7d5a7eb1d03ca4ce3b8e02e95
+[5]: https://github.com/Xunnamius/workflow-playground/compare/v7.1.0...v7.2.0
+[6]:
+  https://github.com/Xunnamius/workflow-playground/commit/864253c3a63de8cbb6577244c8a419ea8a97decd
+[7]:
+  https://github.com/Xunnamius/workflow-playground/commit/bf8c76bc12c51476719204c44b25c361b7258e90
+[8]:
+  https://github.com/Xunnamius/workflow-playground/commit/f7d12565f96e1626ffa393ba4ac39786197818e7
+[9]: https://github.com/Xunnamius/workflow-playground/compare/v7.0.0...v7.1.0
+[10]:
+  https://github.com/Xunnamius/workflow-playground/commit/27c97500ced2ef3085ce5bf984ccfa3e2bf5e04f
+[11]:
+  https://github.com/Xunnamius/workflow-playground/commit/67264ed159f3686a5f89fda5cec5f07d465af49e
+[12]:
+  https://github.com/Xunnamius/workflow-playground/commit/cd6236ad92608b126f7b8df52693f75db28b488d
+[13]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.3...v7.0.0
+[14]:
+  https://github.com/Xunnamius/workflow-playground/commit/5765c024e82c3e7e0c77808e3860c85fb8c8d759
+[15]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.2...v6.7.3
+[16]:
+  https://github.com/Xunnamius/workflow-playground/commit/ec263026c77f36f1b15c67e102f42300108a43ce
+[17]:
+  https://github.com/Xunnamius/workflow-playground/commit/6e9fb7333b29c973517b6c2813c162f0c00c0f4b
+[18]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.1...v6.7.2
+[19]:
+  https://github.com/Xunnamius/workflow-playground/commit/38bfb775cde6952a35a7daca6ad3e191cc0fa37b
+[20]:
+  https://github.com/Xunnamius/workflow-playground/commit/aff005d252799e06e7a84aab1b5f88af62cf8901
+[21]: https://github.com/Xunnamius/workflow-playground/compare/v6.7.0...v6.7.1
+[22]:
+  https://github.com/Xunnamius/workflow-playground/commit/c24773e0265cc559ad8b6596dd3d97740f18e64f
+[23]:
+  https://github.com/Xunnamius/workflow-playground/commit/ff94fe15bb18f2cc1d545a0b7948d0e818b48ae9
+[24]:
+  https://github.com/Xunnamius/workflow-playground/commit/717ffdb672294ccca92a87d368777e09d35a2ab6
+[25]:
+  https://github.com/Xunnamius/workflow-playground/commit/f2e971ece7f3b60647ab3584db988dd8cbfd5d97
+[26]: https://github.com/Xunnamius/workflow-playground/compare/v6.6.0...v6.7.0
+[27]:
+  https://github.com/Xunnamius/workflow-playground/commit/1fdcb9c6c500f88fbc2b7b6ec7f427f0a4995080
+[28]: https://github.com/Xunnamius/workflow-playground/compare/v6.5.1...v6.6.0
+[29]:
+  https://github.com/Xunnamius/workflow-playground/commit/0cb26453351737c2ff0476b02f76ca82e3087f88
+[30]:
+  https://github.com/Xunnamius/workflow-playground/commit/ac06b3300ed526f58f26a18e4a5465f9e6ee8f13
+[31]:
+  https://github.com/Xunnamius/workflow-playground/commit/c6a3cd632cf814ca9d103bb4868ecafd032ed527
+[32]:
+  https://github.com/Xunnamius/workflow-playground/commit/69ec71f088e1e162cf7695940b92e3637941e452
+[33]:
+  https://github.com/Xunnamius/workflow-playground/commit/2fe163c01107f6a1a31fddb871a6eae27f07fd3f
+[34]: https://github.com/Xunnamius/workflow-playground/compare/v6.5.0...v6.5.1
+[35]:
+  https://github.com/Xunnamius/workflow-playground/commit/99c2868b2682621a350c02665199a6132c3a8ec8
+[36]:
+  https://github.com/Xunnamius/workflow-playground/commit/d47c48bccb6110aca895d2472d611cd95134e156
+[37]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.3...v6.5.0
+[38]:
+  https://github.com/Xunnamius/workflow-playground/commit/54488d92317360c2e358bca9238e60e2daca64dd
+[39]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.2...v6.4.3
+[40]:
+  https://github.com/Xunnamius/workflow-playground/commit/b759c31195eb816c8c7fec1d18f89d85ed437ff1
+[41]:
+  https://github.com/Xunnamius/workflow-playground/commit/de2c7b1582b0ea20213ab5f761e7dc9994183f50
+[42]:
+  https://github.com/Xunnamius/workflow-playground/commit/4fb641cc202f3a510389566ce55415686bbc6a4e
+[43]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.1...v6.4.2
+[44]:
+  https://github.com/Xunnamius/workflow-playground/commit/6b2e2383ef2b54a56a665e6b9ecef7d93e5fec2e
+[45]: https://github.com/Xunnamius/workflow-playground/compare/v6.4.0...v6.4.1
+[46]:
+  https://github.com/Xunnamius/workflow-playground/commit/de7ef33e1d74831b441e909c4e628527ed2900c0
+[47]:
+  https://github.com/Xunnamius/workflow-playground/commit/c8ef15e813811f037acd12133f485bd8435ac9cc
+[48]:
+  https://github.com/Xunnamius/workflow-playground/commit/b9e8cc58ea93099742c91d7431687965e131a3df
+[49]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.8...v6.4.0
+[50]:
+  https://github.com/Xunnamius/workflow-playground/commit/ed73fc3e5c9c7f0f621802e9ea429dcfca36bf52
+[51]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.7...v6.3.8
+[52]:
+  https://github.com/Xunnamius/workflow-playground/commit/d923b299e05789a20a08dc2e4059e5e6e1099658
+[53]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.6...v6.3.7
+[54]:
+  https://github.com/Xunnamius/workflow-playground/commit/44dd46246911a9cb58baf0ec0b84aa5093f2628e
+[55]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.5...v6.3.6
+[56]:
+  https://github.com/Xunnamius/workflow-playground/commit/66670754987250b92806dfa7d94c1cb46349f07f
+[57]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.4...v6.3.5
+[58]:
+  https://github.com/Xunnamius/workflow-playground/commit/a10bac3efbce2b4bd511420fd4d7466c288d9706
+[59]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.3...v6.3.4
+[60]:
+  https://github.com/Xunnamius/workflow-playground/commit/e8bac90bb68b79d4c4ab1853bdd4c45dddef44fe
+[61]:
+  https://github.com/Xunnamius/workflow-playground/commit/077abcea8df04b8b6cf292f97d0e4b37cda28f7b
+[62]:
+  https://github.com/Xunnamius/workflow-playground/commit/6885a3467c42b61e1edb93fed363ceca6ff15b28
+[63]:
+  https://github.com/Xunnamius/workflow-playground/commit/ba0ef5863ce550a6988ce259d7500807bdaa5db8
+[64]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.2...v6.3.3
+[65]:
+  https://github.com/Xunnamius/workflow-playground/commit/772dee15ff4eaeba84f8327f30c69868c5e514c8
+[66]:
+  https://github.com/Xunnamius/workflow-playground/commit/e38af90e7720f08f46d6220168226336e6c040d4
+[67]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.1...v6.3.2
+[68]:
+  https://github.com/Xunnamius/workflow-playground/commit/f757db8f0e97286abda30b825de9f803cd63c097
+[69]: https://github.com/Xunnamius/workflow-playground/compare/v6.3.0...v6.3.1
+[70]:
+  https://github.com/Xunnamius/workflow-playground/commit/7f4a70af17528c36e80440827663251f79c9c1be
+[71]: https://github.com/Xunnamius/workflow-playground/compare/v6.2.0...v6.3.0
+[72]:
+  https://github.com/Xunnamius/workflow-playground/commit/dda943e24fcd164ae850feb1f1bd16924b773773
+[73]:
+  https://github.com/Xunnamius/workflow-playground/commit/636c35303cb5d04d239b13e89a3040e483c81cf7
+[74]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.7...v6.2.0
+[75]:
+  https://github.com/Xunnamius/workflow-playground/commit/e16cd8b559096a076739d79a15ff79e5efa7f581
+[76]:
+  https://github.com/Xunnamius/workflow-playground/commit/538c374e597751bc198b6d52bc0a8fa41de6494d
+[77]:
+  https://github.com/Xunnamius/workflow-playground/commit/6fbd1df74d4bc1a7ad852e76e8fa805138d95657
+[78]:
+  https://github.com/Xunnamius/workflow-playground/commit/33a510dce4dcaf004732e739e3e9c3d12518646a
+[79]:
+  https://github.com/Xunnamius/workflow-playground/commit/db4c284e914688911f1b0d75c569b83a198113c2
+[80]:
+  https://github.com/Xunnamius/workflow-playground/commit/bcbf3f5cc2d0bba5f282de657977ab44c70b1bfe
+[81]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.6...v6.1.7
+[82]:
+  https://github.com/Xunnamius/workflow-playground/commit/8a7fc06df25ffa5381bb5d771eb6e5a619fcbf64
+[83]:
+  https://github.com/Xunnamius/workflow-playground/commit/9675eeb1a06b715fea6cd9024cf94aa31d44943c
+[84]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.5...v6.1.6
+[85]:
+  https://github.com/Xunnamius/workflow-playground/commit/828751d051d5cff15c5d1315fc9729d82cab985f
+[86]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.4...v6.1.5
+[87]:
+  https://github.com/Xunnamius/workflow-playground/commit/d8ed033ead9608349f2d876c4cecebecd65dc47f
+[88]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.3...v6.1.4
+[89]:
+  https://github.com/Xunnamius/workflow-playground/commit/44f5cd4c3c6adeb548ba89adba8e884336f41520
+[90]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.2...v6.1.3
+[91]:
+  https://github.com/Xunnamius/workflow-playground/commit/55e1235d39714dd00c146549f630ec62f4952e2d
+[92]:
+  https://github.com/Xunnamius/workflow-playground/commit/5448960531a3bd19cc38de44f13519a8888e342a
+[93]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.1...v6.1.2
+[94]:
+  https://github.com/Xunnamius/workflow-playground/commit/5921653ac2c26273eace14aa3e4994960be521a0
+[95]:
+  https://github.com/Xunnamius/workflow-playground/commit/b2ea6f13a5c7d7c8d89f76b6ced72c938448a235
+[96]:
+  https://github.com/Xunnamius/workflow-playground/commit/03825f051d3ed50dad916f0e3f3993a0fb3c51ce
+[97]: https://github.com/Xunnamius/workflow-playground/compare/v6.1.0...v6.1.1
+[98]:
+  https://github.com/Xunnamius/workflow-playground/commit/bda2d5ea408563874429d8ed8e30455d5e717a54
+[99]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.5...v6.1.0
+[100]:
+  https://github.com/Xunnamius/workflow-playground/commit/b9d92fdd4f2d594a62fce6d16299152c79a43566
+[101]:
+  https://github.com/Xunnamius/workflow-playground/commit/f90dde35c32e676c765b131ddfa135246ad7f7eb
+[102]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.4...v6.0.5
+[103]:
+  https://github.com/Xunnamius/workflow-playground/commit/4b6c84c788c4105db8a1ddd10ecb044be31876f9
+[104]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.3...v6.0.4
+[105]:
+  https://github.com/Xunnamius/workflow-playground/commit/85b8e12e1bce4baa22bd301da9dda21ea289fd9d
+[106]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.2...v6.0.3
+[107]:
+  https://github.com/Xunnamius/workflow-playground/commit/02746df97d17f717de608d4b5cc3838e2992a150
+[108]:
+  https://github.com/Xunnamius/workflow-playground/commit/7520e0fc29f22ef537fc947a5f32d6b6bc762cc5
+[109]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.1...v6.0.2
+[110]:
+  https://github.com/Xunnamius/workflow-playground/commit/747a6742dabcc6cdc8fd835b2f673e355f212cdf
+[111]:
+  https://github.com/Xunnamius/workflow-playground/commit/b3742961a2824618bf68953c532055a04ef03920
+[112]: https://github.com/Xunnamius/workflow-playground/compare/v6.0.0...v6.0.1
+[113]:
+  https://github.com/Xunnamius/workflow-playground/commit/d40192bd13d9b301e09723cdca68be60b44b5d82
+[114]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.3...v6.0.0
+[115]:
+  https://github.com/Xunnamius/workflow-playground/commit/95a13d21dd902a490d445d3c8aee89c59b2131f1
+[116]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.2...v5.0.3
+[117]:
+  https://github.com/Xunnamius/workflow-playground/commit/0a91fad0d4f6c41c600294b8ecfc84b16e906980
+[118]:
+  https://github.com/Xunnamius/workflow-playground/commit/4aab0bda87d426f81663773342f77bf661c79ce0
+[119]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.1...v5.0.2
+[120]:
+  https://github.com/Xunnamius/workflow-playground/commit/e62c5b42ca2b43326cc9eec8db248020b2d90ec8
+[121]: https://github.com/Xunnamius/workflow-playground/compare/v5.0.0...v5.0.1
+[122]:
+  https://github.com/Xunnamius/workflow-playground/commit/2ef6297d257bcd1661093eed5069714382f01f36
+[123]:
+  https://github.com/Xunnamius/workflow-playground/commit/d73cac91012e0a32ee1f52a3b476b8639f325ca2
+[124]:
+  https://github.com/Xunnamius/workflow-playground/commit/da477b770bc7b17db8eb474eb523e8468881e447
+[125]: https://github.com/Xunnamius/workflow-playground/compare/v4.0.0...v5.0.0
+[126]:
+  https://github.com/Xunnamius/workflow-playground/commit/7391321c8da14ed35a865a4e245db2ae3b72a606
+[127]: https://github.com/Xunnamius/workflow-playground/compare/v3.0.1...v4.0.0
+[128]:
+  https://github.com/Xunnamius/workflow-playground/commit/02662fcac7c02ac3f5a32dba750e00d23d6c88f2
+[129]:
+  https://github.com/Xunnamius/workflow-playground/commit/5a2aef4cebc6ed136fa3fb5015f38f47de8ce781
+[130]: https://github.com/Xunnamius/workflow-playground/compare/v3.0.0...v3.0.1
+[131]:
+  https://github.com/Xunnamius/workflow-playground/commit/b15149139462980707fc8ec6d7d67414ac207e6e
+[132]:
+  https://github.com/Xunnamius/workflow-playground/commit/783ba76db816b0cc391450d442c708420203c46c
+[133]:
+  https://github.com/Xunnamius/workflow-playground/commit/a876517a6ea8b339e8c0eca9f7763bcc85919f87
+[134]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.4...v3.0.0
+[135]:
+  https://github.com/Xunnamius/workflow-playground/commit/b060d3ec78744b72bd53450ecd1664110cdebda8
+[136]:
+  https://github.com/Xunnamius/workflow-playground/commit/d5dfc506c9d68a0f299559b5e76c92630c9edf0a
+[137]:
+  https://github.com/Xunnamius/workflow-playground/commit/0447d5959113f033e2ed5644efdb4c80c4fe5085
+[138]:
+  https://github.com/Xunnamius/workflow-playground/commit/3a4bdff03f0d8ea450f53aebceb33525801b3c34
+[139]:
+  https://github.com/Xunnamius/workflow-playground/commit/1096e6fbfff5fd399c2f1af5fe2b6496c5ca3cfe
+[140]:
+  https://github.com/Xunnamius/workflow-playground/commit/4fd2952e78b5cfda17a84a538bcc382d06621926
+[141]:
+  https://github.com/Xunnamius/workflow-playground/commit/446e961cee1326be7db4085f118447ac30f15078
+[142]:
+  https://github.com/Xunnamius/workflow-playground/commit/e537358218a8abcc97008f5460b37a1949dd0681
+[143]:
+  https://github.com/Xunnamius/workflow-playground/commit/b75d8ac9bb35a28aa8ebbe8dc52589bc7783d0cd
+[144]:
+  https://github.com/Xunnamius/workflow-playground/commit/d59bb1a385279427ee93ac6babbc2a8f7544e599
+[145]:
+  https://github.com/Xunnamius/workflow-playground/commit/4cc6ee68cec6500f99e918443fee5deae32a9f0a
+[146]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.3...v2.3.4
+[147]:
+  https://github.com/Xunnamius/workflow-playground/commit/10c71bf50522ae3902f84cf6171b9fce4d1470f4
+[148]:
+  https://github.com/Xunnamius/workflow-playground/commit/57e0c162e73d5850807e9f496df0aa6203834f4c
+[149]:
+  https://github.com/Xunnamius/workflow-playground/commit/e5d6d42ad230f45b0239bcec671a18a2789ae8f2
+[150]:
+  https://github.com/Xunnamius/workflow-playground/commit/efb29c5c991d58ae8aa684159f4db0d3f8f6dbbe
+[151]:
+  https://github.com/Xunnamius/workflow-playground/commit/f9a3e231bf5b99619d5aabccdba6f6299642b6e9
+[152]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.2...v2.3.3
+[153]:
+  https://github.com/Xunnamius/workflow-playground/commit/c2789bfd8f43bb9fc60316131c4e6d17dd2c1de8
+[154]:
+  https://github.com/Xunnamius/workflow-playground/commit/1dcdcc1cac342f9bdca71e49f9cc332e9118932f
+[155]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.1...v2.3.2
+[156]:
+  https://github.com/Xunnamius/workflow-playground/commit/598a3966ce1d85c6dcc2945878ebd3ba2c969654
+[157]: https://github.com/Xunnamius/workflow-playground/compare/v2.3.0...v2.3.1
+[158]:
+  https://github.com/Xunnamius/workflow-playground/commit/022603bbe50298a8e7500a77cb77ce5aae4b45f7
+[159]:
+  https://github.com/Xunnamius/workflow-playground/commit/0d181ea032a9f5322137dacf5ee97e6a28acd035
+[160]:
+  https://github.com/Xunnamius/workflow-playground/commit/ec632ad52472184edbed16111b4a5b306ae6f7ed
+[161]: https://github.com/Xunnamius/workflow-playground/compare/v2.2.2...v2.3.0
+[162]:
+  https://github.com/Xunnamius/workflow-playground/commit/d9213827f9448a93affcab8ca652e37f24b247b9
+[163]:
+  https://github.com/Xunnamius/workflow-playground/commit/c44c310f01d78798c5a13213dafeef5e1f25b25f
+[164]: https://github.com/Xunnamius/workflow-playground/compare/v2.2.1...v2.2.2
+[165]:
+  https://github.com/Xunnamius/workflow-playground/commit/d630264d1ee046ddf943ad287b15f5308ce4c224
+[166]: https://github.com/Xunnamius/workflow-playground/compare/v2.2.0...v2.2.1
+[167]:
+  https://github.com/Xunnamius/workflow-playground/commit/d4ccacb6533b04c4889b909ecd2bffd4c7b5fa79
+[168]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.4...v2.2.0
+[169]:
+  https://github.com/Xunnamius/workflow-playground/commit/a62380bc4f75c42d74640916fde44fb5811f150d
+[170]:
+  https://github.com/Xunnamius/workflow-playground/commit/823f8b5434e07250b8aefbd9f4a49e0ea05cc9e5
+[171]:
+  https://github.com/Xunnamius/workflow-playground/commit/bd10f4414522a0c6b406adb2fba9d58abee6830e
+[172]:
+  https://github.com/Xunnamius/workflow-playground/commit/46db2ee7335e9b37cfafce98776171304f0072b7
+[173]:
+  https://github.com/Xunnamius/workflow-playground/commit/f3800e471e93308b37eb2668dd5c4bfde9e7b88e
+[174]:
+  https://github.com/Xunnamius/workflow-playground/commit/9a7adb4fb9592328efd3b33bc156b87f89a59ffb
+[175]:
+  https://github.com/Xunnamius/workflow-playground/commit/af76dbe52921aed27c4cf275875de9c1194561d4
+[176]:
+  https://github.com/Xunnamius/workflow-playground/commit/69a25baa21133345e2a2baffd2f69d0abe950c02
+[177]:
+  https://github.com/Xunnamius/workflow-playground/commit/14b86ae815f2c24aef82dcad41b0ead036a2f4c4
+[178]:
+  https://github.com/Xunnamius/workflow-playground/commit/cc94940e7b903a141f4e16a4169411c0a45bfb96
+[179]:
+  https://github.com/Xunnamius/workflow-playground/commit/66adf2f3d8ea4bd1813fac4c704ff327ac175855
+[180]:
+  https://github.com/Xunnamius/workflow-playground/commit/f0d0032fb51ddb98b2f35b229c9d1873c00264f7
+[181]:
+  https://github.com/Xunnamius/workflow-playground/commit/2fa4aa962a17c6075d28af876f67fe98d0f519b6
+[182]:
+  https://github.com/Xunnamius/workflow-playground/commit/787a28144826609ddffb5e0d1937f314b1039ab6
+[183]:
+  https://github.com/Xunnamius/workflow-playground/commit/8393a87974cea60087a8d11fc9b0bac0f7ecc6e2
+[184]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.3...v2.1.4
+[185]:
+  https://github.com/Xunnamius/workflow-playground/commit/31ece1cb7d0b91bbc38b1c3eb6366c13d1da7fd2
+[186]:
+  https://github.com/Xunnamius/workflow-playground/commit/72acb24c0c521217fb8eebb5204ddf1591808326
+[187]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.2...v2.1.3
+[188]:
+  https://github.com/Xunnamius/workflow-playground/commit/8ce176044293af0ac3b5dd2495d7d0eb580bbede
+[189]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.1...v2.1.2
+[190]:
+  https://github.com/Xunnamius/workflow-playground/commit/2cdd373974fdc62480e5681813c09cba98aebddc
+[191]:
+  https://github.com/Xunnamius/workflow-playground/commit/fcb2232cf6e628f58033a78a0d6aa107f9794589
+[192]:
+  https://github.com/Xunnamius/workflow-playground/commit/cdf46102e7d5b590bd153d2444cb13c24d4170b3
+[193]: https://github.com/Xunnamius/workflow-playground/compare/v2.1.0...v2.1.1
+[194]:
+  https://github.com/Xunnamius/workflow-playground/commit/961ecef3555403928cf319012ca6bd40093da66e
+[195]: https://github.com/Xunnamius/workflow-playground/compare/v2.0.1...v2.1.0
+[196]:
+  https://github.com/Xunnamius/workflow-playground/commit/97682f434acc501e4964c31770472acae0320ad5
+[197]:
+  https://github.com/Xunnamius/workflow-playground/commit/24e373907b23a68627fe535049f603c93bfa1361
+[198]:
+  https://github.com/Xunnamius/workflow-playground/commit/874f8d65aff5d8e27e14e8d9e4a0e37450713ce0
+[199]:
+  https://github.com/Xunnamius/workflow-playground/commit/4bb9d94050d1b8fb164bdf04b1bffa10705aa0a2
+[200]: https://github.com/Xunnamius/workflow-playground/compare/v2.0.0...v2.0.1
+[201]:
+  https://github.com/Xunnamius/workflow-playground/commit/f01d16b51e444eb801121e81718994b4add18799
+[202]:
+  https://github.com/Xunnamius/workflow-playground/commit/bcdbd0e1c23786185cd43b11d9ce18d3498e9ff5
+[203]:
+  https://github.com/Xunnamius/workflow-playground/commit/3124ab0500924ce75f3387d59d5d60ea3e77c827
+[204]: https://github.com/Xunnamius/workflow-playground/compare/v1.0.15...v2.0.0
+[205]:
+  https://github.com/Xunnamius/workflow-playground/commit/d8cc83611de2a595631f42bee0f10591b11bc59c
+[206]:
+  https://github.com/Xunnamius/workflow-playground/commit/bbe0416125a303076bc3f8a5a96c9669db926b46
+[207]:
+  https://github.com/Xunnamius/workflow-playground/commit/65e5d463925b888e08dd69a9da7f4e9f4c9be872
+[208]:
+  https://github.com/Xunnamius/workflow-playground/commit/f621f76895e6a0749f76a6a1abd90253b8694717
+[209]:
+  https://github.com/Xunnamius/workflow-playground/commit/f5428c87836552db96d40310c52abd47e593e729
+[210]:
+  https://github.com/Xunnamius/workflow-playground/commit/7af5e45eb0712da5d80022cedd535a673082d195
+[211]:
+  https://github.com/Xunnamius/workflow-playground/commit/6d86c0b4ce2218a93f9919a256a89a04af83a9d1
+[212]:
+  https://github.com/Xunnamius/workflow-playground/commit/e8bfbc590ec8ac73071ae61708c1ca29f2beee36
+[213]:
+  https://github.com/Xunnamius/workflow-playground/commit/5e40deb020c4bafb103a6bc78fbeecb266a5c983
+[214]:
+  https://github.com/Xunnamius/workflow-playground/commit/6da0a656aba20f022d26335ec33c9c4c4ea37c02
+[215]:
+  https://github.com/Xunnamius/workflow-playground/commit/d489cfacd8514a210ec0b570ab3c5a283cf5bc19
+[216]:
+  https://github.com/Xunnamius/workflow-playground/commit/57775c9cc3ffdad94f09b23923785a081e2a08ee
+[217]:
+  https://github.com/Xunnamius/workflow-playground/commit/1741cde56623bdb6e3e0c1dc95dcbe094b197ebe
+[218]:
+  https://github.com/Xunnamius/workflow-playground/commit/42af3470f3e91e5d359d995888c83534b8d32060
+[219]:
+  https://github.com/Xunnamius/workflow-playground/commit/57faa2cc448f39383b56db04ec06b1093f5f7bcd
+[220]:
+  https://github.com/Xunnamius/workflow-playground/commit/5ced6267d44731337fe5e0a69776dd5642d8a54d
+[221]:
+  https://github.com/Xunnamius/workflow-playground/commit/df91d8298edd2d756f732b2245ba086e91197505
+[222]: https://conventionalcommits.org
+[223]: https://semver.org
+[224]: https://github.com/Xunnamius/workflow-playground/compare/v7.2.2...v7.2.3
+[225]:
+  https://github.com/Xunnamius/workflow-playground/commit/786942001834cb5337fabf921cbc14ea4cc04d2f

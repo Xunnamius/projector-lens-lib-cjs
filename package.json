@@ -1,6 +1,6 @@
 {
   "name": "@xunnamius/do-not-install",
-  "version": "7.2.2",
+  "version": "7.2.3",
   "description": "A dummy package used for testing workflow pipelines. Not to be installed!",
   "keywords": [],
   "repository": {
