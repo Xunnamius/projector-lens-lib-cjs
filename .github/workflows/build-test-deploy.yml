@@ -248,8 +248,8 @@ jobs:
         run: |
           npm ci
           PEER_DEPS=$(node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))')
-          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'"
-          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS
+          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
+          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
       - name: Lint
         run: npm run lint
@@ -289,8 +289,8 @@ jobs:
         run: |
           npm ci
           PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
-          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'"
-          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS
+          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
+          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
       - name: Test unit
         run: npm run test-unit
@@ -345,8 +345,8 @@ jobs:
         run: |
           npm ci
           PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
-          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'"
-          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS
+          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
+          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
       - name: Build distributables
         run: npm run build-dist
@@ -396,8 +396,8 @@ jobs:
         run: |
           npm ci
           PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
-          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'"
-          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS
+          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
+          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
       - name: Build externals
         run: npm run build-externals
@@ -454,8 +454,8 @@ jobs:
         run: |
           npm ci
           PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
-          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'"
-          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS
+          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
+          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
       - name: Build distributables
         run: npm run build-dist
@@ -501,8 +501,8 @@ jobs:
         run: |
           npm ci
           PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
-          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'"
-          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS
+          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
+          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
       - name: Build distributables
         run: npm run build-dist
@@ -560,8 +560,8 @@ jobs:
         run: |
           npm ci
           PEER_DEPS=`node -e 'console.log(Object.entries(require("./package.json")?.peerDependencies || {}).map(([p,v]) => `${p}@${v}`).join(" "))'`
-          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'"
-          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS
+          ! [ -z "$DEBUG" ] && echo "(install targets) PEER_DEPS='$PEER_DEPS'" || true
+          ! [ -z "$PEER_DEPS"] && npm install --no-save $PEER_DEPS || true
 
       - name: Pre source formatting
         run: npm run format
