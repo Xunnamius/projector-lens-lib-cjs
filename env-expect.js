@@ -127,7 +127,7 @@ module.exports = {
 
         const makeSubstr = (name, value) =>
           `name ${not ? 'NOT ' : ''}matching regex ${name}` +
-          (DEFAULT_VALUE_REGEX.map(String).includes(value?.toString())
+          (DEFAULT_VALUE_REGEX.map(String).includes((value || '').toString())
             ? ''
             : ` and value ${not ? 'NOT ' : ''}matching regex ${value}`);
 
