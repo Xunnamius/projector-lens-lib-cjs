@@ -26,8 +26,8 @@ module.exports = {
     node: true,
     jest: true,
     'jest/globals': true,
-    browser: true,
-    webextensions: true
+    browser: false,
+    webextensions: false
   },
   rules: {
     'no-console': 'warn',
@@ -78,7 +78,9 @@ module.exports = {
         'jest/require-to-throw-message': 'off',
         'jest/prefer-called-with': 'off',
         'jest/prefer-spy-on': 'off',
-        'jest/no-if': 'off'
+        'jest/no-if': 'off',
+        'jest/no-disabled-tests': 'warn',
+        'jest/no-commented-out-tests': 'warn'
       }
     }
   ],

@@ -13,9 +13,9 @@
   "type": "commonjs",
   "exports": {
     ".": {
-      "default": "./dist/lib/index.js",
       "import": "./dist/lib/index.mjs",
-      "require": "./dist/lib/index.js"
+      "require": "./dist/lib/index.js",
+      "default": "./dist/lib/index.js"
     },
     "./package": "./package.json",
     "./package.json": "./package.json"
