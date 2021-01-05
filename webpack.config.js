@@ -1,6 +1,11 @@
 // This webpack config is used to transpile src to dist, compile externals, etc
 
 const debug = require('debug')(`${require('./package.json').name}:webpack-config`);
+const { verifyEnvironment } = require('./env-expect');
+const { config: populateEnv } = require('dotenv');
+
+populateEnv();
+verifyEnvironment();
 
 module.exports = {
   name: 'main',
