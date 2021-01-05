@@ -300,7 +300,6 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          flags: unit
           fail_ci_if_error: true
 
       - name: Issue any codecov-related warnings
@@ -370,8 +369,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          # ? codecov-action requires access to git history
-          fetch-depth: 0
           persist-credentials: false
 
       - name: Reconfigure git auth
@@ -406,18 +403,6 @@ jobs:
         env:
           MATRIX_NODE_VERSION: ${{ matrix.node }}
         run: npm run test-integration-externals
-
-      - name: Attempt to upload coverage data to codecov
-        if: env.UPLOAD_CODE_COVERAGE == 'true'
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          flags: externals
-          fail_ci_if_error: true
-
-      - name: Issue any codecov-related warnings
-        if: env.UPLOAD_CODE_COVERAGE != 'true'
-        run: echo '::warning::no code coverage data uploaded for this run'
 
   test-integration-browser:
     name: '[CI] test-integration-browser'
