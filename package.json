@@ -30,7 +30,7 @@
     "/README.md"
   ],
   "env-expect": {
-    "errorMessage": "\nCopy the \".env.example\" file to \".env\" and/or define only the appropriate environment variables",
+    "errorMessage": "\nCopy the \".env.example\" file to \".env\" or define the appropriate repository secrets",
     "rules": []
   },
   "scripts": {
@@ -46,9 +46,9 @@
     "list-tasks": "node -e 'console.log(Object.keys(require(\"./package.json\").scripts).join(\"\\n\"))'",
     "test": "npm run test-unit --",
     "test-integration": "npm run list-tasks | grep -e '^test-integration-' | xargs -n1 npm run",
-    "test-integration-browser": "BABEL_ENV=test jest test/integration-browser*.test.ts",
     "test-integration-node": "BABEL_ENV=test jest test/integration-node*.test.ts",
-    "test-unit": "BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
+    "test-integration-webpack": "BABEL_ENV=test jest test/integration-webpack*.test.ts",
+    "test-unit": "if ! [ -z \"$INCLUDE_EXTERNALS\" ]; then X=; Y='--collectCoverageFrom'; Z='external-scripts/**/*.ts'; else X='test/unit-externals*.test.ts'; Y=; Z=; fi; BABEL_ENV=test jest --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' $Y $Z --testPathIgnorePatterns test/integration-*.test.ts $X"
   },
   "commitlint": {
     "extends": [
@@ -150,6 +150,7 @@
     "conventional-changelog-angular": "^5.0.12",
     "conventional-changelog-cli": "^2.1.1",
     "debug": "^4.3.1",
+    "dotenv": "^8.2.0",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^7.16.0",
     "eslint-import-resolver-alias": "^1.1.2",
