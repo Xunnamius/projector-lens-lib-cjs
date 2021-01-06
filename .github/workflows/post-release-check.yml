@@ -47,7 +47,7 @@ jobs:
 
       - name: Test install package
         run: |
-          PKG_PRIVATE=`node -e 'console.log(require("./package.json").private || 'false')'`
+          PKG_PRIVATE=`node -e 'console.log(require("./package.json").private || "false")'`
           PKG_NAME=`node -e 'console.log(require("./package.json").name)'`
           PKG_VERSION=`node -e 'console.log(require("./package.json").version)'`
 
