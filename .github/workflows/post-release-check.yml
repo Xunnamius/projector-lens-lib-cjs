@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       node-matrix: ${{ steps.set-matrix.outputs.node-matrix }}
-      is-private-pkg: ${{ steps.pkg.outputs.is-private }}
     steps:
       - name: Report DEBUG mode status
         run: |
@@ -36,6 +35,7 @@ jobs:
 
   check-compat:
     runs-on: ubuntu-latest
+    needs: metadata
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
