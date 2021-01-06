@@ -60,4 +60,4 @@ jobs:
           ! [ -z "$DEBUG" ] && echo "PKG_NAME=$PKG_NAME" || true
           ! [ -z "$DEBUG" ] && echo "PKG_VERSION=$PKG_VERSION" || true
 
-          if ! [ -z "$PKG_PRIVATE" = "false" ]; then npm install "${PKG_NAME}@${PKG_VERSION}"; fi;
+          if ! [ "$PKG_PRIVATE" = "false" ]; then npm install "${PKG_NAME}@${PKG_VERSION}"; fi
