@@ -40,6 +40,11 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
       - name: Use node ${{ matrix.node }}
         uses: actions/setup-node@v2.1.4
         with:
