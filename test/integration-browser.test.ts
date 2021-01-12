@@ -2,7 +2,7 @@
 import { main } from '../package.json';
 import { unitServerPuppeteer } from './setup';
 
-describe('workflow-playground [INTEGRATION-BROWSER]', () => {
+describe('workflow-playground [INTEGRATION-CLIENT]', () => {
   it('should export expected members', async () => {
     expect.hasAssertions();
 
