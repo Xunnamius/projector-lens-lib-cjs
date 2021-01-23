@@ -1,5 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { main } from '../package.json';
+import sjx from 'shelljs';
+
+sjx.config.silent = true;
+
+if (!sjx.test('-e', `${__dirname}/../${main}.js`))
+  throw new Error(
+    'must build distributables before running this test suite (try `npm run build-dist`)'
+  );
 
 describe('workflow-playground [INTEGRATION-NODE]', () => {
   it('should export expected members', async () => {
