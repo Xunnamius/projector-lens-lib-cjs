@@ -36,7 +36,7 @@ Returns the quotient of `dividend` and `divisor`
 
 #### Parameters:
 
-• **(destructured)**: *object*
+**({ destructured })**: *object*
 
 | Name       | Type     |
 | ---------- | -------- |
@@ -93,10 +93,10 @@ Defined in: [index.ts:4][8]
 
 [4]: README.md#sum
 
-[5]: https://github.com/Xunnamius/workflow-playground/blob/85881f7/src/index.ts#L11
+[5]: https://github.com/Xunnamius/workflow-playground/blob/3b81944/src/index.ts#L11
 
-[6]: https://github.com/Xunnamius/workflow-playground/blob/85881f7/src/index.ts#L25
+[6]: https://github.com/Xunnamius/workflow-playground/blob/3b81944/src/index.ts#L25
 
-[7]: https://github.com/Xunnamius/workflow-playground/blob/85881f7/src/index.ts#L18
+[7]: https://github.com/Xunnamius/workflow-playground/blob/3b81944/src/index.ts#L18
 
-[8]: https://github.com/Xunnamius/workflow-playground/blob/85881f7/src/index.ts#L4
+[8]: https://github.com/Xunnamius/workflow-playground/blob/3b81944/src/index.ts#L4
