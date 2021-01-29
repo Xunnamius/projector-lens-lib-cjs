@@ -1,6 +1,6 @@
 import { sum, diff, mult, div } from '../src/index';
 
-describe('workflow-playground [UNIT]', () => {
+describe('workflow-playground [UNIT-INDEX]', () => {
   describe('::sum', () => {
     it('sums as expected', async () => {
       expect.hasAssertions();
