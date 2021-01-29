@@ -65,9 +65,18 @@ module.exports = {
       ],
       plugins: [
         // ? Interoperable named CJS imports for free
-        'babel-plugin-transform-mjs-imports',
-        // ? Ensure all local imports end in .mjs
-        ['babel-plugin-add-import-extension', { extension: 'mjs' }]
+        'transform-mjs-imports',
+        // ? Ensure all local imports without extensions now end in .mjs
+        ['add-import-extension', { extension: 'mjs' }],
+        // ? Fix relative local imports referencing package.json (.dist/esm/...)
+        [
+          'transform-rename-import',
+          {
+            replacements: [
+              { original: '../package.json', replacement: '../../package.json' }
+            ]
+          }
+        ]
       ]
     }
   }
