@@ -27,7 +27,7 @@ env:
   # DEBUG: '@xunnamius/do-not-install:*'
   NODE_CURRENT_VERSION: 15.x
   NODE_TEST_VERSIONS: '"12.x", "14.x"' # * NODE_CURRENT_VERSION included automatically
-  WEBPACK_TEST_VERSIONS: '"4.x", "5.x"'
+  WEBPACK_TEST_VERSIONS: '"5.x"'
   CI_COMMITTER_NAME: xunn-bot
   CI_COMMITTER_EMAIL: bot@xunn.io
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
