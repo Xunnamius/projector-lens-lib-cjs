@@ -34,26 +34,24 @@ npm install @xunnamius/do-not-install
 
 <details><summary><strong>[additional details]</strong></summary>
 
-> Note: **typical users don't need to read through this!** This information is
-> primarily useful for those attempting to bundle this package or for those who
+> Note: **you probably don't need to read through this!** This information is
+> primarily useful for those attempting to bundle this package or for people who
 > have an opinion on ESM versus CJS.
 
-This is a [dual UMD (CJS2)/ES module][dual-module] package. That means this
-package exposes both UMD+CJS2 and ESM entry points and can be used in most
-JavaScript environments (browsers, any current or LTS Node version, etc).
+This is a [dual CJS2/ES module][dual-module] package. That means this package
+exposes both CJS2 and ESM entry points.
 
-Loading this package via `require(...)` will cause Node and modern browsers to
-use the [CJS2 bundle][cjs2] entry point, disable [tree shaking][tree-shaking] in
-Webpack 4, and lead to larger bundles in Webpack 5. Alternatively, loading this
-package via `import { ... } from ...` or `import(...)` will cause Node and
-modern browsers to use the ESM entry point in [versions that support
-it][node-esm-support], in Webpack, and in the browser. Using the `import` syntax
-is the modern, preferred choice.
+Loading this package via `require(...)` will cause Node and Webpack to use the
+[CJS2 bundle][cjs2] entry point, disable [tree shaking][tree-shaking] in Webpack
+4, and lead to larger bundles in Webpack 5. Alternatively, loading this package
+via `import { ... } from ...` or `import(...)` will cause Node to use the ESM
+entry point in [versions that support it][node-esm-support], as will Webpack.
+Using the `import` syntax is the modern, preferred choice.
 
 For backwards compatibility with Webpack 4 and Node versions < 14,
 [`package.json`][package-json] retains the [`module`][module-key] key, which
 points to the ESM entry point, and the [`main`][exports-main-key] key, which
-points to both the ESM and CJS2 entry points implicitly (no file extension). For
+points to the CJS2 entry point explicitly (using the .js file extension). For
 Webpack 5 and Node versions >= 14, [`package.json`][package-json] includes the
 [`exports`][exports-main-key] key, which points to both entry points explicitly.
 
