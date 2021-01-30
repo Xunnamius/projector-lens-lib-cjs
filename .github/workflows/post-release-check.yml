@@ -34,10 +34,22 @@ jobs:
           echo "::set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_CURRENT_VERSION\"]}"
           ! [ -z "$DEBUG" ] && echo "set-output name=node-matrix::{\"node\":[$NODE_TEST_VERSIONS, \"$NODE_CURRENT_VERSION\"]}" || true
 
+  sleep:
+    name: 'five-minute-sleep'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Give result of npm publish time to propagate
+        uses: jakejarvis/wait-action@v0.1.0
+        with:
+          time: '5m'
+
   check-compat:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: metadata
+    needs:
+      - metadata
+      - sleep
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.metadata.outputs.node-matrix) }}
@@ -64,7 +76,10 @@ jobs:
           ! [ -z "$DEBUG" ] && echo "PKG_VERSION=$PKG_VERSION" || true
           ! [ -z "$DEBUG" ] && echo "PKG_BIN=$PKG_BIN" || true
 
-          if ! [ "$PKG_PRIVATE" = "false" ]; then
+          if [ "$PKG_PRIVATE" = "false" ]; then
+            export NODE_ENV=production
+            mkdir /tmp/post-release-check
+            cd /tmp/post-release-check
             npm install "${PKG_NAME}@${PKG_VERSION}"
             ! [ -z "$PKG_BIN" ] && npx --no-install $PKG_BIN --help
           fi
