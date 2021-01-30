@@ -11,7 +11,9 @@ module.exports = {
   plugins: [
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-function-bind',
-    '@babel/plugin-transform-typescript'
+    '@babel/plugin-transform-typescript',
+    // ? Interoperable named CJS imports for free
+    'babel-plugin-transform-default-named-imports'
   ],
   // ? Sub-keys under the "env" config key will augment the above
   // ? configuration depending on the value of NODE_ENV and friends. Default
@@ -64,8 +66,6 @@ module.exports = {
         // ? The end user will handle minification
       ],
       plugins: [
-        // ? Interoperable named CJS imports for free
-        'transform-mjs-imports',
         // ? Ensure all local imports without extensions now end in .mjs
         ['add-import-extension', { extension: 'mjs' }],
         // ? Fix relative local imports referencing package.json (.dist/esm/...)
