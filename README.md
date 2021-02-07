@@ -16,12 +16,12 @@
 
 <!-- prettier-ignore-end -->
 
-# do-not-install 🤔🤯☠️
+# projector-lens-lib-umd
 
-Proving grounds for my GitHub webhook, Action workflows, NPM publishing
-automation scripts and the like.
+Proving grounds for GitHub Action workflows, CI/CD publishing and deployment
+automation scripts, and the like.
 
-> Not meant for public consumption! Do not install this!
+> Published package not meant for public consumption! Do not install this!
 
 ## Install
 
