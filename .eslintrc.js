@@ -26,8 +26,8 @@ module.exports = {
     node: true,
     jest: true,
     'jest/globals': true,
-    browser: false,
-    webextensions: false
+    browser: true,
+    webextensions: true
   },
   rules: {
     'no-console': 'warn',
@@ -101,3 +101,4 @@ module.exports = {
 };
 
 debug('exports: %O', module.exports);
+true;

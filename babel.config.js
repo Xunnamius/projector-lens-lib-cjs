@@ -6,6 +6,14 @@ const NODE_LTS = 'maintained node versions';
 
 const debug = require('debug')(`${require('./package.json').name}:babel-config`);
 
+// ? Fix relative local imports referencing package.json (.dist/esm/...)
+const transformRenameImport = [
+  'transform-rename-import',
+  {
+    replacements: [{ original: '../package.json', replacement: '../../package.json' }]
+  }
+];
+
 module.exports = {
   parserOpts: { strictMode: true },
   plugins: [
@@ -13,7 +21,7 @@ module.exports = {
     '@babel/plugin-proposal-function-bind',
     '@babel/plugin-transform-typescript',
     // ? Interoperable named CJS imports for free
-    'babel-plugin-transform-default-named-imports'
+    'transform-default-named-imports'
   ],
   // ? Sub-keys under the "env" config key will augment the above
   // ? configuration depending on the value of NODE_ENV and friends. Default
@@ -49,7 +57,8 @@ module.exports = {
         ['@babel/preset-env', { targets: { node: true } }],
         ['@babel/preset-typescript', { allowDeclareFields: true }]
         // ? Webpack will handle minification
-      ]
+      ],
+      plugins: [transformRenameImport]
     },
     // * Used for compiling ESM code output somewhere in ./dist
     esm: {
@@ -68,15 +77,7 @@ module.exports = {
       plugins: [
         // ? Ensure all local imports without extensions now end in .mjs
         ['add-import-extension', { extension: 'mjs' }],
-        // ? Fix relative local imports referencing package.json (.dist/esm/...)
-        [
-          'transform-rename-import',
-          {
-            replacements: [
-              { original: '../package.json', replacement: '../../package.json' }
-            ]
-          }
-        ]
+        transformRenameImport
       ]
     }
   }
