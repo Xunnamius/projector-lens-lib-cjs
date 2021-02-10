@@ -1,15 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { main as pkgMain } from '../package.json';
+import { name as pkgName, main as pkgMain } from '../package.json';
+import debugFactory from 'debug';
 import sjx from 'shelljs';
 
-sjx.config.silent = true;
+const TEST_IDENTIFIER = 'integration-node';
+const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
+
+debug(`pkgName: "${pkgName}"`);
+
+sjx.config.silent = !process.env.DEBUG;
 
 if (!sjx.test('-e', `${__dirname}/../${pkgMain}`))
   throw new Error(
     'must build distributables before running this test suite (try `npm run build-dist`)'
   );
 
-describe('workflow-playground [INTEGRATION-NODE]', () => {
+describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
   it('should export expected members', async () => {
     expect.hasAssertions();
 
