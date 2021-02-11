@@ -26,8 +26,8 @@ module.exports = {
     node: true,
     jest: true,
     'jest/globals': true,
-    browser: true,
-    webextensions: true
+    browser: false,
+    webextensions: false
   },
   rules: {
     'no-console': 'warn',
