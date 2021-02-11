@@ -1,6 +1,13 @@
+import { name as pkgName } from '../package.json';
 import { sum, diff, mult, div } from '../src/index';
+import debugFactory from 'debug';
 
-describe('workflow-playground [UNIT-INDEX]', () => {
+const TEST_IDENTIFIER = 'unit-index';
+const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
+
+debug(`pkgName: "${pkgName}"`);
+
+describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
   describe('::sum', () => {
     it('sums as expected', async () => {
       expect.hasAssertions();

@@ -16,9 +16,9 @@
 
 <!-- prettier-ignore-end -->
 
-# projector-lens-lib-umd
+# projector-lens-lib-cjs
 
-Proving grounds for GitHub Action workflows, CI/CD publishing and deployment
+A CJS template for GitHub Action workflows, CI/CD publishing and deployment
 automation scripts, and the like.
 
 > Published package not meant for public consumption! Do not install this!
@@ -29,7 +29,7 @@ automation scripts, and the like.
 > [upstream peer dependency problems are resolved][1].
 
 ```shell
-npm install @xunnamius/do-not-install
+npm install @xunnamius/dummy-pkg-1
 ```
 
 <details><summary><strong>[additional details]</strong></summary>
@@ -72,7 +72,7 @@ package.
 ## Quick Start
 
 ```typescript
-import { sum } from '@xunnamius/do-not-install';
+import { sum } from '@xunnamius/dummy-pkg-1';
 
 sum(2, 2); // = 4
 ```
@@ -95,31 +95,31 @@ information.
 [badge-maintenance]:
   https://img.shields.io/maintenance/active/2021
   'Is this package maintained?'
-[link-repo]: https://github.com/xunnamius/workflow-playground
+[link-repo]: https://github.com/xunnamius/projector-lens-lib-cjs
 [badge-last-commit]:
-  https://img.shields.io/github/last-commit/xunnamius/workflow-playground
+  https://img.shields.io/github/last-commit/xunnamius/projector-lens-lib-cjs
   'When was the last commit to the official repo?'
 [badge-issues]:
-  https://isitmaintained.com/badge/open/Xunnamius/workflow-playground.svg
+  https://isitmaintained.com/badge/open/Xunnamius/projector-lens-lib-cjs.svg
   'Number of known issues with this package'
-[link-issues]: https://github.com/Xunnamius/workflow-playground/issues?q=
+[link-issues]: https://github.com/Xunnamius/projector-lens-lib-cjs/issues?q=
 [badge-pulls]:
-  https://img.shields.io/github/issues-pr/xunnamius/workflow-playground
+  https://img.shields.io/github/issues-pr/xunnamius/projector-lens-lib-cjs
   'Number of open pull requests'
-[link-pulls]: https://github.com/xunnamius/workflow-playground/pulls
+[link-pulls]: https://github.com/xunnamius/projector-lens-lib-cjs/pulls
 [badge-codecov]:
-  https://codecov.io/gh/Xunnamius/workflow-playground/branch/main/graph/badge.svg?token=HWRIOBAAPW
+  https://codecov.io/gh/Xunnamius/projector-lens-lib-cjs/branch/main/graph/badge.svg?token=HWRIOBAAPW
   'Is this package well-tested?'
-[link-codecov]: https://codecov.io/gh/Xunnamius/workflow-playground
+[link-codecov]: https://codecov.io/gh/Xunnamius/projector-lens-lib-cjs
 [badge-license]:
-  https://img.shields.io/npm/l/@xunnamius/do-not-install
+  https://img.shields.io/npm/l/@xunnamius/dummy-pkg-1
   "This package's source license"
 [link-license]:
-  https://github.com/Xunnamius/workflow-playground/blob/main/LICENSE
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/main/LICENSE
 [badge-npm]:
-  https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/do-not-install
+  https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/dummy-pkg-1
   'Install this package using npm or yarn!'
-[link-npm]: https://www.npmjs.com/package/@xunnamius/do-not-install
+[link-npm]: https://www.npmjs.com/package/@xunnamius/dummy-pkg-1
 [badge-semantic-release]:
   https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
   'This repo practices continuous integration and deployment!'
@@ -127,8 +127,8 @@ information.
 [package-json]: package.json
 [docs]: docs
 [choose-new-issue]:
-  https://github.com/Xunnamius/workflow-playground/issues/new/choose
-[pr-compare]: https://github.com/Xunnamius/workflow-playground/compare
+  https://github.com/Xunnamius/projector-lens-lib-cjs/issues/new/choose
+[pr-compare]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare
 [contributing]: CONTRIBUTING.md
 [support]: .github/SUPPORT.md
 [cjs2]: https://webpack.js.org/configuration/output/#module-definition-systems

@@ -1,11 +1,11 @@
 {
-  "name": "@xunnamius/do-not-install",
+  "name": "@xunnamius/dummy-pkg-1",
   "version": "7.6.1",
   "description": "A dummy package used for testing workflow pipelines. Not to be installed!",
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Xunnamius/workflow-playground"
+    "url": "https://github.com/Xunnamius/projector-lens-lib-cjs"
   },
   "license": "Unlicense",
   "author": "Xunnamius",

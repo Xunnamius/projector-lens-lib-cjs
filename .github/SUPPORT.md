@@ -46,12 +46,12 @@ contribution 🎉, your efforts are greatly appreciated! 🙌🏿
 - Issues that go for an extended period without activity are subject to closure
 
 [1]:
-  https://isitmaintained.com/badge/resolution/Xunnamius/workflow-playground.svg
+  https://isitmaintained.com/badge/resolution/Xunnamius/projector-lens-lib-cjs.svg
 [2]:
-  https://isitmaintained.com/project/Xunnamius/workflow-playground
+  https://isitmaintained.com/project/Xunnamius/projector-lens-lib-cjs
   'Average time to resolve an issue'
-[3]: https://isitmaintained.com/badge/open/Xunnamius/workflow-playground.svg
-[4]: https://github.com/Xunnamius/workflow-playground/issues?q=
+[3]: https://isitmaintained.com/badge/open/Xunnamius/projector-lens-lib-cjs.svg
+[4]: https://github.com/Xunnamius/projector-lens-lib-cjs/issues?q=
 [5]:
   https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments
-[6]: https://github.com/Xunnamius/workflow-playground/issues/new/choose
+[6]: https://github.com/Xunnamius/projector-lens-lib-cjs/issues/new/choose

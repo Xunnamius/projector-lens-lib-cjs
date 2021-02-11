@@ -19,7 +19,7 @@ around!
 This repository makes extensive use of [debug][7] (through [rejoinder][8]).
 Should you wish to view all possible debugging output, [export `DEBUG='*'`][9].
 To get debugging output for just this project's components, [export
-`DEBUG='@xunnamius/do-not-install:*'`][9].
+`DEBUG='@xunnamius/dummy-pkg-1:*'`][9].
 
 The ideal contributor flow is as follows:
 
@@ -369,13 +369,13 @@ which of the following scripts are available for this project.
 [1]: https://www.dataschool.io/how-to-contribute-on-github
 [2]: /.github/CODE_OF_CONDUCT.md
 [3]: https://github.com/features/actions
-[4]: https://github.com/Xunnamius/workflow-playground/tree/main/.husky
+[4]: https://github.com/Xunnamius/projector-lens-lib-cjs/tree/main/.husky
 [5]: .github/workflows/build-test-deploy.yml
 [6]: https://github.com/semantic-release/semantic-release#readme
 [7]: https://www.npmjs.com/package/debug
 [8]: https://www.npmjs.com/package/rejoinder
 [9]: https://www.npmjs.com/package/debug#wildcards
-[10]: https://github.com/Xunnamius/workflow-playground/fork
+[10]: https://github.com/Xunnamius/projector-lens-lib-cjs/fork
 [11]:
   https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository
 [12]: https://docs.npmjs.com/cli/v6/commands/npm-ci
@@ -383,9 +383,9 @@ which of the following scripts are available for this project.
   https://docs.npmjs.com/cli/v6/configuring-npm/package-json#peerdependencies
 [14]:
   https://docs.npmjs.com/cli/v7/commands/npm-install#configuration-options-affecting-dependency-resolution-and-tree-design
-[15]: https://github.com/Xunnamius/workflow-playground/compare
-[16]: https://github.com/Xunnamius/workflow-playground/issues/new/choose
-[17]: https://github.com/Xunnamius/workflow-playground/issues?q=
+[15]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare
+[16]: https://github.com/Xunnamius/projector-lens-lib-cjs/issues/new/choose
+[17]: https://github.com/Xunnamius/projector-lens-lib-cjs/issues?q=
 [18]: https://www.codewithjason.com/atomic-commits-testing/
 [19]: https://about.codecov.io/
 [20]: https://www.conventionalcommits.org/en/v1.0.0/#summary
