@@ -14,17 +14,17 @@ describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
       expect.hasAssertions();
       expect(sum(2, 2)).toBe(4);
     });
+
+    it('fails if this test should fail', async () => {
+      expect.hasAssertions();
+      expect(true).toBe(true);
+    });
   });
 
   describe('::diff', () => {
     it('takes the difference as expected', async () => {
       expect.hasAssertions();
       expect(diff(2, 2)).toBe(0);
-    });
-
-    it('fails if this test should fail', async () => {
-      expect.hasAssertions();
-      expect(true).toBe(true);
     });
   });
 
@@ -33,22 +33,12 @@ describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
       expect.hasAssertions();
       expect(mult(2, 3)).toBe(6);
     });
-
-    it('fails if this test should fail', async () => {
-      expect.hasAssertions();
-      expect(true).toBe(true);
-    });
   });
 
   describe('::div', () => {
     it('divides as expected', async () => {
       expect.hasAssertions();
       expect(div({ dividend: 4, divisor: 2 })).toBe(2);
-    });
-
-    it('fails if this test should fail', async () => {
-      expect.hasAssertions();
-      expect(true).toBe(true);
     });
   });
 });
