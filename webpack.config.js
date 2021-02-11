@@ -85,5 +85,42 @@ const mainConfig = {
   ]
 };
 
-module.exports = [mainConfig];
+const externalsConfig = {
+  name: 'externals',
+  mode: 'production',
+  target: 'node',
+  node: false,
+
+  entry: {
+    external: `${__dirname}/external-scripts/external.ts`
+  },
+
+  output: {
+    filename: '[name].js',
+    path: `${__dirname}/external-scripts/bin`
+  },
+
+  externals,
+  externalsPresets: { node: true },
+
+  stats: {
+    orphanModules: true,
+    providedExports: true,
+    usedExports: true
+  },
+
+  resolve: { extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'] },
+  module: {
+    rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
+  },
+  optimization: { usedExports: true },
+  ignoreWarnings: [/critical dependency:/i],
+  plugins: [
+    ...envPlugins,
+    // * ▼ For non-bundled externals, make entry file executable w/ shebang
+    new BannerPlugin({ banner: '#!/usr/bin/env node', raw: true, entryOnly: true })
+  ]
+};
+
+module.exports = [mainConfig, externalsConfig];
 debug('exports: %O', module.exports);
