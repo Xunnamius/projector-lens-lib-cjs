@@ -1,4 +1,4 @@
-import { name as pkgName } from '../package.json';
+import { name as pkgName, version as pkgVersion } from '../package.json';
 import { sum, diff, mult, div } from '../src/index';
 import debugFactory from 'debug';
 
@@ -6,6 +6,7 @@ const TEST_IDENTIFIER = 'unit-index';
 const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
 
 debug(`pkgName: "${pkgName}"`);
+debug(`pkgVersion: "${pkgVersion}"`);
 
 describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
   describe('::sum', () => {
@@ -20,8 +21,9 @@ describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
       expect.hasAssertions();
       expect(diff(2, 2)).toBe(0);
     });
-    // eslint-disable-next-line jest/prefer-expect-assertions
+
     it('fails if this test should fail', async () => {
+      expect.hasAssertions();
       expect(true).toBe(true);
     });
   });
@@ -31,8 +33,9 @@ describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
       expect.hasAssertions();
       expect(mult(2, 3)).toBe(6);
     });
-    // eslint-disable-next-line jest/prefer-expect-assertions
+
     it('fails if this test should fail', async () => {
+      expect.hasAssertions();
       expect(true).toBe(true);
     });
   });
@@ -42,8 +45,9 @@ describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
       expect.hasAssertions();
       expect(div({ dividend: 4, divisor: 2 })).toBe(2);
     });
-    // eslint-disable-next-line jest/prefer-expect-assertions
+
     it('fails if this test should fail', async () => {
+      expect.hasAssertions();
       expect(true).toBe(true);
     });
   });
