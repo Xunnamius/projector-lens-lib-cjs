@@ -2,16 +2,16 @@
 
 ### Functions
 
-*   [diff][1]
-*   [div][2]
-*   [mult][3]
-*   [sum][4]
+- [diff][1]
+- [div][2]
+- [mult][3]
+- [sum][4]
 
 ## Functions
 
 ### diff
 
-▸ **diff**(`a`: *number*, `b`: *number*): *number*
+▸ **diff**(`a`: _number_, `b`: _number_): _number_
 
 Returns the difference of `a` and `b`
 
@@ -19,39 +19,39 @@ Returns the difference of `a` and `b`
 
 | Name | Type     |
 | ---- | -------- |
-| `a`  | *number* |
-| `b`  | *number* |
+| `a`  | _number_ |
+| `b`  | _number_ |
 
-**Returns:** *number*
+**Returns:** _number_
 
-Defined in: [index.ts:11][5]
+Defined in: [index.ts:17][5]
 
-***
+---
 
 ### div
 
-▸ **div**({ `dividend`: *number* ; `divisor`: *number*  }): *number*
+▸ **div**({ `dividend`: _number_ ; `divisor`: _number_ }): _number_
 
 Returns the quotient of `dividend` and `divisor`
 
 #### Parameters:
 
-**({ destructured })**: *object*
+**({ destructured })**: _object_
 
 | Name       | Type     |
 | ---------- | -------- |
-| `dividend` | *number* |
-| `divisor`  | *number* |
+| `dividend` | _number_ |
+| `divisor`  | _number_ |
 
-**Returns:** *number*
+**Returns:** _number_
 
-Defined in: [index.ts:25][6]
+Defined in: [index.ts:33][6]
 
-***
+---
 
 ### mult
 
-▸ **mult**(`a`: *number*, `b`: *number*): *number*
+▸ **mult**(`a`: _number_, `b`: _number_): _number_
 
 Returns the product of `a` and `b`
 
@@ -59,18 +59,18 @@ Returns the product of `a` and `b`
 
 | Name | Type     |
 | ---- | -------- |
-| `a`  | *number* |
-| `b`  | *number* |
+| `a`  | _number_ |
+| `b`  | _number_ |
 
-**Returns:** *number*
+**Returns:** _number_
 
-Defined in: [index.ts:18][7]
+Defined in: [index.ts:25][7]
 
-***
+---
 
 ### sum
 
-▸ **sum**(`a`: *number*, `b`: *number*): *number*
+▸ **sum**(`a`: _number_, `b`: _number_): _number_
 
 Returns the sum of `a` and `b`
 
@@ -78,25 +78,22 @@ Returns the sum of `a` and `b`
 
 | Name | Type     |
 | ---- | -------- |
-| `a`  | *number* |
-| `b`  | *number* |
+| `a`  | _number_ |
+| `b`  | _number_ |
 
-**Returns:** *number*
+**Returns:** _number_
 
-Defined in: [index.ts:4][8]
+Defined in: [index.ts:9][8]
 
 [1]: README.md#diff
-
 [2]: README.md#div
-
 [3]: README.md#mult
-
 [4]: README.md#sum
-
-[5]: https://github.com/Xunnamius/workflow-playground/blob/26a8371/src/index.ts#L11
-
-[6]: https://github.com/Xunnamius/workflow-playground/blob/26a8371/src/index.ts#L25
-
-[7]: https://github.com/Xunnamius/workflow-playground/blob/26a8371/src/index.ts#L18
-
-[8]: https://github.com/Xunnamius/workflow-playground/blob/26a8371/src/index.ts#L4
+[5]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/35da4c3/src/index.ts#L17
+[6]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/35da4c3/src/index.ts#L33
+[7]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/35da4c3/src/index.ts#L25
+[8]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/35da4c3/src/index.ts#L9
