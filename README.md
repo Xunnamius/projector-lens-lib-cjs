@@ -18,7 +18,7 @@
 
 # projector-lens-lib-cjs
 
-A CJS template for GitHub Action workflows, CI/CD publishing and deployment
+A CJS template with GitHub Action workflows, CI/CD publishing and deployment
 automation scripts, and the like.
 
 > Published package not meant for public consumption! Do not install this!
