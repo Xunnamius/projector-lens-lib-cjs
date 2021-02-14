@@ -15,7 +15,7 @@ try {
   debug(`env support disabled; reason: ${e}`);
 }
 
-const dotenv = enableDotenvSupport ? require('dotenv')() : null;
+const dotenv = enableDotenvSupport ? require('dotenv').config() : null;
 
 debug(
   ...(enableDotenvSupport
