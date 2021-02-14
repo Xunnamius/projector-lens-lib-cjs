@@ -1,6 +1,6 @@
 {
   "name": "@xunnamius/dummy-pkg-1",
-  "version": "7.6.3",
+  "version": "7.6.4",
   "description": "A dummy package used for testing workflow pipelines. Not to be installed!",
   "keywords": [],
   "repository": {
