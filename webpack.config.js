@@ -2,7 +2,6 @@
 // compile executables, etc
 
 const { EnvironmentPlugin, DefinePlugin, BannerPlugin } = require('webpack');
-const { config: populateEnv } = require('dotenv');
 const { verifyEnvironment } = require('./env-expect');
 const nodeExternals = require('webpack-node-externals');
 const debug = require('debug')(`${require('./package.json').name}:webpack-config`);
@@ -10,11 +9,14 @@ const debug = require('debug')(`${require('./package.json').name}:webpack-config
 let enableDotenvSupport = false;
 
 try {
-  require('fs').access('.env');
+  require('fs').accessSync('.env');
   enableDotenvSupport = true;
-} catch {}
+} catch (e) {
+  debug(`env support disabled; reason: ${e}`);
+}
 
-const dotenv = enableDotenvSupport ? populateEnv() : null;
+const dotenv = enableDotenvSupport ? require('dotenv')() : null;
+
 debug(
   ...(enableDotenvSupport
     ? ['saw dotenv result: %O', dotenv]
@@ -40,8 +42,8 @@ const externals = [
     /\.json$/.test(request) ? cb(null, `commonjs ${request}`) : cb()
 ];
 
-const mainConfig = {
-  name: 'main',
+const libConfig = {
+  name: 'lib',
   mode: 'production',
   target: 'node',
   node: false,
@@ -51,12 +53,9 @@ const mainConfig = {
   output: {
     filename: 'index.js',
     path: `${__dirname}/dist`,
-    // ! ▼ Only required for libraries (CJS2/UMD/etc)
-    // ! Note: ESM outputs are handled by Babel ONLY!
-    libraryTarget: 'umd',
-    //libraryTarget: 'commonjs2',
-    // ! ▼ Only required for when libraryTarget is UMD (to help globals work)
-    globalObject: 'this'
+    // ! ▼ Only required for libraries
+    // ! ▼ Note: ESM outputs are handled by Babel ONLY!
+    libraryTarget: 'commonjs2'
   },
 
   externals,
@@ -74,15 +73,7 @@ const mainConfig = {
   },
   optimization: { usedExports: true },
   ignoreWarnings: [/critical dependency:/i],
-  plugins: [
-    ...envPlugins,
-    // * ▼ For UMD libraries
-    new BannerPlugin({
-      banner: '"undefined"!=typeof window&&(window.global=window);',
-      raw: true,
-      entryOnly: true
-    })
-  ]
+  plugins: [...envPlugins]
 };
 
 const externalsConfig = {
@@ -122,5 +113,40 @@ const externalsConfig = {
   ]
 };
 
-module.exports = [mainConfig, externalsConfig];
+/*const cliConfig = {
+  name: 'cli',
+  mode: 'production',
+  target: 'node',
+  node: false,
+
+  entry: `${__dirname}/src/cli.ts`,
+
+  output: {
+    filename: 'cli.js',
+    path: `${__dirname}/dist`
+  },
+
+  externals,
+  externalsPresets: { node: true },
+
+  stats: {
+    orphanModules: true,
+    providedExports: true,
+    usedExports: true
+  },
+
+  resolve: { extensions: ['.ts', '.wasm', '.mjs', '.cjs', '.js', '.json'] },
+  module: {
+    rules: [{ test: /\.(ts|js)x?$/, loader: 'babel-loader', exclude: /node_modules/ }]
+  },
+  optimization: { usedExports: true },
+  ignoreWarnings: [/critical dependency:/i],
+  plugins: [
+    ...envPlugins,
+    // * ▼ For bundled CLI applications, make entry file executable w/ shebang
+    new BannerPlugin({ banner: '#!/usr/bin/env node', raw: true, entryOnly: true })
+  ]
+};*/
+
+module.exports = [libConfig, externalsConfig /*, cliConfig*/];
 debug('exports: %O', module.exports);
