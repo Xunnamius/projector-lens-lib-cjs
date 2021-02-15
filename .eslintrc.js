@@ -101,4 +101,3 @@ module.exports = {
 };
 
 debug('exports: %O', module.exports);
-true;
