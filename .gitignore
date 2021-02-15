@@ -6,6 +6,5 @@ ignore.*
 /.vscode
 /.env
 /external-scripts/bin
-/next-env.d.ts
 /node_modules
 /coverage
