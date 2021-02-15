@@ -86,18 +86,18 @@ module.exports = {
     }
   ],
   settings: {
-    'import/extensions': ['.ts', '.js'],
+    'import/extensions': ['.ts', '.tsx', '.js', '.jsx'],
     // ? Switch parsers depending on which type of file we're looking at
     'import/parsers': {
-      '@typescript-eslint/parser': ['.ts'],
-      'babel-eslint': ['.js']
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+      'babel-eslint': ['.js', '.jsx']
     },
     'import/ignore': [
       // ? Don't go complaining about anything that we don't own
       '.*/node_modules/.*'
     ]
   },
-  ignorePatterns: ['coverage', 'dist', 'bin']
+  ignorePatterns: ['coverage', 'dist', 'bin', 'build']
 };
 
 debug('exports: %O', module.exports);
