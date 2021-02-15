@@ -6,25 +6,15 @@ const { verifyEnvironment } = require('./env-expect');
 const nodeExternals = require('webpack-node-externals');
 const debug = require('debug')(`${require('./package.json').name}:webpack-config`);
 
-let enableDotenvSupport = false;
+let env = {};
 
 try {
   require('fs').accessSync('.env');
-  enableDotenvSupport = true;
+  env = require('dotenv').config().parsed;
+  debug('new env vars: %O', env);
 } catch (e) {
   debug(`env support disabled; reason: ${e}`);
 }
-
-const dotenv = enableDotenvSupport ? require('dotenv').config() : null;
-
-debug(
-  ...(enableDotenvSupport
-    ? ['saw dotenv result: %O', dotenv]
-    : ['(dotenv support disabled)'])
-);
-
-const env = (dotenv && dotenv.parsed) || {};
-debug('saw env: %O', env);
 
 verifyEnvironment();
 
