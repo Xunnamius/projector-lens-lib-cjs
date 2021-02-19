@@ -1,29 +1,31 @@
-import { name as pkgName, version as pkgVersion, main as pkgMain } from '../package.json';
-import { resolve } from 'path';
-import sjx from 'shelljs';
 import debugFactory from 'debug';
-import uniqueFilename from 'unique-filename';
-import del from 'del';
+import { name as pkgName, version as pkgVersion, main as pkgMain } from '../package.json';
+import {
+  run,
+  mockFixtureFactory,
+  dummyNpmPackageFixture,
+  webpackTestFixture,
+  FixtureOptions,
+  npmLinkSelfFixture
+} from './setup';
 
 const TEST_IDENTIFIER = 'integration-webpack';
+
+const fullPkgMain = `${__dirname}/../${pkgMain}`;
 const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
-
-sjx.config.silent = !process.env.DEBUG;
-
-if (!sjx.test('-e', `${__dirname}/../${pkgMain}`)) {
-  debug(`unable to find main distributable: ${__dirname}/../${pkgMain}`);
-  throw new Error(
-    'must build distributables before running this test suite (try `npm run build-dist`)'
-  );
-}
-
-debug(`pkgName: "${pkgName}"`);
-debug(`pkgVersion: "${pkgVersion}"`);
 
 const webpackVersion = process.env.MATRIX_WEBPACK_VERSION || 'latest';
 debug(`webpackVersion: "${webpackVersion}"`);
 
-if (!webpackVersion) throw new Error('bad MATRIX_WEBPACK_VERSION encountered');
+const fixtureOptions = {
+  webpackVersion,
+  initialFileContents: {
+    'package.json': `{"name":"dummy-pkg","dependencies":{"${pkgName}":"${pkgVersion}"}}`
+  } as FixtureOptions['initialFileContents'],
+  use: [dummyNpmPackageFixture(), npmLinkSelfFixture(), webpackTestFixture()]
+};
+
+const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, fixtureOptions);
 
 enum SourceType {
   CJS = 'cjs',
@@ -35,128 +37,69 @@ enum DestType {
   CJS_LIB = 'cjs-library'
 }
 
-const createIndexAndRunTest = (root: string) => ({
-  source,
-  dest
-}: {
-  source: SourceType;
-  dest: DestType;
-}) => {
+const runTest = async ({ source, dest }: { source: SourceType; dest: DestType }) => {
   const ext = `${source == SourceType.ESM ? 'm' : ''}js`;
+  const indexPath = `src/index.${ext}`;
 
-  const cmd1 = new sjx.ShellString(
+  // TODO: update file below to output "working" only with success condition
+  fixtureOptions.initialFileContents[indexPath] =
     (source == SourceType.ESM
       ? `import { sum, diff, mult, div } from '${pkgName}';`
       : `const { sum, diff, mult, div } = require('${pkgName}');`) +
-      `
-      const working = sum(2, 2) == 4 && diff(2, 2) == 0 && mult(2, 3) == 6 && div({ dividend: 4, divisor: 2 }) == 2;
-      console.log(working ? 'working' : 'not working');`.trim()
-  );
-
-  debug(`echoing string \`${cmd1}\` to ${root}/src/index.${ext}`);
-  cmd1.to(`${root}/src/index.${ext}`);
-
-  const cmd2 = new sjx.ShellString(
     `
-    module.exports = {
-      name: 'dummy',
-      mode: 'production',
-      target: 'node',
-      node: false,
-      entry: \`\${__dirname}/src/index.${ext}\`,
-      output: {
-        filename: 'index.js',
-        path: \`\${__dirname}/dist\`,
-        ${dest == DestType.CJS_LIB ? "libraryTarget: 'commonjs2'" : ''}
-      }
-    }`.trim()
-  );
+      const working = sum(2, 2) == 4 && diff(2, 2) == 0 && mult(2, 3) == 6 && div({ dividend: 4, divisor: 2 }) == 2;
+      console.log(working ? 'working' : 'not working');`;
 
-  debug(`echoing string \`${cmd2}\` to ${root}/webpack.config.js`);
-  cmd2.to(`${root}/webpack.config.js`);
+  fixtureOptions.initialFileContents['webpack.config.js'] = `
+  module.exports = {
+    name: 'dummy',
+    mode: 'production',
+    target: 'node',
+    node: false,
+    entry: \`\${__dirname}/src/index.${ext}\`,
+    output: {
+      filename: 'index.js',
+      path: \`\${__dirname}/dist\`,
+      ${dest == DestType.CJS_LIB ? "libraryTarget: 'commonjs2'" : ''}
+    }
+  }`;
 
-  debug(`directory at this point: ${sjx.exec('tree -a', { silent: true }).stdout}`);
+  await withMockedFixture(async (ctx) => {
+    if (!ctx.testResult) throw new Error('must use webpack-test fixture');
 
-  sjx.exec(`npm install webpack@${webpackVersion} webpack-cli`);
+    debug('(expecting exit code to be 0)');
+    debug('(expecting stdout to be "working")');
 
-  debug(`package.json contents: ${sjx.cat('package.json').stdout}`);
+    expect(ctx.testResult.code).toBe(0);
+    expect(ctx.testResult.stdout).toBe('working');
+  });
 
-  const webpack = sjx.exec('npx webpack');
-
-  debug(`webpack run: (${webpack.code})\n${webpack.stderr}\n${webpack.stdout}`);
-  expect(webpack.code).toBe(0);
-
-  const result = sjx.exec(`node ${root}/dist/index.js`).stdout.trim();
-  debug(`result: "${result}" (expected "working")`);
-  expect(result).toBe('working');
+  delete fixtureOptions.initialFileContents[indexPath];
 };
 
-let deleteRoot: () => Promise<void>;
-let runTest: ReturnType<typeof createIndexAndRunTest>;
-
-beforeEach(async () => {
-  const root = uniqueFilename(sjx.tempdir(), TEST_IDENTIFIER);
-  const pkgJson = `${root}/package.json`;
-
-  deleteRoot = async () => {
-    sjx.cd('..');
-    debug(`forcibly removing dir ${root}`);
-    await del(root);
-  };
-
-  sjx.mkdir('-p', root);
-  sjx.mkdir('-p', `${root}/src`);
-  sjx.mkdir('-p', `${root}/node_modules`);
-  pkgName.includes('/') &&
-    sjx.mkdir('-p', `${root}/node_modules/${pkgName.split('/')[0]}`);
-
-  const cd = sjx.cd(root);
-
-  if (cd.code != 0) {
-    await deleteRoot();
-    throw new Error(`failed to mkdir/cd into ${root}: ${cd.stderr} ${cd.stdout}`);
-  } else debug(`created temp root dir: ${root}`);
-
-  new sjx.ShellString(
-    `{"name":"dummy-pkg","dependencies":{"${pkgName}":"${pkgVersion}"}}`
-  ).to(pkgJson);
-
-  debug(`creating symbolic link`);
-  const makeLink = sjx.ln('-s', resolve(`${__dirname}/..`), `node_modules/${pkgName}`);
-
-  if (makeLink.code !== 0) {
-    throw new Error(
-      `unable to create symbolic link: ${makeLink}\n\t${makeLink.stderr} ${makeLink.stdout}`
-    );
+beforeAll(async () => {
+  if ((await run('test', ['-e', fullPkgMain])).code != 0) {
+    debug(`unable to find main distributable: ${fullPkgMain}`);
+    throw new Error('must build distributables first (try `npm run build-dist`)');
   }
-
-  runTest = createIndexAndRunTest(root);
 });
 
-afterEach(() => deleteRoot());
+it('can be bundled as CJS source into CJS app by webpack', async () => {
+  expect.hasAssertions();
+  await runTest({ source: SourceType.CJS, dest: DestType.CJS });
+});
 
-describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
-  // eslint-disable-next-line jest/lowercase-name
-  it('CJS source can be bundled into CJS app by webpack', async () => {
-    expect.hasAssertions();
-    runTest({ source: SourceType.CJS, dest: DestType.CJS });
-  });
+it('can be bundled as CJS source into CJS library by webpack', async () => {
+  expect.hasAssertions();
+  await runTest({ source: SourceType.CJS, dest: DestType.CJS_LIB });
+});
 
-  // eslint-disable-next-line jest/lowercase-name
-  it('CJS source can be bundled into CJS library by webpack', async () => {
-    expect.hasAssertions();
-    runTest({ source: SourceType.CJS, dest: DestType.CJS_LIB });
-  });
+it('can be bundled as ESM source into CJS app by webpack', async () => {
+  expect.hasAssertions();
+  await runTest({ source: SourceType.ESM, dest: DestType.CJS });
+});
 
-  // eslint-disable-next-line jest/lowercase-name
-  it('ESM source can be bundled into CJS app by webpack', async () => {
-    expect.hasAssertions();
-    runTest({ source: SourceType.ESM, dest: DestType.CJS });
-  });
-
-  // eslint-disable-next-line jest/lowercase-name
-  it('ESM source can be bundled into CJS library by webpack', async () => {
-    expect.hasAssertions();
-    runTest({ source: SourceType.ESM, dest: DestType.CJS_LIB });
-  });
+it('can be bundled as ESM source into CJS library by webpack', async () => {
+  expect.hasAssertions();
+  await runTest({ source: SourceType.ESM, dest: DestType.CJS_LIB });
 });

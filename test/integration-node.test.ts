@@ -1,111 +1,78 @@
-import { name as pkgName, version as pkgVersion, main as pkgMain } from '../package.json';
-import { resolve } from 'path';
-import sjx from 'shelljs';
 import debugFactory from 'debug';
-import uniqueFilename from 'unique-filename';
-import del from 'del';
+import { name as pkgName, version as pkgVersion, main as pkgMain } from '../package.json';
+import {
+  run,
+  mockFixtureFactory,
+  dummyNpmPackageFixture,
+  npmLinkSelfFixture,
+  nodeImportTestFixture,
+  FixtureOptions
+} from './setup';
 
 const TEST_IDENTIFIER = 'integration-node';
+
+const fullPkgMain = `${__dirname}/../${pkgMain}`;
 const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
 
-sjx.config.silent = !process.env.DEBUG;
+const fixtureOptions = {
+  initialFileContents: {
+    'package.json': `{"name":"dummy-pkg","dependencies":{"${pkgName}":"${pkgVersion}"}}`
+  } as FixtureOptions['initialFileContents'],
+  use: [dummyNpmPackageFixture(), npmLinkSelfFixture(), nodeImportTestFixture()]
+};
 
-if (!sjx.test('-e', `${__dirname}/../${pkgMain}`)) {
-  debug(`unable to find main distributable: ${__dirname}/../${pkgMain}`);
-  throw new Error(
-    'must build distributables before running this test suite (try `npm run build-dist`)'
-  );
-}
-
-debug(`pkgName: "${pkgName}"`);
-debug(`pkgVersion: "${pkgVersion}"`);
+const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, fixtureOptions);
 
 const nodeVersion = process.env.MATRIX_NODE_VERSION || process.version;
 debug(`nodeVersion: "${nodeVersion}"`);
 
-if (!nodeVersion) throw new Error('bad MATRIX_NODE_VERSION encountered');
+const runTest = async ({ esm }: { esm: boolean }) => {
+  const indexPath = `src/index.${esm ? 'm' : ''}js`;
 
-const createIndexAndRunTest = (root: string) => ({ esm }: { esm: boolean }) => {
-  const ext = `${esm ? 'm' : ''}js`;
-
-  const cmd = new sjx.ShellString(
+  // TODO: update file below to output "working" only with success condition
+  fixtureOptions.initialFileContents[indexPath] =
     (esm
       ? `import { sum, diff, mult, div } from '${pkgName}';`
       : `const { sum, diff, mult, div } = require('${pkgName}');`) +
-      `
+    `
       const working = sum(2, 2) == 4 && diff(2, 2) == 0 && mult(2, 3) == 6 && div({ dividend: 4, divisor: 2 }) == 2;
-      console.log(working ? 'working' : 'not working');`.trim()
-  );
+      console.log(working ? 'working' : 'not working');`;
 
-  debug(`echoing string \`${cmd}\` to ${root}/index.${ext}`);
-  cmd.to(`${root}/index.${ext}`);
+  await withMockedFixture(async (ctx) => {
+    if (!ctx.testResult) throw new Error('must use node-import-test fixture');
 
-  debug(`package.json contents: ${sjx.cat('package.json').stdout}`);
+    if (esm) {
+      debug('(expecting stdout to be "working" or "")');
+      debug('(expecting stderr to be "" or an error in a 3rd party dependency)');
 
-  const exec = sjx.exec(`node --experimental-json-modules index.${ext}`);
-  const stdout = exec.stdout.trim();
-  const stderr = exec.stderr.trim();
+      expect(ctx.testResult.stdout).toBeOneOf(['working', '']);
+      ctx.testResult.stdout == '' &&
+        expect(ctx.testResult.stderr).toMatch(/ \/.+\/node_modules\/.+$/m);
+    } else {
+      debug('(expecting exit code to be 0)');
+      debug('(expecting stdout to be "working")');
 
-  if (esm) {
-    debug(`result: \`${stdout}\` (expected "working" or "")`);
-    debug(`result: \`${stderr}\` (expected "" or an error in a 3rd party dependency)`);
-    expect(stdout == 'working' || / \/.+\/node_modules\/.+$/m.test(stderr)).toBeTrue();
-  } else {
-    debug(`result: "${stdout}" (expected "working")`);
-    expect(stdout).toBe('working');
-  }
+      expect(ctx.testResult.code).toBe(0);
+      expect(ctx.testResult.stdout).toBe('working');
+    }
+  });
+
+  delete fixtureOptions.initialFileContents[indexPath];
 };
 
-let deleteRoot: () => Promise<void>;
-let runTest: ReturnType<typeof createIndexAndRunTest>;
-
-beforeEach(async () => {
-  const root = uniqueFilename(sjx.tempdir(), TEST_IDENTIFIER);
-  const pkgJson = `${root}/package.json`;
-
-  deleteRoot = async () => {
-    sjx.cd('..');
-    debug(`forcibly removing dir ${root}`);
-    await del(root);
-  };
-
-  sjx.mkdir('-p', root);
-  sjx.mkdir('-p', `${root}/node_modules`);
-  pkgName.includes('/') &&
-    sjx.mkdir('-p', `${root}/node_modules/${pkgName.split('/')[0]}`);
-  const cd = sjx.cd(root);
-
-  if (cd.code != 0) {
-    throw new Error(`failed to mkdir/cd into ${root}: ${cd.stderr} ${cd.stdout}`);
-  } else debug(`created temp root dir: ${root}`);
-
-  new sjx.ShellString(
-    `{"name":"dummy-pkg","dependencies":{"${pkgName}":"${pkgVersion}"}}`
-  ).to(pkgJson);
-
-  debug(`creating symbolic link`);
-  const makeLink = sjx.ln('-s', resolve(`${__dirname}/..`), `node_modules/${pkgName}`);
-
-  if (makeLink.code !== 0) {
-    throw new Error(
-      `unable to create symbolic link: ${makeLink}\n\t${makeLink.stderr} ${makeLink.stdout}`
-    );
+beforeAll(async () => {
+  if ((await run('test', ['-e', fullPkgMain])).code != 0) {
+    debug(`unable to find main distributable: ${fullPkgMain}`);
+    throw new Error('must build distributables first (try `npm run build-dist`)');
   }
-
-  debug(`directory at this point: ${sjx.exec('tree -a', { silent: true }).stdout}`);
-  runTest = createIndexAndRunTest(root);
 });
 
-afterEach(() => deleteRoot());
+it('works as an ESM import', async () => {
+  expect.hasAssertions();
+  await runTest({ esm: true });
+});
 
-describe(`${pkgName} [${TEST_IDENTIFIER}]`, () => {
-  it('works as an ESM import', async () => {
-    expect.hasAssertions();
-    runTest({ esm: true });
-  });
-
-  it('works as a CJS require(...)', async () => {
-    expect.hasAssertions();
-    runTest({ esm: false });
-  });
+it('works as a CJS require(...)', async () => {
+  expect.hasAssertions();
+  await runTest({ esm: false });
 });
