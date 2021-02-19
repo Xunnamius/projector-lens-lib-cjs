@@ -18,7 +18,7 @@ on:
     branches-ignore: ['dependabot/**', 'snyk-**', 'no-ci/**']
 
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, reopened, synchronize]
     branches: [main, canary]
 
 env:
