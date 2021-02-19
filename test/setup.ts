@@ -1,6 +1,6 @@
 import { name as pkgName, version as pkgVersion } from '../package.json';
-import { writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
+import { promises as fs } from 'fs';
 import 'jest-extended';
 import execa from 'execa';
 import uniqueFilename from 'unique-filename';
@@ -10,6 +10,7 @@ import type { ExecaReturnValue } from 'execa';
 import type { AnyFunction, AnyVoid } from '@ergodark/types';
 import { resolve } from 'path';
 
+const { writeFile } = fs;
 const debug = debugFactory(`${pkgName}:jest-setup`);
 
 debug(`pkgName: "${pkgName}"`);

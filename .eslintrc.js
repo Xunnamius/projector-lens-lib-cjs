@@ -35,7 +35,11 @@ module.exports = {
     'no-await-in-loop': 'warn',
     'import/no-unresolved': [
       'error',
-      { commonjs: true, ignore: ['fs/promises', 'dns/promises'] }
+      {
+        commonjs: true
+        // ? Once Node 12 dies, these can be used safely
+        /*ignore: ['fs/promises', 'dns/promises']*/
+      }
     ],
     'no-extra-boolean-cast': 'off',
     'no-empty': 'off',
