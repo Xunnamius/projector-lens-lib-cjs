@@ -326,7 +326,7 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          fail_ci_if_error: true
+          fail_ci_if_error: false
 
       - name: Issue any codecov-related warnings
         if: env.UPLOAD_CODE_COVERAGE != 'true'
