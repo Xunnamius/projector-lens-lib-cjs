@@ -18,7 +18,7 @@ Returns the difference of `a` and `b`
 #### Parameters:
 
 | Name | Type     |
-| ---- | -------- |
+| :--- | :------- |
 | `a`  | _number_ |
 | `b`  | _number_ |
 
@@ -36,12 +36,11 @@ Returns the quotient of `dividend` and `divisor`
 
 #### Parameters:
 
-**({ destructured })**: _object_
-
-| Name       | Type     |
-| ---------- | -------- |
-| `dividend` | _number_ |
-| `divisor`  | _number_ |
+| Name                             | Type     |
+| :------------------------------- | :------- |
+| **({ destructured })**`          | _object_ |
+| **({ destructured })**.dividend` | _number_ |
+| **({ destructured })**.divisor`  | _number_ |
 
 **Returns:** _number_
 
@@ -58,7 +57,7 @@ Returns the product of `a` and `b`
 #### Parameters:
 
 | Name | Type     |
-| ---- | -------- |
+| :--- | :------- |
 | `a`  | _number_ |
 | `b`  | _number_ |
 
@@ -77,7 +76,7 @@ Returns the sum of `a` and `b`
 #### Parameters:
 
 | Name | Type     |
-| ---- | -------- |
+| :--- | :------- |
 | `a`  | _number_ |
 | `b`  | _number_ |
 
@@ -90,10 +89,10 @@ Defined in: [index.ts:9][8]
 [3]: README.md#mult
 [4]: README.md#sum
 [5]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4a2ed37/src/index.ts#L17
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4cdb325/src/index.ts#L17
 [6]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4a2ed37/src/index.ts#L33
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4cdb325/src/index.ts#L33
 [7]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4a2ed37/src/index.ts#L25
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4cdb325/src/index.ts#L25
 [8]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4a2ed37/src/index.ts#L9
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4cdb325/src/index.ts#L9
