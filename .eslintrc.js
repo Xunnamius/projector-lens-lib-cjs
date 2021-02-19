@@ -33,7 +33,10 @@ module.exports = {
     'no-console': 'warn',
     'no-return-await': 'warn',
     'no-await-in-loop': 'warn',
-    'import/no-unresolved': ['error', { commonjs: true }],
+    'import/no-unresolved': [
+      'error',
+      { commonjs: true, ignore: ['fs/promises', 'dns/promises'] }
+    ],
     'no-extra-boolean-cast': 'off',
     'no-empty': 'off',
     '@typescript-eslint/camelcase': 'off',
