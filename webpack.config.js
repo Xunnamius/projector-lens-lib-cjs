@@ -73,7 +73,7 @@ const externalsConfig = {
   node: false,
 
   entry: {
-    external: `${__dirname}/external-scripts/external.ts`
+    dummy: `${__dirname}/external-scripts/dummy.ts`
   },
 
   output: {
