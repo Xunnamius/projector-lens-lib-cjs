@@ -22,21 +22,45 @@ on:
     branches: [main, canary]
 
 env:
+  # * The name and email used to author commits and interact with GitHub
+  # ! This should correspond to the identity associated with the GH_TOKEN secret
+  CI_COMMITTER_NAME: xunn-bot
+  CI_COMMITTER_EMAIL: bot@xunn.io
+
   # * Selectively enable debugger verbose output in the pipeline
   # ? See also: https://www.npmjs.com/package/debug#wildcards
   # DEBUG: '@xunnamius/dummy-pkg-1:*'
+
+  # * The version of node to load into each job. Must NOT be quoted!
   NODE_CURRENT_VERSION: 15.x
-  NODE_TEST_VERSIONS: '"12.x", "14.x"' # * NODE_CURRENT_VERSION included automatically
+
+  # * Node versions to test against (NODE_CURRENT_VERSION included
+  # * automatically). Must be quoted!
+  NODE_TEST_VERSIONS: '"12.x", "14.x"'
+
+  # * Webpack versions to test against. Must be quoted!
   WEBPACK_TEST_VERSIONS: '"5.x"'
-  CI_COMMITTER_NAME: xunn-bot
-  CI_COMMITTER_EMAIL: bot@xunn.io
+
+  # * Regular expressions (w/ proper escaping) for skipping CI/CD
   # ! These also have to be updated in .changelogrc.js and cleanup.yml
   CI_SKIP_REGEX: '\[skip ci\]|\[ci skip\]'
   CD_SKIP_REGEX: '\[skip cd\]|\[cd skip\]'
-  # ? Add your GitHub user/org to enable CD pipeline
-  # ? (you'll need to provide your own secrets or the pipeline will error)
+
+  # * A list of GitHub repo namespaces allowed to trigger the CD pipeline
+  # ? Add your GitHub user/org (github.repository_owner) to enable CD pipeline
+  # ! (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
+
+  # * A list of exact GitHub logins whose passing PRs will be auto-merged !
+  # ? Add your bot user's login name (github.actor) to enable auto-merge
+  # ! WARNING: this allows 3rd party code to be merged and released without
+  # ! any human oversight. Only allow this for trusted actors, like dependabot.
+  AUTOMERGE_ACTOR_WHITELIST: dependabot[bot], snyk-bot
+
+  # * Npm audit will fail upon encountering problems of at least this severity:
   NPM_AUDIT_FAIL_LEVEL: high
+
+  # * Attempt to upload project coverage data to codecov
   UPLOAD_CODE_COVERAGE: true
 
 jobs:
