@@ -48,7 +48,7 @@
     "prepare": "if [ -z \"$CI\" ]; then npx husky install; else echo 'skipped installing husky git hooks'; fi",
     "test": "npm run test-unit --",
     "test-integration": "BABEL_ENV=test jest $JEST_CLI --testPathIgnorePatterns test/unit-*.test.ts",
-    "test-integration-externals": "BABEL_ENV=test jest $JEST_CLI test/integration-externals*.test.ts",
+    "test-integration-externals": "BABEL_ENV=test jest $JEST_CLI test/integration-external*.test.ts",
     "test-integration-node": "BABEL_ENV=test jest $JEST_CLI test/integration-node*.test.ts",
     "test-integration-webpack": "BABEL_ENV=test jest $JEST_CLI test/integration-webpack*.test.ts",
     "test-unit": "BABEL_ENV=test jest $JEST_CLI --coverage --collectCoverageFrom 'src/**/*.ts' --collectCoverageFrom 'lib/**/*.ts' --collectCoverageFrom 'external-scripts/**/*.ts' --testPathIgnorePatterns test/integration-*.test.ts"
@@ -157,7 +157,6 @@
     "dotenv": "^8.2.0",
     "escape-string-regexp": "^4.0.0",
     "eslint": "^7.20.0",
-    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.1.3",
