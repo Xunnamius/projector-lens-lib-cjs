@@ -123,9 +123,7 @@ jobs:
         id: owner
         run: |
           set +e
-          WL='${{ env.REPO_OWNER_WHITELIST }}'
-          REPO='${{ github.repository }}'
-          node -e "process.exit('$WL'.toLowerCase().split(',').some(o => '$REPO'.toLowerCase().startsWith(o.trim() + '/')) ? 0 : 1)"
+          node -e "process.exit('${{ env.REPO_OWNER_WHITELIST }}'.split(',').some(o => o.trim() == '${{ github.repository_owner }}') ? 0 : 1)"
           echo "::set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
           ! [ -z "$DEBUG" ] && echo "set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')" || true
 
