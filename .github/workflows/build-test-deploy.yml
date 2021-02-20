@@ -839,7 +839,10 @@ jobs:
                     `Auto-merge skipped: PR #${pullRequest.number} was marked as a draft`
                   );
                   return;
-                } else if (latestPullRequest.data.state != 'open') {
+                } else if (
+                  latestPullRequest.status < 400 &&
+                  latestPullRequest.data.state != 'open'
+                ) {
                   core.warning(
                     `Auto-merge skipped: PR #${pullRequest.number} is no longer open`
                   );
@@ -866,48 +869,43 @@ jobs:
                   console.log('mergeAttempt->merged:', merged);
                 }
 
+                const defaultError =
+                  message ||
+                  `failed to merge PR #${pullRequest.number}: status code ${status}`;
+
                 if ([403, 404, 422].includes(status)) {
                   core.setFailed(`Auto-merge failed: ${message}`);
                   return;
-                } else if ([409].includes(status)) {
+                } else if (status == 409) {
                   core.info(
                     `Auto-merge skipped: current HEAD is out of sync with PR #${pullRequest.number}`
                   );
+                } else if (status >= 400 && status < 500 && !canRetryMerge) {
+                  core.setFailed(`Auto-merge failed: ${defaultError}`);
+                  return;
                 } else if (!merged) {
-                  throw new Error(
-                    message ||
-                      `failed to merge PR #${pullRequest.number}: status code ${status}`
-                  );
+                  throw new Error(defaultError);
                 }
 
                 success = true;
               } catch (e) {
-                if (canRetryMerge) {
-                  console.error(
-                    'Auto-merge failed:',
-                    e.message || e || 'an unknown error occurred'
+                console.error(
+                  'Auto-merge failed:',
+                  e.message || e || 'an unknown error occurred'
+                );
+
+                if (tries + 1 < MAX_RETRIES) {
+                  const nextRetryIn = 2 ** tries * MINIMUM_SECONDS * 1000 + jitter;
+                  jitter += Math.random() * JITTER_SECONDS * 1000;
+                  core.warning(
+                    `Auto-merge attempt ${
+                      tries + 1
+                    }/${MAX_RETRIES} failed, next try in ${Math.round(
+                      nextRetryIn / 1000
+                    )} seconds`
                   );
 
-                  if (tries + 1 < MAX_RETRIES) {
-                    const nextRetryIn = 2 ** tries * MINIMUM_SECONDS * 1000 + jitter;
-                    jitter += Math.random() * JITTER_SECONDS * 1000;
-                    core.warning(
-                      `Auto-merge attempt ${
-                        tries + 1
-                      }/${MAX_RETRIES} failed, next try in ${Math.round(
-                        nextRetryIn / 1000
-                      )} seconds`
-                    );
-
-                    await delay(nextRetryIn);
-                  }
-                } else {
-                  core.setFailed(
-                    `Auto-merge failed immediately: ${
-                      e.message || e || 'an unknown error occurred'
-                    }`
-                  );
-                  return;
+                  await delay(nextRetryIn);
                 }
               }
             }
