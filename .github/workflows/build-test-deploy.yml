@@ -706,6 +706,7 @@ jobs:
       - test-integration-externals
       - test-integration-client
       - test-integration-webpack
+    if: always()
     steps:
       - name: debug
         run: |
