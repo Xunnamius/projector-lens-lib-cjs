@@ -2,670 +2,681 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Conventional Commits][332], and this project adheres to
-[Semantic Versioning][333].
+The format is based on [Conventional Commits][334], and this project adheres to
+[Semantic Versioning][335].
 
-# [7.8.0][334] (2021-02-20)
-
-### Features
-
-- **build-test-deploy.yml:** add auto-merge job and functionality
-  ([4b22c20][335])
-
-## [7.7.1][1] (2021-02-19)
+## [7.8.1][336] (2021-02-20)
 
 ### Bug Fixes
 
-- **build-test-deploy.yml:** whitelist is again case-insensitive ([c034e86][2])
+- **build-test-deploy.yml:** store and use proper result ([09d35d7][337])
 
 ### Build System
 
-- **build-test-deploy.yml:** also run on reopened PRs ([ece78e3][3])
-- **build-test-deploy.yml:** codecov failures no longer fail the whole pipeline
-  ([a111d7f][4])
-- **build-test-deploy.yml:** restructure env w/ comments ([b980cbe][5])
-- **build-test-deploy.yml:** update repo owner whitelist step ([b4f89cf][6])
+- **deps:** bump object-path from 0.11.4 to 0.11.5 ([726df90][338])
+- **deps:** bump object-path from 0.11.4 to 0.11.5 ([658f591][339])
+- **package.json:** bump jest timeout to 1 minute ([cb59af2][340])
 
-# [7.7.0][7] (2021-02-19)
+# [7.8.0][1] (2021-02-20)
+
+### Features
+
+- **build-test-deploy.yml:** add auto-merge job and functionality ([4b22c20][2])
+
+## [7.7.1][3] (2021-02-19)
 
 ### Bug Fixes
 
-- Account for node 12 ([4cdb325][8])
+- **build-test-deploy.yml:** whitelist is again case-insensitive ([c034e86][4])
+
+### Build System
+
+- **build-test-deploy.yml:** also run on reopened PRs ([ece78e3][5])
+- **build-test-deploy.yml:** codecov failures no longer fail the whole pipeline
+  ([a111d7f][6])
+- **build-test-deploy.yml:** restructure env w/ comments ([b980cbe][7])
+- **build-test-deploy.yml:** update repo owner whitelist step ([b4f89cf][8])
+
+# [7.7.0][9] (2021-02-19)
+
+### Bug Fixes
+
+- Account for node 12 ([4cdb325][10])
 - **.eslintrc.js:** ensure eslint plays nice with fs/dns promise interface
-  ([4209e51][9])
+  ([4209e51][11])
 
 ### Build System
 
 - **package.json:** external integration test runs w/ proper prefix
-  ([5056c05][10])
-- **package.json:** update deps ([4ef9c1b][11])
+  ([5056c05][12])
+- **package.json:** update deps ([4ef9c1b][13])
 
 ### Features
 
 - **external-scripts:** reorganize externals; rename external to dummy
-  ([efc916e][12])
-- **test:** externalize jest helper proto-packages ([2dbfb8e][13])
+  ([efc916e][14])
+- **test:** externalize jest helper proto-packages ([2dbfb8e][15])
 
-## [7.6.5][14] (2021-02-15)
-
-### Build System
-
-- **package.json:** add private:false ([090cdfe][15])
-
-## [7.6.4][16] (2021-02-14)
-
-### Bug Fixes
-
-- **webpack.config.js:** call dotenv properly ([22a8424][17])
-
-## [7.6.3][18] (2021-02-14)
-
-### Bug Fixes
-
-- Incorrect package name ([bbbd58d][19])
+## [7.6.5][16] (2021-02-15)
 
 ### Build System
 
-- **package.json:** update deps ([599b6c2][20])
+- **package.json:** add private:false ([090cdfe][17])
+
+## [7.6.4][18] (2021-02-14)
+
+### Bug Fixes
+
+- **webpack.config.js:** call dotenv properly ([22a8424][19])
+
+## [7.6.3][20] (2021-02-14)
+
+### Bug Fixes
+
+- Incorrect package name ([bbbd58d][21])
+
+### Build System
+
+- **package.json:** update deps ([599b6c2][22])
 - **webpack.config.js:** backport updates from projector-lens-cli
-  ([312a2ef][21])
+  ([312a2ef][23])
 
-## [7.6.2][22] (2021-02-11)
+## [7.6.2][24] (2021-02-11)
 
 ### Bug Fixes
 
-- **package.json:** account for new ./dist organization ([99a01ea][23])
+- **package.json:** account for new ./dist organization ([99a01ea][25])
 
 ### Build System
 
-- **test:** complete testing suite ([35da4c3][24])
-- **webpack.config.js:** add externals ([7a8f54b][25])
-- Move debug to deps, update dependencies ([6587184][26])
-- **.eslintrc.js:** false env browser/webextensions ([71809e9][27])
-- **integration-client.test.ts:** removed ([f080ad0][28])
-- Normalize across repos ([2020d61][29])
+- **test:** complete testing suite ([35da4c3][26])
+- **webpack.config.js:** add externals ([7a8f54b][27])
+- Move debug to deps, update dependencies ([6587184][28])
+- **.eslintrc.js:** false env browser/webextensions ([71809e9][29])
+- **integration-client.test.ts:** removed ([f080ad0][30])
+- Normalize across repos ([2020d61][31])
 - **webpack.config.js:** normalize webpack configuration across repos
-  ([8a3bc81][30])
-- **webpack.config.js:** remove ES6 syntax from JS file ([dd2b254][31])
+  ([8a3bc81][32])
+- **webpack.config.js:** remove ES6 syntax from JS file ([dd2b254][33])
 
-## [7.6.1][32] (2021-01-30)
+## [7.6.1][34] (2021-01-30)
 
 ### Build System
 
 - **babel.config.js:** add babel-plugin-transform-default-named-imports
-  ([720dc20][33])
-- **package.json:** update deps ([26a8371][34])
+  ([720dc20][35])
+- **package.json:** update deps ([26a8371][36])
 - **post-release-check.yml:** add five minute wait for npm updates
-  ([411fd7d][35])
+  ([411fd7d][37])
 
-# [7.6.0][36] (2021-01-29)
+# [7.6.0][38] (2021-01-29)
 
 ### Features
 
-- **post-release-check.yml:** run executables as part of check ([31bdc0c][37])
+- **post-release-check.yml:** run executables as part of check ([31bdc0c][39])
 
-## [7.5.18][38] (2021-01-29)
-
-### Build System
-
-- **build-test-deploy.yml:** drop support for webpack 4 ([e7f2bbb][39])
-- **cleanup.yml:** fix bug for new package repos ([8d16630][40])
-
-## [7.5.17][41] (2021-01-29)
+## [7.5.18][40] (2021-01-29)
 
 ### Build System
 
-- **babel.config.js:** add plugin-rename-imports ([c59e45c][42])
-- **build-test-deploy.yml:** remove externals exception ([3addf11][43])
-- **test:** drop support for 10.x ([fb18856][44])
-- **test:** standardize imports ([4f23d4e][45])
+- **build-test-deploy.yml:** drop support for webpack 4 ([e7f2bbb][41])
+- **cleanup.yml:** fix bug for new package repos ([8d16630][42])
 
-## [7.5.16][46] (2021-01-23)
+## [7.5.17][43] (2021-01-29)
 
 ### Build System
 
-- **package.json:** nicer destructured vals in docs ([3b81944][47])
+- **babel.config.js:** add plugin-rename-imports ([c59e45c][44])
+- **build-test-deploy.yml:** remove externals exception ([3addf11][45])
+- **test:** drop support for 10.x ([fb18856][46])
+- **test:** standardize imports ([4f23d4e][47])
 
-## [7.5.15][48] (2021-01-23)
-
-### Build System
-
-- Backport/normalize across packages ([85881f7][49])
-
-## [7.5.14][50] (2021-01-22)
+## [7.5.16][48] (2021-01-23)
 
 ### Build System
 
-- Update debug statement syntax ([107b953][51])
+- **package.json:** nicer destructured vals in docs ([3b81944][49])
 
-## [7.5.13][52] (2021-01-21)
+## [7.5.15][50] (2021-01-23)
+
+### Build System
+
+- Backport/normalize across packages ([85881f7][51])
+
+## [7.5.14][52] (2021-01-22)
+
+### Build System
+
+- Update debug statement syntax ([107b953][53])
+
+## [7.5.13][54] (2021-01-21)
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** fix peer dependency installation
-  ([2dce9c4][53])
+  ([2dce9c4][55])
 
-## [7.5.12][54] (2021-01-17)
-
-### Build System
-
-- Backport changes from gac ([172fa77][55])
-
-## [7.5.11][56] (2021-01-12)
+## [7.5.12][56] (2021-01-17)
 
 ### Build System
 
-- Rebuild lockfile ([fef7222][57])
-- Update babel-plugin-transform-mjs-imports ([16a597d][58])
+- Backport changes from gac ([172fa77][57])
 
-## [7.5.10][59] (2021-01-12)
+## [7.5.11][58] (2021-01-12)
 
 ### Build System
 
-- Update -browser to -client everywhere ([597d6c5][60])
+- Rebuild lockfile ([fef7222][59])
+- Update babel-plugin-transform-mjs-imports ([16a597d][60])
 
-## [7.5.9][61] (2021-01-10)
+## [7.5.10][61] (2021-01-12)
+
+### Build System
+
+- Update -browser to -client everywhere ([597d6c5][62])
+
+## [7.5.9][63] (2021-01-10)
 
 ### Bug Fixes
 
-- **webpack.config.js:** better process.env support ([25db498][62])
+- **webpack.config.js:** better process.env support ([25db498][64])
 
-## [7.5.8][63] (2021-01-06)
-
-### Build System
-
-- **webpack.config.js:** process.env shim ([3973279][64])
-
-## [7.5.7][65] (2021-01-06)
+## [7.5.8][65] (2021-01-06)
 
 ### Build System
 
-- **.github/workflows/post-release-check.yml:** fix post-release-check?2
-  ([51123db][66])
+- **webpack.config.js:** process.env shim ([3973279][66])
 
-## [7.5.6][67] (2021-01-06)
+## [7.5.7][67] (2021-01-06)
 
 ### Build System
 
 - **.github/workflows/post-release-check.yml:** fix post-release-check?2
-  ([31f61f5][68])
+  ([51123db][68])
 
-## [7.5.5][69] (2021-01-06)
+## [7.5.6][69] (2021-01-06)
+
+### Build System
+
+- **.github/workflows/post-release-check.yml:** fix post-release-check?2
+  ([31f61f5][70])
+
+## [7.5.5][71] (2021-01-06)
 
 ### Build System
 
 - **.github/workflows/post-release-check.yml:** fix post-release-check?
-  ([7212561][70])
+  ([7212561][72])
 
-## [7.5.4][71] (2021-01-06)
+## [7.5.4][73] (2021-01-06)
 
 ### Build System
 
 - **.github/workflows/post-release-check.yml:** add new post-release-check
-  ([ed31f79][72])
+  ([ed31f79][74])
 
-## [7.5.3][73] (2021-01-05)
-
-### Build System
-
-- **package.json:** backported updates ([8a051d1][74])
-
-## [7.5.2][75] (2021-01-05)
+## [7.5.3][75] (2021-01-05)
 
 ### Build System
 
-- **package.json:** backported updates ([2cf6e46][76])
+- **package.json:** backported updates ([8a051d1][76])
 
-## [7.5.1][77] (2021-01-05)
+## [7.5.2][77] (2021-01-05)
+
+### Build System
+
+- **package.json:** backported updates ([2cf6e46][78])
+
+## [7.5.1][79] (2021-01-05)
 
 ### Bug Fixes
 
-- **env-expect.js:** use syntax for node 10 ([cb77d20][78])
-- **package.json:** return browser test ([6c1c4d4][79])
+- **env-expect.js:** use syntax for node 10 ([cb77d20][80])
+- **package.json:** return browser test ([6c1c4d4][81])
 
 ### Build System
 
-- **.github:** add INCLUDE_EXTERNALS ([c755631][80])
+- **.github:** add INCLUDE_EXTERNALS ([c755631][82])
 - **build-test-deploy.yml:** remove codecov upload for externals integration
-  tests ([3fdd509][81])
-- **package.json:** backports from the wild ([eda277e][82])
-- **webpack.config.js:** add env-expect ([0f401ff][83])
+  tests ([3fdd509][83])
+- **package.json:** backports from the wild ([eda277e][84])
+- **webpack.config.js:** add env-expect ([0f401ff][85])
 
-# [7.5.0][84] (2021-01-05)
+# [7.5.0][86] (2021-01-05)
 
 ### Features
 
-- **package-lock.json:** add unique-filename ([77c033f][85])
+- **package-lock.json:** add unique-filename ([77c033f][87])
 
-## [7.4.5][86] (2021-01-05)
+## [7.4.5][88] (2021-01-05)
 
 ### Bug Fixes
 
 - **package.json:** order of items in exports objects are VERY IMPORTANT
-  ([677b4ce][87])
+  ([677b4ce][89])
 
-## [7.4.4][88] (2021-01-04)
+## [7.4.4][90] (2021-01-04)
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** move webpack install
-  responsibility to integration ([5c8fefa][89])
+  responsibility to integration ([5c8fefa][91])
 
-## [7.4.3][90] (2021-01-04)
+## [7.4.3][92] (2021-01-04)
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** add debug output to npm ci
-  ([09304d7][91])
-- **.github/workflows/build-test-deploy.yml:** fix debug output ([c247c7a][92])
-- **.github/workflows/build-test-deploy.yml:** fix debug output ([6eb7d41][93])
+  ([09304d7][93])
+- **.github/workflows/build-test-deploy.yml:** fix debug output ([c247c7a][94])
+- **.github/workflows/build-test-deploy.yml:** fix debug output ([6eb7d41][95])
 - **.github/workflows/build-test-deploy.yml:** fix debug output (normalize node
-  support) ([0528db6][94])
+  support) ([0528db6][96])
 
-## [7.4.2][95] (2021-01-04)
+## [7.4.2][97] (2021-01-04)
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** do not run npm install when stdin
-  is empty ([2842a31][96])
-- **package.json:** revert "test: peer dep install" ([4c174fe][97])
-- **package.json:** test: peer dep install ([6c00005][98])
+  is empty ([2842a31][98])
+- **package.json:** revert "test: peer dep install" ([4c174fe][99])
+- **package.json:** test: peer dep install ([6c00005][100])
 
-## [7.4.1][99] (2021-01-04)
+## [7.4.1][101] (2021-01-04)
 
 ### Bug Fixes
 
 - **env-expect.js:** improve RegExp support; better debugging experience
-  ([aff191d][100])
+  ([aff191d][102])
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** add improved npm install step
-  ([e9b9e49][101])
+  ([e9b9e49][103])
 
-# [7.4.0][102] (2021-01-04)
+# [7.4.0][104] (2021-01-04)
 
 ### Features
 
-- **.github:** add codecov to externals; add flags to codecov ([e47160b][103])
+- **.github:** add codecov to externals; add flags to codecov ([e47160b][105])
 
-# [7.3.0][104] (2021-01-04)
+# [7.3.0][106] (2021-01-04)
 
 ### Bug Fixes
 
-- **env-expect.js:** simple RegExp names no longer error ([a576d0b][105])
+- **env-expect.js:** simple RegExp names no longer error ([a576d0b][107])
 
 ### Build System
 
-- **package.json:** better lint output ([0dc7c4e][106])
+- **package.json:** better lint output ([0dc7c4e][108])
 
 ### Features
 
-- **.github:** backport env matrix hint ([c01b325][107])
-- **readme.md:** add NPM7 warning ([24f0888][108])
+- **.github:** backport env matrix hint ([c01b325][109])
+- **readme.md:** add NPM7 warning ([24f0888][110])
 
-## [7.2.3][109] (2021-01-04)
+## [7.2.3][111] (2021-01-04)
 
 ### Build System
 
-- Updates back-ported from package migration ([7869420][110])
+- Updates back-ported from package migration ([7869420][112])
 
-## [7.2.2][111] (2021-01-03)
-
-### Bug Fixes
-
-- Add remark frontmatter support ([a8cd378][112])
-
-## [7.2.1][113] (2021-01-03)
+## [7.2.2][113] (2021-01-03)
 
 ### Bug Fixes
 
-- **templates:** fix strange issue template problems ([73edb9a][114])
+- Add remark frontmatter support ([a8cd378][114])
 
-# [7.2.0][115] (2021-01-03)
-
-### Bug Fixes
-
-- **changelog.md:** conclude tests _breaks champagne glass_ ([864253c][116])
-- **workflows:** actually fix should-skip determination algo ([bf8c76b][117])
-- **workflows:** fix should-skip determination algo ([f7d1256][118])
-
-# [7.1.0][119] (2021-01-03)
+## [7.2.1][115] (2021-01-03)
 
 ### Bug Fixes
 
-- **.github:** add set +e to should-skip ([27c9750][120])
-- **readme.md:** complete skip test ([67264ed][121])
-- **workflows:** replace should-skip determination algo ([cd6236a][122])
+- **templates:** fix strange issue template problems ([73edb9a][116])
 
-# [7.0.0][123] (2021-01-03)
+# [7.2.0][117] (2021-01-03)
+
+### Bug Fixes
+
+- **changelog.md:** conclude tests _breaks champagne glass_ ([864253c][118])
+- **workflows:** actually fix should-skip determination algo ([bf8c76b][119])
+- **workflows:** fix should-skip determination algo ([f7d1256][120])
+
+# [7.1.0][121] (2021-01-03)
+
+### Bug Fixes
+
+- **.github:** add set +e to should-skip ([27c9750][122])
+- **readme.md:** complete skip test ([67264ed][123])
+- **workflows:** replace should-skip determination algo ([cd6236a][124])
+
+# [7.0.0][125] (2021-01-03)
 
 ### Features
 
-- **changelog.md:** add skip cd/cd skip pipeline commands ([5765c02][124])
+- **changelog.md:** add skip cd/cd skip pipeline commands ([5765c02][126])
 
 ### BREAKING CHANGES
 
 - **changelog.md:** **skip github/github skip options were removed**
 
-## [6.7.3][125] (2021-01-03)
+## [6.7.3][127] (2021-01-03)
 
 ### Bug Fixes
 
-- **.changelogrc.js:** show reverts in changelog ([ec26302][126])
+- **.changelogrc.js:** show reverts in changelog ([ec26302][128])
 
 ### Reverts
 
-- _"chore(changelog.md): update pipeline usage bullets"_ ([6e9fb73][127])
+- _"chore(changelog.md): update pipeline usage bullets"_ ([6e9fb73][129])
 
-## [6.7.2][128] (2021-01-03)
+## [6.7.2][130] (2021-01-03)
 
 ### Reverts
 
-- _"chore(readme.md): debug chore"_ ([38bfb77][129])
-- _"debug(readme.md): debug debug"_ ([aff005d][130])
+- _"chore(readme.md): debug chore"_ ([38bfb77][131])
+- _"debug(readme.md): debug debug"_ ([aff005d][132])
 
-## [6.7.1][131] (2021-01-02)
-
-### Bug Fixes
-
-- **.changelogrc.js:** exclude pre-releases ([c24773e][132])
-- **.changelogrc.js:** fix bad type bug ([ff94fe1][133])
-- **.changelogrc.js:** several writer glitches fixed ([717ffdb][134])
-
-### Build System
-
-- **package.json:** better build-changelog ([f2e971e][135])
-
-# [6.7.0][136] (2021-01-02)
-
-### Features
-
-- **.changelogrc.js:** reintroduced selective capitalization ([1fdcb9c][137])
-
-# [6.6.0][138] (2021-01-02)
+## [6.7.1][133] (2021-01-02)
 
 ### Bug Fixes
 
-- **.changelogrc.js:** correct improper array access ([0cb2645][139])
+- **.changelogrc.js:** exclude pre-releases ([c24773e][134])
+- **.changelogrc.js:** fix bad type bug ([ff94fe1][135])
+- **.changelogrc.js:** several writer glitches fixed ([717ffdb][136])
 
 ### Build System
 
-- **.changelogrc.js:** fix revision filtering during generation ([ac06b33][140])
-- **.changelogrc.js:** fix spread bug ([c6a3cd6][141])
+- **package.json:** better build-changelog ([f2e971e][137])
+
+# [6.7.0][138] (2021-01-02)
 
 ### Features
 
-- **.changelogrc.js:** centralize release rules ([69ec71f][142])
-- **release.config.js:** use imported releaseRules ([2fe163c][143])
+- **.changelogrc.js:** reintroduced selective capitalization ([1fdcb9c][139])
 
-## [6.5.1][144] (2021-01-02)
+# [6.6.0][140] (2021-01-02)
 
 ### Bug Fixes
 
-- **release.config.js:** add title to releaseRules objects ([99c2868][145])
+- **.changelogrc.js:** correct improper array access ([0cb2645][141])
 
 ### Build System
 
-- **.changelogrc.js:** add debug output to .changelogrc.js ([d47c48b][146])
-
-# [6.5.0][147] (2021-01-02)
+- **.changelogrc.js:** fix revision filtering during generation ([ac06b33][142])
+- **.changelogrc.js:** fix spread bug ([c6a3cd6][143])
 
 ### Features
 
-- **.changelogrc.js:** add debug to all javascript ([54488d9][148])
+- **.changelogrc.js:** centralize release rules ([69ec71f][144])
+- **release.config.js:** use imported releaseRules ([2fe163c][145])
 
-## [6.4.3][149] (2021-01-02)
+## [6.5.1][146] (2021-01-02)
+
+### Bug Fixes
+
+- **release.config.js:** add title to releaseRules objects ([99c2868][147])
+
+### Build System
+
+- **.changelogrc.js:** add debug output to .changelogrc.js ([d47c48b][148])
+
+# [6.5.0][149] (2021-01-02)
+
+### Features
+
+- **.changelogrc.js:** add debug to all javascript ([54488d9][150])
+
+## [6.4.3][151] (2021-01-02)
 
 ### Bug Fixes
 
 - **build-test-deploy.yml:** debug pipeline statements always return true
-  ([b759c31][150])
+  ([b759c31][152])
 
 ### Build System
 
-- **.github:** fix debug scope name (leave / alone) ([de2c7b1][151])
-- **package.json:** remove deploy test script ([4fb641c][152])
+- **.github:** fix debug scope name (leave / alone) ([de2c7b1][153])
+- **package.json:** remove deploy test script ([4fb641c][154])
 
-## [6.4.2][153] (2021-01-02)
+## [6.4.2][155] (2021-01-02)
 
 ### Build System
 
-- **.github:** add DEBUG support to metadata gathering steps ([6b2e238][154])
+- **.github:** add DEBUG support to metadata gathering steps ([6b2e238][156])
 
-## [6.4.1][155] (2021-01-02)
+## [6.4.1][157] (2021-01-02)
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** add DEBUG support
-  ([de7ef33][156])
-- **release.config.js:** fix bracket scoping issue ([c8ef15e][157])
+  ([de7ef33][158])
+- **release.config.js:** fix bracket scoping issue ([c8ef15e][159])
 - **release.config.js:** fix deploy to run at success step; add debug output
-  ([b9e8cc5][158])
+  ([b9e8cc5][160])
 
-# [6.4.0][159] (2021-01-02)
+# [6.4.0][161] (2021-01-02)
 
 ### Features
 
-- **package.json:** vercel deploy test ([ed73fc3][160])
+- **package.json:** vercel deploy test ([ed73fc3][162])
 
-## [6.3.8][161] (2021-01-02)
+## [6.3.8][163] (2021-01-02)
 
 ### Build System
 
 - **build-test-deploy.yml:** add awareness of deploy npm script to pipeline
-  ([d923b29][162])
+  ([d923b29][164])
 
-## [6.3.7][163] (2021-01-02)
+## [6.3.7][165] (2021-01-02)
 
 ### Build System
 
 - **.github/workflows/cleanup.yml:** fix metadata gathering step
-  ([44dd462][164])
+  ([44dd462][166])
 
-## [6.3.6][165] (2021-01-01)
+## [6.3.6][167] (2021-01-01)
 
 ### Build System
 
 - **.github/workflows/cleanup.yml:** add metadata filtering step
-  ([6667075][166])
+  ([6667075][168])
 
-## [6.3.5][167] (2021-01-01)
-
-### Build System
-
-- **.github:** fix hardcoded package name ([a10bac3][168])
-
-## [6.3.4][169] (2021-01-01)
+## [6.3.5][169] (2021-01-01)
 
 ### Build System
 
-- Move npm lint step before lint-staged in husky hook ([e8bac90][170])
-- Update remark linting to exit 1 on error, quiet on success ([077abce][171])
-- Update sort-package-json to contrib-env-expect ([6885a34][172])
+- **.github:** fix hardcoded package name ([a10bac3][170])
+
+## [6.3.4][171] (2021-01-01)
+
+### Build System
+
+- Move npm lint step before lint-staged in husky hook ([e8bac90][172])
+- Update remark linting to exit 1 on error, quiet on success ([077abce][173])
+- Update sort-package-json to contrib-env-expect ([6885a34][174])
 - **pre-commit:** decentralize remark; more resilient build system
-  ([ba0ef58][173])
+  ([ba0ef58][175])
 
-## [6.3.3][174] (2021-01-01)
+## [6.3.3][176] (2021-01-01)
 
 ### Build System
 
 - **pre-commit:** centralize remark; add markdown and eslint linting to CL
-  ([772dee1][175])
+  ([772dee1][177])
 - **pre-commit:** move eslint (and tsc) CL linting out of lint-staged and
-  directly into husky ([e38af90][176])
+  directly into husky ([e38af90][178])
 
-## [6.3.2][177] (2021-01-01)
+## [6.3.2][179] (2021-01-01)
 
 ### Build System
 
-- **.github:** fix pre/post formatting steps ([f757db8][178])
+- **.github:** fix pre/post formatting steps ([f757db8][180])
 
-## [6.3.1][179] (2021-01-01)
+## [6.3.1][181] (2021-01-01)
 
 ### Bug Fixes
 
-- **test:** improve test coverage ([7f4a70a][180])
+- **test:** improve test coverage ([7f4a70a][182])
 
-# [6.3.0][181] (2021-01-01)
+# [6.3.0][183] (2021-01-01)
 
 ### Build System
 
-- **package.json:** simplify lint ([dda943e][182])
+- **package.json:** simplify lint ([dda943e][184])
 
 ### Features
 
-- **src:** add div function ([636c353][183])
+- **src:** add div function ([636c353][185])
 
-# [6.2.0][184] (2021-01-01)
+# [6.2.0][186] (2021-01-01)
 
 ### Build System
 
 - **.github/workflows/build-test-deploy.yml:** add remark and formatting steps
-  ([e16cd8b][185])
-- **.husky:** remove verbose flag ([538c374][186])
-- **package.json:** fix lint-staged remark and prettier ([6fbd1df][187])
-- **package.json:** remove debug echo ([33a510d][188])
-- **release.config.js:** fix to use gfm ([db4c284][189])
+  ([e16cd8b][187])
+- **.husky:** remove verbose flag ([538c374][188])
+- **package.json:** fix lint-staged remark and prettier ([6fbd1df][189])
+- **package.json:** remove debug echo ([33a510d][190])
+- **release.config.js:** fix to use gfm ([db4c284][191])
 
 ### Features
 
-- **package.json:** add remark-gfm; test lint-staged ([bcbf3f5][190])
+- **package.json:** add remark-gfm; test lint-staged ([bcbf3f5][192])
 
-## [6.1.7][191] (2020-12-31)
+## [6.1.7][193] (2020-12-31)
 
 ### Bug Fixes
 
-- **README.md:** simulated external-PR fix ([8a7fc06][192])
+- **README.md:** simulated external-PR fix ([8a7fc06][194])
 
 ### Reverts
 
-- _"chore(readme.md): format husky test"_ ([9675eeb][193])
+- _"chore(readme.md): format husky test"_ ([9675eeb][195])
 
-## [6.1.6][194] (2020-12-30)
+## [6.1.6][196] (2020-12-30)
 
 ### Build System
 
 - **package.json:** conclude dynamic continuous integration tests
-  ([828751d][195])
+  ([828751d][197])
 
-## [6.1.5][196] (2020-12-30)
+## [6.1.5][198] (2020-12-30)
 
 ### Bug Fixes
 
 - **build-test-deploy.yml:** clearer error language with invalid externals
-  config ([d8ed033][197])
+  config ([d8ed033][199])
 
-## [6.1.4][198] (2020-12-30)
+## [6.1.4][200] (2020-12-30)
 
 ### Reverts
 
-- _"build(build-test-deploy.yml): debug should warn"_ ([44f5cd4][199])
+- _"build(build-test-deploy.yml): debug should warn"_ ([44f5cd4][201])
 
-## [6.1.3][200] (2020-12-30)
-
-### Build System
-
-- **build-test-deploy.yml:** debug should warn ([55e1235][201])
-- **build-test-deploy.yml:** fix syntax error ([5448960][202])
-
-## [6.1.2][203] (2020-12-30)
+## [6.1.3][202] (2020-12-30)
 
 ### Build System
 
-- **.github:** better snyk ignore ([5921653][204])
-- **package.json:** remove high audit CI failure ([b2ea6f1][205])
-- **package.json:** test high audit CI failure ([03825f0][206])
+- **build-test-deploy.yml:** debug should warn ([55e1235][203])
+- **build-test-deploy.yml:** fix syntax error ([5448960][204])
 
-## [6.1.1][207] (2020-12-30)
+## [6.1.2][205] (2020-12-30)
+
+### Build System
+
+- **.github:** better snyk ignore ([5921653][206])
+- **package.json:** remove high audit CI failure ([b2ea6f1][207])
+- **package.json:** test high audit CI failure ([03825f0][208])
+
+## [6.1.1][209] (2020-12-30)
 
 ### Bug Fixes
 
-- **readme.md:** dummy fix ([bda2d5e][208])
+- **readme.md:** dummy fix ([bda2d5e][210])
 
-# [6.1.0][209] (2020-12-30)
+# [6.1.0][211] (2020-12-30)
 
 ### Bug Fixes
 
-- **readme.md:** dummy fix ([b9d92fd][210])
+- **readme.md:** dummy fix ([b9d92fd][212])
 
 ### Features
 
-- **readme.md:** dummy feat ([f90dde3][211])
+- **readme.md:** dummy feat ([f90dde3][213])
 
-## [6.0.5][212] (2020-12-30)
+## [6.0.5][214] (2020-12-30)
 
 ### Bug Fixes
 
-- **readme.md:** add codecov badge ([4b6c84c][213])
+- **readme.md:** add codecov badge ([4b6c84c][215])
 
-## [6.0.4][214] (2020-12-30)
-
-### Build System
-
-- **.github:** more resilient cleanup routine ([85b8e12][215])
-
-## [6.0.3][216] (2020-12-30)
+## [6.0.4][216] (2020-12-30)
 
 ### Build System
 
-- **.github:** better cleanup caching ([02746df][217])
-- **.github:** fix cleanup ([7520e0f][218])
+- **.github:** more resilient cleanup routine ([85b8e12][217])
 
-## [6.0.2][219] (2020-12-30)
-
-### Build System
-
-- **cleanup.yml:** add cleanup workflow ([747a674][220])
-- **release.config.js:** remove console.info ([b374296][221])
-
-## [6.0.1][222] (2020-12-30)
+## [6.0.3][218] (2020-12-30)
 
 ### Build System
 
-- **.github:** ensure deploy stage is using latest node and npm ([d40192b][223])
+- **.github:** better cleanup caching ([02746df][219])
+- **.github:** fix cleanup ([7520e0f][220])
 
-# [6.0.0][224] (2020-12-30)
+## [6.0.2][221] (2020-12-30)
+
+### Build System
+
+- **cleanup.yml:** add cleanup workflow ([747a674][222])
+- **release.config.js:** remove console.info ([b374296][223])
+
+## [6.0.1][224] (2020-12-30)
+
+### Build System
+
+- **.github:** ensure deploy stage is using latest node and npm ([d40192b][225])
+
+# [6.0.0][226] (2020-12-30)
 
 ### Features
 
-- **readme.md:** fake feature ([95a13d2][225])
+- **readme.md:** fake feature ([95a13d2][227])
 
 ### BREAKING CHANGES
 
 - **readme.md:** **fake breaking change**
 
-## [5.0.3][226] (2020-12-29)
+## [5.0.3][228] (2020-12-29)
 
 ### Build System
 
 - **.github:** loosen CD pipeline launch check: run CD on all branches
-  ([0a91fad][227])
+  ([0a91fad][229])
 
 ### Reverts
 
-- _"chore(.gitignore): ignore coverage"_ ([4aab0bd][228])
+- _"chore(.gitignore): ignore coverage"_ ([4aab0bd][230])
 
-## [5.0.2][229] (2020-12-29)
+## [5.0.2][231] (2020-12-29)
 
 ### Build System
 
 - **.github:** add codecov config and add fetch-depth to test-unit
-  ([e62c5b4][230])
+  ([e62c5b4][232])
 
-## [5.0.1][231] (2020-12-29)
+## [5.0.1][233] (2020-12-29)
 
 ### Build System
 
-- **.github:** add codecov-action to test-unit job ([2ef6297][232])
-- **package.json:** add codecov package ([d73cac9][233])
-- **package.json:** remove codecov package ([da477b7][234])
+- **.github:** add codecov-action to test-unit job ([2ef6297][234])
+- **package.json:** add codecov package ([d73cac9][235])
+- **package.json:** remove codecov package ([da477b7][236])
 
-# [5.0.0][235] (2020-12-29)
+# [5.0.0][237] (2020-12-29)
 
 ### Chore
 
-- Fix capitalization of non-release commit types ([7391321][236])
+- Fix capitalization of non-release commit types ([7391321][238])
 
 ### BREAKING CHANGES
 
@@ -673,16 +684,16 @@ The format is based on [Conventional Commits][332], and this project adheres to
 - **Dummy BC 9**
 - **Dummy BCs 10, 8, and 6**
 
-# [4.0.0][237] (2020-12-29)
+# [4.0.0][239] (2020-12-29)
 
 ### Bug Fixes
 
 - **.changelogrc.js:** remove BC capitalization and sentence-case code
-  ([02662fc][238])
+  ([02662fc][240])
 
 ### Chore
 
-- Update comment language ([5a2aef4][239])
+- Update comment language ([5a2aef4][241])
 
 ### BREAKING CHANGES
 
@@ -690,48 +701,48 @@ The format is based on [Conventional Commits][332], and this project adheres to
 - **Dummy BC 2**
 - **Dummy BCs 3, 4, and 5**
 
-## [3.0.1][240] (2020-12-28)
+## [3.0.1][242] (2020-12-28)
 
 ### Bug Fixes
 
-- **.github:** update ci committer name and email to xunn-bot ([b151491][241])
-- **package.json:** update typedoc to latest beta and fix npmbd ([783ba76][242])
+- **.github:** update ci committer name and email to xunn-bot ([b151491][243])
+- **package.json:** update typedoc to latest beta and fix npmbd ([783ba76][244])
 
 ### Build System
 
-- **package.json:** update deps ([a876517][243])
+- **package.json:** update deps ([a876517][245])
 
-# [3.0.0][244] (2020-12-07)
+# [3.0.0][246] (2020-12-07)
 
 ### Bug Fixes
 
-- **.github/workflows:** fix syntax: "no-ci/\*\*" ([b060d3e][245])
-- **config:** rename changelog.config.js to .changelogrc.js ([d5dfc50][246])
-- **package.json:** use @xunnamius/semantic-release ([0447d59][247])
+- **.github/workflows:** fix syntax: "no-ci/\*\*" ([b060d3e][247])
+- **config:** rename changelog.config.js to .changelogrc.js ([d5dfc50][248])
+- **package.json:** use @xunnamius/semantic-release ([0447d59][249])
 
 ### Build System
 
 - **.github/workflows:** build system now ignores branches with names that begin
-  with "no-ci/" ([3a4bdff][248])
+  with "no-ci/" ([3a4bdff][250])
 - **.github/workflows:** workflow no longer triggered on tag push,
-  dependabot/snyk push ([1096e6f][249])
-- **package-lock.json:** fix syntax error ([4fd2952][250])
+  dependabot/snyk push ([1096e6f][251])
+- **package-lock.json:** fix syntax error ([4fd2952][252])
 
 ### Debug
 
 - Update semantic-release to Xunnamius/semantic-release#contrib-holistic
-  ([446e961][251])
+  ([446e961][253])
 
 ### Features
 
-- Added mult function ([e537358][252])
+- Added mult function ([e537358][254])
 
 ### Reverts
 
 - _"chore(.github/workflows): exclude ./.git from build caching"_
-  ([b75d8ac][253])
-- _"debug(.github/workflows): fake change"_ ([d59bb1a][254])
-- _"debug(.github/workflows): test force push protection"_ ([4cc6ee6][255])
+  ([b75d8ac][255])
+- _"debug(.github/workflows): fake change"_ ([d59bb1a][256])
+- _"debug(.github/workflows): test force push protection"_ ([4cc6ee6][257])
 
 ### BREAKING CHANGES
 
@@ -750,179 +761,179 @@ Ack: Tre Signed: Yup!
 
 This is a simulated breaking change.
 
-## [2.3.4][256] (2020-12-03)
+## [2.3.4][258] (2020-12-03)
 
 ### Build System
 
-- **commitlint:** add debug type to type-enum ([10c71bf][257])
+- **commitlint:** add debug type to type-enum ([10c71bf][259])
 - **config:** fix changelog.config.js bug when subject is undefined
-  ([57e0c16][258])
-- **package.json:** downgrade puppeteer and upgrade other deps ([e5d6d42][259])
-- Added .env.example and env-expect ([efb29c5][260])
+  ([57e0c16][260])
+- **package.json:** downgrade puppeteer and upgrade other deps ([e5d6d42][261])
+- Added .env.example and env-expect ([efb29c5][262])
 
 ### Reverts
 
-- revert "debug: switch actions ci to install" ([f9a3e23][261])
+- revert "debug: switch actions ci to install" ([f9a3e23][263])
 
-## [2.3.3][262] (2020-11-30)
+## [2.3.3][264] (2020-11-30)
 
 ### Bug Fixes
 
 - **spellcheck:** fix incorrect parsing of global cspell vscode settings
-  ([c2789bf][263])
+  ([c2789bf][265])
 
 ### Build System
 
-- **release:** fix changelogTitle skip title ([1dcdcc1][264])
+- **release:** fix changelogTitle skip title ([1dcdcc1][266])
 
-## [2.3.2][265] (2020-11-30)
-
-### Build System
-
-- **release:** fix changelogTitle spread bug ([598a396][266])
-
-## [2.3.1][267] (2020-11-30)
+## [2.3.2][267] (2020-11-30)
 
 ### Build System
 
-- Install @semantic-release/changelog ([022603b][268])
-- **release:** fix changelogTitle bug ([0d181ea][269])
-- **release:** fix SHOULD_UPDATE_CHANGELOG conditional ([ec632ad][270])
+- **release:** fix changelogTitle spread bug ([598a396][268])
 
-# [2.3.0][271] (2020-11-30)
+## [2.3.1][269] (2020-11-30)
+
+### Build System
+
+- Install @semantic-release/changelog ([022603b][270])
+- **release:** fix changelogTitle bug ([0d181ea][271])
+- **release:** fix SHOULD_UPDATE_CHANGELOG conditional ([ec632ad][272])
+
+# [2.3.0][273] (2020-11-30)
 
 ### Features
 
-- **tooling:** spellcheck now ignores camelCase et al ([d921382][272])
+- **tooling:** spellcheck now ignores camelCase et al ([d921382][274])
 
 ### Performance Improvements
 
-- Better faster spellchecking ([c44c310][273])
+- Better faster spellchecking ([c44c310][275])
 
-## [2.2.2][274] (2020-11-29)
+## [2.2.2][276] (2020-11-29)
 
 ### Build System
 
 - **changelog:** changelog now includes relevant build-type commits
-  ([d630264][275])
+  ([d630264][277])
 
-## [2.2.1][276] (2020-11-29)
+## [2.2.1][278] (2020-11-29)
 
 ### Build System
 
-- **changelog:** changelog now includes relevant reverts ([d4ccacb][277])
+- **changelog:** changelog now includes relevant reverts ([d4ccacb][279])
 
-# [2.2.0][278] (2020-11-29)
+# [2.2.0][280] (2020-11-29)
 
 ### Bug Fixes
 
 - **actions:** bring metadata collection in-line with new format
-  ([a62380b][279])
+  ([a62380b][281])
 - **config:** changelog config honors skip commands, leaves reverts alone
-  ([823f8b5][280])
-- **config:** fix broken changelog.config.js structure ([bd10f44][281])
-- **package.json:** downgrade typedoc and assoc plugins ([46db2ee][282])
-- **package.json:** install lint-staged dep and script ([f3800e4][283])
-- **package.json:** install spellcheck dependencies ([9a7adb4][284])
-- **spellcheck:** change "contains" to "includes" ([af76dbe][285])
+  ([823f8b5][282])
+- **config:** fix broken changelog.config.js structure ([bd10f44][283])
+- **package.json:** downgrade typedoc and assoc plugins ([46db2ee][284])
+- **package.json:** install lint-staged dep and script ([f3800e4][285])
+- **package.json:** install spellcheck dependencies ([9a7adb4][286])
+- **spellcheck:** change "contains" to "includes" ([af76dbe][287])
 - **spellcheck:** fix bug where spellcheck reads from wrong message source
-  ([69a25ba][286])
-- **spellcheck:** spellcheck now leverages assorted knowledge ([14b86ae][287])
+  ([69a25ba][288])
+- **spellcheck:** spellcheck now leverages assorted knowledge ([14b86ae][289])
 
 ### Build System
 
-- Install @semantic-release/exec ([cc94940][288])
+- Install @semantic-release/exec ([cc94940][290])
 - **config:** fix changelog.config.js operating on individual releases
-  ([66adf2f][289])
-- **config:** fix husky pre-commit hook ([f0d0032][290])
-- **config:** generate CHANGELOG.md beautifully ([2fa4aa9][291])
-- **config:** retire @semantic-release/changelog ([787a281][292])
+  ([66adf2f][291])
+- **config:** fix husky pre-commit hook ([f0d0032][292])
+- **config:** generate CHANGELOG.md beautifully ([2fa4aa9][293])
+- **config:** retire @semantic-release/changelog ([787a281][294])
 
 ### Features
 
-- Add build-changelog to npm scripts ([8393a87][293])
+- Add build-changelog to npm scripts ([8393a87][295])
 
-## [2.1.4][294] (2020-11-28)
+## [2.1.4][296] (2020-11-28)
 
 ### Bug Fixes
 
-- **actions:** ensure metadata is gathered properly ([31ece1c][295])
+- **actions:** ensure metadata is gathered properly ([31ece1c][297])
 - **release:** remove extra newlines during changelogs generation
-  ([72acb24][296])
+  ([72acb24][298])
 
-## [2.1.3][297] (2020-11-28)
-
-### Bug Fixes
-
-- **release:** update how changelogs are generated ([8ce1760][298])
-
-## [2.1.2][299] (2020-11-28)
+## [2.1.3][299] (2020-11-28)
 
 ### Bug Fixes
 
-- **actions:** remove erroneous build-dist from lint job ([2cdd373][300])
-- **actions:** remove erroneous build-dist from test-unit job ([fcb2232][301])
-- **config:** fix babel.config.js with NODE_LTS ([cdf4610][302])
+- **release:** update how changelogs are generated ([8ce1760][300])
 
-## [2.1.1][303] (2020-11-26)
+## [2.1.2][301] (2020-11-28)
 
 ### Bug Fixes
 
-- **actions:** update gather-metadata with more accurate grep ([961ecef][304])
+- **actions:** remove erroneous build-dist from lint job ([2cdd373][302])
+- **actions:** remove erroneous build-dist from test-unit job ([fcb2232][303])
+- **config:** fix babel.config.js with NODE_LTS ([cdf4610][304])
 
-# [2.1.0][305] (2020-11-25)
+## [2.1.1][305] (2020-11-26)
 
 ### Bug Fixes
 
-- **actions:** gather-metadata steps gather and skip properly ([97682f4][306])
-- **actions:** if statements now use | instead of > ([24e3739][307])
-- **actions:** move comments out of multiline statements ([874f8d6][308])
+- **actions:** update gather-metadata with more accurate grep ([961ecef][306])
+
+# [2.1.0][307] (2020-11-25)
+
+### Bug Fixes
+
+- **actions:** gather-metadata steps gather and skip properly ([97682f4][308])
+- **actions:** if statements now use | instead of > ([24e3739][309])
+- **actions:** move comments out of multiline statements ([874f8d6][310])
 
 ### Features
 
 - **actions:** introduce new streamlined workflow job configuration
-  ([4bb9d94][309])
+  ([4bb9d94][311])
 
-## [2.0.1][310] (2020-11-24)
+## [2.0.1][312] (2020-11-24)
 
 ### Bug Fixes
 
 - **actions:** add git author and commiter env vars for semantic-release signed
-  commits ([f01d16b][311])
+  commits ([f01d16b][313])
 - **dependabot:** ensure dependabot formats GitHub Actions PRs correctly
-  ([bcdbd0e][312])
-- Add build commits to release rule ([3124ab0][313])
+  ([bcdbd0e][314])
+- Add build commits to release rule ([3124ab0][315])
 
-# [2.0.0][314] (2020-11-24)
+# [2.0.0][316] (2020-11-24)
 
 ### Bug Fixes
 
 - **actions:** add install-dependencies to semantic-release needs
-  ([d8cc836][315])
-- **actions:** deps caching done properly ([bbe0416][316])
-- **actions:** ensure repo is always checked out first ([65e5d46][317])
-- **actions:** removed signed pushes ([f621f76][318])
-- **package.json:** do not guess error codes ([f5428c8][319])
-- **package.json:** ensure machine-friendly run-script syntax ([7af5e45][320])
+  ([d8cc836][317])
+- **actions:** deps caching done properly ([bbe0416][318])
+- **actions:** ensure repo is always checked out first ([65e5d46][319])
+- **actions:** removed signed pushes ([f621f76][320])
+- **package.json:** do not guess error codes ([f5428c8][321])
+- **package.json:** ensure machine-friendly run-script syntax ([7af5e45][322])
 - **package.json:** ensure set +e used in run-scripts when necessary
-  ([6d86c0b][321])
+  ([6d86c0b][323])
 - **package.json:** precedence error caused bad return value in lint
-  ([e8bfbc5][322])
+  ([e8bfbc5][324])
 
 ### Features
 
-- Added diff to take the difference ([5e40deb][323])
+- Added diff to take the difference ([5e40deb][325])
 
 ### Performance Improvements
 
-- **actions:** better caching ([6da0a65][324])
-- **actions:** made test-integration-chrome independent ([d489cfa][325])
-- **actions:** only cache node_modules ([57775c9][326])
+- **actions:** better caching ([6da0a65][326])
+- **actions:** made test-integration-chrome independent ([d489cfa][327])
+- **actions:** only cache node_modules ([57775c9][328])
 
 ### Reverts
 
-- _"debug: added debug step"_ ([1741cde][327])
-- _"debug: debug cache miss"_ ([42af347][328])
+- _"debug: added debug step"_ ([1741cde][329])
+- _"debug: debug cache miss"_ ([42af347][330])
 
 ### BREAKING CHANGES
 
@@ -933,677 +944,686 @@ cycle based on semantic-release.
 
 # Archived Releases (pre-CI/CD)
 
-- Version 1.0.15 ([57faa2c][329])
+- Version 1.0.15 ([57faa2c][331])
 
 <!---->
 
-- Version 1.0.7 ([5ced626][330])
+- Version 1.0.7 ([5ced626][332])
 
-- Version 1.0.0 ([df91d82][331])
+- Version 1.0.0 ([df91d82][333])
 
-[1]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.7.0...v7.7.1
+[1]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.7.1...v7.8.0
 [2]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c034e8683db76f52b1ba6dd80c30e896bc9f3618
-[3]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ece78e30af62e095b238fddd25ce33282e1b031c
-[4]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a111d7fd12173ae42d8d4ce711713040de7e7ccf
-[5]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b980cbe95af63586284fbea254921f12fbefa95f
-[6]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b4f89cf2b39bef5519981df54f03b95048b00208
-[7]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.5...v7.7.0
-[8]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4cdb325a19edeb2338fc27d19a1c6b5af2dda81b
-[9]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4209e5163df6c2cfca6b3fae2e676c535cce8a9b
-[10]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5056c05dfef6039e4c2e47c08fcaf08f056458e9
-[11]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4ef9c1b43fa79224c518cec35c8f3b39b735e95d
-[12]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/efc916efbf1e1367614fa9136044e21024b901dc
-[13]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2dbfb8e654b50f9c94cb413a2bbb6cf51e0f1409
-[14]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.4...v7.6.5
-[15]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/090cdfe5bba623bcf93e99a6167d077cb1f50efe
-[16]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.3...v7.6.4
-[17]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/22a8424d3c39befa850235defdd1c2844e1b557f
-[18]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.2...v7.6.3
-[19]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bbbd58dcfd0cf3718d433e9a7f72f98d8391db31
-[20]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/599b6c2e3b8f9d5ab030582fb6252402b70e76f4
-[21]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/312a2efe1bff6497a0459ca0b84b2130f73ff630
-[22]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.1...v7.6.2
-[23]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/99a01ea12f1fc45c3e1b8ea6b84067436855aea9
-[24]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/35da4c355197c0a7c25b8c98919884c19e198f8a
-[25]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7a8f54b6afb44c6ca81c75919dc002f408f3379d
-[26]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/658718435a782393ae188425d51a5c17a1bc4be5
-[27]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/71809e9a866f33d107b1481997e4810ea58869a7
-[28]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f080ad03de773df842dc48731abd547c00b38b24
-[29]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2020d61075fb2ae5905d1e5b46f6fc6dbde9f690
-[30]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8a3bc8145ad10ed4f49f954dde4af2210177a43b
-[31]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/dd2b25492a971573cea5ed3c5139388c72857a85
-[32]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.0...v7.6.1
-[33]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/720dc20d162a2421e6008f995feda7bb94166a17
-[34]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/26a83711815c8a18343fb296e0c03619d2f46198
-[35]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/411fd7d704e0fd0eb365fb2ef776e994c99d7884
-[36]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.18...v7.6.0
-[37]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/31bdc0c22f3ffe3fa2a4b3efd08b75e68a5b8443
-[38]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.17...v7.5.18
-[39]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e7f2bbb7c066e4fadb2484f938353456e2312c8e
-[40]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8d16630dd5a5d092d1e74c385e582c0a592ee20e
-[41]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.16...v7.5.17
-[42]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c59e45c31b71404ede66de65a20befd7fc62f392
-[43]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3addf1183dafdd2ae6f38151f84877e015703d37
-[44]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/fb18856babb2be3d69030629173b94deb134a0a8
-[45]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4f23d4ee5fb37e220072dcf76ebc81f6f84b22cf
-[46]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.15...v7.5.16
-[47]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3b81944504da09657d3232b437c4d04ba9fa95a4
-[48]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.14...v7.5.15
-[49]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/85881f72411301a06791be63c76a67fbff45d3fd
-[50]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.13...v7.5.14
-[51]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/107b953b834fb54bb2ee1c418d5bb8119fabe3ac
-[52]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.12...v7.5.13
-[53]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2dce9c47d069b05df41481678a967dccc4637ead
-[54]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.11...v7.5.12
-[55]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/172fa775e677fe977d2b8265460ec192818b1996
-[56]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.10...v7.5.11
-[57]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/fef722214527e07c51c47fd635a24f0be4a4f839
-[58]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/16a597d7a2eb2ee07543c382844e18cb7ce363e6
-[59]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.9...v7.5.10
-[60]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/597d6c58440c5e7aac53fbbe23b57e6c19125ad2
-[61]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.8...v7.5.9
-[62]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/25db498808da4891f7f40b8a04b09e68b920d130
-[63]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.7...v7.5.8
-[64]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3973279927772eea45ac8573c1a91dea3635c6eb
-[65]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.6...v7.5.7
-[66]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/51123db7bc0a158d3849f99de64fbe1691011fdd
-[67]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.5...v7.5.6
-[68]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/31f61f5dc94357a5950d2b2fe90ef9e6268e4ee4
-[69]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.4...v7.5.5
-[70]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7212561b4cf094f47169b7b38e9ae4a9550e569b
-[71]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.3...v7.5.4
-[72]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ed31f79e0ebe97823e2a62b9e6aa7b3e2355ff7c
-[73]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.2...v7.5.3
-[74]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8a051d1222ed6df2d1c9e1f2e2eb890d763a6333
-[75]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.1...v7.5.2
-[76]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2cf6e46a6fe59b8a47123f2215ba8caf7976ad87
-[77]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.0...v7.5.1
-[78]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cb77d20313504c4cb25f082680fe321d6409a421
-[79]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6c1c4d48ea0ca4b60135976a0186152b97a31ec7
-[80]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c7556314894b98e9d727c27096e69695b5eb46fa
-[81]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3fdd509eac028d1eecd953ba4bc0931460aafeb9
-[82]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/eda277e8f0a37e171bc329c9c6fc2e8c2d028396
-[83]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0f401ffec3ebdd4736b3ef0aa52419293f5ad599
-[84]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.5...v7.5.0
-[85]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/77c033ff143dff64455049b8314cd528bae4e198
-[86]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.4...v7.4.5
-[87]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/677b4cedff4d3e4541736e612035d909a0df6131
-[88]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.3...v7.4.4
-[89]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5c8fefa330e31620fe2af848d42eb2c5ab881d02
-[90]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.2...v7.4.3
-[91]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/09304d7cbeea2f0b6f938a907fa1f2351ae51a5b
-[92]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c247c7a353a522de79dcf677994c278dfc993d65
-[93]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6eb7d4120f89cd1aaa0f0be2216ae327c66546cb
-[94]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0528db62704fb9d6a5139c60f131c432a23eeaa0
-[95]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.1...v7.4.2
-[96]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2842a3173829dc06bef77cb0b039ad584681f414
-[97]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4c174fe72d1a8f7e731b0a78d713223308015256
-[98]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6c000053c1b04088ed83b5690b4317bfa56e8d39
-[99]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.0...v7.4.1
-[100]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/aff191d1d036b9098493a3057927d24b3a175f1f
-[101]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e9b9e49f60737401c2d524ef21674a75d89f02a4
-[102]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.3.0...v7.4.0
-[103]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e47160b09b956e69f0d9eb0cab01a3440bb66645
-[104]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.3...v7.3.0
-[105]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a576d0b3e2a3e3f3cd4b0007ccd024f206877fbe
-[106]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0dc7c4eef97a021462e54b1d00cd789544202d9e
-[107]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c01b325ea28e7b4cf940e622faf7c805e42c5880
-[108]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/24f088811ed253dac8791e85d27aa2c194111328
-[109]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.2...v7.2.3
-[110]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/786942001834cb5337fabf921cbc14ea4cc04d2f
-[111]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.1...v7.2.2
-[112]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a8cd37812dc9e304bf813c742b2d4d54c1c9c183
-[113]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.0...v7.2.1
-[114]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/73edb9a864bbc4b7d5a7eb1d03ca4ce3b8e02e95
-[115]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.1.0...v7.2.0
-[116]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/864253c3a63de8cbb6577244c8a419ea8a97decd
-[117]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bf8c76bc12c51476719204c44b25c361b7258e90
-[118]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f7d12565f96e1626ffa393ba4ac39786197818e7
-[119]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.0.0...v7.1.0
-[120]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/27c97500ced2ef3085ce5bf984ccfa3e2bf5e04f
-[121]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/67264ed159f3686a5f89fda5cec5f07d465af49e
-[122]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cd6236ad92608b126f7b8df52693f75db28b488d
-[123]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.3...v7.0.0
-[124]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5765c024e82c3e7e0c77808e3860c85fb8c8d759
-[125]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.2...v6.7.3
-[126]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ec263026c77f36f1b15c67e102f42300108a43ce
-[127]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6e9fb7333b29c973517b6c2813c162f0c00c0f4b
-[128]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.1...v6.7.2
-[129]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/38bfb775cde6952a35a7daca6ad3e191cc0fa37b
-[130]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/aff005d252799e06e7a84aab1b5f88af62cf8901
-[131]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.0...v6.7.1
-[132]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c24773e0265cc559ad8b6596dd3d97740f18e64f
-[133]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ff94fe15bb18f2cc1d545a0b7948d0e818b48ae9
-[134]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/717ffdb672294ccca92a87d368777e09d35a2ab6
-[135]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f2e971ece7f3b60647ab3584db988dd8cbfd5d97
-[136]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.6.0...v6.7.0
-[137]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1fdcb9c6c500f88fbc2b7b6ec7f427f0a4995080
-[138]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.5.1...v6.6.0
-[139]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0cb26453351737c2ff0476b02f76ca82e3087f88
-[140]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ac06b3300ed526f58f26a18e4a5465f9e6ee8f13
-[141]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c6a3cd632cf814ca9d103bb4868ecafd032ed527
-[142]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/69ec71f088e1e162cf7695940b92e3637941e452
-[143]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2fe163c01107f6a1a31fddb871a6eae27f07fd3f
-[144]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.5.0...v6.5.1
-[145]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/99c2868b2682621a350c02665199a6132c3a8ec8
-[146]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d47c48bccb6110aca895d2472d611cd95134e156
-[147]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.3...v6.5.0
-[148]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/54488d92317360c2e358bca9238e60e2daca64dd
-[149]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.2...v6.4.3
-[150]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b759c31195eb816c8c7fec1d18f89d85ed437ff1
-[151]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/de2c7b1582b0ea20213ab5f761e7dc9994183f50
-[152]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4fb641cc202f3a510389566ce55415686bbc6a4e
-[153]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.1...v6.4.2
-[154]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6b2e2383ef2b54a56a665e6b9ecef7d93e5fec2e
-[155]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.0...v6.4.1
-[156]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/de7ef33e1d74831b441e909c4e628527ed2900c0
-[157]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c8ef15e813811f037acd12133f485bd8435ac9cc
-[158]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b9e8cc58ea93099742c91d7431687965e131a3df
-[159]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.8...v6.4.0
-[160]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ed73fc3e5c9c7f0f621802e9ea429dcfca36bf52
-[161]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.7...v6.3.8
-[162]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d923b299e05789a20a08dc2e4059e5e6e1099658
-[163]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.6...v6.3.7
-[164]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/44dd46246911a9cb58baf0ec0b84aa5093f2628e
-[165]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.5...v6.3.6
-[166]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/66670754987250b92806dfa7d94c1cb46349f07f
-[167]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.4...v6.3.5
-[168]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a10bac3efbce2b4bd511420fd4d7466c288d9706
-[169]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.3...v6.3.4
-[170]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e8bac90bb68b79d4c4ab1853bdd4c45dddef44fe
-[171]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/077abcea8df04b8b6cf292f97d0e4b37cda28f7b
-[172]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6885a3467c42b61e1edb93fed363ceca6ff15b28
-[173]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ba0ef5863ce550a6988ce259d7500807bdaa5db8
-[174]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.2...v6.3.3
-[175]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/772dee15ff4eaeba84f8327f30c69868c5e514c8
-[176]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e38af90e7720f08f46d6220168226336e6c040d4
-[177]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.1...v6.3.2
-[178]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f757db8f0e97286abda30b825de9f803cd63c097
-[179]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.0...v6.3.1
-[180]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7f4a70af17528c36e80440827663251f79c9c1be
-[181]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.2.0...v6.3.0
-[182]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/dda943e24fcd164ae850feb1f1bd16924b773773
-[183]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/636c35303cb5d04d239b13e89a3040e483c81cf7
-[184]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.7...v6.2.0
-[185]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e16cd8b559096a076739d79a15ff79e5efa7f581
-[186]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/538c374e597751bc198b6d52bc0a8fa41de6494d
-[187]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6fbd1df74d4bc1a7ad852e76e8fa805138d95657
-[188]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/33a510dce4dcaf004732e739e3e9c3d12518646a
-[189]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/db4c284e914688911f1b0d75c569b83a198113c2
-[190]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bcbf3f5cc2d0bba5f282de657977ab44c70b1bfe
-[191]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.6...v6.1.7
-[192]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8a7fc06df25ffa5381bb5d771eb6e5a619fcbf64
-[193]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/9675eeb1a06b715fea6cd9024cf94aa31d44943c
-[194]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.5...v6.1.6
-[195]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/828751d051d5cff15c5d1315fc9729d82cab985f
-[196]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.4...v6.1.5
-[197]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d8ed033ead9608349f2d876c4cecebecd65dc47f
-[198]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.3...v6.1.4
-[199]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/44f5cd4c3c6adeb548ba89adba8e884336f41520
-[200]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.2...v6.1.3
-[201]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/55e1235d39714dd00c146549f630ec62f4952e2d
-[202]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5448960531a3bd19cc38de44f13519a8888e342a
-[203]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.1...v6.1.2
-[204]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5921653ac2c26273eace14aa3e4994960be521a0
-[205]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b2ea6f13a5c7d7c8d89f76b6ced72c938448a235
-[206]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/03825f051d3ed50dad916f0e3f3993a0fb3c51ce
-[207]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.0...v6.1.1
-[208]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bda2d5ea408563874429d8ed8e30455d5e717a54
-[209]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.5...v6.1.0
-[210]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b9d92fdd4f2d594a62fce6d16299152c79a43566
-[211]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f90dde35c32e676c765b131ddfa135246ad7f7eb
-[212]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.4...v6.0.5
-[213]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4b6c84c788c4105db8a1ddd10ecb044be31876f9
-[214]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.3...v6.0.4
-[215]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/85b8e12e1bce4baa22bd301da9dda21ea289fd9d
-[216]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.2...v6.0.3
-[217]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/02746df97d17f717de608d4b5cc3838e2992a150
-[218]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7520e0fc29f22ef537fc947a5f32d6b6bc762cc5
-[219]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.1...v6.0.2
-[220]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/747a6742dabcc6cdc8fd835b2f673e355f212cdf
-[221]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b3742961a2824618bf68953c532055a04ef03920
-[222]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.0...v6.0.1
-[223]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d40192bd13d9b301e09723cdca68be60b44b5d82
-[224]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.3...v6.0.0
-[225]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/95a13d21dd902a490d445d3c8aee89c59b2131f1
-[226]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.2...v5.0.3
-[227]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0a91fad0d4f6c41c600294b8ecfc84b16e906980
-[228]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4aab0bda87d426f81663773342f77bf661c79ce0
-[229]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.1...v5.0.2
-[230]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e62c5b42ca2b43326cc9eec8db248020b2d90ec8
-[231]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.0...v5.0.1
-[232]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2ef6297d257bcd1661093eed5069714382f01f36
-[233]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d73cac91012e0a32ee1f52a3b476b8639f325ca2
-[234]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/da477b770bc7b17db8eb474eb523e8468881e447
-[235]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v4.0.0...v5.0.0
-[236]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7391321c8da14ed35a865a4e245db2ae3b72a606
-[237]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v3.0.1...v4.0.0
-[238]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/02662fcac7c02ac3f5a32dba750e00d23d6c88f2
-[239]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5a2aef4cebc6ed136fa3fb5015f38f47de8ce781
-[240]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v3.0.0...v3.0.1
-[241]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b15149139462980707fc8ec6d7d67414ac207e6e
-[242]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/783ba76db816b0cc391450d442c708420203c46c
-[243]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a876517a6ea8b339e8c0eca9f7763bcc85919f87
-[244]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.4...v3.0.0
-[245]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b060d3ec78744b72bd53450ecd1664110cdebda8
-[246]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d5dfc506c9d68a0f299559b5e76c92630c9edf0a
-[247]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0447d5959113f033e2ed5644efdb4c80c4fe5085
-[248]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3a4bdff03f0d8ea450f53aebceb33525801b3c34
-[249]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1096e6fbfff5fd399c2f1af5fe2b6496c5ca3cfe
-[250]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4fd2952e78b5cfda17a84a538bcc382d06621926
-[251]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/446e961cee1326be7db4085f118447ac30f15078
-[252]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e537358218a8abcc97008f5460b37a1949dd0681
-[253]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b75d8ac9bb35a28aa8ebbe8dc52589bc7783d0cd
-[254]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d59bb1a385279427ee93ac6babbc2a8f7544e599
-[255]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4cc6ee68cec6500f99e918443fee5deae32a9f0a
-[256]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.3...v2.3.4
-[257]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/10c71bf50522ae3902f84cf6171b9fce4d1470f4
-[258]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/57e0c162e73d5850807e9f496df0aa6203834f4c
-[259]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e5d6d42ad230f45b0239bcec671a18a2789ae8f2
-[260]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/efb29c5c991d58ae8aa684159f4db0d3f8f6dbbe
-[261]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f9a3e231bf5b99619d5aabccdba6f6299642b6e9
-[262]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.2...v2.3.3
-[263]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c2789bfd8f43bb9fc60316131c4e6d17dd2c1de8
-[264]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1dcdcc1cac342f9bdca71e49f9cc332e9118932f
-[265]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.1...v2.3.2
-[266]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/598a3966ce1d85c6dcc2945878ebd3ba2c969654
-[267]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.0...v2.3.1
-[268]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/022603bbe50298a8e7500a77cb77ce5aae4b45f7
-[269]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0d181ea032a9f5322137dacf5ee97e6a28acd035
-[270]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ec632ad52472184edbed16111b4a5b306ae6f7ed
-[271]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.2.2...v2.3.0
-[272]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d9213827f9448a93affcab8ca652e37f24b247b9
-[273]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c44c310f01d78798c5a13213dafeef5e1f25b25f
-[274]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.2.1...v2.2.2
-[275]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d630264d1ee046ddf943ad287b15f5308ce4c224
-[276]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.2.0...v2.2.1
-[277]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d4ccacb6533b04c4889b909ecd2bffd4c7b5fa79
-[278]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.4...v2.2.0
-[279]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a62380bc4f75c42d74640916fde44fb5811f150d
-[280]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/823f8b5434e07250b8aefbd9f4a49e0ea05cc9e5
-[281]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bd10f4414522a0c6b406adb2fba9d58abee6830e
-[282]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/46db2ee7335e9b37cfafce98776171304f0072b7
-[283]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f3800e471e93308b37eb2668dd5c4bfde9e7b88e
-[284]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/9a7adb4fb9592328efd3b33bc156b87f89a59ffb
-[285]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/af76dbe52921aed27c4cf275875de9c1194561d4
-[286]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/69a25baa21133345e2a2baffd2f69d0abe950c02
-[287]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/14b86ae815f2c24aef82dcad41b0ead036a2f4c4
-[288]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cc94940e7b903a141f4e16a4169411c0a45bfb96
-[289]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/66adf2f3d8ea4bd1813fac4c704ff327ac175855
-[290]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f0d0032fb51ddb98b2f35b229c9d1873c00264f7
-[291]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2fa4aa962a17c6075d28af876f67fe98d0f519b6
-[292]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/787a28144826609ddffb5e0d1937f314b1039ab6
-[293]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8393a87974cea60087a8d11fc9b0bac0f7ecc6e2
-[294]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.3...v2.1.4
-[295]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/31ece1cb7d0b91bbc38b1c3eb6366c13d1da7fd2
-[296]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/72acb24c0c521217fb8eebb5204ddf1591808326
-[297]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.2...v2.1.3
-[298]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8ce176044293af0ac3b5dd2495d7d0eb580bbede
-[299]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.1...v2.1.2
-[300]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2cdd373974fdc62480e5681813c09cba98aebddc
-[301]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/fcb2232cf6e628f58033a78a0d6aa107f9794589
-[302]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cdf46102e7d5b590bd153d2444cb13c24d4170b3
-[303]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.0...v2.1.1
-[304]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/961ecef3555403928cf319012ca6bd40093da66e
-[305]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.0.1...v2.1.0
-[306]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/97682f434acc501e4964c31770472acae0320ad5
-[307]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/24e373907b23a68627fe535049f603c93bfa1361
-[308]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/874f8d65aff5d8e27e14e8d9e4a0e37450713ce0
-[309]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4bb9d94050d1b8fb164bdf04b1bffa10705aa0a2
-[310]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.0.0...v2.0.1
-[311]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f01d16b51e444eb801121e81718994b4add18799
-[312]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bcdbd0e1c23786185cd43b11d9ce18d3498e9ff5
-[313]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3124ab0500924ce75f3387d59d5d60ea3e77c827
-[314]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v1.0.15...v2.0.0
-[315]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d8cc83611de2a595631f42bee0f10591b11bc59c
-[316]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bbe0416125a303076bc3f8a5a96c9669db926b46
-[317]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/65e5d463925b888e08dd69a9da7f4e9f4c9be872
-[318]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f621f76895e6a0749f76a6a1abd90253b8694717
-[319]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f5428c87836552db96d40310c52abd47e593e729
-[320]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7af5e45eb0712da5d80022cedd535a673082d195
-[321]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6d86c0b4ce2218a93f9919a256a89a04af83a9d1
-[322]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e8bfbc590ec8ac73071ae61708c1ca29f2beee36
-[323]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5e40deb020c4bafb103a6bc78fbeecb266a5c983
-[324]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6da0a656aba20f022d26335ec33c9c4c4ea37c02
-[325]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d489cfacd8514a210ec0b570ab3c5a283cf5bc19
-[326]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/57775c9cc3ffdad94f09b23923785a081e2a08ee
-[327]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1741cde56623bdb6e3e0c1dc95dcbe094b197ebe
-[328]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/42af3470f3e91e5d359d995888c83534b8d32060
-[329]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/57faa2cc448f39383b56db04ec06b1093f5f7bcd
-[330]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5ced6267d44731337fe5e0a69776dd5642d8a54d
-[331]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/df91d8298edd2d756f732b2245ba086e91197505
-[332]: https://conventionalcommits.org
-[333]: https://semver.org
-[334]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.7.1...v7.8.0
-[335]:
   https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4b22c20a232710bb98836a42d374b844b785373b
+[3]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.7.0...v7.7.1
+[4]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c034e8683db76f52b1ba6dd80c30e896bc9f3618
+[5]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ece78e30af62e095b238fddd25ce33282e1b031c
+[6]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a111d7fd12173ae42d8d4ce711713040de7e7ccf
+[7]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b980cbe95af63586284fbea254921f12fbefa95f
+[8]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b4f89cf2b39bef5519981df54f03b95048b00208
+[9]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.5...v7.7.0
+[10]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4cdb325a19edeb2338fc27d19a1c6b5af2dda81b
+[11]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4209e5163df6c2cfca6b3fae2e676c535cce8a9b
+[12]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5056c05dfef6039e4c2e47c08fcaf08f056458e9
+[13]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4ef9c1b43fa79224c518cec35c8f3b39b735e95d
+[14]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/efc916efbf1e1367614fa9136044e21024b901dc
+[15]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2dbfb8e654b50f9c94cb413a2bbb6cf51e0f1409
+[16]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.4...v7.6.5
+[17]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/090cdfe5bba623bcf93e99a6167d077cb1f50efe
+[18]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.3...v7.6.4
+[19]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/22a8424d3c39befa850235defdd1c2844e1b557f
+[20]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.2...v7.6.3
+[21]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bbbd58dcfd0cf3718d433e9a7f72f98d8391db31
+[22]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/599b6c2e3b8f9d5ab030582fb6252402b70e76f4
+[23]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/312a2efe1bff6497a0459ca0b84b2130f73ff630
+[24]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.1...v7.6.2
+[25]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/99a01ea12f1fc45c3e1b8ea6b84067436855aea9
+[26]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/35da4c355197c0a7c25b8c98919884c19e198f8a
+[27]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7a8f54b6afb44c6ca81c75919dc002f408f3379d
+[28]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/658718435a782393ae188425d51a5c17a1bc4be5
+[29]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/71809e9a866f33d107b1481997e4810ea58869a7
+[30]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f080ad03de773df842dc48731abd547c00b38b24
+[31]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2020d61075fb2ae5905d1e5b46f6fc6dbde9f690
+[32]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8a3bc8145ad10ed4f49f954dde4af2210177a43b
+[33]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/dd2b25492a971573cea5ed3c5139388c72857a85
+[34]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.6.0...v7.6.1
+[35]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/720dc20d162a2421e6008f995feda7bb94166a17
+[36]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/26a83711815c8a18343fb296e0c03619d2f46198
+[37]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/411fd7d704e0fd0eb365fb2ef776e994c99d7884
+[38]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.18...v7.6.0
+[39]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/31bdc0c22f3ffe3fa2a4b3efd08b75e68a5b8443
+[40]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.17...v7.5.18
+[41]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e7f2bbb7c066e4fadb2484f938353456e2312c8e
+[42]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8d16630dd5a5d092d1e74c385e582c0a592ee20e
+[43]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.16...v7.5.17
+[44]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c59e45c31b71404ede66de65a20befd7fc62f392
+[45]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3addf1183dafdd2ae6f38151f84877e015703d37
+[46]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/fb18856babb2be3d69030629173b94deb134a0a8
+[47]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4f23d4ee5fb37e220072dcf76ebc81f6f84b22cf
+[48]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.15...v7.5.16
+[49]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3b81944504da09657d3232b437c4d04ba9fa95a4
+[50]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.14...v7.5.15
+[51]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/85881f72411301a06791be63c76a67fbff45d3fd
+[52]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.13...v7.5.14
+[53]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/107b953b834fb54bb2ee1c418d5bb8119fabe3ac
+[54]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.12...v7.5.13
+[55]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2dce9c47d069b05df41481678a967dccc4637ead
+[56]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.11...v7.5.12
+[57]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/172fa775e677fe977d2b8265460ec192818b1996
+[58]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.10...v7.5.11
+[59]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/fef722214527e07c51c47fd635a24f0be4a4f839
+[60]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/16a597d7a2eb2ee07543c382844e18cb7ce363e6
+[61]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.9...v7.5.10
+[62]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/597d6c58440c5e7aac53fbbe23b57e6c19125ad2
+[63]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.8...v7.5.9
+[64]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/25db498808da4891f7f40b8a04b09e68b920d130
+[65]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.7...v7.5.8
+[66]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3973279927772eea45ac8573c1a91dea3635c6eb
+[67]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.6...v7.5.7
+[68]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/51123db7bc0a158d3849f99de64fbe1691011fdd
+[69]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.5...v7.5.6
+[70]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/31f61f5dc94357a5950d2b2fe90ef9e6268e4ee4
+[71]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.4...v7.5.5
+[72]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7212561b4cf094f47169b7b38e9ae4a9550e569b
+[73]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.3...v7.5.4
+[74]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ed31f79e0ebe97823e2a62b9e6aa7b3e2355ff7c
+[75]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.2...v7.5.3
+[76]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8a051d1222ed6df2d1c9e1f2e2eb890d763a6333
+[77]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.1...v7.5.2
+[78]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2cf6e46a6fe59b8a47123f2215ba8caf7976ad87
+[79]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.5.0...v7.5.1
+[80]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cb77d20313504c4cb25f082680fe321d6409a421
+[81]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6c1c4d48ea0ca4b60135976a0186152b97a31ec7
+[82]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c7556314894b98e9d727c27096e69695b5eb46fa
+[83]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3fdd509eac028d1eecd953ba4bc0931460aafeb9
+[84]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/eda277e8f0a37e171bc329c9c6fc2e8c2d028396
+[85]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0f401ffec3ebdd4736b3ef0aa52419293f5ad599
+[86]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.5...v7.5.0
+[87]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/77c033ff143dff64455049b8314cd528bae4e198
+[88]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.4...v7.4.5
+[89]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/677b4cedff4d3e4541736e612035d909a0df6131
+[90]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.3...v7.4.4
+[91]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5c8fefa330e31620fe2af848d42eb2c5ab881d02
+[92]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.2...v7.4.3
+[93]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/09304d7cbeea2f0b6f938a907fa1f2351ae51a5b
+[94]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c247c7a353a522de79dcf677994c278dfc993d65
+[95]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6eb7d4120f89cd1aaa0f0be2216ae327c66546cb
+[96]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0528db62704fb9d6a5139c60f131c432a23eeaa0
+[97]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.1...v7.4.2
+[98]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2842a3173829dc06bef77cb0b039ad584681f414
+[99]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4c174fe72d1a8f7e731b0a78d713223308015256
+[100]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6c000053c1b04088ed83b5690b4317bfa56e8d39
+[101]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.4.0...v7.4.1
+[102]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/aff191d1d036b9098493a3057927d24b3a175f1f
+[103]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e9b9e49f60737401c2d524ef21674a75d89f02a4
+[104]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.3.0...v7.4.0
+[105]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e47160b09b956e69f0d9eb0cab01a3440bb66645
+[106]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.3...v7.3.0
+[107]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a576d0b3e2a3e3f3cd4b0007ccd024f206877fbe
+[108]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0dc7c4eef97a021462e54b1d00cd789544202d9e
+[109]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c01b325ea28e7b4cf940e622faf7c805e42c5880
+[110]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/24f088811ed253dac8791e85d27aa2c194111328
+[111]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.2...v7.2.3
+[112]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/786942001834cb5337fabf921cbc14ea4cc04d2f
+[113]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.1...v7.2.2
+[114]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a8cd37812dc9e304bf813c742b2d4d54c1c9c183
+[115]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.2.0...v7.2.1
+[116]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/73edb9a864bbc4b7d5a7eb1d03ca4ce3b8e02e95
+[117]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.1.0...v7.2.0
+[118]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/864253c3a63de8cbb6577244c8a419ea8a97decd
+[119]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bf8c76bc12c51476719204c44b25c361b7258e90
+[120]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f7d12565f96e1626ffa393ba4ac39786197818e7
+[121]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.0.0...v7.1.0
+[122]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/27c97500ced2ef3085ce5bf984ccfa3e2bf5e04f
+[123]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/67264ed159f3686a5f89fda5cec5f07d465af49e
+[124]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cd6236ad92608b126f7b8df52693f75db28b488d
+[125]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.3...v7.0.0
+[126]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5765c024e82c3e7e0c77808e3860c85fb8c8d759
+[127]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.2...v6.7.3
+[128]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ec263026c77f36f1b15c67e102f42300108a43ce
+[129]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6e9fb7333b29c973517b6c2813c162f0c00c0f4b
+[130]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.1...v6.7.2
+[131]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/38bfb775cde6952a35a7daca6ad3e191cc0fa37b
+[132]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/aff005d252799e06e7a84aab1b5f88af62cf8901
+[133]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.7.0...v6.7.1
+[134]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c24773e0265cc559ad8b6596dd3d97740f18e64f
+[135]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ff94fe15bb18f2cc1d545a0b7948d0e818b48ae9
+[136]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/717ffdb672294ccca92a87d368777e09d35a2ab6
+[137]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f2e971ece7f3b60647ab3584db988dd8cbfd5d97
+[138]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.6.0...v6.7.0
+[139]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1fdcb9c6c500f88fbc2b7b6ec7f427f0a4995080
+[140]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.5.1...v6.6.0
+[141]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0cb26453351737c2ff0476b02f76ca82e3087f88
+[142]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ac06b3300ed526f58f26a18e4a5465f9e6ee8f13
+[143]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c6a3cd632cf814ca9d103bb4868ecafd032ed527
+[144]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/69ec71f088e1e162cf7695940b92e3637941e452
+[145]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2fe163c01107f6a1a31fddb871a6eae27f07fd3f
+[146]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.5.0...v6.5.1
+[147]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/99c2868b2682621a350c02665199a6132c3a8ec8
+[148]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d47c48bccb6110aca895d2472d611cd95134e156
+[149]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.3...v6.5.0
+[150]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/54488d92317360c2e358bca9238e60e2daca64dd
+[151]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.2...v6.4.3
+[152]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b759c31195eb816c8c7fec1d18f89d85ed437ff1
+[153]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/de2c7b1582b0ea20213ab5f761e7dc9994183f50
+[154]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4fb641cc202f3a510389566ce55415686bbc6a4e
+[155]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.1...v6.4.2
+[156]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6b2e2383ef2b54a56a665e6b9ecef7d93e5fec2e
+[157]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.4.0...v6.4.1
+[158]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/de7ef33e1d74831b441e909c4e628527ed2900c0
+[159]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c8ef15e813811f037acd12133f485bd8435ac9cc
+[160]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b9e8cc58ea93099742c91d7431687965e131a3df
+[161]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.8...v6.4.0
+[162]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ed73fc3e5c9c7f0f621802e9ea429dcfca36bf52
+[163]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.7...v6.3.8
+[164]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d923b299e05789a20a08dc2e4059e5e6e1099658
+[165]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.6...v6.3.7
+[166]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/44dd46246911a9cb58baf0ec0b84aa5093f2628e
+[167]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.5...v6.3.6
+[168]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/66670754987250b92806dfa7d94c1cb46349f07f
+[169]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.4...v6.3.5
+[170]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a10bac3efbce2b4bd511420fd4d7466c288d9706
+[171]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.3...v6.3.4
+[172]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e8bac90bb68b79d4c4ab1853bdd4c45dddef44fe
+[173]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/077abcea8df04b8b6cf292f97d0e4b37cda28f7b
+[174]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6885a3467c42b61e1edb93fed363ceca6ff15b28
+[175]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ba0ef5863ce550a6988ce259d7500807bdaa5db8
+[176]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.2...v6.3.3
+[177]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/772dee15ff4eaeba84f8327f30c69868c5e514c8
+[178]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e38af90e7720f08f46d6220168226336e6c040d4
+[179]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.1...v6.3.2
+[180]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f757db8f0e97286abda30b825de9f803cd63c097
+[181]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.3.0...v6.3.1
+[182]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7f4a70af17528c36e80440827663251f79c9c1be
+[183]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.2.0...v6.3.0
+[184]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/dda943e24fcd164ae850feb1f1bd16924b773773
+[185]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/636c35303cb5d04d239b13e89a3040e483c81cf7
+[186]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.7...v6.2.0
+[187]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e16cd8b559096a076739d79a15ff79e5efa7f581
+[188]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/538c374e597751bc198b6d52bc0a8fa41de6494d
+[189]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6fbd1df74d4bc1a7ad852e76e8fa805138d95657
+[190]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/33a510dce4dcaf004732e739e3e9c3d12518646a
+[191]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/db4c284e914688911f1b0d75c569b83a198113c2
+[192]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bcbf3f5cc2d0bba5f282de657977ab44c70b1bfe
+[193]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.6...v6.1.7
+[194]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8a7fc06df25ffa5381bb5d771eb6e5a619fcbf64
+[195]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/9675eeb1a06b715fea6cd9024cf94aa31d44943c
+[196]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.5...v6.1.6
+[197]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/828751d051d5cff15c5d1315fc9729d82cab985f
+[198]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.4...v6.1.5
+[199]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d8ed033ead9608349f2d876c4cecebecd65dc47f
+[200]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.3...v6.1.4
+[201]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/44f5cd4c3c6adeb548ba89adba8e884336f41520
+[202]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.2...v6.1.3
+[203]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/55e1235d39714dd00c146549f630ec62f4952e2d
+[204]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5448960531a3bd19cc38de44f13519a8888e342a
+[205]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.1...v6.1.2
+[206]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5921653ac2c26273eace14aa3e4994960be521a0
+[207]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b2ea6f13a5c7d7c8d89f76b6ced72c938448a235
+[208]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/03825f051d3ed50dad916f0e3f3993a0fb3c51ce
+[209]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.1.0...v6.1.1
+[210]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bda2d5ea408563874429d8ed8e30455d5e717a54
+[211]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.5...v6.1.0
+[212]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b9d92fdd4f2d594a62fce6d16299152c79a43566
+[213]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f90dde35c32e676c765b131ddfa135246ad7f7eb
+[214]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.4...v6.0.5
+[215]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4b6c84c788c4105db8a1ddd10ecb044be31876f9
+[216]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.3...v6.0.4
+[217]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/85b8e12e1bce4baa22bd301da9dda21ea289fd9d
+[218]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.2...v6.0.3
+[219]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/02746df97d17f717de608d4b5cc3838e2992a150
+[220]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7520e0fc29f22ef537fc947a5f32d6b6bc762cc5
+[221]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.1...v6.0.2
+[222]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/747a6742dabcc6cdc8fd835b2f673e355f212cdf
+[223]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b3742961a2824618bf68953c532055a04ef03920
+[224]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v6.0.0...v6.0.1
+[225]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d40192bd13d9b301e09723cdca68be60b44b5d82
+[226]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.3...v6.0.0
+[227]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/95a13d21dd902a490d445d3c8aee89c59b2131f1
+[228]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.2...v5.0.3
+[229]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0a91fad0d4f6c41c600294b8ecfc84b16e906980
+[230]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4aab0bda87d426f81663773342f77bf661c79ce0
+[231]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.1...v5.0.2
+[232]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e62c5b42ca2b43326cc9eec8db248020b2d90ec8
+[233]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v5.0.0...v5.0.1
+[234]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2ef6297d257bcd1661093eed5069714382f01f36
+[235]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d73cac91012e0a32ee1f52a3b476b8639f325ca2
+[236]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/da477b770bc7b17db8eb474eb523e8468881e447
+[237]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v4.0.0...v5.0.0
+[238]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7391321c8da14ed35a865a4e245db2ae3b72a606
+[239]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v3.0.1...v4.0.0
+[240]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/02662fcac7c02ac3f5a32dba750e00d23d6c88f2
+[241]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5a2aef4cebc6ed136fa3fb5015f38f47de8ce781
+[242]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v3.0.0...v3.0.1
+[243]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b15149139462980707fc8ec6d7d67414ac207e6e
+[244]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/783ba76db816b0cc391450d442c708420203c46c
+[245]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a876517a6ea8b339e8c0eca9f7763bcc85919f87
+[246]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.4...v3.0.0
+[247]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b060d3ec78744b72bd53450ecd1664110cdebda8
+[248]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d5dfc506c9d68a0f299559b5e76c92630c9edf0a
+[249]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0447d5959113f033e2ed5644efdb4c80c4fe5085
+[250]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3a4bdff03f0d8ea450f53aebceb33525801b3c34
+[251]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1096e6fbfff5fd399c2f1af5fe2b6496c5ca3cfe
+[252]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4fd2952e78b5cfda17a84a538bcc382d06621926
+[253]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/446e961cee1326be7db4085f118447ac30f15078
+[254]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e537358218a8abcc97008f5460b37a1949dd0681
+[255]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/b75d8ac9bb35a28aa8ebbe8dc52589bc7783d0cd
+[256]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d59bb1a385279427ee93ac6babbc2a8f7544e599
+[257]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4cc6ee68cec6500f99e918443fee5deae32a9f0a
+[258]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.3...v2.3.4
+[259]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/10c71bf50522ae3902f84cf6171b9fce4d1470f4
+[260]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/57e0c162e73d5850807e9f496df0aa6203834f4c
+[261]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e5d6d42ad230f45b0239bcec671a18a2789ae8f2
+[262]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/efb29c5c991d58ae8aa684159f4db0d3f8f6dbbe
+[263]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f9a3e231bf5b99619d5aabccdba6f6299642b6e9
+[264]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.2...v2.3.3
+[265]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c2789bfd8f43bb9fc60316131c4e6d17dd2c1de8
+[266]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1dcdcc1cac342f9bdca71e49f9cc332e9118932f
+[267]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.1...v2.3.2
+[268]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/598a3966ce1d85c6dcc2945878ebd3ba2c969654
+[269]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.3.0...v2.3.1
+[270]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/022603bbe50298a8e7500a77cb77ce5aae4b45f7
+[271]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/0d181ea032a9f5322137dacf5ee97e6a28acd035
+[272]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/ec632ad52472184edbed16111b4a5b306ae6f7ed
+[273]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.2.2...v2.3.0
+[274]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d9213827f9448a93affcab8ca652e37f24b247b9
+[275]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c44c310f01d78798c5a13213dafeef5e1f25b25f
+[276]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.2.1...v2.2.2
+[277]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d630264d1ee046ddf943ad287b15f5308ce4c224
+[278]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.2.0...v2.2.1
+[279]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d4ccacb6533b04c4889b909ecd2bffd4c7b5fa79
+[280]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.4...v2.2.0
+[281]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/a62380bc4f75c42d74640916fde44fb5811f150d
+[282]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/823f8b5434e07250b8aefbd9f4a49e0ea05cc9e5
+[283]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bd10f4414522a0c6b406adb2fba9d58abee6830e
+[284]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/46db2ee7335e9b37cfafce98776171304f0072b7
+[285]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f3800e471e93308b37eb2668dd5c4bfde9e7b88e
+[286]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/9a7adb4fb9592328efd3b33bc156b87f89a59ffb
+[287]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/af76dbe52921aed27c4cf275875de9c1194561d4
+[288]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/69a25baa21133345e2a2baffd2f69d0abe950c02
+[289]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/14b86ae815f2c24aef82dcad41b0ead036a2f4c4
+[290]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cc94940e7b903a141f4e16a4169411c0a45bfb96
+[291]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/66adf2f3d8ea4bd1813fac4c704ff327ac175855
+[292]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f0d0032fb51ddb98b2f35b229c9d1873c00264f7
+[293]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2fa4aa962a17c6075d28af876f67fe98d0f519b6
+[294]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/787a28144826609ddffb5e0d1937f314b1039ab6
+[295]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8393a87974cea60087a8d11fc9b0bac0f7ecc6e2
+[296]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.3...v2.1.4
+[297]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/31ece1cb7d0b91bbc38b1c3eb6366c13d1da7fd2
+[298]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/72acb24c0c521217fb8eebb5204ddf1591808326
+[299]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.2...v2.1.3
+[300]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/8ce176044293af0ac3b5dd2495d7d0eb580bbede
+[301]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.1...v2.1.2
+[302]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/2cdd373974fdc62480e5681813c09cba98aebddc
+[303]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/fcb2232cf6e628f58033a78a0d6aa107f9794589
+[304]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cdf46102e7d5b590bd153d2444cb13c24d4170b3
+[305]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.1.0...v2.1.1
+[306]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/961ecef3555403928cf319012ca6bd40093da66e
+[307]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.0.1...v2.1.0
+[308]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/97682f434acc501e4964c31770472acae0320ad5
+[309]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/24e373907b23a68627fe535049f603c93bfa1361
+[310]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/874f8d65aff5d8e27e14e8d9e4a0e37450713ce0
+[311]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/4bb9d94050d1b8fb164bdf04b1bffa10705aa0a2
+[312]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v2.0.0...v2.0.1
+[313]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f01d16b51e444eb801121e81718994b4add18799
+[314]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bcdbd0e1c23786185cd43b11d9ce18d3498e9ff5
+[315]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/3124ab0500924ce75f3387d59d5d60ea3e77c827
+[316]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v1.0.15...v2.0.0
+[317]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d8cc83611de2a595631f42bee0f10591b11bc59c
+[318]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/bbe0416125a303076bc3f8a5a96c9669db926b46
+[319]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/65e5d463925b888e08dd69a9da7f4e9f4c9be872
+[320]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f621f76895e6a0749f76a6a1abd90253b8694717
+[321]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/f5428c87836552db96d40310c52abd47e593e729
+[322]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/7af5e45eb0712da5d80022cedd535a673082d195
+[323]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6d86c0b4ce2218a93f9919a256a89a04af83a9d1
+[324]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/e8bfbc590ec8ac73071ae61708c1ca29f2beee36
+[325]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5e40deb020c4bafb103a6bc78fbeecb266a5c983
+[326]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6da0a656aba20f022d26335ec33c9c4c4ea37c02
+[327]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/d489cfacd8514a210ec0b570ab3c5a283cf5bc19
+[328]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/57775c9cc3ffdad94f09b23923785a081e2a08ee
+[329]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1741cde56623bdb6e3e0c1dc95dcbe094b197ebe
+[330]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/42af3470f3e91e5d359d995888c83534b8d32060
+[331]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/57faa2cc448f39383b56db04ec06b1093f5f7bcd
+[332]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/5ced6267d44731337fe5e0a69776dd5642d8a54d
+[333]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/df91d8298edd2d756f732b2245ba086e91197505
+[334]: https://conventionalcommits.org
+[335]: https://semver.org
+[336]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.8.0...v7.8.1
+[337]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/09d35d7379f73a4af8fc8c89bcd81e828e7fe8a7
+[338]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/726df9008efa8ccb32dc58cebf29354bd8cafd7d
+[339]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/658f59103f46992cd0fed413bdf4bb0d5be4d995
+[340]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/cb59af2d8c68c03bbc8d834a0384670c71a5e0ec
