@@ -713,7 +713,7 @@ jobs:
           echo '${{ needs.metadata.outputs.should-skip-cd != 'true' }}';
           echo '${{ needs.metadata.outputs.can-automerge == 'true' }}';
           echo '${{ github.event_name == 'pull_request' }}';
-          echo '${{ github.event.pull_request.draft == 'false' }}';
+          echo '${{ github.event.pull_request.draft == false }}';
           echo '${{ needs.build.result == 'skipped' }}';
           echo '${{ needs.release.result == 'skipped' }}';
           echo '${{ needs.check-audit.result == 'success' }}';
@@ -750,7 +750,7 @@ jobs:
       && needs.metadata.outputs.should-skip-cd != 'true'
       && needs.metadata.outputs.can-automerge == 'true'
       && github.event_name == 'pull_request'
-      && github.event.pull_request.draft == 'false'
+      && github.event.pull_request.draft == false
       && needs.build.result == 'skipped'
       && needs.release.result == 'skipped'
       && needs.check-audit.result == 'success'
