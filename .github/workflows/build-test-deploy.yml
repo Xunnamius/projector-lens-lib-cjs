@@ -57,7 +57,7 @@ env:
   # ! WARNING: unlike REPO_OWNER_WHITELIST, matching is case sensitive.
   # ! WARNING: this allows 3rd party code to be merged and released without
   # ! any human oversight. Only allow this for trusted actors, like dependabot!
-  AUTOMERGE_ACTOR_WHITELIST: dependabot[bot], snyk-bot
+  AUTOMERGE_ACTOR_WHITELIST: dependabot[bot], xunn-bot
 
   # * Npm audit will fail upon encountering problems of at least this severity:
   NPM_AUDIT_FAIL_LEVEL: high
@@ -780,9 +780,11 @@ jobs:
                   return;
                 } else if ([409].includes(status)) {
                   core.info(
-                    `Auto-merge skipped: PR #${pullRequest.number} was updated since run began`
+                    `Auto-merge skipped: current HEAD is out of sync with PR #${pullRequest.number}`
                   );
-                } else if (!merged) throw new Error(message || '(unknown error occurred)');
+                } else if (!merged) {
+                  throw new Error(message || `unknown error occurred: HTTP status code ${status}`);
+                }
 
                 success = true;
               } catch (e) {
