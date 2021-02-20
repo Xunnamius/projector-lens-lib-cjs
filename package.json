@@ -1,6 +1,6 @@
 {
   "name": "@xunnamius/dummy-pkg-1",
-  "version": "7.8.1",
+  "version": "7.8.0",
   "private": false,
   "description": "A dummy package used for testing workflow pipelines. Not to be installed!",
   "keywords": [],
@@ -121,7 +121,7 @@
   },
   "dependencies": {
     "debug": "^4.3.1",
-    "object-path": "0.11.5"
+    "object-path": "0.11.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.17",
