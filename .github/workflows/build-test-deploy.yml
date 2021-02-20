@@ -153,8 +153,9 @@ jobs:
         run: |
           set +e
           node -e "process.exit('${{ env.REPO_OWNER_WHITELIST }}'.split(',').some(o => o.trim().toLowerCase() == '${{ github.repository_owner }}'.toLowerCase()) ? 0 : 1)"
-          echo "::set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
-          ! [ -z "$DEBUG" ] && echo "set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')" || true
+          RESULT=`[ $? -eq 0 ] && echo 'true' || echo 'false'`
+          echo "::set-output name=is-whitelisted::$RESULT"
+          ! [ -z "$DEBUG" ] && echo "set-output name=is-whitelisted::$RESULT" || true
 
       - name: Verify workflow actor against auto-merge whitelist
         if: steps.skip.outputs.should-skip-ci != 'true'
@@ -162,8 +163,9 @@ jobs:
         run: |
           set +e
           node -e "process.exit('${{ env.AUTOMERGE_ACTOR_WHITELIST }}'.split(',').some(o => o.trim() == '${{ github.actor }}') ? 0 : 1)"
-          echo "::set-output name=allowed-to-automerge::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
-          ! [ -z "$DEBUG" ] && echo "set-output name=allowed-to-automerge::$([ $? -eq 0 ] && echo 'true' || echo 'false')" || true
+          RESULT=`[ $? -eq 0 ] && echo 'true' || echo 'false'`
+          echo "::set-output name=allowed-to-automerge::$RESULT"
+          ! [ -z "$DEBUG" ] && echo "set-output name=allowed-to-automerge::$RESULT" || true
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         if: steps.skip.outputs.should-skip-ci != 'true'
@@ -180,8 +182,8 @@ jobs:
 
           ! [ -z "$DEBUG" ] && echo 'NPMR=' $NPMR || true
 
-          if [ $? -ne 0 ]; then
-            echo '::error::`npm run list-tasks` failed'
+          if [ -z "$NPMR" ]; then
+            echo '::error::npm script "list-tasks" failed'
             exit 1
           fi
 
