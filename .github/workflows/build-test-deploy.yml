@@ -693,37 +693,6 @@ jobs:
           GIT_COMMITTER_EMAIL: ${{ env.CI_COMMITTER_EMAIL }}
         run: npx semantic-release
 
-  debug:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - check-audit
-      - lint
-      - release
-      - test-unit
-      - metadata
-      - test-integration-node
-      - test-integration-externals
-      - test-integration-client
-      - test-integration-webpack
-    if: always()
-    steps:
-      - name: debug
-        run: |
-          echo '${{ needs.metadata.outputs.should-skip-cd != 'true' }}';
-          echo '${{ needs.metadata.outputs.can-automerge == 'true' }}';
-          echo '${{ github.event_name == 'pull_request' }}';
-          echo '${{ github.event.pull_request.draft == false }}';
-          echo '${{ needs.build.result == 'skipped' }}';
-          echo '${{ needs.release.result == 'skipped' }}';
-          echo '${{ needs.check-audit.result == 'success' }}';
-          echo '${{ needs.lint.result == 'success' }}';
-          echo '${{ needs.test-unit.result == 'success' }}';
-          echo '${{ (needs.metadata.outputs.has-integration-node != 'true' || needs.test-integration-node.result == 'success') }}';
-          echo '${{ (needs.metadata.outputs.has-integration-externals != 'true' || needs.test-integration-externals.result == 'success') }}';
-          echo '${{ (needs.metadata.outputs.has-integration-client != 'true' || needs.test-integration-client.result == 'success') }}';
-          echo '${{ (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success') }}';
-
   # ? This job always runs except:
   # ? 1. If CI and/or CD are skipped globally
   # ? 2. If the "build" or "release" jobs weren't skipped
@@ -733,7 +702,7 @@ jobs:
   auto-merge:
     name: '[CD] auto-merge'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
     needs:
       - build
       - check-audit
@@ -766,7 +735,7 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const MAX_RETRIES = 6;
+            const MAX_RETRIES = 10;
             const MINIMUM_SECONDS = 10;
             const JITTER_SECONDS = 10;
 
@@ -777,6 +746,17 @@ jobs:
             const pullRequest = context.payload.pull_request;
             const repository = context.repo;
             const delay = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+            if(process.env.DEBUG) {
+              console.log('MAX_RETRIES:', MAX_RETRIES);
+              console.log('MINIMUM_SECONDS:', MINIMUM_SECONDS);
+              console.log('JITTER_SECONDS:', JITTER_SECONDS);
+              console.log('repository:', repository);
+              console.log('pullRequest:', pullRequest);
+              console.log('sha: ${{ github.sha }}');
+              console.log('base_ref: ${{ github.base_ref }}');
+              console.log('head_ref: ${{ github.head_ref }}');
+            }
 
             for (let tries = 0; !success && tries < MAX_RETRIES; ++tries) {
               try {
@@ -791,6 +771,12 @@ jobs:
                   merge_method: 'rebase'
                 });
 
+                if(process.env.DEBUG) {
+                  console.log('status:', status);
+                  console.log('merged:', merged);
+                  console.log('message:', message);
+                }
+
                 if ([403, 404, 422].includes(status)) {
                   core.setFailed(`Auto-merge failed: ${message}`);
                   return;
@@ -802,10 +788,7 @@ jobs:
 
                 success = true;
               } catch (e) {
-                e = e.message || e || '(unknown error occurred)';
-
-                console.error(e);
-                errors.push(e);
+                console.error('GitHub returned an exception:', e.message || e || '(unknown error occurred)');
 
                 if (tries + 1 < MAX_RETRIES) {
                   const nextRetryIn = 2 ** tries * MINIMUM_SECONDS * 1000 + jitter;
@@ -823,10 +806,4 @@ jobs:
               }
             }
 
-            if (!success) {
-              core.setFailed(
-                `Auto-merge failed after ${MAX_RETRIES} attempts. Errors:\n- ${errors.join(
-                  '\n- '
-                )}`
-              );
-            }
+            if (!success) core.setFailed(`Auto-merge failed after ${MAX_RETRIES} attempts`);
