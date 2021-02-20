@@ -767,7 +767,13 @@ jobs:
                   pull_number: pullRequest.number,
                   sha: pullRequest.head.sha,
                   merge_method: 'merge'
-                });
+                }).catch((e) => Promise.resolve({
+                  status: e.status || 0,
+                  data: {
+                    merged: false,
+                    message: e.message || 'github.pulls.merge rejected'
+                  }
+                }));
 
                 if(debugging) {
                   console.log('status:', status);
