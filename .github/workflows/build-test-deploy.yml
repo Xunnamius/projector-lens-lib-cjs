@@ -693,6 +693,36 @@ jobs:
           GIT_COMMITTER_EMAIL: ${{ env.CI_COMMITTER_EMAIL }}
         run: npx semantic-release
 
+  debug:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - check-audit
+      - lint
+      - release
+      - test-unit
+      - metadata
+      - test-integration-node
+      - test-integration-externals
+      - test-integration-client
+      - test-integration-webpack
+    steps:
+      - name: debug
+        run: |
+          echo '${{ needs.metadata.outputs.should-skip-cd }}';
+          echo '${{ needs.metadata.outputs.can-automerge }}';
+          echo '${{ github.event_name }}';
+          echo '${{ github.event.pull_request.draft }}';
+          echo '${{ needs.build.result }}';
+          echo '${{ needs.release.result }}';
+          echo '${{ needs.check-audit.result }}';
+          echo '${{ needs.lint.result }}';
+          echo '${{ needs.test-unit.result }}';
+          echo '${{ needs.metadata.outputs.has-integration-node }}' '||' '${{ needs.test-integration-node.result }}';
+          echo '${{ needs.metadata.outputs.has-integration-externals }}' '||' '${{ needs.test-integration-externals.result }}';
+          echo '${{ needs.metadata.outputs.has-integration-client }}' '||' '${{ needs.test-integration-client.result }}';
+          echo '${{ needs.metadata.outputs.has-integration-webpack }}' '||' '${{ needs.test-integration-webpack.result }}';
+
   # ? This job always runs except:
   # ? 1. If CI and/or CD are skipped globally
   # ? 2. If the "build" or "release" jobs weren't skipped
