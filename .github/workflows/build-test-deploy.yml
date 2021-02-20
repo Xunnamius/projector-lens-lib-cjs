@@ -47,14 +47,17 @@ env:
   CD_SKIP_REGEX: '\[skip cd\]|\[cd skip\]'
 
   # * A list of GitHub repo namespaces allowed to trigger the CD pipeline
-  # ? Add your GitHub user/org (github.repository_owner) to enable CD pipeline
+  # ? Add your GitHub user/org (github.repository_owner) to enable CD pipeline.
+  # ? Repo owner names are compared to the below in a case insensitive fashion
   # ! (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
 
-  # * A list of exact GitHub logins whose passing PRs will be auto-merged !
+  # * A list of exact GitHub logins whose passing PRs will be auto-merged
   # ? Add your bot user's login name (github.actor) to enable auto-merge
+  # ! WARNING: unlike REPO_OWNER_WHITELIST, matching is case sensitive.
+  # ! WARNING: the merge method used is REBASE, not normal MERGE!
   # ! WARNING: this allows 3rd party code to be merged and released without
-  # ! any human oversight. Only allow this for trusted actors, like dependabot.
+  # ! any human oversight. Only allow this for trusted actors, like dependabot!
   AUTOMERGE_ACTOR_WHITELIST: dependabot[bot], snyk-bot
 
   # * Npm audit will fail upon encountering problems of at least this severity:
@@ -71,6 +74,8 @@ jobs:
     outputs:
       current-branch: ${{ steps.branch.outputs.current-branch }}
       has-proper-owner: ${{ steps.owner.outputs.is-whitelisted }}
+      can-automerge:
+        ${{ steps.automerge.outputs.allowed-to-automerge == 'true' }}
       should-skip-ci: ${{ steps.skip.outputs.should-skip-ci == 'true' }}
       should-skip-cd: ${{ steps.skip.outputs.should-skip-cd == 'true' }}
       node-matrix: ${{ steps.set-matrix.outputs.node-matrix }}
@@ -142,7 +147,7 @@ jobs:
           echo "::set-output name=current-branch::$BRANCH_NAME"
           ! [ -z "$DEBUG" ] && echo "set-output name=current-branch::$BRANCH_NAME" || true
 
-      - name: Verify repository owner against whitelist
+      - name: Verify repository owner against deploy whitelist
         if: steps.skip.outputs.should-skip-ci != 'true'
         id: owner
         run: |
@@ -150,6 +155,15 @@ jobs:
           node -e "process.exit('${{ env.REPO_OWNER_WHITELIST }}'.split(',').some(o => o.trim().toLowerCase() == '${{ github.repository_owner }}'.toLowerCase()) ? 0 : 1)"
           echo "::set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
           ! [ -z "$DEBUG" ] && echo "set-output name=is-whitelisted::$([ $? -eq 0 ] && echo 'true' || echo 'false')" || true
+
+      - name: Verify workflow actor against auto-merge whitelist
+        if: steps.skip.outputs.should-skip-ci != 'true'
+        id: automerge
+        run: |
+          set +e
+          node -e "process.exit('${{ env.AUTOMERGE_ACTOR_WHITELIST }}'.split(',').some(o => o.trim() == '${{ github.actor }}') ? 0 : 1)"
+          echo "::set-output name=allowed-to-automerge::$([ $? -eq 0 ] && echo 'true' || echo 'false')"
+          ! [ -z "$DEBUG" ] && echo "set-output name=allowed-to-automerge::$([ $? -eq 0 ] && echo 'true' || echo 'false')" || true
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         if: steps.skip.outputs.should-skip-ci != 'true'
@@ -530,11 +544,10 @@ jobs:
   # * === The end of CI (build and test) and the beginning of CD (deploy) === *
 
   # ? Skip this job:
-  # ? 1. When CI is skipped globally
+  # ? 1. If CI and/or CD are skipped globally
   # ? 2. On PRs
   # ? 3. In repo forks
   # ? 4. If no semantic-release configuration
-  # ? 5. On pushes to branches (other than main/canary)
   build:
     name: '[CD] build'
     runs-on: ubuntu-latest
@@ -597,8 +610,8 @@ jobs:
           path: ./*
 
   # ? This job always runs except:
-  # ? 1. if CD pipeline failed/was skipped
-  # ? 2. if CI pipeline didn't complete successfully
+  # ? 1. If the "build" job failed or was skipped
+  # ? 2. If CI pipeline didn't complete successfully
   release:
     name: '[CD] release'
     runs-on: ubuntu-latest
@@ -677,3 +690,110 @@ jobs:
           GIT_COMMITTER_NAME: ${{ env.CI_COMMITTER_NAME }}
           GIT_COMMITTER_EMAIL: ${{ env.CI_COMMITTER_EMAIL }}
         run: npx semantic-release
+
+  # ? This job always runs except:
+  # ? 1. If CI and/or CD are skipped globally
+  # ? 2. If the "build" or "release" jobs weren't skipped
+  # ? 3. If not a PR
+  # ? 4. If the PR is a draft
+  # ? 5. If CI pipeline didn't complete successfully
+  auto-merge:
+    name: '[CD] auto-merge'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs:
+      - build
+      - check-audit
+      - lint
+      - release
+      - test-unit
+      - metadata
+      - test-integration-node
+      - test-integration-externals
+      - test-integration-client
+      - test-integration-webpack
+    if: |
+      always()
+      && needs.metadata.outputs.should-skip-cd != 'true'
+      && needs.metadata.outputs.can-automerge == 'true'
+      && github.event_name == 'pull_request'
+      && github.event.pull_request.draft == 'false'
+      && needs.build.result == 'skipped'
+      && needs.release.result == 'skipped'
+      && needs.check-audit.result == 'success'
+      && needs.lint.result == 'success'
+      && needs.test-unit.result == 'success'
+      && (needs.metadata.outputs.has-integration-node != 'true' || needs.test-integration-node.result == 'success')
+      && (needs.metadata.outputs.has-integration-externals != 'true' || needs.test-integration-externals.result == 'success')
+      && (needs.metadata.outputs.has-integration-client != 'true' || needs.test-integration-client.result == 'success')
+      && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
+    steps:
+      - name: 'Merge (rebase) pull request'
+        uses: 'actions/github-script@v2'
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          script: |
+            const MAX_RETRIES = 6;
+            const MINIMUM_SECONDS = 10;
+            const JITTER_SECONDS = 10;
+
+            let success = false;
+            let errors = [];
+            let jitter = 0;
+
+            const pullRequest = context.payload.pull_request;
+            const repository = context.repo;
+            const delay = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+            for (let tries = 0; !success && tries < MAX_RETRIES; ++tries) {
+              try {
+                const {
+                  status,
+                  data: { merged, message }
+                } = await github.pulls.merge({
+                  owner: repository.owner,
+                  repo: repository.repo,
+                  pull_number: pullRequest.number,
+                  sha: '${{ github.sha }}',
+                  merge_method: 'rebase'
+                });
+
+                if ([403, 404, 422].includes(status)) {
+                  core.setFailed(`Auto-merge failed: ${message}`);
+                  return;
+                } else if ([409].includes(status)) {
+                  core.info(
+                    `Auto-merge skipped: PR #${pullRequest.number} was updated since run began`
+                  );
+                } else if (!merged) throw new Error(message || '(unknown error occurred)');
+
+                success = true;
+              } catch (e) {
+                e = e.message || e || '(unknown error occurred)';
+
+                console.error(e);
+                errors.push(e);
+
+                if (tries + 1 < MAX_RETRIES) {
+                  const nextRetryIn = 2 ** tries * MINIMUM_SECONDS * 1000 + jitter;
+                  jitter += Math.random() * JITTER_SECONDS * 1000;
+                  core.warning(
+                    `Auto-merge attempt ${
+                      tries + 1
+                    }/${MAX_RETRIES} failed, next try in ${Math.round(
+                      nextRetryIn / 1000
+                    )} seconds`
+                  );
+
+                  await delay(nextRetryIn);
+                }
+              }
+            }
+
+            if (!success) {
+              core.setFailed(
+                `Auto-merge failed after ${MAX_RETRIES} attempts. Errors:\n- ${errors.join(
+                  '\n- '
+                )}`
+              );
+            }
