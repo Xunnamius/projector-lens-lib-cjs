@@ -5,14 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Commits][340], and this project adheres to
 [Semantic Versioning][341].
 
-## [7.8.2][342] (2021-02-20)
+## [7.8.3][342] (2021-02-20)
+
+### Bug Fixes
+
+- **build-test-deploy.yml:** resolve rejections from merge function
+  ([33f983f][343])
 
 ### Build System
 
-- **deps:** bump object-path from 0.11.4 to 0.11.5 ([1a47041][343])
-- **deps:** bump object-path from 0.11.4 to 0.11.5 ([aaf7665][2])
+- **build-test-deploy.yml:** better error messages ([6d5573e][344])
+- **deps:** bump object-path from 0.11.3 to 0.11.5 ([554eacd][345])
+- **deps:** bump object-path from 0.11.3 to 0.11.5 ([c493a8c][346])
 
-# [7.8.0][1] (2021-02-20)
+## [7.8.2][1] (2021-02-20)
 
 ### Build System
 
@@ -964,7 +970,7 @@ cycle based on semantic-release.
 
 - Version 1.0.0 ([df91d82][339])
 
-[1]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.8.1...v7.8.0
+[1]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.8.1...v7.8.2
 [2]:
   https://github.com/Xunnamius/projector-lens-lib-cjs/commit/aaf76651b7632f7f9ac6c957c0d8e74ddd0099ac
 [3]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.8.0...v7.8.1
@@ -1641,6 +1647,12 @@ cycle based on semantic-release.
 [340]: https://conventionalcommits.org
 [341]: https://semver.org
 [342]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.8.1...v7.8.2
+  https://github.com/Xunnamius/projector-lens-lib-cjs/compare/v7.8.2...v7.8.3
 [343]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/1a47041d2bf9c730e94396196d66bfb3397a91d5
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/33f983f774533369a569a4a02ddba260b5af44e9
+[344]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/6d5573edb539232a11a81003beb287216c307716
+[345]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/554eacd6d7e26beae5a61bb6da59cdeed5ecec2b
+[346]:
+  https://github.com/Xunnamius/projector-lens-lib-cjs/commit/c493a8c37f694376b30ff35b7850a9e178da1b45
