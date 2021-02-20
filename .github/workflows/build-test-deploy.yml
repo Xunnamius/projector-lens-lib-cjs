@@ -702,7 +702,7 @@ jobs:
   auto-merge:
     name: '[CD] auto-merge'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 15
     needs:
       - build
       - check-audit
@@ -735,7 +735,7 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const MAX_RETRIES = 3;
+            const MAX_RETRIES = 3; //7;
             const MINIMUM_SECONDS = 10;
             const JITTER_SECONDS = 10;
 
@@ -753,10 +753,8 @@ jobs:
               console.log('MINIMUM_SECONDS:', MINIMUM_SECONDS);
               console.log('JITTER_SECONDS:', JITTER_SECONDS);
               console.log('repository:', repository);
-              console.log('pullRequest:', pullRequest);
-              console.log('sha: ${{ github.sha }}');
-              console.log('base_ref: ${{ github.base_ref }}');
-              console.log('head_ref: ${{ github.head_ref }}');
+              console.log('pullRequest.number:', pullRequest.number);
+              console.log(`head_ref (sha): ${pullRequest.head.sha}`);
             }
 
             for (let tries = 0; !success && tries < MAX_RETRIES; ++tries) {
@@ -768,7 +766,7 @@ jobs:
                   owner: repository.owner,
                   repo: repository.repo,
                   pull_number: pullRequest.number,
-                  sha: '${{ github.sha }}',
+                  sha: pullRequest.head.sha,
                   merge_method: 'rebase'
                 });
 
