@@ -744,10 +744,19 @@ jobs:
 
             const pullRequest = context.payload.pull_request;
             const repository = context.repo;
-            const delay = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             const debugging = !!'${{ env.DEBUG }}';
 
-            if(debugging) {
+            const delay = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const withErrorHandling = (promise, failData = {}) => {
+              return promise.catch((e) =>
+                Promise.resolve({
+                  status: e.status || 0,
+                  data: { message: e.message, ...failData }
+                })
+              );
+            };
+
+            if (debugging) {
               console.log('MAX_RETRIES:', MAX_RETRIES);
               console.log('MINIMUM_SECONDS:', MINIMUM_SECONDS);
               console.log('JITTER_SECONDS:', JITTER_SECONDS);
@@ -757,28 +766,77 @@ jobs:
             }
 
             for (let tries = 0; !success && tries < MAX_RETRIES; ++tries) {
+              const failSymbol = Symbol('fail');
+
               try {
+                const latestPullRequest = await withErrorHandling(
+                  github.pulls.get(
+                    {
+                      owner: repository.owner,
+                      repo: repository.repo,
+                      pull_number: pullRequest.number
+                    },
+                    { failed: failSymbol }
+                  )
+                );
+
+                if (debugging) {
+                  console.log('latestPullRequest->status:', latestPullRequest.status);
+                  console.log(
+                    'latestPullRequest->message:',
+                    latestPullRequest.data.message
+                  );
+                  console.log('latestPullRequest->failed:', latestPullRequest.data.failed);
+                  console.log('latestPullRequest->state:', latestPullRequest.data.state);
+                  console.log('latestPullRequest->merged:', latestPullRequest.data.merged);
+                  console.log('latestPullRequest->draft:', latestPullRequest.data.draft);
+                }
+
+                if (latestPullRequest.status == 404) {
+                  core.warning(
+                    `Auto-merge skipped: PR #${pullRequest.number} no longer exists`
+                  );
+                  return;
+                } else if (latestPullRequest.data.failed == failSymbol) {
+                  throw new Error(
+                    latestPullRequest.data.message ||
+                      `failed to get PR #${pullRequest.number}: status code ${status}`
+                  );
+                } else if (latestPullRequest.data.merged) {
+                  core.info(
+                    `Auto-merge skipped: PR #${pullRequest.number} has already been merged`
+                  );
+                  return;
+                } else if (latestPullRequest.data.draft) {
+                  core.warning(
+                    `Auto-merge skipped: PR #${pullRequest.number} was marked as a draft`
+                  );
+                  return;
+                } else if (latestPullRequest.data.state != 'open') {
+                  core.warning(
+                    `Auto-merge skipped: PR #${pullRequest.number} is no longer open`
+                  );
+                  return;
+                } // ? Mergeability check is the attempt to merge itself (below)
+
                 const {
                   status,
                   data: { merged, message }
-                } = await github.pulls.merge({
-                  owner: repository.owner,
-                  repo: repository.repo,
-                  pull_number: pullRequest.number,
-                  sha: pullRequest.head.sha,
-                  merge_method: 'merge'
-                }).catch((e) => Promise.resolve({
-                  status: e.status || 0,
-                  data: {
-                    merged: false,
-                    message: e.message || 'github.pulls.merge rejected'
-                  }
-                }));
+                } = await withErrorHandling(
+                  github.pulls.merge({
+                    owner: repository.owner,
+                    repo: repository.repo,
+                    pull_number: pullRequest.number,
+                    sha: pullRequest.head.sha,
+                    merge_method: 'merge'
+                  }),
+                  { merged: false }
+                );
 
-                if(debugging) {
-                  console.log('status:', status);
-                  console.log('merged:', merged);
-                  console.log('message:', message);
+                if (debugging) {
+                  console.log('mergeAttempt->status:', status);
+                  console.log('mergeAttempt->message:', message);
+                  console.log('mergeAttempt->merged:', merged);
                 }
 
                 if ([403, 404, 422].includes(status)) {
@@ -789,12 +847,18 @@ jobs:
                     `Auto-merge skipped: current HEAD is out of sync with PR #${pullRequest.number}`
                   );
                 } else if (!merged) {
-                  throw new Error(message || `unknown error occurred: HTTP status code ${status}`);
+                  throw new Error(
+                    message ||
+                      `failed to merge PR #${pullRequest.number}: status code ${status}`
+                  );
                 }
 
                 success = true;
               } catch (e) {
-                console.error('GitHub returned an exception:', e.message || e || '(unknown error occurred)');
+                console.error(
+                  'GitHub returned an exception:',
+                  e.message || e || '(unknown error occurred)'
+                );
 
                 if (tries + 1 < MAX_RETRIES) {
                   const nextRetryIn = 2 ** tries * MINIMUM_SECONDS * 1000 + jitter;
