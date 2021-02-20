@@ -735,7 +735,7 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const MAX_RETRIES = 10;
+            const MAX_RETRIES = 3;
             const MINIMUM_SECONDS = 10;
             const JITTER_SECONDS = 10;
 
@@ -746,8 +746,9 @@ jobs:
             const pullRequest = context.payload.pull_request;
             const repository = context.repo;
             const delay = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const debugging = !!'${{ env.DEBUG }}';
 
-            if(process.env.DEBUG) {
+            if(debugging) {
               console.log('MAX_RETRIES:', MAX_RETRIES);
               console.log('MINIMUM_SECONDS:', MINIMUM_SECONDS);
               console.log('JITTER_SECONDS:', JITTER_SECONDS);
@@ -771,7 +772,7 @@ jobs:
                   merge_method: 'rebase'
                 });
 
-                if(process.env.DEBUG) {
+                if(debugging) {
                   console.log('status:', status);
                   console.log('merged:', merged);
                   console.log('message:', message);
