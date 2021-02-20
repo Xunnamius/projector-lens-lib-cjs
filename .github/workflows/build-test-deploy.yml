@@ -59,6 +59,13 @@ env:
   # ! any human oversight. Only allow this for trusted actors, like dependabot!
   AUTOMERGE_ACTOR_WHITELIST: dependabot[bot], xunn-bot
 
+  # * A list of exact GitHub logins whose auto-merge attempts should be retried
+  # * on failure even when the PR is not mergeable.
+  # ? Only add bots that actively synchronize their PRs, like dependabot!
+  # ! WARNING: listing a bot here that creates PRs that are never synchronized
+  # ! could waste hundreds or even thousands of Actions minutes and $$$!
+  AUTOMERGE_RETRY_WHITELIST: dependabot[bot]
+
   # * Npm audit will fail upon encountering problems of at least this severity:
   NPM_AUDIT_FAIL_LEVEL: high
 
@@ -75,6 +82,9 @@ jobs:
       has-proper-owner: ${{ steps.owner.outputs.is-whitelisted }}
       can-automerge:
         ${{ steps.automerge.outputs.allowed-to-automerge == 'true' }}
+      can-retry-automerge:
+        ${{ steps.automerge-retry.outputs.allowed-to-retry-automerge == 'true'
+        }}
       should-skip-ci: ${{ steps.skip.outputs.should-skip-ci == 'true' }}
       should-skip-cd: ${{ steps.skip.outputs.should-skip-cd == 'true' }}
       node-matrix: ${{ steps.set-matrix.outputs.node-matrix }}
@@ -165,6 +175,16 @@ jobs:
           RESULT=`[ $? -eq 0 ] && echo 'true' || echo 'false'`
           echo "::set-output name=allowed-to-automerge::$RESULT"
           ! [ -z "$DEBUG" ] && echo "set-output name=allowed-to-automerge::$RESULT" || true
+
+      - name: Verify workflow actor against auto-merge retry whitelist
+        if: steps.skip.outputs.should-skip-ci != 'true'
+        id: automerge-retry
+        run: |
+          set +e
+          node -e "process.exit('${{ env.AUTOMERGE_RETRY_WHITELIST }}'.split(',').some(o => o.trim() == '${{ github.actor }}') ? 0 : 1)"
+          RESULT=`[ $? -eq 0 ] && echo 'true' || echo 'false'`
+          echo "::set-output name=allowed-to-retry-automerge::$RESULT"
+          ! [ -z "$DEBUG" ] && echo "set-output name=allowed-to-retry-automerge::$RESULT" || true
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         if: steps.skip.outputs.should-skip-ci != 'true'
@@ -745,6 +765,8 @@ jobs:
             const pullRequest = context.payload.pull_request;
             const repository = context.repo;
             const debugging = !!'${{ env.DEBUG }}';
+            const canRetryMerge =
+              '${{ needs.metadata.outputs.can-retry-automerge }}' == 'true';
 
             const delay = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             const withErrorHandling = (promise, failData = {}) => {
@@ -761,6 +783,11 @@ jobs:
               console.log('MINIMUM_SECONDS:', MINIMUM_SECONDS);
               console.log('JITTER_SECONDS:', JITTER_SECONDS);
               console.log('repository:', repository);
+              console.log(
+                'canRetryMerge:',
+                canRetryMerge,
+                ' ("${{ needs.metadata.outputs.can-retry-automerge }}")'
+              );
               console.log('pullRequest.number:', pullRequest.number);
               console.log(`head_ref (sha): ${pullRequest.head.sha}`);
             }
@@ -855,23 +882,32 @@ jobs:
 
                 success = true;
               } catch (e) {
-                console.error(
-                  'GitHub returned an exception:',
-                  e.message || e || '(unknown error occurred)'
-                );
-
-                if (tries + 1 < MAX_RETRIES) {
-                  const nextRetryIn = 2 ** tries * MINIMUM_SECONDS * 1000 + jitter;
-                  jitter += Math.random() * JITTER_SECONDS * 1000;
-                  core.warning(
-                    `Auto-merge attempt ${
-                      tries + 1
-                    }/${MAX_RETRIES} failed, next try in ${Math.round(
-                      nextRetryIn / 1000
-                    )} seconds`
+                if (canRetryMerge) {
+                  console.error(
+                    'Auto-merge failed:',
+                    e.message || e || 'an unknown error occurred'
                   );
 
-                  await delay(nextRetryIn);
+                  if (tries + 1 < MAX_RETRIES) {
+                    const nextRetryIn = 2 ** tries * MINIMUM_SECONDS * 1000 + jitter;
+                    jitter += Math.random() * JITTER_SECONDS * 1000;
+                    core.warning(
+                      `Auto-merge attempt ${
+                        tries + 1
+                      }/${MAX_RETRIES} failed, next try in ${Math.round(
+                        nextRetryIn / 1000
+                      )} seconds`
+                    );
+
+                    await delay(nextRetryIn);
+                  }
+                } else {
+                  core.setFailed(
+                    `Auto-merge failed immediately: ${
+                      e.message || e || 'an unknown error occurred'
+                    }`
+                  );
+                  return;
                 }
               }
             }
