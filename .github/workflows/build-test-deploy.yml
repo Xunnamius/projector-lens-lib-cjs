@@ -55,7 +55,6 @@ env:
   # * A list of exact GitHub logins whose passing PRs will be auto-merged
   # ? Add your bot user's login name (github.actor) to enable auto-merge
   # ! WARNING: unlike REPO_OWNER_WHITELIST, matching is case sensitive.
-  # ! WARNING: the merge method used is REBASE, not normal MERGE!
   # ! WARNING: this allows 3rd party code to be merged and released without
   # ! any human oversight. Only allow this for trusted actors, like dependabot!
   AUTOMERGE_ACTOR_WHITELIST: dependabot[bot], snyk-bot
@@ -730,7 +729,7 @@ jobs:
       && (needs.metadata.outputs.has-integration-client != 'true' || needs.test-integration-client.result == 'success')
       && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
     steps:
-      - name: 'Merge (rebase) pull request'
+      - name: 'Merge pull request'
         uses: 'actions/github-script@v2'
         with:
           github-token: ${{ secrets.GH_TOKEN }}
@@ -767,7 +766,7 @@ jobs:
                   repo: repository.repo,
                   pull_number: pullRequest.number,
                   sha: pullRequest.head.sha,
-                  merge_method: 'rebase'
+                  merge_method: 'merge'
                 });
 
                 if(debugging) {
