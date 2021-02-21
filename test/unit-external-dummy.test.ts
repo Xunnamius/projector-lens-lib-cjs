@@ -1,4 +1,4 @@
-import { asMockedFunction, isolatedImportFactory, withMockedExit } from './setup';
+import { asMockedFunction, protectedImportFactory } from './setup';
 import debugFactory from 'debug';
 
 import type { Debugger } from 'debug';
@@ -7,7 +7,7 @@ const EXTERNAL_PATH = '../external-scripts/dummy';
 
 jest.mock('debug');
 
-const isolatedImport = isolatedImportFactory(EXTERNAL_PATH);
+const protectedImport = protectedImportFactory(EXTERNAL_PATH);
 const mockedDebug = asMockedFunction<Debugger>();
 mockedDebug.extend = asMockedFunction<Debugger['extend']>().mockReturnValue(mockedDebug);
 asMockedFunction(debugFactory).mockReturnValue(mockedDebug);
@@ -18,7 +18,7 @@ afterEach(() => {
 
 it('calls invoker when imported', async () => {
   expect.hasAssertions();
-  await withMockedExit(async () => void (await isolatedImport()));
+  await protectedImport();
   expect(mockedDebug).toBeCalledWith('implement me!');
 });
 
@@ -31,11 +31,9 @@ it('handles thrown error objects', async () => {
     throw new Error('problems!');
   });
 
-  await withMockedExit(async ({ exitSpy }) => {
-    await isolatedImport();
-    expect(exitSpy).toBeCalledWith(1);
-  });
+  await protectedImport({ expectedExitCode: 1 });
 
+  expect(mockedDebug).toBeCalledWith('problems!');
   expect(mockedDebug).toBeCalledTimes(4);
 });
 
@@ -48,10 +46,8 @@ it('handles thrown string errors', async () => {
     throw 'problems!';
   });
 
-  await withMockedExit(async ({ exitSpy }) => {
-    await isolatedImport();
-    expect(exitSpy).toBeCalledWith(1);
-  });
+  await protectedImport({ expectedExitCode: 1 });
 
+  expect(mockedDebug).toBeCalledWith('problems!');
   expect(mockedDebug).toBeCalledTimes(4);
 });
