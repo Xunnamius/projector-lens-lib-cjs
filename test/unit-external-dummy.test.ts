@@ -19,7 +19,7 @@ afterEach(() => {
 it('calls invoker when imported', async () => {
   expect.hasAssertions();
   await protectedImport();
-  expect(mockedDebug).toBeCalledWith('implement me!');
+  expect(mockedDebug).toHaveBeenNthCalledWith(3, 'implement me!');
 });
 
 it('handles thrown error objects', async () => {
