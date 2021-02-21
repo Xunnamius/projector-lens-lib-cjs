@@ -81,7 +81,7 @@ export function mockArgvFactory(
 // TODO: XXX: make this into a separate (mock-env) package
 export async function withMockedEnv(
   fn: () => AnyVoid,
-  newEnv: typeof process.env,
+  newEnv: Record<string, string>,
   options: MockEnvOptions = { replace: true }
 ) {
   const prevEnv = { ...process.env };
@@ -100,13 +100,17 @@ export async function withMockedEnv(
 
 // TODO: XXX: make this into a separate (mock-env) package (along w/ the above)
 export function mockEnvFactory(
-  newEnv: typeof process.env,
+  newEnv: Record<string, string>,
   options: MockEnvOptions = { replace: true }
 ) {
   const factoryNewEnv = newEnv;
   const factoryOptions = options;
 
-  return (fn: () => AnyVoid, newEnv?: typeof process.env, options?: MockEnvOptions) => {
+  return (
+    fn: () => AnyVoid,
+    newEnv?: Record<string, string>,
+    options?: MockEnvOptions
+  ) => {
     return withMockedEnv(
       fn,
       { ...factoryNewEnv, ...(newEnv || {}) },
