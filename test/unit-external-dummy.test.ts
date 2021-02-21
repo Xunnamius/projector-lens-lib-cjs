@@ -34,7 +34,6 @@ it('handles thrown error objects', async () => {
   await protectedImport({ expectedExitCode: 1 });
 
   expect(mockedDebug).toHaveBeenNthCalledWith(4, 'problems!');
-  expect(mockedDebug).toBeCalledTimes(4);
 });
 
 it('handles thrown string errors', async () => {
@@ -49,5 +48,4 @@ it('handles thrown string errors', async () => {
   await protectedImport({ expectedExitCode: 1 });
 
   expect(mockedDebug).toHaveBeenNthCalledWith(4, 'problems!');
-  expect(mockedDebug).toBeCalledTimes(4);
 });
