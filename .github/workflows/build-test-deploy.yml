@@ -198,10 +198,11 @@ jobs:
         run: |
           set +e
           NPMR=`npm run list-tasks`
+          CODE=$?
 
           ! [ -z "$DEBUG" ] && echo 'NPMR=' $NPMR || true
 
-          if [ -z "$NPMR" ]; then
+          if [ $CODE -ne 0 ]; then
             echo '::error::npm script "list-tasks" failed'
             exit 1
           fi
