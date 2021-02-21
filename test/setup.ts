@@ -432,8 +432,10 @@ export async function withMockedFixture({
   };
 
   if (finalOptions.use) {
-    if (finalOptions.use?.[0].name != 'root') ctx.using.push(rootFixture());
+    if (finalOptions.use?.[0]?.name != 'root') ctx.using.push(rootFixture());
     ctx.using = [...ctx.using, ...finalOptions.use];
+    // ? `describe-root` fixture doesn't have to be the last one, but a fixture
+    // ? with that name must be included at least once
     if (!finalOptions.use.find((f) => f.name == 'describe-root'))
       ctx.using.push(describeRootFixture());
   } else ctx.using = [rootFixture(), describeRootFixture()];
