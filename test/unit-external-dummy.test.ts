@@ -31,9 +31,9 @@ it('handles thrown error objects', async () => {
     throw new Error('problems!');
   });
 
-  await withMockedExit(async (mockedProcessExit) => {
+  await withMockedExit(async ({ exitSpy }) => {
     await isolatedImport();
-    expect(mockedProcessExit).toBeCalledWith(1);
+    expect(exitSpy).toBeCalledWith(1);
   });
 
   expect(mockedDebug).toBeCalledTimes(4);
@@ -48,9 +48,9 @@ it('handles thrown string errors', async () => {
     throw 'problems!';
   });
 
-  await withMockedExit(async (mockedProcessExit) => {
+  await withMockedExit(async ({ exitSpy }) => {
     await isolatedImport();
-    expect(mockedProcessExit).toBeCalledWith(1);
+    expect(exitSpy).toBeCalledWith(1);
   });
 
   expect(mockedDebug).toBeCalledTimes(4);

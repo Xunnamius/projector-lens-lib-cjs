@@ -1,14 +1,15 @@
 import { name as pkgName, version as pkgVersion } from '../package.json';
 import { tmpdir } from 'os';
 import { promises as fs } from 'fs';
-import 'jest-extended';
+import { resolve } from 'path';
 import execa from 'execa';
 import uniqueFilename from 'unique-filename';
-import debugFactory, { Debugger } from 'debug';
+import debugFactory from 'debug';
+import 'jest-extended';
 
 import type { ExecaReturnValue } from 'execa';
 import type { AnyFunction, AnyVoid } from '@ergodark/types';
-import { resolve } from 'path';
+import type { Debugger } from 'debug';
 
 const { writeFile } = fs;
 const debug = debugFactory(`${pkgName}:jest-setup`);
@@ -23,7 +24,98 @@ export function asMockedFunction<T extends AnyFunction>(fn?: T): jest.MockedFunc
   return ((fn || jest.fn()) as unknown) as jest.MockedFunction<T>;
 }
 
-// TODO: XXX: make this into a separate package
+// TODO: XXX: make this into a separate (mock-argv) package (along w/ the below)
+export type MockArgvOptions = {
+  /**
+   * By default, the first two elements in `process.argv` are preserved. Setting
+   * `replace` to `true` will cause the entire process.argv array to be replaced
+   * @default false
+   */
+  replace?: boolean;
+};
+
+// TODO: XXX: make this into a separate (mock-env) package (along w/ the below)
+export type MockEnvOptions = {
+  /**
+   * By default, the `process.env` object is emptied and re-hydrated with
+   * `newEnv`. Setting `replace` to `false` will cause `newEnv` to be appended
+   * instead
+   * @default true
+   */
+  replace?: boolean;
+};
+
+// TODO: XXX: make this into a separate (mock-argv) package
+export async function withMockedArgv(
+  fn: () => AnyVoid,
+  newArgv: string[],
+  options: MockArgvOptions = { replace: false }
+) {
+  // ? Take care to preserve the original argv array reference in memory
+  const prevArgv = process.argv.splice(options?.replace ? 0 : 2, process.argv.length);
+  process.argv.push(...newArgv);
+
+  await fn();
+
+  process.argv.splice(options?.replace ? 0 : 2, process.argv.length);
+  process.argv.push(...prevArgv);
+}
+
+// TODO: XXX: make this into a separate (mock-argv) package (along w/ the above)
+export function mockArgvFactory(
+  newArgv: typeof process.argv,
+  options: MockArgvOptions = { replace: false }
+) {
+  const factoryNewArgv = newArgv;
+  const factoryOptions = options;
+
+  return (fn: () => AnyVoid, newArgv?: string[], options?: MockArgvOptions) => {
+    return withMockedArgv(
+      fn,
+      [...factoryNewArgv, ...(newArgv || [])],
+      options || factoryOptions
+    );
+  };
+}
+
+// TODO: XXX: make this into a separate (mock-env) package
+export async function withMockedEnv(
+  fn: () => AnyVoid,
+  newEnv: typeof process.env,
+  options: MockEnvOptions = { replace: true }
+) {
+  const prevEnv = { ...process.env };
+  const clearEnv = () =>
+    Object.getOwnPropertyNames(process.env).forEach((prop) => delete process.env[prop]);
+
+  // ? Take care to preserve the original env object reference in memory
+  if (options.replace) clearEnv();
+  Object.assign(process.env, newEnv);
+
+  await fn();
+
+  clearEnv();
+  Object.assign(process.env, prevEnv);
+}
+
+// TODO: XXX: make this into a separate (mock-env) package (along w/ the above)
+export function mockEnvFactory(
+  newEnv: typeof process.env,
+  options: MockEnvOptions = { replace: true }
+) {
+  const factoryNewEnv = newEnv;
+  const factoryOptions = options;
+
+  return (fn: () => AnyVoid, newEnv?: typeof process.env, options?: MockEnvOptions) => {
+    return withMockedEnv(
+      fn,
+      { ...factoryNewEnv, ...(newEnv || {}) },
+      options || factoryOptions
+    );
+  };
+}
+
+// TODO: XXX: make this into a separate (jest-isolated-import) package
 export async function isolatedImport(path: string) {
   let pkg: Promise<unknown> | undefined;
 
@@ -43,13 +135,58 @@ export function isolatedImportFactory(path: string) {
 
 // TODO: XXX: make this into a separate (mock-exit) package
 export async function withMockedExit(
+  fn: (spies: { exitSpy: jest.SpyInstance }) => AnyVoid
+) {
+  const exitSpy = jest
+    .spyOn(process, 'exit')
+    .mockImplementation(() => undefined as never);
+
+  try {
+    await fn({ exitSpy });
+  } finally {
+    exitSpy.mockRestore();
+  }
+}
+
+// TODO: XXX: make this into a separate (mock-output) package
+export async function withMockedOutput(
+  fn: (spies: {
+    logSpy: jest.SpyInstance;
+    warnSpy: jest.SpyInstance;
+    errorSpy: jest.SpyInstance;
+    infoSpy: jest.SpyInstance;
+  }) => AnyVoid
+) {
+  const logSpy = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+  const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+  const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+  const infoSpy = jest.spyOn(console, 'info').mockImplementation(() => undefined);
+
+  try {
+    await fn({
+      logSpy,
+      warnSpy,
+      errorSpy,
+      infoSpy
+    });
+  } finally {
+    logSpy.mockRestore();
+    warnSpy.mockRestore();
+    errorSpy.mockRestore();
+    infoSpy.mockRestore();
+  }
+}
+
+// TODO: XXX: make this into a separate (mock-output-exit) package
+export async function withMockedOutputAndExit(
   fn: (
-    mockedProcessExit: jest.SpyInstance<never, Parameters<typeof process.exit>>
+    spies: Parameters<Parameters<typeof withMockedOutput>[0]>[0] &
+      Parameters<Parameters<typeof withMockedExit>[0]>[0]
   ) => AnyVoid
 ) {
-  const mock = jest.spyOn(process, 'exit').mockImplementation(() => undefined as never);
-  await fn(mock);
-  mock.mockReset();
+  return withMockedExit(({ exitSpy }) =>
+    withMockedOutput((otherSpies) => fn({ ...otherSpies, exitSpy }))
+  );
 }
 
 // TODO: XXX: make this into a separate (run) package
@@ -69,6 +206,7 @@ export async function run(file: string, args?: string[], options?: execa.Options
 export function runnerFactory(file: string, args?: string[], options?: execa.Options) {
   const factoryArgs = args;
   const factoryOptions = options;
+
   return (args?: string[], options?: execa.Options) =>
     run(file, args || factoryArgs, { ...factoryOptions, ...options });
 }

@@ -3,19 +3,21 @@ import { run, mockFixtureFactory, dummyNpmPackageFixture, runnerFactory } from '
 import debugFactory from 'debug';
 
 const TEST_IDENTIFIER = 'integration-externals';
-const EXTERNAL_BIN_PATH = `${__dirname}/../external-scripts/bin/dummy.js`;
 
 const debugId = `${pkgName}:*`;
 const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
-const runExternal = runnerFactory('node', [EXTERNAL_BIN_PATH]);
+const externalBinPath = `${__dirname}/../external-scripts/bin/dummy.js`;
+const runExternal = runnerFactory('node', [externalBinPath]);
+
+// TODO: configure automatically generated test fixtures
 const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, {
   use: [dummyNpmPackageFixture()]
 });
 
 beforeAll(async () => {
   // TODO: test environment to ensure expected files and executables are present
-  if ((await run('test', ['-e', EXTERNAL_BIN_PATH])).code != 0) {
-    debug(`unable to find external executable: ${EXTERNAL_BIN_PATH}`);
+  if ((await run('test', ['-e', externalBinPath])).code != 0) {
+    debug(`unable to find external executable: ${externalBinPath}`);
     throw new Error('must build externals first (try `npm run build-externals`)');
   }
 });

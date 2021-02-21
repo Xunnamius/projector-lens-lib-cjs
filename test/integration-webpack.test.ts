@@ -5,27 +5,18 @@ import {
   mockFixtureFactory,
   dummyNpmPackageFixture,
   webpackTestFixture,
-  FixtureOptions,
   npmLinkSelfFixture
 } from './setup';
 
+import type { FixtureOptions } from './setup';
+
 const TEST_IDENTIFIER = 'integration-webpack';
 
-const fullPkgMain = `${__dirname}/../${pkgMain}`;
+const pkgMainPath = `${__dirname}/../${pkgMain}`;
 const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
-
 const webpackVersion = process.env.MATRIX_WEBPACK_VERSION || 'latest';
+
 debug(`webpackVersion: "${webpackVersion}"`);
-
-const fixtureOptions = {
-  webpackVersion,
-  initialFileContents: {
-    'package.json': `{"name":"dummy-pkg","dependencies":{"${pkgName}":"${pkgVersion}"}}`
-  } as FixtureOptions['initialFileContents'],
-  use: [dummyNpmPackageFixture(), npmLinkSelfFixture(), webpackTestFixture()]
-};
-
-const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, fixtureOptions);
 
 enum SourceType {
   CJS = 'cjs',
@@ -36,6 +27,17 @@ enum DestType {
   CJS = 'cjs',
   CJS_LIB = 'cjs-library'
 }
+
+// TODO: configure automatically generated test fixtures
+const fixtureOptions = {
+  webpackVersion,
+  initialFileContents: {
+    'package.json': `{"name":"dummy-pkg","dependencies":{"${pkgName}":"${pkgVersion}"}}`
+  } as FixtureOptions['initialFileContents'],
+  use: [dummyNpmPackageFixture(), npmLinkSelfFixture(), webpackTestFixture()]
+};
+
+const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, fixtureOptions);
 
 const runTest = async ({ source, dest }: { source: SourceType; dest: DestType }) => {
   const ext = `${source == SourceType.ESM ? 'm' : ''}js`;
@@ -78,8 +80,8 @@ const runTest = async ({ source, dest }: { source: SourceType; dest: DestType })
 };
 
 beforeAll(async () => {
-  if ((await run('test', ['-e', fullPkgMain])).code != 0) {
-    debug(`unable to find main distributable: ${fullPkgMain}`);
+  if ((await run('test', ['-e', pkgMainPath])).code != 0) {
+    debug(`unable to find main distributable: ${pkgMainPath}`);
     throw new Error('must build distributables first (try `npm run build-dist`)');
   }
 });

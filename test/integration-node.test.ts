@@ -5,15 +5,20 @@ import {
   mockFixtureFactory,
   dummyNpmPackageFixture,
   npmLinkSelfFixture,
-  nodeImportTestFixture,
-  FixtureOptions
+  nodeImportTestFixture
 } from './setup';
+
+import type { FixtureOptions } from './setup';
 
 const TEST_IDENTIFIER = 'integration-node';
 
-const fullPkgMain = `${__dirname}/../${pkgMain}`;
+const pkgMainPath = `${__dirname}/../${pkgMain}`;
 const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
+const nodeVersion = process.env.MATRIX_NODE_VERSION || process.version;
 
+debug(`nodeVersion: "${nodeVersion}"`);
+
+// TODO: configure automatically generated test fixtures
 const fixtureOptions = {
   initialFileContents: {
     'package.json': `{"name":"dummy-pkg","dependencies":{"${pkgName}":"${pkgVersion}"}}`
@@ -22,9 +27,6 @@ const fixtureOptions = {
 };
 
 const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, fixtureOptions);
-
-const nodeVersion = process.env.MATRIX_NODE_VERSION || process.version;
-debug(`nodeVersion: "${nodeVersion}"`);
 
 const runTest = async ({ esm }: { esm: boolean }) => {
   const indexPath = `src/index.${esm ? 'm' : ''}js`;
@@ -61,8 +63,8 @@ const runTest = async ({ esm }: { esm: boolean }) => {
 };
 
 beforeAll(async () => {
-  if ((await run('test', ['-e', fullPkgMain])).code != 0) {
-    debug(`unable to find main distributable: ${fullPkgMain}`);
+  if ((await run('test', ['-e', pkgMainPath])).code != 0) {
+    debug(`unable to find main distributable: ${pkgMainPath}`);
     throw new Error('must build distributables first (try `npm run build-dist`)');
   }
 });
