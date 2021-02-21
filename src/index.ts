@@ -1,7 +1,7 @@
 import { name as pkgName } from '../package.json';
 import debugFactory from 'debug';
 
-const debug = debugFactory(`${pkgName}:git-lib`);
+const debug = debugFactory(`${pkgName}:index`);
 
 /**
  * Returns the sum of `a` and `b`
