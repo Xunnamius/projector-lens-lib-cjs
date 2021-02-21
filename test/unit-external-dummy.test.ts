@@ -18,7 +18,11 @@ afterEach(() => {
 
 it('calls invoker when imported', async () => {
   expect.hasAssertions();
-  await isolatedImport();
+
+  await withMockedExit(async () => {
+    await isolatedImport();
+  });
+
   expect(mockedDebug).toBeCalledWith('implement me!');
 });
 
