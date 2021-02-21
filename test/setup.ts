@@ -152,6 +152,17 @@ export async function withMockedExit(
   }
 }
 
+// TODO: XXX: make this into a separate package (along with the above)
+export function protectedImportFactory(path: string) {
+  let pkg: unknown;
+  return (params?: { expectedExitCode?: number }) =>
+    withMockedExit(async ({ exitSpy }) => {
+      pkg = await isolatedImport(path);
+      if (params?.expectedExitCode)
+        expect(exitSpy).toBeCalledWith(params?.expectedExitCode);
+    }).then(() => pkg);
+}
+
 // TODO: XXX: make this into a separate (mock-output) package
 export async function withMockedOutput(
   fn: (spies: {
