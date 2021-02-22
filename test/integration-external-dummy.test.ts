@@ -2,6 +2,8 @@ import { name as pkgName } from '../package.json';
 import { run, mockFixtureFactory, dummyNpmPackageFixture, runnerFactory } from './setup';
 import debugFactory from 'debug';
 
+import type { FixtureOptions } from './setup';
+
 const TEST_IDENTIFIER = 'integration-externals';
 const EXTERNAL_BIN_PATH = `${__dirname}/../external-scripts/bin/dummy.js`;
 
@@ -10,9 +12,14 @@ const debug = debugFactory(`${pkgName}:${TEST_IDENTIFIER}`);
 const runExternal = runnerFactory('node', [EXTERNAL_BIN_PATH]);
 
 // TODO: configure automatically generated test fixtures
-const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, {
+const fixtureOptions = {
+  initialFileContents: {
+    // 'package.json': `{"name":"dummy-pkg"}`
+  } as FixtureOptions['initialFileContents'],
   use: [dummyNpmPackageFixture()]
-});
+};
+
+const withMockedFixture = mockFixtureFactory(TEST_IDENTIFIER, fixtureOptions);
 
 beforeAll(async () => {
   // TODO: test environment to ensure expected files and executables are present
