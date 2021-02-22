@@ -170,8 +170,10 @@ export function protectedImportFactory(path: string) {
 
     await withMockedExit(async ({ exitSpy }) => {
       pkg = await isolatedImport(path);
-      if (params?.expectedExitCode !== undefined)
-        expect(exitSpy).toBeCalledWith(params?.expectedExitCode);
+      if (expect && params?.expectedExitCode)
+        expect(exitSpy).toBeCalledWith(params.expectedExitCode);
+      else if (!expect)
+        debug('WARNING: "expect" object not found, so exit check was skipped');
     });
 
     return pkg;
@@ -205,18 +207,6 @@ export async function withMockedOutput(
     errorSpy.mockRestore();
     infoSpy.mockRestore();
   }
-}
-
-// TODO: XXX: make this into a separate (mock-output-exit) package
-export async function withMockedOutputAndExit(
-  fn: (
-    spies: Parameters<Parameters<typeof withMockedOutput>[0]>[0] &
-      Parameters<Parameters<typeof withMockedExit>[0]>[0]
-  ) => AnyVoid
-) {
-  return withMockedExit(({ exitSpy }) =>
-    withMockedOutput((otherSpies) => fn({ ...otherSpies, exitSpy }))
-  );
 }
 
 // TODO: XXX: make this into a separate (run) package
