@@ -17,5 +17,5 @@ const invoked = async () => {
 
 export default invoked().catch((e: Error | string) => {
   debug.extend('error')(typeof e == 'string' ? e : e.message);
-  process.exit(1);
+  process.exit(2);
 });

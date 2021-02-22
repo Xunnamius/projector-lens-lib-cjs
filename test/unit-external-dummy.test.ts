@@ -31,7 +31,7 @@ it('handles thrown error objects', async () => {
     throw new Error('problems!');
   });
 
-  await protectedImport({ expectedExitCode: 1 });
+  await protectedImport({ expectedExitCode: 2 });
 
   expect(mockedDebug).toHaveBeenNthCalledWith(4, 'problems!');
 });
@@ -45,7 +45,7 @@ it('handles thrown string errors', async () => {
     throw 'problems!';
   });
 
-  await protectedImport({ expectedExitCode: 1 });
+  await protectedImport({ expectedExitCode: 2 });
 
   expect(mockedDebug).toHaveBeenNthCalledWith(4, 'problems!');
 });
