@@ -125,8 +125,19 @@ export async function isolatedImport(path: string) {
 
   // ? Cache-busting
   jest.isolateModules(() => {
-    // ? While I'd prefer dynamic import(), it doesn't support cache busting!
-    pkg = require(path);
+    pkg = ((r) => {
+      debug(
+        `performing isolated import of ${path} as ${r.__esModule ? 'es' : 'cjs'} module`
+      );
+
+      if (!r.__esModule && r.default) {
+        debug(
+          'WARNING: treating module with default export as CJS instead of ESM, which could cause undefined behavior!'
+        );
+      }
+
+      return r.__esModule ? r.default : r;
+    })(require(path));
   });
 
   return pkg;
@@ -154,13 +165,17 @@ export async function withMockedExit(
 
 // TODO: XXX: make this into a separate package (along with the above)
 export function protectedImportFactory(path: string) {
-  let pkg: unknown;
-  return (params?: { expectedExitCode?: number }) =>
-    withMockedExit(async ({ exitSpy }) => {
+  return async (params?: { expectedExitCode?: number }) => {
+    let pkg: unknown = undefined;
+
+    await withMockedExit(async ({ exitSpy }) => {
       pkg = await isolatedImport(path);
-      if (params?.expectedExitCode)
+      if (params?.expectedExitCode !== undefined)
         expect(exitSpy).toBeCalledWith(params?.expectedExitCode);
-    }).then(() => pkg);
+    });
+
+    return pkg;
+  };
 }
 
 // TODO: XXX: make this into a separate (mock-output) package
