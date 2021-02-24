@@ -3,6 +3,7 @@ import debugFactory from 'debug';
 
 import type { Debugger } from 'debug';
 
+// TODO: replace EXTERNAL_BIN_PATH below with its actual value
 const EXTERNAL_PATH = '../external-scripts/dummy';
 
 jest.mock('debug');

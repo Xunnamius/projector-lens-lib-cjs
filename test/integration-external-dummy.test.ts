@@ -4,6 +4,7 @@ import debugFactory from 'debug';
 
 import type { FixtureOptions } from './setup';
 
+// TODO: replace TEST_IDENTIFIER and EXTERNAL_BIN_PATH below with actual values
 const TEST_IDENTIFIER = 'integration-externals';
 const EXTERNAL_BIN_PATH = `${__dirname}/../external-scripts/bin/dummy.js`;
 
