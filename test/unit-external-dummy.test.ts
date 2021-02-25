@@ -1,4 +1,4 @@
-import { asMockedFunction, protectedImportFactory } from './setup';
+import { asMockedFunction, mockEnvFactory, protectedImportFactory } from './setup';
 import debugFactory from 'debug';
 
 import type { Debugger } from 'debug';
@@ -6,10 +6,16 @@ import type { Debugger } from 'debug';
 // TODO: replace EXTERNAL_BIN_PATH below with its actual value
 const EXTERNAL_PATH = '../external-scripts/dummy';
 
-jest.mock('debug');
+// ? This could be called early so needs to be mocked early
+jest.mock('debug', () => jest.fn().mockImplementation(() => () => undefined));
+
+const withMockedEnv = mockEnvFactory({
+  // TODO: define any necessary environment variables
+});
 
 const protectedImport = protectedImportFactory(EXTERNAL_PATH);
 const mockedDebug = asMockedFunction<Debugger>();
+
 mockedDebug.extend = asMockedFunction<Debugger['extend']>().mockReturnValue(mockedDebug);
 asMockedFunction(debugFactory).mockReturnValue(mockedDebug);
 
@@ -19,8 +25,11 @@ afterEach(() => {
 
 it('calls invoker when imported', async () => {
   expect.hasAssertions();
-  await protectedImport();
-  expect(mockedDebug).toHaveBeenNthCalledWith(3, 'implement me!');
+
+  await withMockedEnv(async () => {
+    await protectedImport();
+    expect(mockedDebug).toBeCalledWith(expect.stringContaining('implement me!'));
+  });
 });
 
 it('handles thrown error objects', async () => {
@@ -28,13 +37,15 @@ it('handles thrown error objects', async () => {
 
   mockedDebug.mockImplementationOnce(() => undefined);
   mockedDebug.mockImplementationOnce(() => undefined);
+  mockedDebug.mockImplementationOnce(() => undefined);
   mockedDebug.mockImplementationOnce(() => {
     throw new Error('problems!');
   });
 
-  await protectedImport({ expectedExitCode: 2 });
-
-  expect(mockedDebug).toHaveBeenNthCalledWith(4, 'problems!');
+  await withMockedEnv(async () => {
+    await protectedImport({ expectedExitCode: 2 });
+    expect(mockedDebug).toBeCalledWith('problems!');
+  });
 });
 
 it('handles thrown string errors', async () => {
@@ -42,11 +53,13 @@ it('handles thrown string errors', async () => {
 
   mockedDebug.mockImplementationOnce(() => undefined);
   mockedDebug.mockImplementationOnce(() => undefined);
+  mockedDebug.mockImplementationOnce(() => undefined);
   mockedDebug.mockImplementationOnce(() => {
     throw 'problems!';
   });
 
-  await protectedImport({ expectedExitCode: 2 });
-
-  expect(mockedDebug).toHaveBeenNthCalledWith(4, 'problems!');
+  await withMockedEnv(async () => {
+    await protectedImport({ expectedExitCode: 2 });
+    expect(mockedDebug).toBeCalledWith('problems!');
+  });
 });

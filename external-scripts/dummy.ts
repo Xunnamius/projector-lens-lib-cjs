@@ -13,6 +13,7 @@ debug(`pkgVersion: "${pkgVersion}"`);
 const invoked = async () => {
   // TODO: implementation
   debug('implement me!');
+  debug('and me!');
 };
 
 export default invoked().catch((e: Error | string) => {
