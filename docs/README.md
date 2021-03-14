@@ -36,11 +36,11 @@ Returns the quotient of `dividend` and `divisor`
 
 #### Parameters:
 
-| Name                             | Type     |
-| :------------------------------- | :------- |
-| **({ destructured })**`          | _object_ |
-| **({ destructured })**.dividend` | _number_ |
-| **({ destructured })**.divisor`  | _number_ |
+| Name             | Type     |
+| :--------------- | :------- |
+| `(destructured)` | _object_ |
+| `({ dividend })` | _number_ |
+| `({ divisor })`  | _number_ |
 
 **Returns:** _number_
 
@@ -89,10 +89,10 @@ Defined in: [index.ts:9][8]
 [3]: README.md#mult
 [4]: README.md#sum
 [5]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/9d52947/src/index.ts#L17
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4305ea1/src/index.ts#L17
 [6]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/9d52947/src/index.ts#L33
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4305ea1/src/index.ts#L33
 [7]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/9d52947/src/index.ts#L25
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4305ea1/src/index.ts#L25
 [8]:
-  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/9d52947/src/index.ts#L9
+  https://github.com/Xunnamius/projector-lens-lib-cjs/blob/4305ea1/src/index.ts#L9
