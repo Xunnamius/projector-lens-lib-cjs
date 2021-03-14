@@ -637,7 +637,7 @@ jobs:
   release:
     name: '[CD] release'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     needs:
       - build
       - check-audit
@@ -751,11 +751,11 @@ jobs:
       && (needs.metadata.outputs.has-integration-webpack != 'true' || needs.test-integration-webpack.result == 'success')
     steps:
       - name: 'Merge pull request'
-        uses: 'actions/github-script@v3.1'
+        uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           script: |
-            const MAX_RETRIES = 6;
+            const MAX_RETRIES = 5;
             const MINIMUM_SECONDS = 10;
             const JITTER_SECONDS = 10;
 
