@@ -755,6 +755,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-${{ runner.os }}-${{ github.sha }}
-          path: ./* !**/node_modules
+          path: '{./*,!**/node_modules}'
           if-no-files-found: error
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
