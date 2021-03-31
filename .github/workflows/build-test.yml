@@ -182,6 +182,7 @@ jobs:
         run: |
           if ! [ -z "$DEBUG" ]; then
             echo ':: BTD pipeline started :: PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
+            echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
           else
             echo ':: BTD pipeline started :: not in debug mode'
           fi
