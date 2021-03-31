@@ -36,34 +36,34 @@ jobs:
     outputs:
       should-skip:
         ${{ github.event.workflow_run.conclusion != 'success' ||
-        steps.metadata.outputs.should-skip == 'true' }},
-      node-version: ${{ steps.metadata.outputs.node-version }},
-      current-branch: ${{ steps.metadata.outputs.current-branch }},
-      commit-sha: ${{ steps.metadata.outputs.commit-sha }},
-      pr-number: ${{ steps.metadata.outputs.pr-number }},
-      can-release: ${{ steps.metadata.outputs.can-release }},
-      can-automerge: ${{ steps.metadata.outputs.can-automerge }},
-      can-retry-automerge: ${{ steps.metadata.outputs.can-retry-automerge }},
-      can-upload-coverage: ${{ steps.metadata.outputs.can-upload-coverage }},
-      has-deploy: ${{ steps.metadata.outputs.has-deploy }},
-      has-release-config: ${{ steps.metadata.outputs.has-release-config }},
-      has-docs: ${{ steps.metadata.outputs.has-docs }},
-      has-externals: ${{ steps.metadata.outputs.has-externals }},
-      has-integration-node: ${{ steps.metadata.outputs.has-integration-node }},
+        steps.metadata.outputs.should-skip == 'true' }}
+      node-version: ${{ steps.metadata.outputs.node-version }}
+      current-branch: ${{ steps.metadata.outputs.current-branch }}
+      commit-sha: ${{ steps.metadata.outputs.commit-sha }}
+      pr-number: ${{ steps.metadata.outputs.pr-number }}
+      can-release: ${{ steps.metadata.outputs.can-release }}
+      can-automerge: ${{ steps.metadata.outputs.can-automerge }}
+      can-retry-automerge: ${{ steps.metadata.outputs.can-retry-automerge }}
+      can-upload-coverage: ${{ steps.metadata.outputs.can-upload-coverage }}
+      has-deploy: ${{ steps.metadata.outputs.has-deploy }}
+      has-release-config: ${{ steps.metadata.outputs.has-release-config }}
+      has-docs: ${{ steps.metadata.outputs.has-docs }}
+      has-externals: ${{ steps.metadata.outputs.has-externals }}
+      has-integration-node: ${{ steps.metadata.outputs.has-integration-node }}
       has-integration-externals:
-        ${{ steps.metadata.outputs.has-integration-externals }},
+        ${{ steps.metadata.outputs.has-integration-externals }}
       has-integration-client:
-        ${{ steps.metadata.outputs.has-integration-client }},
+        ${{ steps.metadata.outputs.has-integration-client }}
       has-integration-webpack:
-        ${{ steps.metadata.outputs.has-integration-webpack }},
-      debug-string: ${{ steps.metadata.outputs.debug-string }},
-      committer-name: ${{ steps.metadata.outputs.committer-name }},
+        ${{ steps.metadata.outputs.has-integration-webpack }}
+      debug-string: ${{ steps.metadata.outputs.debug-string }}
+      committer-name: ${{ steps.metadata.outputs.committer-name }}
       committer-email: ${{ steps.metadata.outputs.committer-email }}
 
     steps:
       - name: debug
         run: |
-          echo '${{ github.event.workflow_run.conclusion != "success" || steps.metadata.outputs.should-skip == "true" }}'
+          echo "${{ github.event.workflow_run.conclusion != 'success' || steps.metadata.outputs.should-skip == 'true' }}"
 
       - name: Download metadata artifact
         if: github.event.workflow_run.conclusion == 'success'
