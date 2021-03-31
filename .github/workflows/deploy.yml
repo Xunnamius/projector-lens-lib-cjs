@@ -61,15 +61,6 @@ jobs:
       committer-email: ${{ steps.metadata.outputs.committer-email }}
 
     steps:
-      - name: Report DEBUG mode status
-        run: |
-          if ! [ -z "$DEBUG" ]; then
-            echo ':: CD pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
-            echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
-          else
-            echo ':: CD pipeline stage started :: not in debug mode'
-          fi
-
       - name: Download metadata artifact
         if: github.event.workflow_run.conclusion == 'success'
         uses: actions/github-script@v3.1.0
@@ -95,7 +86,7 @@ jobs:
       - name: Extract artifact
         run: |
           unzip /tmp/meta.zip -d /tmp
-          ! [ -z "$DEBUG" ] && ls -la || true
+          [ -n '${{ steps.metadata.outputs.debug-string }}' ] && ls -la || true
 
       - name: Import metadata from artifact
         id: metadata
@@ -108,6 +99,16 @@ jobs:
             });
           EOF
           )"
+
+      - name: Report DEBUG mode status
+        if: github.event.workflow_run.conclusion == 'success'
+        run: |
+          if [ -n '${{ steps.metadata.outputs.debug-string }}' ]; then
+            echo ':: CD pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: '"${{ steps.metadata.outputs.debug-string }}"'
+            echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: '"${{ steps.metadata.outputs.debug-string }}"'
+          else
+            echo ':: CD pipeline stage started :: not in debug mode'
+          fi
 
   upload-coverage:
     name: '[CD] upload-coverage'
