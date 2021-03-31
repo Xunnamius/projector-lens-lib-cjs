@@ -181,10 +181,10 @@ jobs:
       - name: Report DEBUG mode status
         run: |
           if ! [ -z "$DEBUG" ]; then
-            echo ':: BTD pipeline started :: PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
+            echo ':: CI pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
             echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
           else
-            echo ':: BTD pipeline started :: not in debug mode'
+            echo ':: CI pipeline stage started :: not in debug mode'
           fi
 
       - name: Checkout
