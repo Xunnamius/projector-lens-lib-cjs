@@ -110,8 +110,8 @@ jobs:
         if: github.event.workflow_run.conclusion == 'success'
         run: |
           if [ -n '${{ steps.metadata.outputs.debug-string }}' ]; then
-            echo ':: CD pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: '"${{ steps.metadata.outputs.debug-string }}"'
-            echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: '"${{ steps.metadata.outputs.debug-string }}"'
+            echo ':: CD pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: "${{ steps.metadata.outputs.debug-string }}"'
+            echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: "${{ steps.metadata.outputs.debug-string }}"'
           else
             echo ':: CD pipeline stage started :: not in debug mode'
           fi
