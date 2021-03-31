@@ -63,7 +63,7 @@ jobs:
     steps:
       - name: debug
         run: |
-          echo '${{ github.event.workflow_run.conclusion }} != "success" || ${{ steps.metadata.outputs.should-skip }} == "true"'
+          echo '${{ github.event.workflow_run.conclusion != "success" || steps.metadata.outputs.should-skip == "true" }}'
 
       - name: Download metadata artifact
         if: github.event.workflow_run.conclusion == 'success'
