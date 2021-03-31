@@ -68,6 +68,7 @@ jobs:
           # ? Unfortunately, we can't use the official action to download
           # ? artifacts across workloads, so we do it manually
           script: |
+            console.log('saw run_id #${{ github.event.workflow_run.id }}');
             const artifactId = (await github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
@@ -78,6 +79,7 @@ jobs:
                 (artifact) => artifact.name == 'metadata-${{ runner.os }}-${{ github.sha }}'
               );
 
+            console.log(`downloading artifact #${artifactId}`);
             const download = await github.actions.downloadArtifact({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -149,6 +151,7 @@ jobs:
           # ? Unfortunately, we can't use the official action to download
           # ? artifacts across workloads, so we do it manually
           script: |
+            console.log('saw run_id #${{ github.event.workflow_run.id }}');
             const artifactId = await (github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
@@ -159,6 +162,7 @@ jobs:
                 (artifact) => artifact.name == 'build-${{ runner.os }}-${{ github.sha }}'
               );
 
+            console.log(`downloading artifact #${artifactId}`);
             const download = await github.actions.downloadArtifact({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -217,6 +221,7 @@ jobs:
           # ? Unfortunately, we can't use the official action to download
           # ? artifacts across workloads, so we do it manually
           script: |
+            console.log('saw run_id #${{ github.event.workflow_run.id }}');
             const artifactId = await (github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
@@ -227,6 +232,7 @@ jobs:
                 (artifact) => artifact.name == 'build-${{ runner.os }}-${{ github.sha }}'
               );
 
+            console.log(`downloading artifact #${artifactId}`);
             const download = await github.actions.downloadArtifact({
               owner: context.repo.owner,
               repo: context.repo.repo,
