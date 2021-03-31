@@ -194,9 +194,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           fail_ci_if_error: false
 
-      - name: Issue any codecov-related warnings
-        run: echo '::warning::no code coverage data uploaded for this run'
-
   release:
     name: '[CD] release'
     runs-on: ubuntu-latest

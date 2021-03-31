@@ -328,6 +328,10 @@ jobs:
             echo '::warning::no `build-docs` script defined in package.json'
           fi
 
+          if [ "$UPLOAD_CODE_COVERAGE" = 'false' ]; then
+            echo '::warning::no code coverage data will be collected for this run'
+          fi
+
       - name: Create metadata artifact
         if: steps.skip.outputs.should-skip-ci != 'true'
         run: |
