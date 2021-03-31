@@ -118,7 +118,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build-${{ runner.os }}-${{ github.sha }}
-          path: ./
 
       - name: Attempt to upload coverage data to codecov
         uses: codecov/codecov-action@v1
@@ -162,7 +161,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build-${{ runner.os }}-${{ github.sha }}
-          path: ./
 
       - name: Use node ${{ needs.metadata.outputs.node-version }} (for npx only)
         uses: actions/setup-node@v2.1.5
