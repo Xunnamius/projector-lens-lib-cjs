@@ -758,5 +758,6 @@ jobs:
           path: |
             ./*
             !./**/node_modules
+            !.git
           if-no-files-found: error
           retention-days: ${{ env.ARTIFACT_RETENTION_DAYS }}
