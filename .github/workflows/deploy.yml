@@ -94,6 +94,7 @@ jobs:
             require('fs').writeFileSync('/tmp/meta.zip', Buffer.from(download.data));
 
       - name: Extract artifact
+        if: github.event.workflow_run.conclusion == 'success'
         run: unzip /tmp/meta.zip -d /tmp
 
       - name: Import metadata from artifact
@@ -277,7 +278,18 @@ jobs:
           GIT_AUTHOR_EMAIL: ${{ needs.metadata.outputs.committer-email }}
           GIT_COMMITTER_NAME: ${{ needs.metadata.outputs.committer-name }}
           GIT_COMMITTER_EMAIL: ${{ needs.metadata.outputs.committer-email }}
-        run: npx --no-install semantic-release
+        run: |
+          npx -p debug \
+              -p escape-string-regexp \
+              -p semver \
+              -p execa \
+              -p conventional-changelog-angular \
+              -p @semantic-release/changelog \
+              -p @semantic-release/exec \
+              -p @semantic-release/git \
+              -p semantic-release \
+          semantic-release
+          npx --no-install semantic-release
 
   # ? This job always runs except:
   # ? 1. If CI and/or CD are skipped globally or pipeline otherwise failed
