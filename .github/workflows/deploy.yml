@@ -146,7 +146,9 @@ jobs:
           }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Strip repository bare
-        run: rm -rf {*,.!(git|.|)}
+        run: |
+          shopt -s extglob
+          rm -rf {*,.!(git|.|)}
 
       - name: Download build artifact
         uses: actions/github-script@v3.1.0
@@ -215,7 +217,9 @@ jobs:
           }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Strip repository bare
-        run: rm -rf {*,.!(git|.|)}
+        run: |
+          shopt -s extglob
+          rm -rf {*,.!(git|.|)}
 
       - name: Download build artifact
         uses: actions/github-script@v3.1.0
