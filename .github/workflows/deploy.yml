@@ -68,12 +68,12 @@ jobs:
           # ? Unfortunately, we can't use the official action to download
           # ? artifacts across workloads, so we do it manually
           script: |
-            const artifactId = await github.actions
+            const artifactId = (await github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 run_id: ${{ github.event.workflow_run.id }}
-              })
+              }))
               .data.artifacts.find(
                 (artifact) => artifact.name == 'metadata-${{ runner.os }}-${{ github.sha }}'
               );
@@ -149,12 +149,12 @@ jobs:
           # ? Unfortunately, we can't use the official action to download
           # ? artifacts across workloads, so we do it manually
           script: |
-            const artifactId = await github.actions
+            const artifactId = await (github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 run_id: ${{ github.event.workflow_run.id }}
-              })
+              }))
               .data.artifacts.find(
                 (artifact) => artifact.name == 'build-${{ runner.os }}-${{ github.sha }}'
               );
@@ -217,12 +217,12 @@ jobs:
           # ? Unfortunately, we can't use the official action to download
           # ? artifacts across workloads, so we do it manually
           script: |
-            const artifactId = await github.actions
+            const artifactId = await (github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 run_id: ${{ github.event.workflow_run.id }}
-              })
+              }))
               .data.artifacts.find(
                 (artifact) => artifact.name == 'build-${{ runner.os }}-${{ github.sha }}'
               );
