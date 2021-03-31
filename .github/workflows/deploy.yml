@@ -9,8 +9,8 @@
 #
 # ! See also: https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
 # ! tl;dr: do not build anything or run any code or executables from the repo.
-# ! Also for this reason, installing dependencies cannot happen either. Deps are
-# ! hardcoded in the release job, rather than taken from `package.json`
+# ! Also for this reason, installing dependencies cannot happen either.
+# ! Installed deps are hardcoded below, rather than taken from `package.json`.
 #
 # ! To function, the following GitHub repository secrets must be defined:
 # !   CODECOV_TOKEN (optional for public repos)
@@ -31,6 +31,11 @@ defaults:
   run:
     shell: bash
 
+env:
+  SEMANTIC_RELEASE_NPM_INSTALL: >
+    debug escape-string-regexp semver execa conventional-changelog-angular
+    @semantic-release/changelog @semantic-release/exec @semantic-release/git
+    semantic-release
 jobs:
   metadata:
     name: 'gather-metadata'
@@ -113,10 +118,12 @@ jobs:
 
       - name: Report DEBUG mode status
         if: github.event.workflow_run.conclusion == 'success'
+        env:
+          DEBUG: ${{ steps.metadata.outputs.debug-string }}
         run: |
-          if [ -n '${{ steps.metadata.outputs.debug-string }}' ]; then
-            echo ':: CD pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: "${{ steps.metadata.outputs.debug-string }}"'
-            echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: "${{ steps.metadata.outputs.debug-string }}"'
+          if [ -n "$DEBUG" ]; then
+            echo ":: CD pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: '$DEBUG'"
+            echo "::warning::PIPELINE IS RUNNING IN DEBUG MODE: '$DEBUG'"
           else
             echo ':: CD pipeline stage started :: not in debug mode'
           fi
@@ -279,16 +286,15 @@ jobs:
           GIT_COMMITTER_NAME: ${{ needs.metadata.outputs.committer-name }}
           GIT_COMMITTER_EMAIL: ${{ needs.metadata.outputs.committer-email }}
         run: |
-          npx -p debug \
-              -p escape-string-regexp \
-              -p semver \
-              -p execa \
-              -p conventional-changelog-angular \
-              -p @semantic-release/changelog \
-              -p @semantic-release/exec \
-              -p @semantic-release/git \
-              -p semantic-release \
-          semantic-release
+          if [ -r node_modules ]; then echo 'illegal node_modules directory encountered'; exit 1; fi
+          REPO=$(pwd)
+          TMP=$(mktemp -d -t deploy-XXXXXXXX)
+          echo "REPO: $REPO"
+          echo "TMP: $TMP"
+          cd $TMP
+          npm install --no-save $SEMANTIC_RELEASE_NPM_INSTALL
+          mv node_modules $REPO
+          cd $REPO
           npx --no-install semantic-release
 
   # ? This job always runs except:
@@ -309,6 +315,8 @@ jobs:
       && needs.metadata.outputs.can-automerge == 'true'
     env:
       DEBUG: ${{ needs.metadata.outputs.debug-string }}
+      SHA: ${{ needs.metadata.outputs.commit-sha }}
+      PR: ${{ needs.metadata.outputs.pr-number }}
 
     steps:
       - name: 'Merge pull request'
@@ -325,9 +333,9 @@ jobs:
             let jitter = 0;
 
             const pullRequest = {
-              number: ${{ needs.metadata.outputs.pr-number }}
+              number: Number(process.env.PR)
               head: {
-                sha: '${{ needs.metadata.outputs.commit-sha }}'
+                sha: process.env.SHA
               }
             };
 
