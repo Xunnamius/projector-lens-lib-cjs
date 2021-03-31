@@ -61,20 +61,48 @@ jobs:
       committer-email: ${{ steps.metadata.outputs.committer-email }}
 
     steps:
+      - name: Report DEBUG mode status
+        run: |
+          if ! [ -z "$DEBUG" ]; then
+            echo ':: CD pipeline stage started :: PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
+            echo '::warning::PIPELINE IS RUNNING IN DEBUG MODE: ''"'"$DEBUG"'"'
+          else
+            echo ':: CD pipeline stage started :: not in debug mode'
+          fi
+
       - name: Download metadata artifact
         if: github.event.workflow_run.conclusion == 'success'
-        uses: actions/download-artifact@v2
+        uses: actions/github-script@v3.1.0
         with:
-          name: metadata-${{ runner.os }}-${{ github.sha }}
-          path: /tmp
+          script: |
+            # ? Unfortunately, we can't use the official action to download
+            # ? artifacts across workloads, so we do it manually
+            const artifactId = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{ github.event.workflow_run.id }},
+            }).data.artifacts.find((artifact) => artifact.name == 'metadata-${{ runner.os }}-${{ github.sha }}');
+
+            const download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: artifactId,
+               archive_format: 'zip',
+            });
+
+            require('fs').writeFileSync('/tmp/meta.zip', Buffer.from(download.data));
+
+      - name: Extract artifact
+        run: |
+          unzip /tmp/meta.zip -d /tmp
+          ! [ -z "$DEBUG" ] && ls -la || true
 
       - name: Import metadata from artifact
         id: metadata
         if: github.event.workflow_run.conclusion == 'success'
         run: |
           node -e "$(cat <<'EOF'
-            const readFile = require('fs').readFileSync;
-            Object.keys(JSON.parse(readFile('/tmp/meta.json'))).forEach((key, value) => {
+            Object.keys(JSON.parse(require('fs').readFileSync('/tmp/meta.json'))).forEach((key, value) => {
               console.log(`imported metadata: name=${key} value=${value}`)
               console.log(`::set-output name=${key}::${value}`)
             });
@@ -111,9 +139,30 @@ jobs:
           rm -rf {,.!(git)}
 
       - name: Download build artifact
-        uses: actions/download-artifact@v2
+        uses: actions/github-script@v3.1.0
         with:
-          name: build-${{ runner.os }}-${{ github.sha }}
+          script: |
+            # ? Unfortunately, we can't use the official action to download
+            # ? artifacts across workloads, so we do it manually
+            const artifactId = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{ github.event.workflow_run.id }},
+            }).data.artifacts.find((artifact) => artifact.name == 'build-${{ runner.os }}-${{ github.sha }}');
+
+            const download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: artifactId,
+               archive_format: 'zip',
+            });
+
+            require('fs').writeFileSync('/tmp/build.zip', Buffer.from(download.data));
+
+      - name: Extract artifact
+        run: |
+          unzip /tmp/build.zip
+          ! [ -z "$DEBUG" ] && ls -la || true
 
       - name: Attempt to upload coverage data to codecov
         uses: codecov/codecov-action@v1
@@ -154,9 +203,30 @@ jobs:
           rm -rf {,.!(git)}
 
       - name: Download build artifact
-        uses: actions/download-artifact@v2
+        uses: actions/github-script@v3.1.0
         with:
-          name: build-${{ runner.os }}-${{ github.sha }}
+          script: |
+            # ? Unfortunately, we can't use the official action to download
+            # ? artifacts across workloads, so we do it manually
+            const artifactId = await github.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{ github.event.workflow_run.id }},
+            }).data.artifacts.find((artifact) => artifact.name == 'build-${{ runner.os }}-${{ github.sha }}');
+
+            const download = await github.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: artifactId,
+               archive_format: 'zip',
+            });
+
+            require('fs').writeFileSync('/tmp/build.zip', Buffer.from(download.data));
+
+      - name: Extract artifact
+        run: |
+          unzip /tmp/build.zip
+          ! [ -z "$DEBUG" ] && ls -la || true
 
       - name: Use node ${{ needs.metadata.outputs.node-version }} (for npx only)
         uses: actions/setup-node@v2.1.5
