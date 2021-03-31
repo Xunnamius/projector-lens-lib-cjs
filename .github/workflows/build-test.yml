@@ -149,6 +149,10 @@ env:
   # * (90 is GitHub's default)
   ARTIFACT_RETENTION_DAYS: 90
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   metadata:
     name: 'gather-metadata'

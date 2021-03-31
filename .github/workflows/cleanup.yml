@@ -24,6 +24,10 @@ env:
   # ? (you'll need to provide your own secrets or the pipeline will error)
   REPO_OWNER_WHITELIST: xunnamius, ergodark, nhscc
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   metadata:
     name: 'gather-metadata'

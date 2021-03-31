@@ -18,6 +18,10 @@ env:
   NODE_CURRENT_VERSION: 15.x
   NODE_TEST_VERSIONS: '"12.x", "14.x"' # * NODE_CURRENT_VERSION included automatically
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   metadata:
     name: 'gather-metadata'
