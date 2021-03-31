@@ -146,9 +146,7 @@ jobs:
           }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Strip repository bare
-        run: |
-          shopt -s extglob
-          rm -rf {*,.!(git|.|)}
+        run: find -maxdepth 1 -not -name . -not -name .git -exec rm -rf {} +
 
       - name: Download build artifact
         uses: actions/github-script@v3.1.0
@@ -217,9 +215,7 @@ jobs:
           }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Strip repository bare
-        run: |
-          shopt -s extglob
-          rm -rf {*,.!(git|.|)}
+        run: find -maxdepth 1 -not -name . -not -name .git -exec rm -rf {} +
 
       - name: Download build artifact
         uses: actions/github-script@v3.1.0
