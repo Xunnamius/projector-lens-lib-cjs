@@ -10,7 +10,7 @@
 # ! See also: https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
 # ! tl;dr: do not build anything or run any code or executables from the repo.
 # ! Also for this reason, installing dependencies cannot happen either. Deps are
-# ! hardcoded (called via `npx -p`) below, rather than taken from `package.json`
+# ! hardcoded in the release job, rather than taken from `package.json`
 #
 # ! To function, the following GitHub repository secrets must be defined:
 # !   CODECOV_TOKEN (optional for public repos)
@@ -277,17 +277,7 @@ jobs:
           GIT_AUTHOR_EMAIL: ${{ needs.metadata.outputs.committer-email }}
           GIT_COMMITTER_NAME: ${{ needs.metadata.outputs.committer-name }}
           GIT_COMMITTER_EMAIL: ${{ needs.metadata.outputs.committer-email }}
-        run: |
-          npx -p debug \
-              -p escape-string-regexp \
-              -p semver \
-              -p execa \
-              -p conventional-changelog-angular \
-              -p @semantic-release/changelog \
-              -p @semantic-release/exec \
-              -p @semantic-release/git \
-              -p semantic-release \
-          semantic-release
+        run: npx --no-install semantic-release
 
   # ? This job always runs except:
   # ? 1. If CI and/or CD are skipped globally or pipeline otherwise failed
