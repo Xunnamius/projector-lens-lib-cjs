@@ -155,7 +155,7 @@ jobs:
           # ? artifacts across workloads, so we do it manually
           script: |
             console.log('saw run_id #${{ github.event.workflow_run.id }}');
-            const artifactId = await (github.actions
+            const artifactId = (await github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -224,7 +224,7 @@ jobs:
           # ? artifacts across workloads, so we do it manually
           script: |
             console.log('saw run_id #${{ github.event.workflow_run.id }}');
-            const artifactId = await (github.actions
+            const artifactId = (await github.actions
               .listWorkflowRunArtifacts({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
