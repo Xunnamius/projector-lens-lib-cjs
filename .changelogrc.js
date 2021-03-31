@@ -32,7 +32,7 @@ const SKIP_COMMANDS = '[skip ci], [ci skip], [skip cd], [cd skip]'.split(', ');
 debug('SKIP_COMMANDS:', SKIP_COMMANDS);
 
 // ! XXX: dark magic to synchronously deal with this async package
-// TODO: fork this package and offer a sync export instead of this dark magic
+// TODO: XXX: fork this package and offer a sync export instead of this dark magic
 let wait;
 try {
   wait = execa.sync('node', [
