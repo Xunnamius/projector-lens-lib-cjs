@@ -97,8 +97,8 @@ jobs:
         if: github.event.workflow_run.conclusion == 'success'
         run: |
           node -e "$(cat <<'EOF'
-            Object.keys(JSON.parse(require('fs').readFileSync('/tmp/meta.json'))).forEach(
-              (key, value) => {
+            Object.entries(JSON.parse(require('fs').readFileSync('/tmp/meta.json'))).forEach(
+              ([key, value]) => {
                 console.log(`imported metadata: name=${key} value=${value}`);
                 console.log(`::set-output name=${key}::${value}`);
               }
