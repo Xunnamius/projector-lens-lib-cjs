@@ -77,7 +77,7 @@ jobs:
               }))
               .data.artifacts.find(
                 (artifact) => artifact.name == 'metadata-${{ runner.os }}-${{ github.sha }}'
-              );
+              ).id;
 
             console.log(`downloading artifact #${artifactId}`);
             const download = await github.actions.downloadArtifact({
@@ -168,7 +168,7 @@ jobs:
               repo: context.repo.repo,
               artifact_id: artifactId,
               archive_format: 'zip'
-            });
+            }).id;
 
             require('fs').writeFileSync('/tmp/build.zip', Buffer.from(download.data));
 
@@ -238,7 +238,7 @@ jobs:
               repo: context.repo.repo,
               artifact_id: artifactId,
               archive_format: 'zip'
-            });
+            }).id;
 
             require('fs').writeFileSync('/tmp/build.zip', Buffer.from(download.data));
 
