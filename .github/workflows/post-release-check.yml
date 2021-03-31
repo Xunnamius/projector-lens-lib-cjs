@@ -70,7 +70,7 @@ jobs:
           persist-credentials: false
 
       - name: Reconfigure git to use HTTP authentication
-        run: |
+        run: >
           git config --global url."https://${{ secrets.GH_TOKEN
           }}@github.com/".insteadOf ssh://git@github.com/
 
