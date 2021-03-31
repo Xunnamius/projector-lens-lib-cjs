@@ -341,8 +341,8 @@ jobs:
             "has-integration-client": ${{ steps.data.outputs.has-integration-client }},
             "has-integration-webpack": ${{ steps.data.outputs.has-integration-webpack }},
             "debug-string": "$DEBUG",
-            "committer-name": "$COMMITTER_NAME",
-            "committer-email": "$COMMITTER_EMAIL"
+            "committer-name": "$CI_COMMITTER_NAME",
+            "committer-email": "$CI_COMMITTER_EMAIL"
           }
           EOF
 
