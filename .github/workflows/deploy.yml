@@ -61,6 +61,10 @@ jobs:
       committer-email: ${{ steps.metadata.outputs.committer-email }}
 
     steps:
+      - name: debug
+        run: |
+          echo '${{ github.event.workflow_run.conclusion }} != "success" || ${{ steps.metadata.outputs.should-skip }} == "true"'
+
       - name: Download metadata artifact
         if: github.event.workflow_run.conclusion == 'success'
         uses: actions/download-artifact@v2
@@ -126,7 +130,9 @@ jobs:
     timeout-minutes: 30
     needs:
       - metadata
-    if: needs.metadata.outputs.should-skip != 'true'
+    if: |
+      needs.metadata.outputs.should-skip != 'true'
+      && needs.metadata.outputs.can-release == 'true'
     env:
       DEBUG: ${{ needs.metadata.outputs.debug-string }}
 
