@@ -1,3 +1,9 @@
+# Delete distribution channels and perform other cleanup tasks after a branch
+# is deleted.
+#
+# ! To function, the following GitHub repository secrets must be defined:
+# !   GH_TOKEN
+
 name: cleanup
 
 # ! If you want to use this workflow, the NPM_TOKEN secret must be defined!
@@ -40,7 +46,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1 # ! We only skip if the tippy top commit says so!
+          fetch-depth: 1 # ! We only skip if the tippy top commit says so
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://${{ secrets.GH_TOKEN
+          }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Determine should-skip
         id: skip-ci
@@ -88,7 +100,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # ? Need all possible tag/branch information
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://${{ secrets.GH_TOKEN
+          }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.5

@@ -101,9 +101,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # ? Codecov action needs access to history
+          fetch-depth: 0 # ? Codecov action needs access to all history
           ref: ${{ needs.metadata.outputs.commit-sha }}
-          token: ${{ secrets.GH_TOKEN }}
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://${{ secrets.GH_TOKEN
+          }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Strip repository bare
         run: |
@@ -140,9 +145,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # ? semantic-release needs access to all history
           ref: ${{ needs.metadata.outputs.commit-sha }}
-          token: ${{ secrets.GH_TOKEN }}
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://${{ secrets.GH_TOKEN
+          }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Strip repository bare
         run: |

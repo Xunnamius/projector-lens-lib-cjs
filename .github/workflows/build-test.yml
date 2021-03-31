@@ -191,6 +191,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1 # ! We only skip if the tippy top commit says so!
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Determine should-skip
         id: skip
@@ -366,6 +372,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.5
@@ -385,6 +398,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.5
@@ -423,6 +443,12 @@ jobs:
         with:
           # ? codecov-action requires access to git history
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.5
@@ -473,6 +499,11 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+
       - name: Use node ${{ matrix.node }}
         uses: actions/setup-node@v2.1.5
         with:
@@ -517,6 +548,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Use node ${{ matrix.node }}
         uses: actions/setup-node@v2.1.5
@@ -559,6 +597,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.5
@@ -602,6 +647,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.5
@@ -650,6 +702,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       - name: Use node ${{ env.NODE_CURRENT_VERSION }}
         uses: actions/setup-node@v2.1.5

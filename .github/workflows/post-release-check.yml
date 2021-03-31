@@ -1,3 +1,9 @@
+# Post package release checks of the installation process and resultant
+# binaries for correctness.
+#
+# ! To function, the following GitHub repository secrets must be defined:
+# !   GH_TOKEN
+
 name: post-release-check
 
 on:
@@ -60,6 +66,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Reconfigure git to use HTTP authentication
+        run: |
+          git config --global url."https://${{ secrets.GH_TOKEN
+          }}@github.com/".insteadOf ssh://git@github.com/
 
       - name: Use node ${{ matrix.node }}
         uses: actions/setup-node@v2.1.5
