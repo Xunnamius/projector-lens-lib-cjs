@@ -74,226 +74,7 @@ PR passes review:
 > or context and immediately upon push to this repository, are [released][22] in
 > accordance with [this project's license][23].
 
----
-
-At this point, you're ready to create your PR and ✨ contribute ✨. What follows
-is a description of this project's automated [CL][4]/[CI/CD][5] pipeline and NPM
-scripts; **this is optional reading for external collaborators.** You're done!
-
----
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-## [The Build-Test-Deploy Pipeline][5]
-
-Development in this repository adheres to [Trunk Based Development][24]
-principles, specifically leveraging [_short-lived feature branches_][25] (SLFB)
-and Continuous Linting (CL), Integration (CI), and Deployment (CD).
-
-Broadly speaking, this pipeline consists of three "sub-pipelines" put together
-front to back:
-
-- First, the so-called "Continuous Linting" pipeline, which automatically runs
-  formatting, linting, and unit testing locally on the developer's machine
-  _before every commit_. This [tightens the developer feedback loop][26] and
-  [saves money][27].
-
-- Once one or more commits are pushed to remote, the [Continuous
-  Integration][28] (CI) pipeline runs next, which runs unit tests, project-wide
-  integration tests, and project-wide linting concurrently upon every triggering
-  event (below).
-
-- Finally, if the CI pipeline terminates successfully (and other conditions are
-  met), the [Continuous Deployment][29] (CD) pipeline runs. It builds, formats,
-  versions, and ships to production on every commit. Production releases only
-  occur on the addition of features, fixes, build system changes, or breaking
-  changes.
-
-These pipelines are situated one after the other such that the CD pipeline
-always fails to publish when the CI pipeline check fails. Further, the CL
-pipeline will reject local commits that fail to pass unit testing before they
-ever reach the CI pipeline.
-
-### Pipeline Usage and Structure
-
-- The existence of certain files is assumed, such as `package.json`
-
-- `main` is the only permanent branch, all other branches are automatically
-  deleted after being merged into `main`
-
-  - The term "merged" as used here and elsewhere in this document connotes a
-    [non-ff merge][30] operation. Note that [ff merge][30], [rebase][31], and
-    [squash][32] operations can be used as well **except when merging between
-    release branches (like `main` and `canary`); [only non-ff merge operations
-    should be used to merge between release branches][33]; any other operation
-    (_[including force pushing][34]_) risks damaging `semantic-release`'s
-    version tracking metadata**!
-
-  - Technically, there are also [maintenance branches][35], which are
-    semi-permanent
-
-  - For NPM package projects, this also means `latest` is the only permanent
-    [dist-tag][36]
-
-- Changes are committed directly to `main`, to a SLFB that is eventually merged
-  into `main`, or through a PR that is eventually merged into `main` from an
-  external repository
-
-- `canary` is a special SLFB used to publish commits on the canary release
-  channel before before they're merged into `main` (useful to combine multiple
-  features as a single testable release)
-
-  - For projects that are deployed (e.g. Vercel, web push, etc), `canary` may be
-    used as a permanent preview branch in addition to the permanent `main`
-    branch
-
-- Pushing a commit to any branch, opening a PR against `main`/`canary`, or
-  synchronizing a PR made against `main`/`canary` will trigger the CI pipeline
-
-- Pushing a commit directly to `main` or `canary` will trigger the CI pipeline
-  and, if all tests pass, also trigger the [semantic-release][37]-based CD
-  pipeline where:
-
-  - Commits pushed to `main` are released on the [default release channel][38]
-
-  - Commits pushed to `canary` are released on the [prerelease channel][39]
-
-  - Commits pushed to `N.x`/`N.x.x` and `N.N.x` branches are released on their
-    respective [maintenance channels][35]
-
-  - Commits pushed to other release branches will also generate a release
-    depending on [custom configuration][40]
-
-  - Commits pushed to branches that aren't the above will never cause the CD
-    pipeline to generate a release even if all tests pass
-
-- Force pushing to `main` and `canary` will always fail (unless temporarily
-  allowed)
-
-- Commits that include `BREAKING:`, `BREAKING CHANGE:`, or `BREAKING CHANGES:`
-  in their message body will be treated as major release commits and will appear
-  in [CHANGELOG.md][41] regardless of their type
-
-  - Example:
-
-    ```shell
-    git commit -m "debug: this commit will cause a major version bump and
-    will appear in the changelog, even though it's only a debug commit!!!
-
-    BREAKING CHANGE: this feature replaces that feature
-    BREAKING CHANGE: this other feature now also works differently"
-    ```
-
-- PRs only trigger the CI pipeline and _never_ the CD pipeline
-
-- The CD pipeline never runs in forks of this repository, even when GitHub
-  Actions are explicitly enabled (this can be overridden)
-
-- All tags created through this pipeline are annotated and automatically signed.
-  To support this and other features that require annotated tags, we use a
-  [custom fork of semantic-release][42]
-
-  - Hopefully [support for][43] [annotated tags][44] will be included upstream
-    one day.
-
-- The CD pipeline will not publish to NPM [so long as package.json contains
-  `private: true`][45]
-
-- Note that **[all reverts are treated as patches and immediately
-  released][46]** no matter the type of the reverted commit. This means
-  **commits that were reverted will appear in [CHANGELOG.md][41] even if they
-  didn't trigger an earlier release**
-
-  - This also means **reverting a commit that introduced a breaking change will
-    only trigger a patch release** unless the revert commit itself also includes
-    `BREAKING CHANGE:` in its message body
-
-  - If a push includes only revert commits (and `BREAKING CHANGE:` or an
-    alternative is not present in the top commit's message body), **the result
-    is always a patch release!**
-
-### Pipeline Trigger Events
-
-The CI/CD pipeline is triggered by two [events][47]:
-
-- `push` events that:
-  - Are of non-tag refs (pushed tags are ignored by CI/CD)
-  - Are of refs with names not starting with `dependabot/`, `snyk-`, or `no-ci/`
-- `pull_request` events that:
-  - Are of type `synchronize` or `opened`
-  - Compare against branches `main` or `canary`
-
-> For NPM packages, [the `cleanup` workflow][48] prunes [dist-tags][36]
-> associated with deleted branches and is triggered by the `delete` event.
-
-> The units that make up the pipeline can usually be triggered manually. For
-> workflows, manual invocations are treated as `push`/`delete` events.
-
-This is further described by the following flow chart of events:
-
-    pushed `main` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z
-    pushed `canary` ==> [run CI] ==> tested ==> [run CD if CI passed] ==> released vx.y.z-canary.N
-    pushed any other SLFB* ==> [run CI] ==> tested
-    PR opened against `main`/`canary` ==> [run CI] ==> tested
-    PR synchronized against `main`/`canary` ==> [run CI] ==> tested
-
-<small>\* Excluding branches with names starting with `dependabot/`, `snyk-`, or
-`no-ci/`</small>
-
-When the CI/CD pipeline is triggered, jobs are executed according to the
-following chronology:
-
-    gather metadata ==> [CI] security audit
-                        [CI] linters
-                        [CI] unit tests
-                        [CI] integration tests
-                        [CD] install, build, format, sort ==> [CD] release
-
-Jobs in the same column are executed concurrently. A job failing in one column
-prevents the pipeline from proceeding to the next column.
-
-This pipeline supports four suites of integration tests: _node_, _externals_,
-_client_ (for browsers/cli/etc), and _webpack_. The presence of these test
-suites is picked up by `grep`-ing the output of `npm run list-tasks` to search
-for the presence of the script keys `test-integration-node`,
-`test-integration-externals`, `test-integration-client`, or
-`test-integration-webpack` respectively.
-
-This pipeline also supports an optional documentation build step via the
-`build-docs` key. A warning will be generated for projects that lack this key.
-Similarly, the pipeline will fail if there is a `build-externals` key without a
-`test-integration-externals` key or vice-versa.
-
-Note that internal PRs to `main`/`canary` made from pushing to internal branches
-**whose names do not begin with `no-ci/`** will trigger two CI runs: one on the
-`push` event generated by pushing to said branch and the other on the subsequent
-`pull_request` event when the PR is opened (type: `opened`) or its merge commit
-is updated (type: `synchronize`). If this is a problem (i.e. wasting money),
-prepend `no-ci/` to the internal branch name or transition to a _clone-and-pull_
-workflow instead of _branch-and-pull_.
-
-### Pipeline Commit Commands
-
-There are several commands that can affect the behavior of the pipeline. To use
-them, include them as part of the top commit's message when pushing to remote.
-When a single push consists of multiple commits, only the very top commit's
-message is parsed for commands.
-
-The following commands are recognized:
-
-| Command     | Alias(es)   | Description                                      | Usage Example                                          |
-| ----------- | ----------- | ------------------------------------------------ | ------------------------------------------------------ |
-| `[skip ci]` | `[ci skip]` | Skip the [CI workflow][5] (implies `[skip cd]`)  | `git commit -m 'build: fix CI system [skip ci]'`       |
-| `[skip cd]` | `[cd skip]` | Skip only the semantic-release-based CD pipeline | `git commit -m 'style: do-not-release-this [skip cd]'` |
+At this point, you're ready to create your PR and ✨ contribute ✨!
 
 ## NPM Scripts
 
@@ -369,13 +150,13 @@ which of the following scripts are available for this project.
 [1]: https://www.dataschool.io/how-to-contribute-on-github
 [2]: /.github/CODE_OF_CONDUCT.md
 [3]: https://github.com/features/actions
-[4]: https://github.com/Xunnamius/projector-lens-lib-cjs/tree/main/.husky
-[5]: .github/workflows/build-test-deploy.yml
+[4]: https://github.com/Xunnamius/@xunnamius/dummy-pkg-1/tree/main/.husky
+[5]: .github/workflows/build-test.yml
 [6]: https://github.com/semantic-release/semantic-release#readme
 [7]: https://www.npmjs.com/package/debug
 [8]: https://www.npmjs.com/package/rejoinder
 [9]: https://www.npmjs.com/package/debug#wildcards
-[10]: https://github.com/Xunnamius/projector-lens-lib-cjs/fork
+[10]: https://github.com/Xunnamius/@xunnamius/dummy-pkg-1/fork
 [11]:
   https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository
 [12]: https://docs.npmjs.com/cli/v6/commands/npm-ci
@@ -383,9 +164,9 @@ which of the following scripts are available for this project.
   https://docs.npmjs.com/cli/v6/configuring-npm/package-json#peerdependencies
 [14]:
   https://docs.npmjs.com/cli/v7/commands/npm-install#configuration-options-affecting-dependency-resolution-and-tree-design
-[15]: https://github.com/Xunnamius/projector-lens-lib-cjs/compare
-[16]: https://github.com/Xunnamius/projector-lens-lib-cjs/issues/new/choose
-[17]: https://github.com/Xunnamius/projector-lens-lib-cjs/issues?q=
+[15]: https://github.com/Xunnamius/@xunnamius/dummy-pkg-1/compare
+[16]: https://github.com/Xunnamius/@xunnamius/dummy-pkg-1/issues/new/choose
+[17]: https://github.com/Xunnamius/@xunnamius/dummy-pkg-1/issues?q=
 [18]: https://www.codewithjason.com/atomic-commits-testing/
 [19]: https://about.codecov.io/
 [20]: https://www.conventionalcommits.org/en/v1.0.0/#summary
@@ -393,39 +174,6 @@ which of the following scripts are available for this project.
 [22]:
   https://help.github.com/articles/github-terms-of-service/#6-contributions-under-repository-license
 [23]: LICENSE
-[24]: https://trunkbaseddevelopment.com/
-[25]: https://trunkbaseddevelopment.com/#scaled-trunk-based-development
-[26]:
-  https://blog.nelhage.com/post/testing-and-feedback-loops/#invest-in-regression-testing
-[27]: https://github.com/pricing
-[28]: https://en.wikipedia.org/wiki/Continuous_integration
-[29]: https://en.wikipedia.org/wiki/Continuous_deployment
-[30]: https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---no-ff
-[31]: https://git-scm.com/docs/git-rebase
-[32]: https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing
-[33]:
-  https://github.com/semantic-release/git#merging-between-semantic-release-branches
-[34]:
-  https://semantic-release.gitbook.io/semantic-release/support/troubleshooting#release-not-found-release-branch-after-git-push-force
-[35]:
-  https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#maintenance-branches
-[36]: https://docs.npmjs.com/cli/v6/commands/npm-dist-tag#purpose
-[37]: https://www.npmjs.com/package/semantic-release
-[38]:
-  https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#release-branches
-[39]:
-  https://semantic-release.gitbook.io/semantic-release/usage/workflow-configuration#pre-release-branches
-[40]: release.config.js
-[41]: CHANGELOG.md
-[42]: https://github.com/Xunnamius/semantic-release/tree/contrib-holistic
-[43]: https://github.com/semantic-release/semantic-release/pull/1709
-[44]: https://github.com/semantic-release/semantic-release/pull/1710
-[45]: https://github.com/semantic-release/npm#options
-[46]:
-  https://github.com/semantic-release/commit-analyzer/blob/e8c560459d7ef8752180154ed0263ce262aa22a7/lib/default-release-rules.js#L8
-[47]:
-  https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
-[48]: .github/workflows/cleanup.yml
 [49]: https://docs.npmjs.com/cli/v6/commands/npm-run-script
 [50]: https://docs.microsoft.com/en-us/windows/wsl/install-win10
 [51]: https://jestjs.io/docs/en/cli.html#--coverageboolean

@@ -1,5 +1,5 @@
 # Post package release checks of the installation process and resultant
-# binaries for correctness.
+# binaries for general correctness.
 #
 # ! To function, the following GitHub repository secrets must be defined:
 # !   GH_TOKEN
