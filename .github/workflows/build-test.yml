@@ -293,7 +293,7 @@ jobs:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-npm
         with:
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -337,7 +337,7 @@ jobs:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-npm
         with:
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -357,7 +357,7 @@ jobs:
 
       - name: Cache coverage
         if: env.UPLOAD_CODE_COVERAGE == 'true'
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-coverage
         with:
           key: coverage-${{ runner.os }}-${{ github.sha }}
@@ -392,7 +392,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Cache npm
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-npm
         with:
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -444,7 +444,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Cache npm
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-npm
         with:
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -493,7 +493,7 @@ jobs:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-npm
         with:
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -543,7 +543,7 @@ jobs:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-npm
         with:
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -598,7 +598,7 @@ jobs:
           node-version: ${{ env.NODE_CURRENT_VERSION }}
 
       - name: Cache npm
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-npm
         with:
           key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
@@ -628,7 +628,7 @@ jobs:
 
       - name: Restore coverage
         if: env.UPLOAD_CODE_COVERAGE == 'true'
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.10
         id: cache-coverage
         with:
           key: coverage-${{ runner.os }}-${{ github.sha }}
