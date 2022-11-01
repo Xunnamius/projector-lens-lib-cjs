@@ -129,7 +129,7 @@
     "@babel/preset-env": "^7.12.17",
     "@babel/preset-typescript": "^7.12.17",
     "@commitlint/cli": "^12.0.0",
-    "@commitlint/config-conventional": "^12.0.0",
+    "@commitlint/config-conventional": "^17.2.0",
     "@ergodark/types": "^1.0.17",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/exec": "^5.0.0",
