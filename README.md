@@ -90,10 +90,10 @@ to let me know you found it useful! ✊🏿 Thank you!
 See [CONTRIBUTING.md][contributing] and [SUPPORT.md][support] for more
 information.
 
-[badge-blm]: https://api.ergodark.com/badges/blm 'Join the movement!'
-[link-blm]: https://secure.actblue.com/donate/ms_blm_homepage_2019
+[badge-blm]: https://xunn.at/badge-blm 'Join the movement!'
+[link-blm]: https://xunn.at/donate-blm
 [badge-maintenance]:
-  https://img.shields.io/maintenance/active/2021
+  https://img.shields.io/maintenance/active/2023
   'Is this package maintained?'
 [link-repo]: https://github.com/xunnamius/projector-lens-lib-cjs
 [badge-last-commit]:
