@@ -1,23 +1,15 @@
-# Releases and deploys commits, auto-merges PRs, and uploads test coverage info,
-# etc using a privileged runner. To function, this workflow requires the working
-# tree (including coverage info) and metadata artifacts at the following keys:
-#   - `build-${{ runner.os }}-${{ github.sha }}`
-#   - `metadata-${{ runner.os }}-${{ github.sha }}`
-#
-# * Note: feel free to run this workflow in forks (e.g. for testing your PR)
-# * without worrying about this workflow attempting to deploy a package 🚀
-#
-# ! See also: https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
-# ! tl;dr: do not build anything or run any code or executables from the repo.
-# ! Also for this reason, installing dependencies cannot happen either.
-# ! Installed deps are hardcoded below, rather than taken from `package.json`.
-#
-# ! To function, the following GitHub repository secrets must be defined:
-# !   CODECOV_TOKEN (optional for public repos)
-# !   GPG_PRIVATE_KEY
-# !   GPG_PASSPHRASE
-# !   GH_TOKEN
-# !   NPM_TOKEN
+# ! Rules For Privileged Component Actions ! #
+# !
+# ! 1. Do not share caches with unprivileged CAs
+# !
+# ! 2. Do not build or install* anything or run any built executables in this
+# ! environment. Also for this reason, installing the client repo's dependencies
+# ! cannot happen either. Installed deps are hardcoded below, rather than taken
+# ! from the client repo's `package.json` file. See also: https://bit.ly/3u2K6Yr
+# !
+# ! 3. Do not globally expose secrets. To each shell command only the secrets
+# ! necessary and nothing more. Codecov, for instance, should only get the
+# ! CODECOV_TOKEN and nothing more. See also: https://bit.ly/3e1oxlw
 
 name: deploy
 

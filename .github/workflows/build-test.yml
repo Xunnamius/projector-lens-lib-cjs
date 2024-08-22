@@ -121,7 +121,7 @@ jobs:
         id: release
         run: |
           set +e
-          node -e "process.exit('${{ env.REPO_OWNER_WHITELIST }}'.split(',').some(o => o.trim().toLowerCase() == '${{ github.repository_owner }}'.toLowerCase()) ? 0 : 1)"
+          node -e "process.exit('${{ env.REPO_OWNER_WHITELIST }}'.split(',') ? 0 : 1)"
           RESULT=`if [ $? -eq 0 ] && [ "${{ github.event_name }}" != "pull_request" ]; then echo 'true'; else echo 'false'; fi`
           echo "::set-output name=can-release::$RESULT"
           ! [ -z "$DEBUG" ] && echo "set-output name=can-release::$RESULT" || true
@@ -193,12 +193,12 @@ jobs:
           ! [ -z "$DEBUG" ] && echo "set-output name=has-deploy::$HAS_DPLY" || true
 
           if [ "$HAS_EXTS" != "$HAS_IEXT" ]; then
-            echo '::error::expected both 1) `build-externals` and 2) `test-integration-externals` scripts to be defined in package.json'
+            echo '::error::'
             exit 2
           fi
 
           if [ "$HAS_DOCS" = 'false' ]; then
-            echo '::warning::no `build-docs` script defined in package.json'
+            echo '::warning::'
           fi
 
           if [ "$UPLOAD_CODE_COVERAGE" = 'false' ]; then

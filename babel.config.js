@@ -18,8 +18,8 @@ module.exports = {
   parserOpts: { strictMode: true },
   plugins: [
     '@babel/plugin-proposal-export-default-from',
-    '@babel/plugin-proposal-function-bind',
-    '@babel/plugin-transform-typescript',
+    
+    
     // ? Interoperable named CJS imports for free
     'transform-default-named-imports'
   ],
