@@ -1,22 +1,17 @@
-<!-- prettier-ignore-start -->
-
 <!-- badges-start -->
 
 [![Black Lives Matter!][badge-blm]][link-blm]
-[![Maintenance status][badge-maintenance]][link-repo]
-[![Last commit timestamp][badge-last-commit]][link-repo]
-[![Open issues][badge-issues]][link-issues]
-[![Pull requests][badge-pulls]][link-pulls]
-[![codecov][badge-codecov]][link-codecov]
-[![Source license][badge-license]][link-license]
-[![NPM version][badge-npm]][link-npm]
-[![semantic-release][badge-semantic-release]][link-semantic-release]
+[![!!UNMAINTAINED!!][badge-unmaintained]][link-unmaintained]
 
 <!-- badges-end -->
 
-<!-- prettier-ignore-end -->
+# ⛔️ DEPRECATED/UNMAINTAINED
 
-# projector-lens-lib-cjs
+> [!CAUTION]
+>
+> This project has been superseded (and all of its useful bits subsumed) by the
+> [`xscripts project init --template lib-cjs`](https://github.com/Xunnamius/xscripts)
+> command.
 
 A CJS template with GitHub Action workflows, CI/CD publishing and deployment
 automation scripts, and the like.
@@ -48,12 +43,13 @@ via `import { ... } from ...` or `import(...)` will cause Node to use the ESM
 entry point in [versions that support it][node-esm-support], as will Webpack.
 Using the `import` syntax is the modern, preferred choice.
 
-For backwards compatibility with Webpack 4 and Node versions < 14,
-[`package.json`][package-json] retains the [`module`][module-key] key, which
-points to the ESM entry point, and the [`main`][exports-main-key] key, which
-points to the CJS2 entry point explicitly (using the .js file extension). For
-Webpack 5 and Node versions >= 14, [`package.json`][package-json] includes the
-[`exports`][exports-main-key] key, which points to both entry points explicitly.
+For backwards compatibility with Webpack 4 (_compat with Webpack 4 is not
+guaranteed!_) and Node versions < 14, [`package.json`][package-json] retains the
+[`module`][module-key] key, which points to the ESM entry point, and the
+[`main`][exports-main-key] key, which points to the CJS2 entry point explicitly
+(using the .js file extension). For Webpack 5 and Node versions >= 14,
+[`package.json`][package-json] includes the [`exports`][exports-main-key] key,
+which points to both entry points explicitly.
 
 Though [`package.json`][package-json] includes
 [`{ "type": "commonjs"}`][local-pkg], note that the ESM entry points are ES
@@ -92,6 +88,10 @@ information.
 
 [badge-blm]: https://xunn.at/badge-blm 'Join the movement!'
 [link-blm]: https://xunn.at/donate-blm
+[badge-unmaintained]:
+  https://xunn.at/badge-unmaintained
+  'Unfortunately, this project is unmaintained (forks welcome!)'
+[link-unmaintained]: https://xunn.at/link-unmaintained
 [badge-maintenance]:
   https://img.shields.io/maintenance/active/2023
   'Is this package maintained?'
@@ -117,7 +117,7 @@ information.
 [link-license]:
   https://github.com/Xunnamius/projector-lens-lib-cjs/blob/main/LICENSE
 [badge-npm]:
-  https://api.ergodark.com/badges/npm-pkg-version/@xunnamius/dummy-pkg-1
+  https://xunn.at/npm-pkg-version/@xunnamius/dummy-pkg-1
   'Install this package using npm or yarn!'
 [link-npm]: https://www.npmjs.com/package/@xunnamius/dummy-pkg-1
 [badge-semantic-release]:
